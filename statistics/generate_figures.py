@@ -13,7 +13,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 
-METRICS = ['MEAN(diameter_AP)', 'MEAN(area)', 'MEAN(diameter_RL)', 'MEAN(eccentricity)', 'MEAN(solidity)']
+METRICS = ['MEAN(diameter_AP)', 'MEAN(area)', 'MEAN(diameter_RL)', 'MEAN(eccentricity)', 'MEAN(solidity)',
+           'MEAN(compression_ratio)']
+
 METRICS_DTYPE = {
     'MEAN(diameter_AP)': 'float64',
     'MEAN(area)': 'float64',
@@ -27,7 +29,8 @@ METRIC_TO_TITLE = {
     'MEAN(area)': 'Cross-Sectional Area',
     'MEAN(diameter_RL)': 'RL Diameter',
     'MEAN(eccentricity)': 'Eccentricity',
-    'MEAN(solidity)': 'Solidity'
+    'MEAN(solidity)': 'Solidity',
+    'MEAN(compression_ratio)': 'Compression Ratio',
 }
 
 METRIC_TO_AXIS = {
@@ -35,7 +38,8 @@ METRIC_TO_AXIS = {
     'MEAN(area)': 'Cross-Sectional Area [mm²]',
     'MEAN(diameter_RL)': 'RL Diameter [mm]',
     'MEAN(eccentricity)': 'Eccentricity [a.u.]',
-    'MEAN(solidity)': 'Solidity [%]'
+    'MEAN(solidity)': 'Solidity [%]',
+    'MEAN(compression_ratio)': 'Compression Ratio [a.u.]',
 }
 
 # ylim max offset (used for showing text)
@@ -44,7 +48,8 @@ METRICS_TO_YLIM = {
     'MEAN(area)': 6,
     'MEAN(diameter_RL)': 0.7,
     'MEAN(eccentricity)': 0.03,
-    'MEAN(solidity)': 1
+    'MEAN(solidity)': 1,
+    'MEAN(compression_ratio)': 0.03,
 }
 
 LABELS_FONT_SIZE = 14
@@ -437,6 +442,10 @@ def main():
         if 'PAM50.csv' in file:
             # Read csv file as pandas dataframe for given subject
             df_subject = pd.read_csv(os.path.join(path_HC, file), dtype=METRICS_DTYPE)
+
+            # Compute compression ratio (CR) as MEAN(diameter_AP) / MEAN(diameter_RL)
+            df_subject['MEAN(compression_ratio)'] = df_subject['MEAN(diameter_AP)'] / df_subject['MEAN(diameter_RL)']
+
             # Concatenate DataFrame objects
             df = pd.concat([df, df_subject], axis=0, ignore_index=True)
     # Get sub-id (e.g., sub-amu01) from Filename column and insert it as a new column called participant_id
