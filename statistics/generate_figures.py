@@ -269,7 +269,7 @@ def create_regplot(df, path_out):
         ax.invert_xaxis()
 
         # Save figure
-        filename = metric + '_cov_scatter_plot.png'
+        filename = metric + '_cov_scatterplot.png'
         path_filename = os.path.join(path_out, filename)
         plt.savefig(path_filename)
         print('Figure saved: ' + path_filename)
@@ -350,7 +350,7 @@ def create_regplot_per_sex(df, path_out):
         ax.invert_xaxis()
 
         # Save figure
-        filename = metric + '_cov_scatter_persex_plot.png'
+        filename = metric + '_cov_scatterplot_persex.png'
         path_filename = os.path.join(path_out, filename)
         plt.savefig(path_filename)
         print('Figure saved: ' + path_filename)
