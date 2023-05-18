@@ -2,6 +2,11 @@
 # Functions to plot morphometric metrics computed from normative database (spine-generic dataset in PAM50 space)
 # perslice and vertebral levels
 #
+# Example usage:
+#       python generate_figures.py
+#       -path-HC $SCT_DIR/data/PAM50_normalized_metrics
+#       -participant-file $SCT_DIR/data/PAM50_normalized_metrics/participants.tsv
+#
 # Author: Sandrine Bédard, Jan Valosek
 #
 
@@ -72,7 +77,7 @@ def get_parser():
                         help="Path to data of normative dataset computed perslice.")
     parser.add_argument('-participant-file', required=False, type=str,
                         help="Path to participants.tsv file.")
-    parser.add_argument('-path-out', required=False, type=str, default='csa_perslice',
+    parser.add_argument('-path-out', required=False, type=str, default='figures',
                         help="Output directory name.")
 
     return parser
@@ -115,7 +120,7 @@ def get_vert_indices(df):
 
 def create_lineplot(df, hue, path_out, show_cv=False):
     """
-    Create lineplot of CSA per vertebral levels.
+    Create lineplot for individual metrics per vertebral levels.
     Note: we are ploting slices not levels to avoid averaging across levels.
     Args:
         df (pd.dataFrame): dataframe with CSA values
@@ -187,9 +192,9 @@ def create_lineplot(df, hue, path_out, show_cv=False):
 
         # Save figure
         if hue:
-            filename = metric + '_plot_per' + hue + '.png'
+            filename = metric + '_lineplot_per' + hue + '.png'
         else:
-            filename = metric + '_plot.png'
+            filename = metric + '_lineplot.png'
         path_filename = os.path.join(path_out, filename)
         plt.savefig(path_filename)
         print('Figure saved: ' + path_filename)
