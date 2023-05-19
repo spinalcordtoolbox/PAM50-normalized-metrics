@@ -480,6 +480,9 @@ def main():
     # Multiply solidity by 100 to get percentage (sct_process_segmentation computes solidity in the interval 0-1)
     df['MEAN(solidity)'] = df['MEAN(solidity)'] * 100
 
+    # Uncomment to save aggregated dataframe with metrics across all subjects as .csv file
+    #df.to_csv(os.path.join(path_out, 'HC_metrics.csv'), index=False)
+
     # Create plots
     create_lineplot(df, None, args.path_out, show_cv=True)        # across all subjects
     create_lineplot(df, 'age', args.path_out)       # across age
