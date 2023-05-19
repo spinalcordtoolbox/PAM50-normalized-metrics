@@ -123,8 +123,8 @@ def create_lineplot(df, hue, path_out, show_cv=False):
     Create lineplot for individual metrics per vertebral levels.
     Note: we are ploting slices not levels to avoid averaging across levels.
     Args:
-        df (pd.dataFrame): dataframe with CSA values
-        hue (str): column name of the dataframe to use for hue
+        df (pd.dataFrame): dataframe with metric values
+        hue (str): column name of the dataframe to use for grouping; if None, no grouping is applied
         path_out (str): path to output directory
         show_cv (bool): if True, show coefficient of variation
     """
@@ -204,7 +204,7 @@ def create_regplot(df, path_out):
     """
     Plot data and a linear regression model fit. Slices in X and Coefficient of Variation (CoV) in Y.
     Args:
-        df (pd.dataFrame): dataframe with CSA values
+        df (pd.dataFrame): dataframe with metric values
         path_out (str): path to output directory
     """
 
@@ -279,7 +279,7 @@ def create_regplot_per_sex(df, path_out):
     """
     Plot data and a linear regression model fit. Slices in X and Coefficient of Variation (CoV) in Y. Per sex.
     Args:
-        df (pd.dataFrame): dataframe with CSA values
+        df (pd.dataFrame): dataframe with metric values
         path_out (str): path to output directory
     """
 
