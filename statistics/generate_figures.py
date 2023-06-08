@@ -432,6 +432,116 @@ def compare_metrics_across_sex(df):
         print(f'{metric}, all levels: Mann-Whitney U test between females and males: p-value{format_pvalue(pval)}')
 
 
+def gen_chart_weight_height(df, df_participants, path_out):
+    """
+    Plot weight and height relationship per sex
+    """
+
+    plt.figure()
+    fig, ax = plt.subplots()
+
+    # Make df_participants['participant_id'] as index
+    df_participants.set_index('participant_id', inplace=True)
+    # Keep only "sex", "height", "weight" columns in df_participants
+    df_participants = df_participants[["sex", "height", "weight"]]
+
+    # Get values only from C2 and C3 levels
+    df_c2_c3 = df[(df['VertLevel'] == 2) | (df['VertLevel'] == 3)]
+    # Average slices to get mean value per subject
+    df_c2_c3_average = df_c2_c3.groupby('participant_id')['MEAN(area)'].mean()
+
+    # Combine both dataframes
+    df_participants.merge(df_c2_c3_average.to_frame(), left_index=True, right_index=True)
+
+    # Drop nan for weight and height
+    print(f'Number of subjects before dropping nan for weight and height: {len(df_participants)}')
+    df_participants.dropna(axis=0, subset=['weight', 'height'], inplace=True)
+    print(f'Number of subjects after dropping nan for weight and height: {len(df_participants)}')
+
+    sns.regplot(x='weight', y='height', data=df_participants[df_participants['sex'] == 'M'], label='Male', color='blue')
+    sns.regplot(x='weight', y='height', data=df_participants[df_participants['sex'] == 'F'], label='Female', color='red')
+    # add legend to top right corner of plot
+    plt.legend(loc='upper right')
+    # x axis label
+    plt.xlabel('Weight (kg)')
+    # y axis label
+    plt.ylabel('Height (m)')
+    # add title
+    plt.title('Weight vs Height persex', fontsize=LABELS_FONT_SIZE)
+
+    # Compute correlation coefficient and p-value between BMI and metric
+    corr_m, pval_m = stats.pearsonr(df_participants[df_participants['sex'] == 'M']['weight'], df_participants[df_participants['sex'] == 'M']['height'])
+    corr_f, pval_f = stats.pearsonr(df_participants[df_participants['sex'] == 'F']['weight'], df_participants[df_participants['sex'] == 'F']['height'])
+
+    # Add correlation coefficient and p-value to plot
+    plt.text(0.03, 0.90,
+             f'Male: r = {round(corr_m, 2)}, p{format_pvalue(pval_m, alpha=0.001, include_space=True)}\n'
+             f'Female: r = {round(corr_f, 2)}, p{format_pvalue(pval_f, alpha=0.001, include_space=True)}',
+             fontsize=10, transform=ax.transAxes,
+             bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='lightgrey'))
+
+    # save figure
+    fname_fig = os.path.join(path_out, 'regplot_weight_height_relationship_persex.png')
+    plt.savefig(fname_fig, dpi=200, bbox_inches="tight")
+    plt.close()
+    print(f'Created: {fname_fig}.\n')
+
+
+def gen_chart_bmi(df, path_out):
+    """
+    Plot BMI and MRI metrics relationship per sex
+    """
+    # Compute BMI
+    df['BMI'] = df['weight'] / ((df['height'] / 100) ** 2)
+
+    # Get values only from C2 and C3 levels
+    df_c2_c3 = df[(df['VertLevel'] == 2) | (df['VertLevel'] == 3)]
+
+    # Loop across metrics
+    for metric in METRICS:
+
+        plt.figure()
+        fig, ax = plt.subplots()
+
+        # Average slices to get mean value per subject
+        metric_series = df_c2_c3.groupby('participant_id')[metric].mean()
+        bmi_series = df_c2_c3.groupby('participant_id')['BMI'].mean()
+        # Get sex per subject based on index
+        sex = df_c2_c3.drop_duplicates(subset=['participant_id', 'sex'])[['participant_id', 'sex']]
+        sex.set_index('participant_id', inplace=True)
+
+        # Merge metric and bmi series with sex dataframe
+        final_df = sex.merge(metric_series.to_frame(), left_index=True, right_index=True)
+        final_df = final_df.merge(bmi_series.to_frame(), left_index=True, right_index=True)
+
+        sns.regplot(x='BMI', y=metric, data=final_df[final_df['sex'] == 'M'], label='Male', color='blue')
+        sns.regplot(x='BMI', y=metric, data=final_df[final_df['sex'] == 'F'], label='Female', color='red')
+        # add legend to top right corner of plot
+        plt.legend(loc='upper right')
+        # x axis label
+        plt.xlabel('BMI (kg/m2)')
+        # y axis label
+        plt.ylabel(METRIC_TO_AXIS[metric])
+        # add title
+        plt.title('Spinal Cord ' + METRIC_TO_TITLE[metric], fontsize=LABELS_FONT_SIZE)
+        # Compute correlation coefficient and p-value between BMI and metric
+        corr_m, pval_m = stats.pearsonr(final_df[final_df['sex'] == 'M']['BMI'], final_df[final_df['sex'] == 'M'][metric])
+        corr_f, pval_f = stats.pearsonr(final_df[final_df['sex'] == 'F']['BMI'], final_df[final_df['sex'] == 'F'][metric])
+
+        # Add correlation coefficient and p-value to plot
+        plt.text(0.03, 0.90,
+                 f'Male: r = {round(corr_m, 2)}, p{format_pvalue(pval_m, alpha=0.001, include_space=True)}\n'
+                 f'Female: r = {round(corr_f, 2)}, p{format_pvalue(pval_f, alpha=0.001, include_space=True)}',
+                 fontsize=10, transform=ax.transAxes,
+                 bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='lightgrey'))
+
+        # save figure
+        fname_fig = os.path.join(path_out, 'regplot_BMI_' + metric + '_relationship_persex.png')
+        plt.savefig(fname_fig, dpi=200, bbox_inches="tight")
+        plt.close()
+        print(f'Created: {fname_fig}.\n')
+
+
 def main():
     parser = get_parser()
     args = parser.parse_args()
@@ -461,7 +571,8 @@ def main():
     # If a participants.tsv file is provided, insert columns sex, age and manufacturer from df_participants into df
     if args.participant_file:
         df_participants = pd.read_csv(args.participant_file, sep='\t')
-        df = df.merge(df_participants[["age", "sex", "manufacturer", "participant_id"]], on='participant_id')
+        df = df.merge(df_participants[["age", "sex", "height", "weight", "manufacturer", "participant_id"]],
+                      on='participant_id')
     # Print number of subjects
     print(f'Number of subjects: {str(len(subjects))}\n')
     df = df.dropna(axis=1, how='all')
@@ -473,6 +584,12 @@ def main():
 
     # Compute Mann-Whitney U test between males and females for across levels for each metric.
     compare_metrics_across_sex(df)
+
+    # Plot correlation between weight and height per sex
+    gen_chart_weight_height(df, df_participants, args.path_out)
+
+    # Plot correlation between BMI and MRI metrics per sex
+    gen_chart_bmi(df, args.path_out)
 
     # Compute mean and std from C2 and C3 levels across sex and compare females and males
     compute_c2_c3_stats(df)
