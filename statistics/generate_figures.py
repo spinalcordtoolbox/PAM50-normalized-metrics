@@ -487,9 +487,9 @@ def gen_chart_weight_height(df, df_participants, path_out):
     print(f'Created: {fname_fig}.\n')
 
 
-def gen_chart_bmi(df, path_out):
+def create_regplot_demographics_vs_metrics(df, path_out):
     """
-    Plot BMI and MRI metrics relationship per sex
+    Plot relationship between demographics (BMI, weight, height) and MRI metrics persex
     """
     # Compute BMI
     df['BMI'] = df['weight'] / ((df['height'] / 100) ** 2)
@@ -499,47 +499,48 @@ def gen_chart_bmi(df, path_out):
 
     # Loop across metrics
     for metric in METRICS:
+        for demographic in ['BMI', 'weight', 'height']:
 
-        plt.figure()
-        fig, ax = plt.subplots()
+            plt.figure()
+            fig, ax = plt.subplots()
 
-        # Average slices to get mean value per subject
-        metric_series = df_c2_c3.groupby('participant_id')[metric].mean()
-        bmi_series = df_c2_c3.groupby('participant_id')['BMI'].mean()
-        # Get sex per subject based on index
-        sex = df_c2_c3.drop_duplicates(subset=['participant_id', 'sex'])[['participant_id', 'sex']]
-        sex.set_index('participant_id', inplace=True)
+            # Average slices to get mean value per subject
+            metric_series = df_c2_c3.groupby('participant_id')[metric].mean()
+            bmi_series = df_c2_c3.groupby('participant_id')[demographic].mean()
+            # Get sex per subject based on index
+            sex = df_c2_c3.drop_duplicates(subset=['participant_id', 'sex'])[['participant_id', 'sex']]
+            sex.set_index('participant_id', inplace=True)
 
-        # Merge metric and bmi series with sex dataframe
-        final_df = sex.merge(metric_series.to_frame(), left_index=True, right_index=True)
-        final_df = final_df.merge(bmi_series.to_frame(), left_index=True, right_index=True)
+            # Merge metric and bmi series with sex dataframe
+            final_df = sex.merge(metric_series.to_frame(), left_index=True, right_index=True)
+            final_df = final_df.merge(bmi_series.to_frame(), left_index=True, right_index=True)
 
-        sns.regplot(x='BMI', y=metric, data=final_df[final_df['sex'] == 'M'], label='Male', color='blue')
-        sns.regplot(x='BMI', y=metric, data=final_df[final_df['sex'] == 'F'], label='Female', color='red')
-        # add legend to top right corner of plot
-        plt.legend(loc='upper right')
-        # x axis label
-        plt.xlabel('BMI (kg/m2)')
-        # y axis label
-        plt.ylabel(METRIC_TO_AXIS[metric])
-        # add title
-        plt.title('Spinal Cord ' + METRIC_TO_TITLE[metric], fontsize=LABELS_FONT_SIZE)
-        # Compute correlation coefficient and p-value between BMI and metric
-        corr_m, pval_m = stats.pearsonr(final_df[final_df['sex'] == 'M']['BMI'], final_df[final_df['sex'] == 'M'][metric])
-        corr_f, pval_f = stats.pearsonr(final_df[final_df['sex'] == 'F']['BMI'], final_df[final_df['sex'] == 'F'][metric])
+            sns.regplot(x=demographic, y=metric, data=final_df[final_df['sex'] == 'M'], label='Male', color='blue')
+            sns.regplot(x=demographic, y=metric, data=final_df[final_df['sex'] == 'F'], label='Female', color='red')
+            # add legend to top right corner of plot
+            plt.legend(loc='upper right')
+            # x axis label
+            plt.xlabel(demographic)
+            # y axis label
+            plt.ylabel(METRIC_TO_AXIS[metric])
+            # add title
+            plt.title('Spinal Cord ' + METRIC_TO_TITLE[metric], fontsize=LABELS_FONT_SIZE)
+            # Compute correlation coefficient and p-value between BMI and metric
+            corr_m, pval_m = stats.pearsonr(final_df[final_df['sex'] == 'M'][demographic], final_df[final_df['sex'] == 'M'][metric])
+            corr_f, pval_f = stats.pearsonr(final_df[final_df['sex'] == 'F'][demographic], final_df[final_df['sex'] == 'F'][metric])
 
-        # Add correlation coefficient and p-value to plot
-        plt.text(0.03, 0.90,
-                 f'Male: r = {round(corr_m, 2)}, p{format_pvalue(pval_m, alpha=0.001, include_space=True)}\n'
-                 f'Female: r = {round(corr_f, 2)}, p{format_pvalue(pval_f, alpha=0.001, include_space=True)}',
-                 fontsize=10, transform=ax.transAxes,
-                 bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='lightgrey'))
+            # Add correlation coefficient and p-value to plot
+            plt.text(0.03, 0.90,
+                     f'Male: r = {round(corr_m, 2)}, p{format_pvalue(pval_m, alpha=0.001, include_space=True)}\n'
+                     f'Female: r = {round(corr_f, 2)}, p{format_pvalue(pval_f, alpha=0.001, include_space=True)}',
+                     fontsize=10, transform=ax.transAxes,
+                     bbox=dict(boxstyle='round', facecolor='white', alpha=0.95, edgecolor='lightgrey'))
 
-        # save figure
-        fname_fig = os.path.join(path_out, 'regplot_BMI_' + metric + '_relationship_persex.png')
-        plt.savefig(fname_fig, dpi=200, bbox_inches="tight")
-        plt.close()
-        print(f'Created: {fname_fig}.\n')
+            # save figure
+            fname_fig = os.path.join(path_out, 'regplot_' + demographic + '_' + metric + '_relationship_persex.png')
+            plt.savefig(fname_fig, dpi=200, bbox_inches="tight")
+            plt.close()
+            print(f'Created: {fname_fig}.\n')
 
 
 def main():
@@ -588,8 +589,8 @@ def main():
     # Plot correlation between weight and height per sex
     gen_chart_weight_height(df, df_participants, args.path_out)
 
-    # Plot correlation between BMI and MRI metrics per sex
-    gen_chart_bmi(df, args.path_out)
+    # Plot relationship between demographics (BMI, weight, height) and MRI metrics persex
+    create_regplot_demographics_vs_metrics(df, args.path_out)
 
     # Compute mean and std from C2 and C3 levels across sex and compare females and males
     compute_c2_c3_stats(df)
