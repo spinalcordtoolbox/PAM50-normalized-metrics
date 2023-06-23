@@ -533,8 +533,10 @@ def create_regplot_demographics_vs_metrics(df, path_out):
             # add title
             plt.title('Spinal Cord ' + METRIC_TO_TITLE[metric], fontsize=LABELS_FONT_SIZE)
             # Compute correlation coefficient and p-value between BMI and metric
-            corr_m, pval_m = stats.pearsonr(final_df[final_df['sex'] == 'M'][demographic], final_df[final_df['sex'] == 'M'][metric])
-            corr_f, pval_f = stats.pearsonr(final_df[final_df['sex'] == 'F'][demographic], final_df[final_df['sex'] == 'F'][metric])
+            corr_m, pval_m = stats.pearsonr(final_df[final_df['sex'] == 'M'][demographic],
+                                            final_df[final_df['sex'] == 'M'][metric])
+            corr_f, pval_f = stats.pearsonr(final_df[final_df['sex'] == 'F'][demographic],
+                                            final_df[final_df['sex'] == 'F'][metric])
 
             # Add correlation coefficient and p-value to plot
             plt.text(0.03, 0.90,
