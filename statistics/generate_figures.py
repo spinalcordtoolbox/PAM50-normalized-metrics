@@ -552,6 +552,27 @@ def create_regplot_demographics_vs_metrics(df, path_out):
             print(f'Created: {fname_fig}.\n')
 
 
+def compute_descriptive_stats(df_participants):
+    """
+    Compute descriptive statistics (mean and std age, weight, height)
+    Args:
+        df_participants: pandas dataframe containing participants information (participants.tsv)
+    """
+    # Whole group
+    print('Whole cohort')
+    print(round(df_participants[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
+
+    # Get number of males and females
+    print('\nNumber of males and females')
+    print(df_participants.groupby(['sex'])['participant_id'].count())
+    # Per-sex
+    print('\nPer-sex')
+    print(round(df_participants.groupby(['sex'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
+    # Per-vendor
+    print('\nPer-vendor')
+    print(round(df_participants.groupby(['manufacturer'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
+
+
 def main():
     parser = get_parser()
     args = parser.parse_args()
@@ -585,6 +606,10 @@ def main():
                       on='participant_id')
     # Print number of subjects
     print(f'Number of subjects: {str(len(subjects))}\n')
+
+    # Compute descriptive statistics (mean and std age, weight, height)
+    compute_descriptive_stats(df_participants)
+
     df = df.dropna(axis=1, how='all')
     df = df.dropna(axis=0, how='any').reset_index(drop=True) # do we want to compute mean with missing levels for some subjects?
     # Keep only VertLevel from C1 to Th1
