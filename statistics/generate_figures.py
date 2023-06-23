@@ -47,6 +47,13 @@ METRIC_TO_AXIS = {
     'MEAN(compression_ratio)': 'Compression Ratio [a.u.]',
 }
 
+DEMOGRAPHIC_TO_AXIS = {
+    'age': 'Age [years]',
+    'BMI': 'BMI [kg/m²]',
+    'height': 'Height [cm]',
+    'weight': 'Weight [kg]',
+}
+
 # ylim max offset (used for showing text)
 METRICS_TO_YLIM = {
     'MEAN(diameter_AP)': 0.4,
@@ -463,9 +470,9 @@ def gen_chart_weight_height(df, df_participants, path_out):
     # add legend to top right corner of plot
     plt.legend(loc='upper right')
     # x axis label
-    plt.xlabel('Weight (kg)')
+    plt.xlabel(DEMOGRAPHIC_TO_AXIS['weight'])
     # y axis label
-    plt.ylabel('Height (m)')
+    plt.ylabel(DEMOGRAPHIC_TO_AXIS['height'])
     # add title
     plt.title('Weight vs Height persex', fontsize=LABELS_FONT_SIZE)
 
@@ -520,7 +527,7 @@ def create_regplot_demographics_vs_metrics(df, path_out):
             # add legend to top right corner of plot
             plt.legend(loc='upper right')
             # x axis label
-            plt.xlabel(demographic)
+            plt.xlabel(DEMOGRAPHIC_TO_AXIS[demographic])
             # y axis label
             plt.ylabel(METRIC_TO_AXIS[metric])
             # add title
