@@ -109,18 +109,19 @@ def get_vert_indices(df):
         df (pd.dataFrame): dataframe with CSA values
     Returns:
         vert (pd.Series): vertebrae levels across slices
-        ind_vert (np.array): indices of slices corresponding to the beginning of each level
+        ind_vert (np.array): indices of slices corresponding to the beginning of each level (=intervertebral disc)
         ind_vert_mid (np.array): indices of slices corresponding to mid-levels
     """
     # Get vert levels for one certain subject
     vert = df[df['participant_id'] == 'sub-amu01']['VertLevel']
     # Get indexes of where array changes value
     ind_vert = vert.diff()[vert.diff() != 0].index.values
+    # Get the beginning of C1
+    ind_vert = np.append(ind_vert, vert.index.values[-1])
     ind_vert_mid = []
-    for i in range(len(ind_vert)):
-        ind_vert_mid.append(int(ind_vert[i:i + 2].mean()))
-    ind_vert_mid.insert(0, ind_vert[0] - 20)
-    ind_vert_mid = ind_vert_mid
+    # Get indexes of mid-vertebrae
+    for i in range(len(ind_vert)-1):
+        ind_vert_mid.append(int(ind_vert[i:i+2].mean()))
 
     return vert, ind_vert, ind_vert_mid
 
@@ -153,16 +154,17 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         # Remove xticks
         ax.set_xticks([])
 
-        # Get indices of slices corresponding to mid-vertebrae
+        # Get indices of slices corresponding vertebral levels
         vert, ind_vert, ind_vert_mid = get_vert_indices(df)
-        # Insert a vertical line for each vertebral level
-        for idx, x in enumerate(ind_vert[1:]):
+        # Insert a vertical line for each intervertebral disc
+        for idx, x in enumerate(ind_vert[1:-1]):
             plt.axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5)
 
         # Insert a text label for each vertebral level
-        for idx, x in enumerate(ind_vert, 1):
+        for idx, x in enumerate(ind_vert_mid, 0):
             if show_cv:
                 cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
+            # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
                 ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
@@ -170,16 +172,6 @@ def create_lineplot(df, hue, path_out, show_cv=False):
                 # Show CV
                 if show_cv:
                     ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM[metric],
-                            str(round(cv, 1)) + '%', horizontalalignment='center',
-                            verticalalignment='bottom', color='black')
-            # Deal with C1 label position
-            elif vert[x] == 1:
-                level = 'C' + str(vert[x])
-                ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)']+15, ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black')
-                # Show CV
-                if show_cv:
-                    ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)']+15, ymax-METRICS_TO_YLIM[metric],
                             str(round(cv, 1)) + '%', horizontalalignment='center',
                             verticalalignment='bottom', color='black')
             else:
@@ -238,10 +230,10 @@ def create_regplot(df, path_out):
         # Add horizontal grid
         ax.grid(color='lightgrey', axis='y')
 
-        # Get indices of slices corresponding to mid-vertebrae
+        # Get indices of slices corresponding vertebral levels
         vert, ind_vert, ind_vert_mid = get_vert_indices(df)
-        # Insert a vertical line for each vertebral level
-        for idx, x in enumerate(ind_vert[1:]):
+        # Insert a vertical line for each intervertebral disc
+        for idx, x in enumerate(ind_vert[1:-1]):
             plt.axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5)
 
         # Set the same y-axis limits across metrics
@@ -257,15 +249,11 @@ def create_regplot(df, path_out):
 
         ymin, ymax = ax.get_ylim()
         # Insert a text label for each vertebral level
-        for idx, x in enumerate(ind_vert, 1):
+        for idx, x in enumerate(ind_vert_mid, 0):
+            # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
                 ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black')
-            # Deal with C1 label position
-            elif vert[x] == 1:
-                level = 'C' + str(vert[x])
-                ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)']+15, ymin, level, horizontalalignment='center',
                         verticalalignment='bottom', color='black')
             else:
                 level = 'C' + str(vert[x])
@@ -319,10 +307,10 @@ def create_regplot_per_sex(df, path_out):
         # Show legend including title
         plt.legend(title='sex')
 
-        # Get indices of slices corresponding to mid-vertebrae
+        # Get indices of slices corresponding vertebral levels
         vert, ind_vert, ind_vert_mid = get_vert_indices(df)
-        # Insert a vertical line for each vertebral level
-        for idx, x in enumerate(ind_vert[1:]):
+        # Insert a vertical line for each intervertebral disc
+        for idx, x in enumerate(ind_vert[1:-1]):
             plt.axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5)
 
         # Set the same y-axis limits across metrics
@@ -339,15 +327,11 @@ def create_regplot_per_sex(df, path_out):
 
         ymin, ymax = ax.get_ylim()
         # Insert a text label for each vertebral level
-        for idx, x in enumerate(ind_vert, 1):
+        for idx, x in enumerate(ind_vert_mid, 0):
+            # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
                 ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black')
-            # Deal with C1 label position
-            elif vert[x] == 1:
-                level = 'C' + str(vert[x])
-                ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)']+15, ymin, level, horizontalalignment='center',
                         verticalalignment='bottom', color='black')
             else:
                 level = 'C' + str(vert[x])
