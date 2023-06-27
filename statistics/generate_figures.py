@@ -86,7 +86,7 @@ def get_parser():
                         help="Path to data of normative dataset computed perslice.")
     parser.add_argument('-participant-file', required=False, type=str,
                         help="Path to participants.tsv file.")
-    parser.add_argument('-path-out', required=False, type=str, default='figures',
+    parser.add_argument('-path-out', required=False, type=str, default='stats',
                         help="Output directory name.")
 
     return parser
@@ -646,10 +646,13 @@ def main():
     parser = get_parser()
     args = parser.parse_args()
     path_HC = args.path_HC
-    path_out = args.path_out
+    path_out_figures = os.path.join(args.path_out, 'figures')
+    path_out_csv = os.path.join(args.path_out, 'csv')
     # If the output folder directory is not present, then create it.
-    if not os.path.exists(path_out):
-        os.makedirs(path_out)
+    if not os.path.exists(path_out_figures):
+        os.makedirs(path_out_figures)
+    if not os.path.exists(path_out_csv):
+        os.makedirs(path_out_csv)
     # Initialize pandas dataframe where data across all subjects will be stored
     df = pd.DataFrame()
     # Loop through .csv files of healthy controls
@@ -692,10 +695,10 @@ def main():
     compare_metrics_across_vendors(df)
 
     # Plot correlation between weight and height per sex
-    gen_chart_weight_height(df, df_participants, args.path_out)
+    gen_chart_weight_height(df, df_participants, path_out_figures)
 
     # Plot relationship between demographics (BMI, weight, height) and MRI metrics persex
-    create_regplot_demographics_vs_metrics(df, args.path_out)
+    create_regplot_demographics_vs_metrics(df, path_out_figures)
 
     # Compute mean and std from C2 and C3 levels across sex and compare females and males
     compute_c2_c3_stats(df)
@@ -704,22 +707,22 @@ def main():
     df['MEAN(solidity)'] = df['MEAN(solidity)'] * 100
 
     # Uncomment to save aggregated dataframe with metrics across all subjects as .csv file
-    #df.to_csv(os.path.join(path_out, 'HC_metrics.csv'), index=False)
+    #df.to_csv(os.path.join(path_out_csv, 'HC_metrics.csv'), index=False)
 
     # Compute normative values
-    compute_normative_values(df, args.path_out)
+    compute_normative_values(df, path_out_csv)
 
     # Create plots
-    create_lineplot(df, None, args.path_out, show_cv=True)        # across all subjects
-    create_lineplot(df, 'age', args.path_out)       # across age
-    create_lineplot(df, 'sex', args.path_out)       # across sex
-    create_lineplot(df, 'manufacturer', args.path_out)  # across manufacturer (vendors)
+    create_lineplot(df, None, path_out_figures, show_cv=True)        # across all subjects
+    create_lineplot(df, 'age', path_out_figures)       # across age
+    create_lineplot(df, 'sex', path_out_figures)       # across sex
+    create_lineplot(df, 'manufacturer', path_out_figures)  # across manufacturer (vendors)
 
     # Plot scatterplot metrics vs COV
-    create_regplot(df, args.path_out)
+    create_regplot(df, path_out_figures)
 
     # Plot scatterplot metrics vs COV per sex
-    create_regplot_per_sex(df, path_out)
+    create_regplot_per_sex(df, path_out_figures)
 
 
 if __name__ == '__main__':
