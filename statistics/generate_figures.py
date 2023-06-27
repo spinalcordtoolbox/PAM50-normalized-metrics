@@ -153,8 +153,8 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         ymin, ymax = ax.get_ylim()
         ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
         ax.set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
-        # Remove xticks
-        ax.set_xticks([])
+        # xticks (PAM50 slice numbers)
+        #ax.set_xticks([])
 
         # Get indices of slices corresponding vertebral levels
         vert, ind_vert, ind_vert_mid = get_vert_indices(df)
