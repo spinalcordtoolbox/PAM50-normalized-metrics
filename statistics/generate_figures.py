@@ -64,6 +64,27 @@ METRICS_TO_YLIM = {
     'MEAN(compression_ratio)': 0.03,
 }
 
+DISCS_DICT = {
+    7: 'C7-T1',
+    6: 'C6-C7',
+    5: 'C5-C6',
+    4: 'C4-C5',
+    3: 'C3-C4',
+    2: 'C2-C3',
+    1: 'C1-C2'
+}
+
+MID_VERT_DICT = {
+    8: 'T1',
+    7: 'C7',
+    6: 'C6',
+    5: 'C5',
+    4: 'C4',
+    3: 'C3',
+    2: 'C2',
+    1: 'C1'
+}
+
 VENDORS = ['Siemens', 'Philips', 'GE']
 
 LABELS_FONT_SIZE = 14
@@ -625,21 +646,45 @@ def compute_normative_values(df, path_out):
         # Get indices of slices corresponding vertebral levels
         vert, ind_vert, ind_vert_mid = get_vert_indices(df)
 
+        d = []
         # Loop across intervertebral discs
         for x in ind_vert[1:-1]:
             slice_number = df.loc[x, 'Slice (I->S)']
-            level = vert[x]
+            disc = DISCS_DICT[vert[x]]
             slice_mean = slices_mean.loc[slice_number]
             slice_std = slices_std.loc[slice_number]
-            print(f'Disc {level}, slice {slice_number}: {round(slice_mean, 2)} ± {round(slice_std, 2)}')
+            print(f'Disc {disc}, slice {slice_number}: {round(slice_mean, 2)} ± {round(slice_std, 2)}')
+            d.append(
+                {
+                    'Disc': disc,
+                    'Slice': slice_number,
+                    'Mean ± STD': f'{round(slice_mean, 2)} ± {round(slice_std, 2)}'
+                }
+            )
 
+        fname_csv = os.path.join(path_out, metric + '_disc_normative_values.csv')
+        pd.DataFrame(d).T.to_csv(fname_csv, header=False)
+        print(f'Created: {fname_csv}.\n')
+
+        d = []
         # Loop across mid-vertebral slices
         for x in ind_vert_mid:
             slice_number = df.loc[x, 'Slice (I->S)']
-            level = vert[x]
+            mid_level = MID_VERT_DICT[vert[x]]
             slice_mean = slices_mean.loc[slice_number]
             slice_std = slices_std.loc[slice_number]
-            print(f'Level {level}, slice {slice_number}: {round(slice_mean, 2)} ± {round(slice_std, 2)}')
+            print(f'Level {mid_level}, slice {slice_number}: {round(slice_mean, 2)} ± {round(slice_std, 2)}')
+            d.append(
+                {
+                    'Level': mid_level,
+                    'Slice': slice_number,
+                    'Mean ± STD': f'{round(slice_mean, 2)} ± {round(slice_std, 2)}'
+                }
+            )
+
+        fname_csv = os.path.join(path_out, metric + '_mid_level_normative_values.csv')
+        pd.DataFrame(d).T.to_csv(fname_csv, header=False)
+        print(f'Created: {fname_csv}.\n')
 
 
 def main():
