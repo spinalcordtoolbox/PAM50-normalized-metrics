@@ -608,6 +608,40 @@ def compute_descriptive_stats(df_participants):
     print(round(df_participants.groupby(['manufacturer'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
 
 
+def compute_normative_values(df, path_out):
+    """
+    Compute normative values for each metric and save them in a csv file
+    Args:
+        df:
+        path_out:
+
+    Returns:
+    """
+    for metric in METRICS:
+        print(f"\n{metric}")
+        slices_mean = df.groupby(['Slice (I->S)'])[metric].mean()
+        slices_std = df.groupby(['Slice (I->S)'])[metric].std()
+
+        # Get indices of slices corresponding vertebral levels
+        vert, ind_vert, ind_vert_mid = get_vert_indices(df)
+
+        # Loop across intervertebral discs
+        for x in ind_vert[1:-1]:
+            slice_number = df.loc[x, 'Slice (I->S)']
+            level = vert[x]
+            slice_mean = slices_mean.loc[slice_number]
+            slice_std = slices_std.loc[slice_number]
+            print(f'Disc {level}, slice {slice_number}: {round(slice_mean, 2)} ± {round(slice_std, 2)}')
+
+        # Loop across mid-vertebral slices
+        for x in ind_vert_mid:
+            slice_number = df.loc[x, 'Slice (I->S)']
+            level = vert[x]
+            slice_mean = slices_mean.loc[slice_number]
+            slice_std = slices_std.loc[slice_number]
+            print(f'Level {level}, slice {slice_number}: {round(slice_mean, 2)} ± {round(slice_std, 2)}')
+
+
 def main():
     parser = get_parser()
     args = parser.parse_args()
@@ -671,6 +705,9 @@ def main():
 
     # Uncomment to save aggregated dataframe with metrics across all subjects as .csv file
     #df.to_csv(os.path.join(path_out, 'HC_metrics.csv'), index=False)
+
+    # Compute normative values
+    compute_normative_values(df, args.path_out)
 
     # Create plots
     create_lineplot(df, None, args.path_out, show_cv=True)        # across all subjects
