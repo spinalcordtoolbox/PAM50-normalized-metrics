@@ -64,6 +64,8 @@ METRICS_TO_YLIM = {
     'MEAN(compression_ratio)': 0.03,
 }
 
+VENDORS = ['Siemens', 'Philips', 'GE']
+
 LABELS_FONT_SIZE = 14
 TICKS_FONT_SIZE = 12
 
@@ -416,11 +418,60 @@ def compute_c2_c3_stats(df):
 
 def compare_metrics_across_sex(df):
     """
-    Compute Mann-Whitney U test between males and females across all levels for each metric.
+    Compute Wilcoxon signed-rank (paired) tests between males and females across all levels for each metric.
     """
+
+    print("")
+
     for metric in METRICS:
-        stat, pval = stats.mannwhitneyu(df[df['sex'] == 'M'][metric], df[df['sex'] == 'F'][metric])
-        print(f'{metric}, all levels: Mann-Whitney U test between females and males: p-value{format_pvalue(pval)}')
+        print(f"\n{metric}")
+
+        #stat, pval = stats.mannwhitneyu(df[df['sex'] == 'M'][metric], df[df['sex'] == 'F'][metric])
+        #print(f'{metric}, all levels: Mann-Whitney U test between females and males: p-value{format_pvalue(pval)}')
+
+        slices_M = df[df['sex'] == 'M'].groupby(['Slice (I->S)'])[metric].mean()
+        slices_F = df[df['sex'] == 'F'].groupby(['Slice (I->S)'])[metric].mean()
+
+        # Run normality test
+        stat, pval = stats.shapiro(slices_M)
+        print(f'Normality test M: p-value{format_pvalue(pval)}')
+        stat, pval = stats.shapiro(slices_F)
+        print(f'Normality test F: p-value{format_pvalue(pval)}')
+        # Run Wilcoxon signed-rank test
+        stat, pval = stats.wilcoxon(x=slices_M, y=slices_F)
+        print(f'{metric}, all levels: Wilcoxon signed-rank test between females and males: '
+              f'p-value{format_pvalue(pval)}')
+
+
+def compare_metrics_across_vendors(df):
+    """
+    Compute Wilcoxon signed-rank (paired) tests between MRI vendors across all levels for each metric.
+    """
+
+    print("")
+
+    for metric in METRICS:
+        print(f"\n{metric}")
+
+        #stat, pval = stats.mannwhitneyu(df[df['sex'] == 'M'][metric], df[df['sex'] == 'F'][metric])
+        #print(f'{metric}, all levels: Mann-Whitney U test between females and males: p-value{format_pvalue(pval)}')
+
+        slices_siemens = df[df['manufacturer'] == 'Siemens'].groupby(['Slice (I->S)'])[metric].mean()
+        slices_philips = df[df['manufacturer'] == 'Philips'].groupby(['Slice (I->S)'])[metric].mean()
+        slices_ge = df[df['manufacturer'] == 'GE'].groupby(['Slice (I->S)'])[metric].mean()
+
+        # Run normality test
+        for i, slices in enumerate([slices_siemens, slices_philips, slices_ge]):
+            stat, pval = stats.shapiro(slices)
+            print(f'Normality test {VENDORS[i]}: p-value{format_pvalue(pval)}')
+
+        # Run Wilcoxon signed-rank test
+        stat, pval = stats.wilcoxon(x=slices_siemens, y=slices_philips)
+        print(f'{metric}, all levels: Wilcoxon signed-rank test between Siemens and Phlips: p-value{format_pvalue(pval)}')
+        stat, pval = stats.wilcoxon(x=slices_siemens, y=slices_ge)
+        print(f'{metric}, all levels: Wilcoxon signed-rank test between Siemens and GE: p-value{format_pvalue(pval)}')
+        stat, pval = stats.wilcoxon(x=slices_philips, y=slices_ge)
+        print(f'{metric}, all levels: Wilcoxon signed-rank test between Philips and GE: p-value{format_pvalue(pval)}')
 
 
 def gen_chart_weight_height(df, df_participants, path_out):
@@ -601,8 +652,10 @@ def main():
     # Recode age into age bins by 10 years
     df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=['10-20', '20-30', '30-40', '40-50', '50-60'])
 
-    # Compute Mann-Whitney U test between males and females for across levels for each metric.
+    # Compute Mann-Whitney U test between males and females for across levels for each metric
     compare_metrics_across_sex(df)
+    # Compute Mann-Whitney U tests between MRI vendors across all levels for each metric
+    compare_metrics_across_vendors(df)
 
     # Plot correlation between weight and height per sex
     gen_chart_weight_height(df, df_participants, args.path_out)
