@@ -648,7 +648,7 @@ def compute_normative_values(df, path_out):
 
         d = []
         # Loop across intervertebral discs
-        for x in ind_vert[1:-1]:
+        for x in reversed(ind_vert[1:-1]):
             slice_number = df.loc[x, 'Slice (I->S)']
             disc = DISCS_DICT[vert[x]]
             slice_mean = slices_mean.loc[slice_number]
@@ -668,7 +668,7 @@ def compute_normative_values(df, path_out):
 
         d = []
         # Loop across mid-vertebral slices
-        for x in ind_vert_mid:
+        for x in reversed(ind_vert_mid):
             slice_number = df.loc[x, 'Slice (I->S)']
             mid_level = MID_VERT_DICT[vert[x]]
             slice_mean = slices_mean.loc[slice_number]
