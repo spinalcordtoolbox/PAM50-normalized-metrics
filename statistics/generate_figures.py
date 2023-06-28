@@ -687,6 +687,41 @@ def compute_normative_values(df, path_out):
         print(f'Created: {fname_csv}.\n')
 
 
+def plot_metrics_relative_to_age(df, path_out_figures):
+    """
+    # Plot averaged metrics from C2-C3 levels as a function of age separated for sex
+    Args:
+        df:
+        path_out_figures:
+
+    Returns:
+
+    """
+    # Compute mean and std from C2 and C3 levels per sex
+    df_c2_c3 = df[(df['VertLevel'] == 2) | (df['VertLevel'] == 3)]
+
+    # Recode sex to 0 and 1 to all pd.mean() at the next step
+    df_c2_c3['sex'].replace(['F', 'M'], [0, 1], inplace=True)
+
+    for metric in METRICS:
+        # Get mean values for each subject
+        df_c2_c3_mean = df_c2_c3.groupby(['participant_id'])[[metric, 'age', 'sex']].mean()
+
+        # Plot averaged metrics from C2-C3 levels as a function of age
+        fig, ax = plt.subplots(figsize=(20, 6))
+        sns.regplot(x='age', y=metric, data=df_c2_c3_mean[df_c2_c3_mean['sex'] == 1], label='Male', color='blue')
+        sns.regplot(x='age', y=metric, data=df_c2_c3_mean[df_c2_c3_mean['sex'] == 0], label='Female', color='red')
+        ax.legend()
+        ax.set_xlabel('Age (years)')
+        ax.set_ylabel(METRIC_TO_AXIS[metric])
+        ax.set_title(f'{METRIC_TO_TITLE[metric]} from C2-C3 levels as a function of age')
+
+        # Save figure
+        fname_fig = os.path.join(path_out_figures, metric + '_C2_C3_vs_age_persex.png')
+        fig.savefig(fname_fig, bbox_inches='tight')
+        print(f'Created: {fname_fig}.\n')
+
+
 def main():
     parser = get_parser()
     args = parser.parse_args()
@@ -731,7 +766,11 @@ def main():
     df = df.dropna(axis=0, how='any').reset_index(drop=True) # do we want to compute mean with missing levels for some subjects?
     # Keep only VertLevel from C1 to Th1
     df = df[df['VertLevel'] <= 8]
-    # Recode age into age bins by 10 years
+
+    # Plot metrics as a function of age
+    plot_metrics_relative_to_age(df, path_out_figures)
+
+    # Recode age into age bins by 10 years (decades)
     df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=['10-20', '20-30', '30-40', '40-50', '50-60'])
 
     # Compute Mann-Whitney U test between males and females for across levels for each metric
