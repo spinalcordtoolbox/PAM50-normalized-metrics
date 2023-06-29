@@ -90,13 +90,16 @@ VENDORS = ['Siemens', 'Philips', 'GE']
 LABELS_FONT_SIZE = 14
 TICKS_FONT_SIZE = 12
 
-# # To be same as spine-generic figures (https://github.com/spine-generic/spine-generic/blob/master/spinegeneric/cli/generate_figure.py#L114)
-# When the colors are overlapping, they do not look good. So we default colors.
-# PALLETE = {
-#     "GE": "black",
-#     "Philips": "dodgerblue",
-#     "Siemens": "limegreen",
-# }
+COLORS_SEX = {
+    'M': 'blue',
+    'F': 'red'
+    }
+
+# To be same as spine-generic figures (https://github.com/spine-generic/spine-generic/blob/master/spinegeneric/cli/generate_figure.py#L114)
+PALLET = {
+    'sex': {'M': 'blue', 'F': 'red'},
+    'manufacturer': {'Siemens': 'limegreen', 'Philips': 'dodgerblue', 'GE': 'black'},
+    }
 
 
 def get_parser():
@@ -163,7 +166,10 @@ def create_lineplot(df, hue, path_out, show_cv=False):
     for metric in METRICS:
         fig, ax = plt.subplots()
         # Note: we are ploting slices not levels to avoid averaging across levels
-        sns.lineplot(ax=ax, x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue)
+        if hue is 'sex' or hue is 'manufacturer':
+            sns.lineplot(ax=ax, x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, palette=PALLET[hue])
+        else:
+            sns.lineplot(ax=ax, x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue)
         # Move y-axis to the right
         plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
         plt.grid(color='lightgrey', zorder=0)
@@ -521,8 +527,10 @@ def gen_chart_weight_height(df, df_participants, path_out):
     df_participants.dropna(axis=0, subset=['weight', 'height'], inplace=True)
     print(f'Number of subjects after dropping nan for weight and height: {len(df_participants)}')
 
-    sns.regplot(x='weight', y='height', data=df_participants[df_participants['sex'] == 'M'], label='Male', color='blue')
-    sns.regplot(x='weight', y='height', data=df_participants[df_participants['sex'] == 'F'], label='Female', color='red')
+    sns.regplot(x='weight', y='height', data=df_participants[df_participants['sex'] == 'M'],
+                label='Male', color=COLORS_SEX['M'])
+    sns.regplot(x='weight', y='height', data=df_participants[df_participants['sex'] == 'F'],
+                label='Female', color=COLORS_SEX['F']  )
     # add legend to top right corner of plot
     plt.legend(loc='upper right')
     # x axis label
@@ -578,8 +586,10 @@ def create_regplot_demographics_vs_metrics(df, path_out):
             final_df = sex.merge(metric_series.to_frame(), left_index=True, right_index=True)
             final_df = final_df.merge(bmi_series.to_frame(), left_index=True, right_index=True)
 
-            sns.regplot(x=demographic, y=metric, data=final_df[final_df['sex'] == 'M'], label='Male', color='blue')
-            sns.regplot(x=demographic, y=metric, data=final_df[final_df['sex'] == 'F'], label='Female', color='red')
+            sns.regplot(x=demographic, y=metric, data=final_df[final_df['sex'] == 'M'],
+                        label='Male', color=COLORS_SEX['M'])
+            sns.regplot(x=demographic, y=metric, data=final_df[final_df['sex'] == 'F'],
+                        label='Female', color=COLORS_SEX['F'])
             # add legend to top right corner of plot
             plt.legend(loc='upper right')
             # x axis label
@@ -709,8 +719,10 @@ def plot_metrics_relative_to_age(df, path_out_figures):
 
         # Plot averaged metrics from C2-C3 levels as a function of age
         fig, ax = plt.subplots(figsize=(20, 6))
-        sns.regplot(x='age', y=metric, data=df_c2_c3_mean[df_c2_c3_mean['sex'] == 1], label='Male', color='blue')
-        sns.regplot(x='age', y=metric, data=df_c2_c3_mean[df_c2_c3_mean['sex'] == 0], label='Female', color='red')
+        sns.regplot(x='age', y=metric, data=df_c2_c3_mean[df_c2_c3_mean['sex'] == 1],
+                    label='Male', color=COLORS_SEX['M'])
+        sns.regplot(x='age', y=metric, data=df_c2_c3_mean[df_c2_c3_mean['sex'] == 0],
+                    label='Female', color=COLORS_SEX['F'])
         ax.legend()
         ax.set_xlabel('Age (years)')
         ax.set_ylabel(METRIC_TO_AXIS[metric])
