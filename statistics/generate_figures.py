@@ -618,9 +618,10 @@ def create_regplot_demographics_vs_metrics(df, path_out):
             print(f'Created: {fname_fig}.\n')
 
 
-def compute_descriptive_stats(df_participants):
+def compute_descriptive_stats(df_participants, path_out_figures):
     """
     Compute descriptive statistics (mean and std age, weight, height)
+    Also plot age distribution
     Args:
         df_participants: pandas dataframe containing participants information (participants.tsv)
     """
@@ -634,9 +635,22 @@ def compute_descriptive_stats(df_participants):
     # Per-sex
     print('\nPer-sex')
     print(round(df_participants.groupby(['sex'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
+
     # Per-vendor
     print('\nPer-vendor')
     print(round(df_participants.groupby(['manufacturer'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
+
+    # Plot age distribution
+    plt.figure()
+    fig, ax = plt.subplots()
+    sns.displot(df_participants['age'], kde=True, color='black')
+    # add title
+    plt.title('Age distribution', fontsize=LABELS_FONT_SIZE)
+    # save figure
+    fname_fig = os.path.join(path_out_figures, 'age_distribution.png')
+    plt.savefig(fname_fig, dpi=200, bbox_inches="tight")
+    plt.close()
+    print(f'Created: {fname_fig}.\n')
 
 
 def compute_normative_values(df, path_out):
@@ -772,7 +786,7 @@ def main():
     print(f'Number of subjects: {str(len(subjects))}\n')
 
     # Compute descriptive statistics (mean and std age, weight, height)
-    compute_descriptive_stats(df_participants)
+    compute_descriptive_stats(df_participants,path_out_figures)
 
     df = df.dropna(axis=1, how='all')
     df = df.dropna(axis=0, how='any').reset_index(drop=True) # do we want to compute mean with missing levels for some subjects?
