@@ -229,12 +229,13 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         print('Figure saved: ' + path_filename)
 
 
-def create_regplot(df, path_out):
+def create_regplot(df, path_out, show_cv=False):
     """
     Plot data and a linear regression model fit. Slices in X and Coefficient of Variation (CoV) in Y.
     Args:
         df (pd.dataFrame): dataframe with metric values
         path_out (str): path to output directory
+        show_cv (bool): if True, include coefficient of variation for each vertebral level to the plot
     """
 
     # Loop across metrics
@@ -280,15 +281,29 @@ def create_regplot(df, path_out):
         ymin, ymax = ax.get_ylim()
         # Insert a text label for each vertebral level
         for idx, x in enumerate(ind_vert_mid, 0):
+            if show_cv:
+                cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
             # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
                 ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black')
+                        verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                # Show CV
+                if show_cv:
+                    ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8,
+                            str(round(cv, 1)) + '%', horizontalalignment='center',
+                            verticalalignment='bottom', color='black')
             else:
                 level = 'C' + str(vert[x])
                 ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black')
+                        verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                # Show CV
+                if show_cv:
+                    ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8,
+                            str(round(cv, 1)) + '%', horizontalalignment='center',
+                            verticalalignment='bottom', color='black')
+            if show_cv:
+                print(f'{metric}, {level}, COV: {cv}')
 
         # Invert x-axis
         ax.invert_xaxis()
