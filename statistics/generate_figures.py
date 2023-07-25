@@ -231,7 +231,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         else:
             filename = metric + '_lineplot.png'
         path_filename = os.path.join(path_out, filename)
-        plt.savefig(path_filename)
+        plt.savefig(path_filename, dpi=300, bbox_inches='tight')
         print('Figure saved: ' + path_filename)
 
 
@@ -319,7 +319,7 @@ def create_regplot(df, path_out, show_cv=False):
         # Save figure
         filename = metric + '_cov_scatterplot.png'
         path_filename = os.path.join(path_out, filename)
-        plt.savefig(path_filename)
+        plt.savefig(path_filename, dpi=300, bbox_inches='tight')
         print('Figure saved: ' + path_filename)
 
 
@@ -399,7 +399,7 @@ def create_regplot_per_sex(df, path_out):
         # Save figure
         filename = metric + '_cov_scatterplot_persex.png'
         path_filename = os.path.join(path_out, filename)
-        plt.savefig(path_filename)
+        plt.savefig(path_filename, dpi=300, bbox_inches='tight')
         print('Figure saved: ' + path_filename)
 
 
