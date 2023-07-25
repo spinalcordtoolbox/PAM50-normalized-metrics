@@ -334,6 +334,7 @@ def create_regplot_per_sex(df, path_out):
     # Loop across metrics
     for metric in METRICS:
         mean_cov = dict()
+        std_cov = dict()
         fig, ax = plt.subplots()
         # Loop across sex
         for sex in df['sex'].unique():
@@ -347,7 +348,9 @@ def create_regplot_per_sex(df, path_out):
                 slices_list.append(slice)
 
             mean_cov[sex] = np.mean(cv_list)
-            sns.regplot(ax=ax, x=slices_list, y=cv_list, label=sex)
+            std_cov[sex] = np.std(cv_list)
+            sns.regplot(ax=ax, x=slices_list, y=cv_list, label=sex,
+                        scatter_kws={'alpha': 0.5}, color=PALLET['sex'][sex])
         # Move y-axis to the right
         #plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
         # Add title
@@ -369,14 +372,16 @@ def create_regplot_per_sex(df, path_out):
             plt.axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5)
 
         # Set the same y-axis limits across metrics
-        ax.set_ylim([0, 16])
+        ax.set_ylim([0, 18])
 
         # Place text box with COV values
         # Note: we invert xaxis, thus xmax is used for the left limit
-        plt.text(.02, .93, 'F mean COV: {}%\nM mean COV: {}%'.format(round(mean_cov['F'], 1),
-                                                                     round(mean_cov['M'], 1)),
-                 horizontalalignment='left', verticalalignment='center', transform=ax.transAxes,
-                 bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
+        plt.text(.5, .90, 'F COV: {} ± {} %\nM COV: {} ± {} %'.format(round(mean_cov['F'], 1),
+                                                                      round(std_cov['F'], 1),
+                                                                      round(mean_cov['M'], 1),
+                                                                      round(std_cov['M'], 1)),
+                 horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
+                 fontsize=TICKS_FONT_SIZE, bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
         # Move the text box to the front
         ax.set_zorder(1)
 
