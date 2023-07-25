@@ -172,7 +172,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         else:
             sns.lineplot(ax=ax, x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue)
         # Move y-axis to the right
-        plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
+        #plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
         plt.grid(color='lightgrey', zorder=0)
 
         # Adjust ymlim for solidity (it has low variance)
