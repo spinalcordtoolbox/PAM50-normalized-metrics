@@ -502,6 +502,31 @@ def compare_metrics_across_vendors(df):
         print(f'{metric}, all levels: Wilcoxon signed-rank test between Philips and GE: p-value{format_pvalue(pval)}')
 
 
+def analyze_metrics_across_age_decades(df):
+    """
+    Get mean values for each age decade across all levels for each metric.
+    """
+
+    print("")
+
+    for metric in METRICS:
+        print(f"\n{metric}")
+
+        # Get number of subjects for each age decade
+        for age_decade in AGE_DECADES:
+            number_of_subejcts = len(df[df['age'] == age_decade].groupby(['participant_id'])[metric])
+            print(f'Number of subjects in {age_decade}: {number_of_subejcts}')
+
+        # Get mean values for each slice
+        slices_10_20 = df[df['age'] == '10-20'].groupby(['Slice (I->S)'])[metric].mean()
+        slices_21_30 = df[df['age'] == '21-30'].groupby(['Slice (I->S)'])[metric].mean()
+        slices_31_40 = df[df['age'] == '31-40'].groupby(['Slice (I->S)'])[metric].mean()
+        slices_41_50 = df[df['age'] == '41-50'].groupby(['Slice (I->S)'])[metric].mean()
+        slices_51_60 = df[df['age'] == '51-60'].groupby(['Slice (I->S)'])[metric].mean()
+
+        # Note: groups are highly unbalanced --> no comparison
+
+
 def gen_chart_weight_height(df, df_participants, path_out):
     """
     Plot weight and height relationship per sex
@@ -804,6 +829,8 @@ def main():
     compare_metrics_across_sex(df)
     # Compute Mann-Whitney U tests between MRI vendors across all levels for each metric
     compare_metrics_across_vendors(df)
+    # Get mean values for each age decade
+    analyze_metrics_across_age_decades(df)
 
     # Plot correlation between weight and height per sex
     gen_chart_weight_height(df, df_participants, path_out_figures)
