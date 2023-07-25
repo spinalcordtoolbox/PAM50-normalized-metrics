@@ -161,7 +161,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         df (pd.dataFrame): dataframe with metric values
         hue (str): column name of the dataframe to use for grouping; if None, no grouping is applied
         path_out (str): path to output directory
-        show_cv (bool): if True, show coefficient of variation
+        show_cv (bool): if True, include coefficient of variation for each vertebral level to the plot
     """
     # Loop across metrics
     for metric in METRICS:
