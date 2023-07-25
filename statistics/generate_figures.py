@@ -890,7 +890,7 @@ def main():
     create_lineplot(df, 'manufacturer', path_out_figures)  # across manufacturer (vendors)
 
     # Plot scatterplot metrics vs COV
-    create_regplot(df, path_out_figures)
+    create_regplot(df, path_out_figures, show_cv=True)
 
     # Plot scatterplot metrics vs COV per sex
     create_regplot_per_sex(df, path_out_figures)
