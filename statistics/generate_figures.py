@@ -457,6 +457,7 @@ def compare_metrics_across_sex(df):
         #stat, pval = stats.mannwhitneyu(df[df['sex'] == 'M'][metric], df[df['sex'] == 'F'][metric])
         #print(f'{metric}, all levels: Mann-Whitney U test between females and males: p-value{format_pvalue(pval)}')
 
+        # Get mean values for each slice
         slices_M = df[df['sex'] == 'M'].groupby(['Slice (I->S)'])[metric].mean()
         slices_F = df[df['sex'] == 'F'].groupby(['Slice (I->S)'])[metric].mean()
 
@@ -484,6 +485,7 @@ def compare_metrics_across_vendors(df):
         #stat, pval = stats.mannwhitneyu(df[df['sex'] == 'M'][metric], df[df['sex'] == 'F'][metric])
         #print(f'{metric}, all levels: Mann-Whitney U test between females and males: p-value{format_pvalue(pval)}')
 
+        # Get mean values for each slice
         slices_siemens = df[df['manufacturer'] == 'Siemens'].groupby(['Slice (I->S)'])[metric].mean()
         slices_philips = df[df['manufacturer'] == 'Philips'].groupby(['Slice (I->S)'])[metric].mean()
         slices_ge = df[df['manufacturer'] == 'GE'].groupby(['Slice (I->S)'])[metric].mean()
