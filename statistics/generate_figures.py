@@ -174,13 +174,19 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         # Move y-axis to the right
         plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
         plt.grid(color='lightgrey', zorder=0)
-        plt.title('Spinal Cord ' + METRIC_TO_TITLE[metric], fontsize=LABELS_FONT_SIZE)
+
         # Adjust ymlim for solidity (it has low variance)
         if metric == 'MEAN(solidity)':
             ax.set_ylim(90, 100)
         ymin, ymax = ax.get_ylim()
+
+        # Add title
+        plt.title('Spinal Cord ' + METRIC_TO_TITLE[metric], fontsize=LABELS_FONT_SIZE)
+        # Add labels
         ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
         ax.set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
+        # Increase xticks and yticks font size
+        ax.tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
         # xticks (PAM50 slice numbers)
         #ax.set_xticks([])
 
@@ -198,7 +204,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
                 ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black')
+                        verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
                     ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM[metric],
@@ -207,7 +213,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
             else:
                 level = 'C' + str(vert[x])
                 ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black')
+                        verticalalignment='bottom', color='black',fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
                     ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM[metric],
@@ -250,7 +256,7 @@ def create_regplot(df, path_out, show_cv=False):
             slices_list.append(slice)
 
         fig, ax = plt.subplots()
-        sns.regplot(ax=ax, x=slices_list, y=cv_list)
+        sns.regplot(ax=ax, x=slices_list, y=cv_list, scatter_kws={'alpha': 0.5})
         # Move y-axis to the right
         #plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
         # Add title
@@ -258,6 +264,8 @@ def create_regplot(df, path_out, show_cv=False):
         # Add labels
         ax.set_xlabel('Slice (I->S)', fontsize=LABELS_FONT_SIZE)
         ax.set_ylabel('Coefficient of Variation (%)', fontsize=LABELS_FONT_SIZE)
+        # Increase xticks and yticks font size
+        ax.tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
         # Add horizontal grid
         ax.grid(color='lightgrey', axis='y')
 
@@ -268,13 +276,12 @@ def create_regplot(df, path_out, show_cv=False):
             plt.axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5)
 
         # Set the same y-axis limits across metrics
-        ax.set_ylim([0, 16])
+        ax.set_ylim([0, 18])
 
-        # Place text box with COV values
-        # Note: we invert xaxis, thus xmax is used for the left limit
-        plt.text(.02, .93, 'mean COV: {}%'.format(round(np.mean(cv_list), 1)),
-                 horizontalalignment='left', verticalalignment='center', transform=ax.transAxes,
-                 bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
+        # Place text box with mean COV value
+        plt.text(.5, .94, 'COV: {} ± {} %'.format(round(np.mean(cv_list), 1), round(np.std(cv_list), 1)),
+                 horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
+                 fontsize=TICKS_FONT_SIZE, bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
         # Move the text box to the front
         ax.set_zorder(1)
 
@@ -307,6 +314,7 @@ def create_regplot(df, path_out, show_cv=False):
 
         # Invert x-axis
         ax.invert_xaxis()
+        ax.set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
 
         # Save figure
         filename = metric + '_cov_scatterplot.png'
@@ -347,6 +355,8 @@ def create_regplot_per_sex(df, path_out):
         # Add labels
         ax.set_xlabel('Slice (I->S)', fontsize=LABELS_FONT_SIZE)
         ax.set_ylabel('Coefficient of Variation (%)', fontsize=LABELS_FONT_SIZE)
+        # Increase xticks and yticks font size
+        ax.tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
         # Add horizontal grid
         ax.grid(color='lightgrey', axis='y')
         # Show legend including title
@@ -377,13 +387,14 @@ def create_regplot_per_sex(df, path_out):
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
                 ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black')
+                        verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
             else:
                 level = 'C' + str(vert[x])
                 ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black')
+                        verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
         # Invert x-axis
         ax.invert_xaxis()
+        ax.set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
 
         # Save figure
         filename = metric + '_cov_scatterplot_persex.png'
