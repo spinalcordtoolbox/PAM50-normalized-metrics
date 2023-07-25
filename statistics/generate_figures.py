@@ -86,6 +86,7 @@ MID_VERT_DICT = {
 }
 
 VENDORS = ['Siemens', 'Philips', 'GE']
+AGE_DECADES = ['10-20', '21-30', '31-40', '41-50', '51-60']
 
 LABELS_FONT_SIZE = 14
 TICKS_FONT_SIZE = 12
@@ -797,7 +798,7 @@ def main():
     plot_metrics_relative_to_age(df, path_out_figures)
 
     # Recode age into age bins by 10 years (decades)
-    df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=['10-20', '20-30', '30-40', '40-50', '50-60'])
+    df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=AGE_DECADES)
 
     # Compute Mann-Whitney U test between males and females for across levels for each metric
     compare_metrics_across_sex(df)
