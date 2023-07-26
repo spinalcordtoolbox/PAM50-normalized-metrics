@@ -859,7 +859,7 @@ def main():
     print(f'Number of subjects: {str(len(subjects))}\n')
 
     # Compute descriptive statistics (mean and std age, weight, height)
-    compute_descriptive_stats(df_participants,path_out_figures)
+    compute_descriptive_stats(df_participants, path_out_figures)
 
     df = df.dropna(axis=1, how='all')
     df = df.dropna(axis=0, how='any').reset_index(drop=True) # do we want to compute mean with missing levels for some subjects?
