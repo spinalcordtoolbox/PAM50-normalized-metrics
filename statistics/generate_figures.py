@@ -477,7 +477,7 @@ def compute_c2_c3_stats(df):
 
 def compare_metrics_across_sex(df):
     """
-    Compute Wilcoxon signed-rank (paired) tests between males and females across all levels for each metric.
+    Compute Wilcoxon rank-sum tests between males and females across all levels for each metric.
     """
 
     print("")
@@ -502,7 +502,7 @@ def compare_metrics_across_sex(df):
 
 def compare_metrics_across_vendors(df):
     """
-    Compute Wilcoxon signed-rank (paired) tests between MRI vendors across all levels for each metric.
+    Compute Wilcoxon rank-sum tests between MRI vendors across all levels for each metric.
     """
 
     print("")
@@ -855,9 +855,9 @@ def main():
     # Recode age into age bins by 10 years (decades)
     df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=AGE_DECADES)
 
-    # Compute Mann-Whitney U test between males and females for across levels for each metric
+    # Compute Wilcoxon rank-sum test between males and females for across levels for each metric
     compare_metrics_across_sex(df)
-    # Compute Mann-Whitney U tests between MRI vendors across all levels for each metric
+    # Compute Wilcoxon rank-sum tests between MRI vendors across all levels for each metric
     compare_metrics_across_vendors(df)
     # Get mean values for each age decade
     analyze_metrics_across_age_decades(df)
