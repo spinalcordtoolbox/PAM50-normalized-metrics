@@ -685,6 +685,23 @@ def compute_descriptive_stats(df_participants, path_out_figures):
     print('Whole cohort')
     print(round(df_participants[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
 
+    # Drop nan for weight and height
+    print(f'Number of subjects before dropping nan for weight and height: {len(df_participants)}')
+    df_temp = df_participants.dropna(axis=0, subset=['weight', 'height'])
+    print(f'Number of subjects after dropping nan for weight and height: {len(df_temp)}')
+
+    for metric in ['age', 'weight', 'height']:
+        # Run normality test
+        stat, pval = stats.shapiro(df_temp[df_temp['sex'] == 'M'][metric])
+        print(f'{metric}: Normality test M: p-value{format_pvalue(pval)}')
+        stat, pval = stats.shapiro(df_temp[df_temp['sex'] == 'F'][metric])
+        print(f'{metric}: Normality test F: p-value{format_pvalue(pval)}')
+        # Run Wilcoxon rank-sum test (groups are independent)
+        stat, pval = stats.ranksums(x=df_temp[df_temp['sex'] == 'M'][metric],
+                                    y=df_temp[df_temp['sex'] == 'F'][metric])
+        print(f'{metric}: Wilcoxon rank-sum test between females and males: '
+              f'p-value{format_pvalue(pval)}')
+
     # Get number of males and females
     print('\nNumber of males and females')
     print(df_participants.groupby(['sex'])['participant_id'].count())
