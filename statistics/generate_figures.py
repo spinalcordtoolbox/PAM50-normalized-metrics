@@ -702,14 +702,17 @@ def compute_descriptive_stats(df_participants, path_out_figures):
         print(f'{metric}: Wilcoxon rank-sum test between females and males: '
               f'p-value{format_pvalue(pval)}')
 
-    # Get number of males and females
+    # Get number of males and females per sex
     print('\nNumber of males and females')
     print(df_participants.groupby(['sex'])['participant_id'].count())
-    # Per-sex
+    # Per-sex age, weight, height
     print('\nPer-sex')
     print(round(df_participants.groupby(['sex'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
 
-    # Per-vendor
+    # Get number of males and females per vendor
+    print('\nNumber of males and females')
+    print(df_participants.groupby(['manufacturer'])['participant_id'].count())
+    # Per-vendor age, weight, height
     print('\nPer-vendor')
     print(round(df_participants.groupby(['manufacturer'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
 
