@@ -740,6 +740,7 @@ def compute_normative_values(df, path_out):
     """
     for metric in METRICS:
         print(f"\n{metric}")
+        # Compute mean and std for each slice across all subjects
         slices_mean = df.groupby(['Slice (I->S)'])[metric].mean()
         slices_std = df.groupby(['Slice (I->S)'])[metric].std()
 
