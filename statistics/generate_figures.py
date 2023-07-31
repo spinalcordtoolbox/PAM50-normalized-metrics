@@ -788,6 +788,78 @@ def compute_normative_values(df, path_out):
         print(f'Created: {fname_csv}.\n')
 
 
+def compute_normative_values_persex(df, path_out):
+    """
+    Compute normative values for each metric persex and save them in a csv file
+    Args:
+        df:
+        path_out:
+
+    Returns:
+    """
+    for metric in METRICS:
+        print(f"\n{metric}")
+        # Compute mean and std for each slice across all subjects
+        slices_mean = df.groupby(['Slice (I->S)', 'sex'])[metric].mean()
+        slices_std = df.groupby(['Slice (I->S)', 'sex'])[metric].std()
+
+        # Get indices of slices corresponding vertebral levels
+        vert, ind_vert, ind_vert_mid = get_vert_indices(df)
+
+        d = []
+        # Loop across intervertebral discs
+        for x in reversed(ind_vert[1:-1]):
+            slice_number = df.loc[x, 'Slice (I->S)']
+            disc = DISCS_DICT[vert[x]]
+            # males
+            slice_mean_M = slices_mean.loc[slice_number]['M']
+            slice_std_M = slices_std.loc[slice_number]['M']
+            # females
+            slice_mean_F = slices_mean.loc[slice_number]['F']
+            slice_std_F = slices_std.loc[slice_number]['F']
+            print(f'M, Disc {disc}, slice {slice_number}: {round(slice_mean_M, 2)} ± {round(slice_std_M, 2)}')
+            print(f'F, Disc {disc}, slice {slice_number}: {round(slice_mean_F, 2)} ± {round(slice_std_F, 2)}')
+            d.append(
+                {
+                    'Disc': disc,
+                    'Slice': slice_number,
+                    'M, Mean ± STD': f'{round(slice_mean_M, 2)} ± {round(slice_std_M, 2)}',
+                    'F, Mean ± STD': f'{round(slice_mean_F, 2)} ± {round(slice_std_F, 2)}'
+                }
+            )
+
+        fname_csv = os.path.join(path_out, metric + '_disc_normative_values_persex.csv')
+
+        pd.DataFrame(d).to_csv(fname_csv, index=False)
+        print(f'Created: {fname_csv}.\n')
+
+        d = []
+        # Loop across mid-vertebral slices
+        for x in reversed(ind_vert_mid):
+            slice_number = df.loc[x, 'Slice (I->S)']
+            mid_level = MID_VERT_DICT[vert[x]]
+            # males
+            slice_mean_M = slices_mean.loc[slice_number]['M']
+            slice_std_M = slices_std.loc[slice_number]['M']
+            # females
+            slice_mean_F = slices_mean.loc[slice_number]['F']
+            slice_std_F = slices_std.loc[slice_number]['F']
+            print(f'M, Level {mid_level}, slice {slice_number}: {round(slice_mean_M, 2)} ± {round(slice_std_M, 2)}')
+            print(f'F, Level {mid_level}, slice {slice_number}: {round(slice_mean_F, 2)} ± {round(slice_std_F, 2)}')
+            d.append(
+                {
+                    'Level': mid_level,
+                    'Slice': slice_number,
+                    'M, Mean ± STD': f'{round(slice_mean_M, 2)} ± {round(slice_std_M, 2)}',
+                    'F, Mean ± STD': f'{round(slice_mean_F, 2)} ± {round(slice_std_F, 2)}'
+                }
+            )
+
+        fname_csv = os.path.join(path_out, metric + '_mid_level_normative_values_persex.csv')
+        pd.DataFrame(d).to_csv(fname_csv, index=False)
+        print(f'Created: {fname_csv}.\n')
+
+
 def plot_metrics_relative_to_age(df, path_out_figures):
     """
     # Plot averaged metrics from C2-C3 levels as a function of age separated for sex
@@ -933,6 +1005,7 @@ def main():
 
     # Compute normative values
     compute_normative_values(df, path_out_csv)
+    compute_normative_values_persex(df, path_out_csv)
 
     # Create plots
     create_lineplot(df, None, path_out_figures, show_cv=True)        # across all subjects
