@@ -824,6 +824,37 @@ def plot_metrics_relative_to_age(df, path_out_figures):
         print(f'Created: {fname_fig}.\n')
 
 
+def explore_linearity(df, path_out_figures):
+    """
+    Plot the following:
+        - correlation matrix to examine the pairwise correlations between morphometric measures
+        - scatter plots for each pair of variables
+    Args:
+        df: dataframe
+        path_out_figures: path to output figures
+    """
+
+    # Keep only columns of interest
+    df = df[METRIC_TO_TITLE.keys()]
+
+    # Calculate the correlation matrix
+    correlation_matrix = df.corr()
+
+    # Display the correlation matrix as a heatmap
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+    plt.title('Correlation Matrix')
+    # Save figure
+    fname_fig = os.path.join(path_out_figures, 'correlation_matrix.png')
+    plt.savefig(fname_fig, bbox_inches='tight', dpi=300)
+    print(f'Created: {fname_fig}.\n')
+
+    # Plot scatter plots for each pair of variables
+    fname_fig = os.path.join(path_out_figures, 'scatter_plots.png')
+    sns.pairplot(df).savefig(fname_fig, bbox_inches='tight', dpi=300)
+    print(f'Created: {fname_fig}.\n')
+
+
 def main():
     parser = get_parser()
     args = parser.parse_args()
@@ -868,6 +899,8 @@ def main():
     df = df.dropna(axis=0, how='any').reset_index(drop=True) # do we want to compute mean with missing levels for some subjects?
     # Keep only VertLevel from C1 to Th1
     df = df[df['VertLevel'] <= 8]
+
+    explore_linearity(df, path_out_figures)
 
     # Plot metrics as a function of age
     plot_metrics_relative_to_age(df, path_out_figures)
