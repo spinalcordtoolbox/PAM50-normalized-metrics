@@ -763,7 +763,7 @@ def compute_normative_values(df, path_out):
             )
 
         fname_csv = os.path.join(path_out, metric + '_disc_normative_values.csv')
-        pd.DataFrame(d).T.to_csv(fname_csv, header=False)
+        pd.DataFrame(d).to_csv(fname_csv, index=False)
         print(f'Created: {fname_csv}.\n')
 
         d = []
@@ -783,7 +783,7 @@ def compute_normative_values(df, path_out):
             )
 
         fname_csv = os.path.join(path_out, metric + '_mid_level_normative_values.csv')
-        pd.DataFrame(d).T.to_csv(fname_csv, header=False)
+        pd.DataFrame(d).to_csv(fname_csv, index=False)
         print(f'Created: {fname_csv}.\n')
 
 
