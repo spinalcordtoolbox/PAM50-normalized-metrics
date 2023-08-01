@@ -15,6 +15,7 @@ import argparse
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 
@@ -164,38 +165,47 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         path_out (str): path to output directory
         show_cv (bool): if True, include coefficient of variation for each vertebral level to the plot
     """
+
+    mpl.rcParams['font.family'] = 'Arial'
+
+    fig, axes = plt.subplots(2, 3, figsize=(20, 10))
+    axs = axes.ravel()
+
     # Loop across metrics
-    for metric in METRICS:
-        fig, ax = plt.subplots()
+    for index, metric in enumerate(METRICS):
         # Note: we are ploting slices not levels to avoid averaging across levels
-        if hue is 'sex' or hue is 'manufacturer':
-            sns.lineplot(ax=ax, x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, palette=PALLET[hue])
+        if hue == 'sex' or hue == 'manufacturer' or hue == 'age':
+            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue,
+                         palette=PALLET[hue])
+            if index == 0:
+                axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
+            else:
+                axs[index].get_legend().remove()
         else:
-            sns.lineplot(ax=ax, x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue)
-        # Move y-axis to the right
-        #plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
-        plt.grid(color='lightgrey', zorder=0)
+            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue)
 
         # Adjust ymlim for solidity (it has low variance)
         if metric == 'MEAN(solidity)':
-            ax.set_ylim(90, 100)
-        ymin, ymax = ax.get_ylim()
+            axs[index].set_ylim(90, 100)
+        ymin, ymax = axs[index].get_ylim()
 
-        # Add title
-        plt.title('Spinal Cord ' + METRIC_TO_TITLE[metric], fontsize=LABELS_FONT_SIZE)
         # Add labels
-        ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
-        ax.set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
+        axs[index].set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
-        ax.tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
-        # xticks (PAM50 slice numbers)
-        #ax.set_xticks([])
+        axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
+
+        # Remove spines
+        axs[index].spines['right'].set_visible(False)
+        axs[index].spines['left'].set_visible(False)
+        axs[index].spines['top'].set_visible(False)
+        axs[index].spines['bottom'].set_visible(True)
 
         # Get indices of slices corresponding vertebral levels
         vert, ind_vert, ind_vert_mid = get_vert_indices(df)
         # Insert a vertical line for each intervertebral disc
         for idx, x in enumerate(ind_vert[1:-1]):
-            plt.axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5)
+            axs[index].axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5, zorder=0)
 
         # Insert a text label for each vertebral level
         for idx, x in enumerate(ind_vert_mid, 0):
@@ -204,36 +214,40 @@ def create_lineplot(df, hue, path_out, show_cv=False):
             # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
-                ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
+                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
-                    ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM[metric],
-                            str(round(cv, 1)) + '%', horizontalalignment='center',
-                            verticalalignment='bottom', color='black')
+                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM[metric],
+                                    str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
+                                    color='black')
             else:
                 level = 'C' + str(vert[x])
-                ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black',fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
+                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
-                    ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM[metric],
-                            str(round(cv, 1)) + '%', horizontalalignment='center',
-                            verticalalignment='bottom', color='black')
+                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM[metric],
+                                    str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
+                                    color='black')
             if show_cv:
                 print(f'{metric}, {level}, COV: {cv}')
 
         # Invert x-axis
-        ax.invert_xaxis()
+        axs[index].invert_xaxis()
+        # Add only horizontal grid lines
+        axs[index].yaxis.grid(True)
+        # Move grid to background (i.e. behind other elements)
+        axs[index].set_axisbelow(True)
 
-        # Save figure
-        if hue:
-            filename = metric + '_lineplot_per' + hue + '.png'
-        else:
-            filename = metric + '_lineplot.png'
-        path_filename = os.path.join(path_out, filename)
-        plt.savefig(path_filename, dpi=300, bbox_inches='tight')
-        print('Figure saved: ' + path_filename)
+    # Save figure
+    if hue:
+        filename = 'lineplot_per' + hue + '.png'
+    else:
+        filename = 'lineplot.png'
+    path_filename = os.path.join(path_out, filename)
+    plt.savefig(path_filename, dpi=300, bbox_inches='tight')
+    print('Figure saved: ' + path_filename)
 
 
 def create_regplot(df, path_out, show_cv=False):
