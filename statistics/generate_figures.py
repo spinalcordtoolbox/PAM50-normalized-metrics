@@ -259,8 +259,13 @@ def create_regplot(df, path_out, show_cv=False):
         show_cv (bool): if True, include coefficient of variation for each vertebral level to the plot
     """
 
+    mpl.rcParams['font.family'] = 'Arial'
+
+    fig, axes = plt.subplots(2, 3, figsize=(20, 10))
+    axs = axes.ravel()
+
     # Loop across metrics
-    for metric in METRICS:
+    for index, metric in enumerate(METRICS):
         slices_list = []
         cv_list = []
         # Loop across slices
@@ -270,37 +275,37 @@ def create_regplot(df, path_out, show_cv=False):
             cv_list.append(compute_cv(df_slice, metric))
             slices_list.append(slice)
 
-        fig, ax = plt.subplots()
-        sns.regplot(ax=ax, x=slices_list, y=cv_list, scatter_kws={'alpha': 0.5})
-        # Move y-axis to the right
-        #plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
-        # Add title
-        plt.title('Spinal Cord ' + METRIC_TO_TITLE[metric], fontsize=LABELS_FONT_SIZE)
+        sns.regplot(ax=axs[index], x=slices_list, y=cv_list, scatter_kws={'alpha': 0.5})
+
         # Add labels
-        ax.set_xlabel('Slice (I->S)', fontsize=LABELS_FONT_SIZE)
-        ax.set_ylabel('Coefficient of Variation (%)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_ylabel('Coefficient of Variation (%)', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
-        ax.tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
-        # Add horizontal grid
-        ax.grid(color='lightgrey', axis='y')
+        axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
+
+        # Remove spines
+        axs[index].spines['right'].set_visible(False)
+        axs[index].spines['left'].set_visible(False)
+        axs[index].spines['top'].set_visible(False)
+        axs[index].spines['bottom'].set_visible(True)
 
         # Get indices of slices corresponding vertebral levels
         vert, ind_vert, ind_vert_mid = get_vert_indices(df)
         # Insert a vertical line for each intervertebral disc
         for idx, x in enumerate(ind_vert[1:-1]):
-            plt.axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5)
+            axs[index].axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5, zorder=0)
 
         # Set the same y-axis limits across metrics
-        ax.set_ylim([0, 18])
+        axs[index].set_ylim([0, 18])
 
         # Place text box with mean COV value
-        plt.text(.5, .94, 'COV: {} ± {} %'.format(round(np.mean(cv_list), 1), round(np.std(cv_list), 1)),
-                 horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
+        axs[index].text(.5, .94, 'COV: {} ± {} %'.format(round(np.mean(cv_list), 1), round(np.std(cv_list), 1)),
+                 horizontalalignment='center', verticalalignment='center', transform=axs[index].transAxes,
                  fontsize=TICKS_FONT_SIZE, bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
         # Move the text box to the front
-        ax.set_zorder(1)
+        axs[index].set_zorder(1)
 
-        ymin, ymax = ax.get_ylim()
+        ymin, ymax = axs[index].get_ylim()
         # Insert a text label for each vertebral level
         for idx, x in enumerate(ind_vert_mid, 0):
             if show_cv:
@@ -308,34 +313,36 @@ def create_regplot(df, path_out, show_cv=False):
             # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
-                ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
+                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
-                    ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8,
-                            str(round(cv, 1)) + '%', horizontalalignment='center',
-                            verticalalignment='bottom', color='black')
+                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8,
+                                    str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
+                                    color='black')
             else:
                 level = 'C' + str(vert[x])
-                ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
+                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
-                    ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8,
-                            str(round(cv, 1)) + '%', horizontalalignment='center',
-                            verticalalignment='bottom', color='black')
+                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8, str(round(cv, 1)) + '%',
+                                    horizontalalignment='center', verticalalignment='bottom', color='black')
             if show_cv:
                 print(f'{metric}, {level}, COV: {cv}')
 
         # Invert x-axis
-        ax.invert_xaxis()
-        ax.set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
+        axs[index].invert_xaxis()
+        # Add only horizontal grid lines
+        axs[index].yaxis.grid(True)
+        # Move grid to background (i.e. behind other elements)
+        axs[index].set_axisbelow(True)
 
-        # Save figure
-        filename = metric + '_cov_scatterplot.png'
-        path_filename = os.path.join(path_out, filename)
-        plt.savefig(path_filename, dpi=300, bbox_inches='tight')
-        print('Figure saved: ' + path_filename)
+    # Save figure
+    filename = 'cov_scatterplot.png'
+    path_filename = os.path.join(path_out, filename)
+    plt.savefig(path_filename, dpi=300, bbox_inches='tight')
+    print('Figure saved: ' + path_filename)
 
 
 def create_regplot_per_sex(df, path_out):
