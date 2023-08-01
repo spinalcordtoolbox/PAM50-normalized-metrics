@@ -18,8 +18,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 
-METRICS = ['MEAN(diameter_AP)', 'MEAN(area)', 'MEAN(diameter_RL)', 'MEAN(eccentricity)', 'MEAN(solidity)',
-           'MEAN(compression_ratio)']
+METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)', 'MEAN(compression_ratio)', 'MEAN(solidity)',
+           'MEAN(eccentricity)']
 
 METRICS_DTYPE = {
     'MEAN(diameter_AP)': 'float64',
