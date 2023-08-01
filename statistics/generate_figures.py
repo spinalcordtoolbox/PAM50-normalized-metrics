@@ -353,11 +353,15 @@ def create_regplot_per_sex(df, path_out):
         path_out (str): path to output directory
     """
 
+    mpl.rcParams['font.family'] = 'Arial'
+
+    fig, axes = plt.subplots(2, 3, figsize=(20, 10))
+    axs = axes.ravel()
+
     # Loop across metrics
-    for metric in METRICS:
+    for index, metric in enumerate(METRICS):
         mean_cov = dict()
         std_cov = dict()
-        fig, ax = plt.subplots()
         # Loop across sex
         for sex in df['sex'].unique():
             slices_list = []
@@ -371,63 +375,69 @@ def create_regplot_per_sex(df, path_out):
 
             mean_cov[sex] = np.mean(cv_list)
             std_cov[sex] = np.std(cv_list)
-            sns.regplot(ax=ax, x=slices_list, y=cv_list, label=sex,
-                        scatter_kws={'alpha': 0.5}, color=PALLET['sex'][sex])
-        # Move y-axis to the right
-        #plt.tick_params(axis='y', which='both', labelleft=False, labelright=True)
-        # Add title
-        plt.title('Spinal Cord ' + METRIC_TO_TITLE[metric], fontsize=LABELS_FONT_SIZE)
+            sns.regplot(ax=axs[index], x=slices_list, y=cv_list, label=sex, scatter_kws={'alpha': 0.5},
+                        color=PALLET['sex'][sex])
+
+        if index == 0:
+            axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
+
         # Add labels
-        ax.set_xlabel('Slice (I->S)', fontsize=LABELS_FONT_SIZE)
-        ax.set_ylabel('Coefficient of Variation (%)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_ylabel('Coefficient of Variation (%)', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
-        ax.tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
-        # Add horizontal grid
-        ax.grid(color='lightgrey', axis='y')
-        # Show legend including title
-        plt.legend(title='sex')
+        axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
+
+        # Remove spines
+        axs[index].spines['right'].set_visible(False)
+        axs[index].spines['left'].set_visible(False)
+        axs[index].spines['top'].set_visible(False)
+        axs[index].spines['bottom'].set_visible(True)
 
         # Get indices of slices corresponding vertebral levels
         vert, ind_vert, ind_vert_mid = get_vert_indices(df)
         # Insert a vertical line for each intervertebral disc
         for idx, x in enumerate(ind_vert[1:-1]):
-            plt.axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5)
+            axs[index].axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5, zorder=0)
 
         # Set the same y-axis limits across metrics
-        ax.set_ylim([0, 18])
+        axs[index].set_ylim([0, 18])
 
         # Place text box with COV values
         # Note: we invert xaxis, thus xmax is used for the left limit
-        plt.text(.5, .90, 'F COV: {} ± {} %\nM COV: {} ± {} %'.format(round(mean_cov['F'], 1),
-                                                                      round(std_cov['F'], 1),
-                                                                      round(mean_cov['M'], 1),
-                                                                      round(std_cov['M'], 1)),
-                 horizontalalignment='center', verticalalignment='center', transform=ax.transAxes,
-                 fontsize=TICKS_FONT_SIZE, bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
+        axs[index].text(.5, .90, 'F COV: {} ± {} %\nM COV: {} ± {} %'.format(round(mean_cov['F'], 1),
+                                                                             round(std_cov['F'], 1),
+                                                                             round(mean_cov['M'], 1),
+                                                                             round(std_cov['M'], 1)),
+                        horizontalalignment='center', verticalalignment='center', transform=axs[index].transAxes,
+                        fontsize=TICKS_FONT_SIZE, bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
         # Move the text box to the front
-        ax.set_zorder(1)
+        axs[index].set_zorder(1)
 
-        ymin, ymax = ax.get_ylim()
+        ymin, ymax = axs[index].get_ylim()
         # Insert a text label for each vertebral level
         for idx, x in enumerate(ind_vert_mid, 0):
             # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
-                ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
+                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
             else:
                 level = 'C' + str(vert[x])
-                ax.text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                        verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
-        # Invert x-axis
-        ax.invert_xaxis()
-        ax.set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
+                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
 
-        # Save figure
-        filename = metric + '_cov_scatterplot_persex.png'
-        path_filename = os.path.join(path_out, filename)
-        plt.savefig(path_filename, dpi=300, bbox_inches='tight')
-        print('Figure saved: ' + path_filename)
+        # Invert x-axis
+        axs[index].invert_xaxis()
+        # Add only horizontal grid lines
+        axs[index].yaxis.grid(True)
+        # Move grid to background (i.e. behind other elements)
+        axs[index].set_axisbelow(True)
+
+    # Save figure
+    filename = 'cov_scatterplot_persex.png'
+    path_filename = os.path.join(path_out, filename)
+    plt.savefig(path_filename, dpi=300, bbox_inches='tight')
+    print('Figure saved: ' + path_filename)
 
 
 def compute_cv(df, metric):
