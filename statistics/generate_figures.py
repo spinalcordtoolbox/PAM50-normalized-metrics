@@ -175,14 +175,14 @@ def create_lineplot(df, hue, path_out, show_cv=False):
     for index, metric in enumerate(METRICS):
         # Note: we are ploting slices not levels to avoid averaging across levels
         if hue == 'sex' or hue == 'manufacturer' or hue == 'age':
-            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue,
+            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2,
                          palette=PALLET[hue])
             if index == 0:
                 axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
             else:
                 axs[index].get_legend().remove()
         else:
-            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue)
+            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2)
 
         # Adjust ymlim for solidity (it has low variance)
         if metric == 'MEAN(solidity)':
