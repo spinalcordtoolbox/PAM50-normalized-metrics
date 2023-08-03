@@ -19,8 +19,8 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 
-METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)', 'MEAN(compression_ratio)', 'MEAN(solidity)',
-           'MEAN(eccentricity)']
+METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)', 'MEAN(compression_ratio)', 'MEAN(eccentricity)',
+           'MEAN(solidity)']
 
 METRICS_DTYPE = {
     'MEAN(diameter_AP)': 'float64',
