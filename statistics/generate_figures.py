@@ -191,7 +191,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
 
         # Add labels
         axs[index].set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
-        axs[index].set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
         axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
 
@@ -278,7 +278,7 @@ def create_regplot(df, path_out, show_cv=False):
         sns.regplot(ax=axs[index], x=slices_list, y=cv_list, scatter_kws={'alpha': 0.5})
 
         # Add labels
-        axs[index].set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
         axs[index].set_ylabel(f'{METRIC_TO_TITLE[metric]} COV (%)', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
         axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
@@ -382,7 +382,7 @@ def create_regplot_per_sex(df, path_out):
             axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
 
         # Add labels
-        axs[index].set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
         axs[index].set_ylabel(f'{METRIC_TO_TITLE[metric]} COV (%)', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
         axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
