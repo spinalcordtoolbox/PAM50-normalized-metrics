@@ -100,8 +100,8 @@ COLORS_SEX = {
 # To be same as spine-generic figures (https://github.com/spine-generic/spine-generic/blob/master/spinegeneric/cli/generate_figure.py#L114)
 PALLET = {
     'sex': {'M': 'blue', 'F': 'red'},
-    'manufacturer': {'Siemens': 'limegreen', 'Philips': 'dodgerblue', 'GE': 'black'},
-    'age': {'10-20': 'blue', '21-30': 'green', '31-40': 'orange', '41-50': 'red', '51-60': 'purple'},
+    'manufacturer': {'Siemens': 'green', 'Philips': 'dodgerblue', 'GE': 'black'},
+    'age': {'10-20': 'blue', '21-30': 'green', '31-40': 'black', '41-50': 'red', '51-60': 'purple'},
     }
 
 
