@@ -279,7 +279,7 @@ def create_regplot(df, path_out, show_cv=False):
 
         # Add labels
         axs[index].set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
-        axs[index].set_ylabel('Coefficient of Variation (%)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_ylabel(f'{METRIC_TO_TITLE[metric]} COV (%)', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
         axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
 
@@ -383,7 +383,7 @@ def create_regplot_per_sex(df, path_out):
 
         # Add labels
         axs[index].set_xlabel('Vertebral Level (S->I)', fontsize=LABELS_FONT_SIZE)
-        axs[index].set_ylabel('Coefficient of Variation (%)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_ylabel(f'{METRIC_TO_TITLE[metric]} COV (%)', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
         axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
 
