@@ -11,6 +11,7 @@
 #
 
 import os
+import sys
 import re
 import argparse
 import numpy as np
@@ -253,6 +254,8 @@ def main():
     # Keep only VertLevel from C1 to Th1
     df = df[df['VertLevel'] <= 8]
 
+    df_spine_generic_min, df_spine_generic_max = df['Slice (I->S)'].min(), df['Slice (I->S)'].max()
+
     # Recode age into age bins by 10 years (decades)
     df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=AGE_DECADES)
     # Multiply solidity by 100 to get percentage (sct_process_segmentation computes solidity in the interval 0-1)
@@ -268,6 +271,15 @@ def main():
                                                    df_single_subject['MEAN(diameter_RL)']
     # Multiply solidity by 100 to get percentage (sct_process_segmentation computes solidity in the interval 0-1)
     df_single_subject['MEAN(solidity)'] = df_single_subject['MEAN(solidity)'] * 100
+
+    # Keep only slices from C1 to Th1 to match the slices of the spine-generic normative values
+    df_single_subject = df_single_subject[(df_single_subject['Slice (I->S)'] >= df_spine_generic_min) &
+                                          (df_single_subject['Slice (I->S)'] <= df_spine_generic_max)]
+
+    # Check if df_single_subject is not empty, if so, print warning and exit
+    if df_single_subject.empty:
+        print('WARNING: No slices found in the range C1-Th1 in the single subject data. Exiting...')
+        sys.exit(1)
 
     # Get subject ID from filename
     subjectID = fetch_subject_and_session(path_single_subject)
