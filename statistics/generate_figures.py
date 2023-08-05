@@ -56,7 +56,7 @@ DEMOGRAPHIC_TO_AXIS = {
 }
 
 # ylim max offset (used for showing text)
-METRICS_TO_YLIM = {
+METRICS_TO_YLIM_OFFSET = {
     'MEAN(diameter_AP)': 0.4,
     'MEAN(area)': 6,
     'MEAN(diameter_RL)': 0.7,
@@ -218,7 +218,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
                                 verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
-                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM[metric],
+                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
                                     str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
                                     color='black')
             else:
@@ -227,7 +227,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
                                 verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
-                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM[metric],
+                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
                                     str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
                                     color='black')
             if show_cv:
