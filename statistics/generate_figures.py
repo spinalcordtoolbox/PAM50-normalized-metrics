@@ -1040,7 +1040,7 @@ def main():
     compute_normative_values_persex(df, path_out_csv)
 
     # Create plots
-    create_lineplot(df, None, path_out_figures, show_cv=True)        # across all subjects
+    create_lineplot(df, None, path_out_figures)        # across all subjects
     create_lineplot(df, 'age', path_out_figures)       # across age
     create_lineplot(df, 'sex', path_out_figures)       # across sex
     create_lineplot(df, 'manufacturer', path_out_figures)  # across manufacturer (vendors)
