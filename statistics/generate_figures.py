@@ -65,6 +65,16 @@ METRICS_TO_YLIM_OFFSET = {
     'MEAN(compression_ratio)': 0.03,
 }
 
+# Set ylim to do not overlap horizontal grid with vertebrae labels
+METRICS_TO_YLIM = {
+    'MEAN(diameter_AP)': (5.7, 9.3),
+    'MEAN(area)': (35, 95),
+    'MEAN(diameter_RL)': (8.5, 14.5),
+    'MEAN(eccentricity)': (0.51, 0.89),
+    'MEAN(solidity)': (91.2, 99.9),
+    'MEAN(compression_ratio)': (0.41, 0.84),
+}
+
 DISCS_DICT = {
     7: 'C7-T1',
     6: 'C6-C7',
@@ -184,9 +194,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         else:
             sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2)
 
-        # Adjust ymlim for solidity (it has low variance)
-        if metric == 'MEAN(solidity)':
-            axs[index].set_ylim(90, 100)
+        axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
         ymin, ymax = axs[index].get_ylim()
 
         # Add labels
