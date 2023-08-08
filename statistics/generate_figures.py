@@ -626,7 +626,7 @@ def gen_chart_weight_height(df, df_participants, path_out):
     sns.regplot(x='weight', y='height', data=df_participants[df_participants['sex'] == 'M'],
                 label='Male', color=COLORS_SEX['M'])
     sns.regplot(x='weight', y='height', data=df_participants[df_participants['sex'] == 'F'],
-                label='Female', color=COLORS_SEX['F']  )
+                label='Female', color=COLORS_SEX['F'])
     # add legend to top right corner of plot
     plt.legend(loc='upper right')
     # x axis label
