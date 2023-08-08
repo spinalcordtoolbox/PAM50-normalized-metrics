@@ -108,7 +108,7 @@ COLORS_SEX = {
     }
 
 # To be same as spine-generic figures (https://github.com/spine-generic/spine-generic/blob/master/spinegeneric/cli/generate_figure.py#L114)
-PALLET = {
+PALETTE = {
     'sex': {'M': 'blue', 'F': 'red'},
     'manufacturer': {'Siemens': 'green', 'Philips': 'dodgerblue', 'GE': 'black'},
     'age': {'10-20': 'blue', '21-30': 'green', '31-40': 'black', '41-50': 'red', '51-60': 'purple'},
@@ -186,7 +186,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         # Note: we are ploting slices not levels to avoid averaging across levels
         if hue == 'sex' or hue == 'manufacturer' or hue == 'age':
             sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2,
-                         palette=PALLET[hue])
+                         palette=PALETTE[hue])
             if index == 0:
                 axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
             else:
@@ -384,7 +384,7 @@ def create_regplot_per_sex(df, path_out):
             mean_cov[sex] = np.mean(cv_list)
             std_cov[sex] = np.std(cv_list)
             sns.regplot(ax=axs[index], x=slices_list, y=cv_list, label=sex, scatter_kws={'alpha': 0.5},
-                        color=PALLET['sex'][sex])
+                        color=PALETTE['sex'][sex])
 
         if index == 0:
             axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
