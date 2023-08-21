@@ -668,6 +668,12 @@ def create_regplot_demographics_vs_metrics(df, path_out):
     """
     Plot relationship between demographics (BMI, weight, height) and MRI metrics persex
     """
+
+    # Drop nan for weight and height
+    print(f"Number of subjects before dropping nan for weight and height: {len(df['Filename'].unique())}")
+    df.dropna(axis=0, subset=['weight', 'height'], inplace=True)
+    print(f"Number of subjects after dropping nan for weight and height: {len(df['Filename'].unique())}")
+
     # Compute BMI
     df['BMI'] = df['weight'] / ((df['height'] / 100) ** 2)
 
