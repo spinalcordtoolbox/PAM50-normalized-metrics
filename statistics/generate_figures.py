@@ -412,10 +412,10 @@ def create_regplot_per_sex(df, path_out):
 
         # Place text box with COV values
         # Note: we invert xaxis, thus xmax is used for the left limit
-        axs[index].text(.5, .90, 'F COV: {}±{}%\nM COV: {} ± {} %'.format(round(mean_cov['F'], 1),
-                                                                          round(std_cov['F'], 1),
-                                                                          round(mean_cov['M'], 1),
-                                                                          round(std_cov['M'], 1)),
+        axs[index].text(.5, .90, 'F COV: {}±{}%\nM COV: {}±{}%'.format(round(mean_cov['F'], 1),
+                                                                       round(std_cov['F'], 1),
+                                                                       round(mean_cov['M'], 1),
+                                                                       round(std_cov['M'], 1)),
                         horizontalalignment='center', verticalalignment='center', transform=axs[index].transAxes,
                         fontsize=TICKS_FONT_SIZE, bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
         # Move the text box to the front
