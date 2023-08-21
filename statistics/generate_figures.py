@@ -1009,7 +1009,12 @@ def main():
     compute_descriptive_stats(df_participants, path_out_figures)
 
     df = df.dropna(axis=1, how='all')
-    df = df.dropna(axis=0, how='any').reset_index(drop=True) # do we want to compute mean with missing levels for some subjects?
+
+    subjects_after_dropping = df['Filename'].unique()
+    # Print number of subjects
+    print(f'Number of subjects after dropping NaN: {str(len(subjects_after_dropping))}')
+    print(f'Dropped subjects: {str(list(set(list(subjects)) - set(list(subjects_after_dropping))))}\n')
+
     # Keep only VertLevel from C1 to Th1
     df = df[df['VertLevel'] <= 8]
 
