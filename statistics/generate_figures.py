@@ -33,7 +33,7 @@ METRICS_DTYPE = {
 METRIC_TO_TITLE = {
     'MEAN(diameter_AP)': 'AP Diameter',
     'MEAN(area)': 'Cross-Sectional Area',
-    'MEAN(diameter_RL)': 'RL Diameter',
+    'MEAN(diameter_RL)': 'Transverse Diameter',
     'MEAN(eccentricity)': 'Eccentricity',
     'MEAN(solidity)': 'Solidity',
     'MEAN(compression_ratio)': 'Compression Ratio',
@@ -42,7 +42,7 @@ METRIC_TO_TITLE = {
 METRIC_TO_AXIS = {
     'MEAN(diameter_AP)': 'AP Diameter [mm]',
     'MEAN(area)': 'Cross-Sectional Area [mm²]',
-    'MEAN(diameter_RL)': 'RL Diameter [mm]',
+    'MEAN(diameter_RL)': 'Transverse Diameter [mm]',
     'MEAN(eccentricity)': 'Eccentricity [a.u.]',
     'MEAN(solidity)': 'Solidity [%]',
     'MEAN(compression_ratio)': 'Compression Ratio [a.u.]',
