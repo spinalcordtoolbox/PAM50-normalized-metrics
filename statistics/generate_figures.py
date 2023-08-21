@@ -287,7 +287,7 @@ def create_regplot(df, path_out, show_cv=False):
 
         # Add labels
         axs[index].set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
-        axs[index].set_ylabel(f'{METRIC_TO_TITLE[metric]} COV (%)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_ylabel(f'{METRIC_TO_TITLE[metric]} COV [%]', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
         axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
 
@@ -307,7 +307,7 @@ def create_regplot(df, path_out, show_cv=False):
         axs[index].set_ylim([0, 18])
 
         # Place text box with mean COV value
-        axs[index].text(.5, .94, 'COV: {} ± {} %'.format(round(np.mean(cv_list), 1), round(np.std(cv_list), 1)),
+        axs[index].text(.5, .94, 'COV: {}±{}%'.format(round(np.mean(cv_list), 1), round(np.std(cv_list), 1)),
                  horizontalalignment='center', verticalalignment='center', transform=axs[index].transAxes,
                  fontsize=TICKS_FONT_SIZE, bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
         # Move the text box to the front
@@ -391,7 +391,7 @@ def create_regplot_per_sex(df, path_out):
 
         # Add labels
         axs[index].set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
-        axs[index].set_ylabel(f'{METRIC_TO_TITLE[metric]} COV (%)', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_ylabel(f'{METRIC_TO_TITLE[metric]} COV [%]', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
         axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
 
@@ -412,10 +412,10 @@ def create_regplot_per_sex(df, path_out):
 
         # Place text box with COV values
         # Note: we invert xaxis, thus xmax is used for the left limit
-        axs[index].text(.5, .90, 'F COV: {} ± {} %\nM COV: {} ± {} %'.format(round(mean_cov['F'], 1),
-                                                                             round(std_cov['F'], 1),
-                                                                             round(mean_cov['M'], 1),
-                                                                             round(std_cov['M'], 1)),
+        axs[index].text(.5, .90, 'F COV: {}±{}%\nM COV: {} ± {} %'.format(round(mean_cov['F'], 1),
+                                                                          round(std_cov['F'], 1),
+                                                                          round(mean_cov['M'], 1),
+                                                                          round(std_cov['M'], 1)),
                         horizontalalignment='center', verticalalignment='center', transform=axs[index].transAxes,
                         fontsize=TICKS_FONT_SIZE, bbox=dict(facecolor='white', edgecolor='black', boxstyle='round'))
         # Move the text box to the front
