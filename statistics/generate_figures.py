@@ -594,7 +594,17 @@ def analyze_metrics_across_age_decades(df):
         slices_41_50 = df[df['age'] == '41-50'].groupby(['Slice (I->S)'])[metric].mean()
         slices_51_60 = df[df['age'] == '51-60'].groupby(['Slice (I->S)'])[metric].mean()
 
-        # Note: groups are highly unbalanced --> no comparison
+        # Run normality test
+        stat, pval = stats.shapiro(slices_21_30)
+        print(f'Normality test 21-30: p-value{format_pvalue(pval)}')
+        stat, pval = stats.shapiro(slices_31_40)
+        print(f'Normality test 31-40: p-value{format_pvalue(pval)}')
+        # Run Wilcoxon rank-sum test (groups are independent)
+        stat, pval = stats.ranksums(x=slices_21_30, y=slices_31_40)
+        print(f'{metric}, all levels: Wilcoxon rank-sum test between 21-30 and 31-40: '
+              f'p-value{format_pvalue(pval)}')
+
+        # Note: other groups are highly unbalanced --> no comparison
 
 
 def gen_chart_weight_height(df, df_participants, path_out):
