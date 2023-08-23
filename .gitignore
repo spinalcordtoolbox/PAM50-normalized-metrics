@@ -1,7 +1,8 @@
 .DS_Store
 .idea/
 
-/statistics/
+statistics/
+notebooks/figures/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
