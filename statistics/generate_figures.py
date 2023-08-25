@@ -578,6 +578,14 @@ def analyze_metrics_across_age_decades(df):
 
     print("")
 
+    # Get number of subjects for each age decade
+    for age_decade in AGE_DECADES:
+        number_of_subjects = len(df[df['age'] == age_decade].groupby(['participant_id'])['MEAN(area)'])
+        print(f'Number of subjects in {age_decade}: {number_of_subjects}')
+        for sex in ['F', 'M']:
+            number_of_subjects = len(df[(df['age'] == age_decade) & (df['sex'] == sex)].groupby(['participant_id'])['MEAN(area)'])
+            print(f'Number of subjects in {age_decade}, {sex}: {number_of_subjects}')
+
     for metric in METRICS:
         print(f"\n{metric}")
 
