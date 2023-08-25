@@ -679,7 +679,7 @@ def fit_linear_regression(df, path_out_csv):
 
             # Compute Wilcoxon rank-sum test between F and M just to check that computation is correct
             stat, pval = stats.ranksums(df_metric[df_metric['sex'] == 1][metric], df_metric[df_metric['sex'] == 0][metric])
-            print(f"Wilcoxon rank-sum test between F and M: p-value{format_pvalue(pval)}")
+            print(f"Wilcoxon rank-sum test between F and M: p-value{format_pvalue(pval, 0.05)}")
 
             # Compute Wilcoxon rank-sum test between 21-30 and 31-40 just to check that computation is correct
             stat, pval = stats.ranksums(df_metric[(df_metric['age'] > 20) & (df_metric['age'] < 31)][metric],
