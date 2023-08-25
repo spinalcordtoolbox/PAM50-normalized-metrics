@@ -573,7 +573,8 @@ def compare_metrics_across_vendors(df):
 
 def analyze_metrics_across_age_decades(df):
     """
-    Get mean values for each age decade across all levels for each metric.
+    Get mean values for each age decade for each metric.
+    Note: we are comparing only 21-30 and 31-40; other groups are highly unbalanced
     """
 
     print("")
@@ -588,11 +589,6 @@ def analyze_metrics_across_age_decades(df):
 
     for metric in METRICS:
         print(f"\n{metric}")
-
-        # Get number of subjects for each age decade
-        for age_decade in AGE_DECADES:
-            number_of_subejcts = len(df[df['age'] == age_decade].groupby(['participant_id'])[metric])
-            print(f'Number of subjects in {age_decade}: {number_of_subejcts}')
 
         # Get mean values for each slice
         slices_10_20 = df[df['age'] == '10-20'].groupby(['Slice (I->S)'])[metric].mean()
