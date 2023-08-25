@@ -517,7 +517,7 @@ def compute_c2_c3_stats(df):
 
 def compare_metrics_across_sex(df):
     """
-    Compute Wilcoxon rank-sum tests between males and females across all levels for each metric.
+    Compute Wilcoxon rank-sum tests between males and females for each metric.
     """
 
     print("")
@@ -536,13 +536,12 @@ def compare_metrics_across_sex(df):
         print(f'Normality test F: p-value{format_pvalue(pval)}')
         # Run Wilcoxon rank-sum test (groups are independent)
         stat, pval = stats.ranksums(x=slices_M, y=slices_F)
-        print(f'{metric}, all levels: Wilcoxon rank-sum test between females and males: '
-              f'p-value{format_pvalue(pval)}')
+        print(f'{metric}: Wilcoxon rank-sum test between females and males: p-value{format_pvalue(pval)}')
 
 
 def compare_metrics_across_vendors(df):
     """
-    Compute Wilcoxon rank-sum tests between MRI vendors across all levels for each metric.
+    Compute Wilcoxon rank-sum tests between MRI vendors for each metric.
     """
 
     print("")
@@ -565,11 +564,11 @@ def compare_metrics_across_vendors(df):
 
         # Run Wilcoxon rank-sum test (groups are independent)
         stat, pval = stats.ranksums(x=slices_siemens, y=slices_philips)
-        print(f'{metric}, all levels: Wilcoxon rank-sum test between Siemens and Phlips: p-value{format_pvalue(pval)}')
+        print(f'{metric}: Wilcoxon rank-sum test between Siemens and Phlips: p-value{format_pvalue(pval)}')
         stat, pval = stats.ranksums(x=slices_siemens, y=slices_ge)
-        print(f'{metric}, all levels: Wilcoxon rank-sum test between Siemens and GE: p-value{format_pvalue(pval)}')
+        print(f'{metric}: Wilcoxon rank-sum test between Siemens and GE: p-value{format_pvalue(pval)}')
         stat, pval = stats.ranksums(x=slices_philips, y=slices_ge)
-        print(f'{metric}, all levels: Wilcoxon rank-sum test between Philips and GE: p-value{format_pvalue(pval)}')
+        print(f'{metric}: Wilcoxon rank-sum test between Philips and GE: p-value{format_pvalue(pval)}')
 
 
 def analyze_metrics_across_age_decades(df):
@@ -601,8 +600,7 @@ def analyze_metrics_across_age_decades(df):
         print(f'Normality test 31-40: p-value{format_pvalue(pval)}')
         # Run Wilcoxon rank-sum test (groups are independent)
         stat, pval = stats.ranksums(x=slices_21_30, y=slices_31_40)
-        print(f'{metric}, all levels: Wilcoxon rank-sum test between 21-30 and 31-40: '
-              f'p-value{format_pvalue(pval)}')
+        print(f'{metric}: Wilcoxon rank-sum test between 21-30 and 31-40: p-value{format_pvalue(pval)}')
 
         # Note: other groups are highly unbalanced --> no comparison
 
