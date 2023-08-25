@@ -18,6 +18,7 @@ import seaborn as sns
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import scipy.stats as stats
+import statsmodels.api as sm
 
 METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)', 'MEAN(compression_ratio)', 'MEAN(eccentricity)',
            'MEAN(solidity)']
@@ -617,6 +618,43 @@ def analyze_metrics_across_age_decades(df):
         print(f'{metric}: Wilcoxon rank-sum test between 21-30_M and 31-40_M: p-value{format_pvalue(pval)}')
 
 
+def fit_linear_regression(df, path_out_csv):
+    """
+    Fit linear regression with age, vendors and sex and with interaction terms
+    """
+
+    # Keep only relevant columns
+    df_fit = df[['participant_id', 'Slice (I->S)', 'age', 'sex', 'manufacturer'] + METRICS]
+    # Drop rows with missing values
+    df_fit = df_fit.dropna()
+    df_fit = df_fit.reset_index(drop=True)
+
+    # Recode sex to numeric values (0 and 1)
+    df_fit['sex'] = df_fit['sex'].apply(lambda x: 1 if x == 'F' else 0)
+    # Recode manufacturer to numeric values (0, 1 and 2)
+    df_fit['manufacturer'] = df_fit['manufacturer'].apply(lambda x: 0 if x == 'GE' else 1 if x == 'Philips' else 2)
+
+    # Add interaction terms to the DataFrame
+    df_fit['age_sex'] = df_fit['age'] * df_fit['sex']
+    df_fit['age_manufacturer'] = df_fit['age'] * df_fit['manufacturer']
+
+    # Define independent variables
+    X = df_fit[['age', 'sex', 'manufacturer', 'age_sex', 'age_manufacturer']]
+    X = sm.add_constant(X)  # Add constant term for intercept
+
+    # Loop through metrics
+    for metric in METRICS:
+        print(f"\n{metric}")
+        # Define dependent variable
+        y = df_fit[metric]
+
+        # Fit linear regression model
+        model = sm.OLS(y, X).fit()
+
+        # Print regression summary
+        print(model.summary())
+
+
 def gen_chart_weight_height(df, df_participants, path_out):
     """
     Plot weight and height relationship per sex
@@ -1048,6 +1086,9 @@ def main():
 
     # Plot metrics as a function of age
     plot_metrics_relative_to_age(df, path_out_figures)
+
+    # Fit linear regression with age, vendors and sex too and with interaction terms
+    fit_linear_regression(df, path_out_csv)
 
     # Recode age into age bins by 10 years (decades)
     df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=AGE_DECADES)
