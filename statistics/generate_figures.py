@@ -624,7 +624,7 @@ def fit_linear_regression(df, path_out_csv):
     """
 
     # Keep only relevant columns
-    df_fit = df[['participant_id', 'Slice (I->S)', 'age', 'sex', 'manufacturer'] + METRICS]
+    df_fit = df[['participant_id', 'Slice (I->S)', 'VertLevel', 'age', 'sex', 'manufacturer'] + METRICS]
     # Drop rows with missing values
     df_fit = df_fit.dropna()
     df_fit = df_fit.reset_index(drop=True)
@@ -634,25 +634,52 @@ def fit_linear_regression(df, path_out_csv):
     # Recode manufacturer to numeric values (0, 1 and 2)
     df_fit['manufacturer'] = df_fit['manufacturer'].apply(lambda x: 0 if x == 'GE' else 1 if x == 'Philips' else 2)
 
-    # Add interaction terms to the DataFrame
-    df_fit['age_sex'] = df_fit['age'] * df_fit['sex']
-    df_fit['age_manufacturer'] = df_fit['age'] * df_fit['manufacturer']
-
-    # Define independent variables
-    X = df_fit[['age', 'sex', 'manufacturer', 'age_sex', 'age_manufacturer']]
-    X = sm.add_constant(X)  # Add constant term for intercept
-
-    # Loop through metrics
+    # Loop across metrics
     for metric in METRICS:
-        print(f"\n{metric}")
-        # Define dependent variable
-        y = df_fit[metric]
+        # Loop across levels
+        for level in list(df_fit['VertLevel'].unique()):
+            print(f"\n{metric}, {MID_VERT_DICT[level]}")
 
-        # Fit linear regression model
-        model = sm.OLS(y, X).fit()
+            # Get mean value perlevel for each subject
+            metric_series = df_fit[df_fit['VertLevel'] == level].groupby(['participant_id'])[metric].mean()
+            sex_series = df_fit[df_fit['VertLevel'] == level].groupby(['participant_id'])['sex'].mean()
+            manufacturer_series = df_fit[df_fit['VertLevel'] == level].groupby(['participant_id'])['manufacturer'].mean()
+            age_series = df_fit[df_fit['VertLevel'] == level].groupby(['participant_id'])['age'].mean()
 
-        # Print regression summary
-        print(model.summary())
+            # Combine series into DataFrame
+            df_metric = pd.DataFrame({metric: metric_series,
+                                      'sex': sex_series,
+                                      'manufacturer': manufacturer_series,
+                                      'age': age_series})
+
+            # Add interaction terms to the DataFrame
+            df_metric['age_sex'] = df_metric['age'] * df_metric['sex']
+            df_metric['age_manufacturer'] = df_metric['age'] * df_metric['manufacturer']
+
+            # Define independent variables
+            X = df_metric[['age', 'sex', 'manufacturer', 'age_sex', 'age_manufacturer']]
+            X = sm.add_constant(X)  # Add constant term for intercept
+
+            # Define dependent variable
+            y = df_metric[metric]
+
+            # Fit linear regression model
+            model = sm.OLS(y, X).fit()
+
+            # Print regression summary
+            #print(model.summary())
+
+            # Print if significant, skip constant
+            for index, pvalue in model.pvalues.items():
+                if index != 'const':
+                    if pvalue < 0.05:
+                        print(f"Linear regression: {index} is significant")
+#                    else:
+#                        print(f"Linear regression: {index} is NOT significant")
+
+            # Compute Wilcoxon rank-sum test between F and M just to check that computation is correct
+            stat, pval = stats.ranksums(df_metric[df_metric['sex'] == 1][metric], df_metric[df_metric['sex'] == 0][metric])
+            print(f"Wilcoxon rank-sum test between F and M: p-value{format_pvalue(pval)}")
 
 
 def gen_chart_weight_height(df, df_participants, path_out):
