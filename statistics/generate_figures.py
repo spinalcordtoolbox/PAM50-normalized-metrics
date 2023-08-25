@@ -606,7 +606,15 @@ def analyze_metrics_across_age_decades(df):
         stat, pval = stats.ranksums(x=slices_21_30, y=slices_31_40)
         print(f'{metric}: Wilcoxon rank-sum test between 21-30 and 31-40: p-value{format_pvalue(pval)}')
 
-        # Note: other groups are highly unbalanced --> no comparison
+        # Run Wilcoxon rank-sum test between age decades separately for F and M
+        slices_21_30_F = df[(df['age'] == '21-30') & (df['sex'] == 'F')].groupby(['Slice (I->S)'])[metric].mean()
+        slices_21_30_M = df[(df['age'] == '21-30') & (df['sex'] == 'M')].groupby(['Slice (I->S)'])[metric].mean()
+        slices_31_40_F = df[(df['age'] == '31-40') & (df['sex'] == 'F')].groupby(['Slice (I->S)'])[metric].mean()
+        slices_31_40_M = df[(df['age'] == '31-40') & (df['sex'] == 'M')].groupby(['Slice (I->S)'])[metric].mean()
+        stat, pval = stats.ranksums(x=slices_21_30_F, y=slices_31_40_F)
+        print(f'{metric}: Wilcoxon rank-sum test between 21-30_F and 31-40_F: p-value{format_pvalue(pval)}')
+        stat, pval = stats.ranksums(x=slices_21_30_M, y=slices_31_40_M)
+        print(f'{metric}: Wilcoxon rank-sum test between 21-30_M and 31-40_M: p-value{format_pvalue(pval)}')
 
 
 def gen_chart_weight_height(df, df_participants, path_out):
