@@ -109,7 +109,7 @@ COLORS_SEX = {
 
 # To be same as spine-generic figures (https://github.com/spine-generic/spine-generic/blob/master/spinegeneric/cli/generate_figure.py#L114)
 PALETTE = {
-    'sex': {'M': 'blue', 'F': 'red'},
+    'sex': {'M': 'blue', 'F': 'red', 'M_21_30': 'blue', 'F_21_30': 'red', 'M_31_40': 'blue', 'F_31_40': 'red'},
     'manufacturer': {'Siemens': 'green', 'Philips': 'dodgerblue', 'GE': 'black'},
     'age': {'10-20': 'blue', '21-30': 'green', '31-40': 'black', '41-50': 'red', '51-60': 'purple'},
     }
@@ -163,6 +163,97 @@ def get_vert_indices(df):
         ind_vert_mid.append(int(ind_vert[i:i+2].mean()))
 
     return vert, ind_vert, ind_vert_mid
+
+
+def create_lineplot_21_40_persex(df, path_out, show_cv=False):
+    """
+    Create lineplot persex for 21-30 and 31-40 age decades for individual metrics per vertebral levels.
+    Note: we are ploting slices not levels to avoid averaging across levels.
+    Args:
+        df (pd.dataFrame): dataframe with metric values
+        path_out (str): path to output directory
+        show_cv (bool): if True, include coefficient of variation for each vertebral level to the plot
+    """
+
+    mpl.rcParams['font.family'] = 'Arial'
+
+    fig, axes = plt.subplots(2, 3, figsize=(20, 10))
+    axs = axes.ravel()
+
+    hue = 'sex'
+
+    df_21_40 = df[(df['age'] == '21-30') | (df['age'] == '31-40')]
+    df_21_40['age'] = df_21_40['age'].cat.remove_unused_categories()
+
+    # Loop across metrics
+    for index, metric in enumerate(METRICS):
+        # Note: we are ploting slices not levels to avoid averaging across levels
+        sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df_21_40, errorbar=None, hue=hue, style='age',
+                     linewidth=2, palette=PALETTE[hue])
+        if index == 0:
+            axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
+        else:
+            axs[index].get_legend().remove()
+
+        axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
+        ymin, ymax = axs[index].get_ylim()
+
+        # Add labels
+        axs[index].set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
+        axs[index].set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
+        # Increase xticks and yticks font size
+        axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
+
+        # Remove spines
+        axs[index].spines['right'].set_visible(False)
+        axs[index].spines['left'].set_visible(False)
+        axs[index].spines['top'].set_visible(False)
+        axs[index].spines['bottom'].set_visible(True)
+
+        # Get indices of slices corresponding vertebral levels
+        vert, ind_vert, ind_vert_mid = get_vert_indices(df)
+        # Insert a vertical line for each intervertebral disc
+        for idx, x in enumerate(ind_vert[1:-1]):
+            axs[index].axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5, zorder=0)
+
+        # Insert a text label for each vertebral level
+        for idx, x in enumerate(ind_vert_mid, 0):
+            if show_cv:
+                cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
+            # Deal with T1 label (C8 -> T1)
+            if vert[x] > 7:
+                level = 'T' + str(vert[x] - 7)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
+                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                # Show CV
+                if show_cv:
+                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
+                                    str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
+                                    color='black')
+            else:
+                level = 'C' + str(vert[x])
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
+                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                # Show CV
+                if show_cv:
+                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
+                                    str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
+                                    color='black')
+            if show_cv:
+                print(f'{metric}, {level}, COV: {cv}')
+
+        # Invert x-axis
+        axs[index].invert_xaxis()
+        # Add only horizontal grid lines
+        axs[index].yaxis.grid(True)
+        # Move grid to background (i.e. behind other elements)
+        axs[index].set_axisbelow(True)
+
+    # Save figure
+    filename = 'lineplot_21-40_age_per' + hue + '.png'
+    path_filename = os.path.join(path_out, filename)
+    plt.savefig(path_filename, dpi=300, bbox_inches='tight')
+    print('Figure saved: ' + path_filename)
 
 
 def create_lineplot(df, hue, path_out, show_cv=False):
@@ -1077,6 +1168,8 @@ def main():
     # Compute normative values
     compute_normative_values(df, path_out_csv)
     compute_normative_values_persex(df, path_out_csv)
+
+    create_lineplot_21_40_persex(df, path_out_figures)
 
     # Create plots
     create_lineplot(df, None, path_out_figures)        # across all subjects
