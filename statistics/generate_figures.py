@@ -185,6 +185,11 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
     df_21_40 = df[(df['age'] == '21-30') | (df['age'] == '31-40')]
     df_21_40['age'] = df_21_40['age'].cat.remove_unused_categories()
 
+    num_sub_21_30_F = len(df_21_40[(df['age'] == '21-30') & (df['sex'] == 'F')].groupby(['participant_id'])['MEAN(area)'])
+    num_sub_21_30_M = len(df_21_40[(df['age'] == '21-30') & (df['sex'] == 'M')].groupby(['participant_id'])['MEAN(area)'])
+    num_sub_31_40_F = len(df_21_40[(df['age'] == '31-40') & (df['sex'] == 'F')].groupby(['participant_id'])['MEAN(area)'])
+    num_sub_31_40_M = len(df_21_40[(df['age'] == '31-40') & (df['sex'] == 'M')].groupby(['participant_id'])['MEAN(area)'])
+
     # Loop across metrics
     for index, metric in enumerate(METRICS):
         # Note: we are ploting slices not levels to avoid averaging across levels
