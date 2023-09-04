@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
@@ -687,3 +688,19 @@ def get_vert_indices(df):
         ind_vert_mid.append(int(ind_vert[i:i + 2].mean()))
 
     return vert, ind_vert, ind_vert_mid
+
+
+def read_metrics(path_csv):
+    """
+    Read the CSV file with aggregated metrics for all subjects
+    Args:
+        path_csv:
+    Returns:
+        df (pd.dataFrame): dataframe with aggregated metrics
+    """
+    # Read the CSV file with aggregated metrics for all subjects
+    df = pd.read_csv(path_csv)
+    # Rename manufacturer column to vendor to match manuscript
+    df = df.rename(columns={'manufacturer': 'vendor'})
+
+    return df
