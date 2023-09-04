@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from repo2data.repo2data import Repo2Data
 
 METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)', 'MEAN(compression_ratio)', 'MEAN(eccentricity)',
            'MEAN(solidity)']
@@ -704,3 +705,15 @@ def read_metrics(path_csv):
     df = df.rename(columns={'manufacturer': 'vendor'})
 
     return df
+
+
+def fetch_data():
+    """
+    Fetch data using repo2data
+    """
+    # define data requirement path
+    data_req_path = os.path.join("data_requirement.json")
+    # download data
+    repo2data = Repo2Data(data_req_path)
+    data_path = repo2data.install()
+
