@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 
 
 FONT_STYLE = {'family': 'Arial', 'color': 'black'}
+FIGURE_MARGIN = dict(t=40, r=50, b=10, l=50)
 
 
 def table_demographic_characteristics(path_csv):
@@ -40,8 +41,9 @@ def table_demographic_characteristics(path_csv):
                    font=font_style))
     ])
 
-    # Set the table height to ensure all rows are displayed
-    fig.update_layout(height=table_height)
+    fig.update_layout(
+        margin=FIGURE_MARGIN,
+        height=table_height)
 
     fig.show()
 
@@ -84,8 +86,9 @@ def table_whole_cohort(path_csv):
                    font=font_style))
     ])
 
-    # Set the table height to ensure all rows are displayed
-    fig.update_layout(height=table_height)
+    fig.update_layout(
+        margin=FIGURE_MARGIN,
+        height=table_height)
 
     fig.show()
 
@@ -133,7 +136,8 @@ def table_persex(path_csv):
                    font=font_style))
     ])
 
-    # Set the table height to ensure all rows are displayed
-    fig.update_layout(height=table_height)
+    fig.update_layout(
+        margin=FIGURE_MARGIN,
+        height=table_height)
 
     fig.show()
