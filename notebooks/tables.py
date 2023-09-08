@@ -66,7 +66,7 @@ def table_normative_values(path_csv, output='show'):
                      'Axial Slice #',
                      'CSA [mm²]',
                      'AP Diameter [mm]',
-                     'RL Diameter [mm]',
+                     'Transverse Diameter [mm]',
                      'Compression Ratio [a.u.]',
                      'Eccentricity [a.u.]',
                      'Solidity [%]']
