@@ -6,11 +6,13 @@ FONT_STYLE = {'family': 'Arial', 'color': 'black'}
 FIGURE_MARGIN = dict(t=40, r=50, b=10, l=50)
 
 
-def table_demographic_characteristics(path_csv):
+def table_demographic_characteristics(path_csv, output='show'):
     """
     Show table from csv file
     Args:
         path_csv:
+        output (str): show (show figure in jupyter notebook), or html (return plotly object, which can be rendered as
+        html in jupyter book)
     """
 
     header_values = ['',
@@ -45,14 +47,19 @@ def table_demographic_characteristics(path_csv):
         margin=FIGURE_MARGIN,
         height=table_height)
 
-    fig.show()
+    if output == 'show':
+        fig.show()
+    elif output == 'html':
+        return fig
 
 
-def table_normative_values(path_csv):
+def table_normative_values(path_csv, output='show'):
     """
     Show table from csv file
     Args:
         path_csv:
+        output (str): show (show figure in jupyter notebook), or html (return plotly object, which can be rendered as
+        html in jupyter book)
     """
 
     header_values = ['',
@@ -90,5 +97,7 @@ def table_normative_values(path_csv):
         margin=FIGURE_MARGIN,
         height=table_height)
 
-    fig.show()
-
+    if output == 'show':
+        fig.show()
+    elif output == 'html':
+        return fig

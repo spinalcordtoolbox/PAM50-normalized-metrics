@@ -85,13 +85,14 @@ PALETTE_RGBA = {
 }
 
 
-def create_subplot(df, save=False):
+def create_subplot(df, output='show'):
     """
     Create 2x3 subplot with lineplots for all MRI metric per vertebral levels.
     Note: we are ploting slices not levels to avoid averaging across levels.
     Args:
         df (pd.dataFrame): dataframe with metric values across all healthy subjects
-        save (bool): if True, save figure to file
+        output (str): show (show figure in jupyter notebook), save (save figure as png) or html (return plotly object,
+        which can be rendered as html in jupyter book)
     """
 
     slices = df["Slice (I->S)"]
@@ -252,19 +253,23 @@ def create_subplot(df, save=False):
         margin=FIGURE_MARGIN
     )
 
-    fig.show()
-    if save:
+    if output == 'show':
+        fig.show()
+    elif output == 'save':
         save_figure(fig, 'lineplot.png')
+    elif output == 'html':
+        return fig
 
 
-def create_subplot_hue(df, hue, save=False):
+def create_subplot_hue(df, hue, output='show'):
     """
     Create 2x3 subplot with lineplots for all MRI metric per vertebral levels for a specific hue ('age', 'sex', 'vendor').
     Note: we are ploting slices not levels to avoid averaging across levels.
     Args:
         df (pd.dataFrame): dataframe with metric values across all healthy subjects
         hue (str): column name of the dataframe to use for grouping
-        save (bool): if True, save figure to file
+        output (str): show (show figure in jupyter notebook), save (save figure as png) or html (return plotly object,
+        which can be rendered as html in jupyter book)
     """
 
     # Get a list of unique categories for the hue variable
@@ -462,18 +467,22 @@ def create_subplot_hue(df, hue, save=False):
         margin=FIGURE_MARGIN
     )
 
-    fig.show()
-    if save:
-        save_figure(fig, 'lineplot_' + hue + '.png')
+    if output == 'show':
+        fig.show()
+    elif output == 'save':
+        save_figure(fig, 'lineplot.png')
+    elif output == 'html':
+        return fig
 
 
-def create_regplot(df, show_cv=False, save=False):
+def create_regplot(df, show_cv=False, output='show'):
     """
     Plot data and a linear regression model fit. Slices in X and Coefficient of Variation (CoV) in Y.
     Args:
         df (pd.dataFrame): dataframe with metric values
         show_cv (bool): if True, include coefficient of variation for each vertebral level to the plot
-        save (bool): if True, save figure to file
+        output (str): show (show figure in jupyter notebook), save (save figure as png) or html (return plotly object,
+        which can be rendered as html in jupyter book)
     """
 
     # Set the same y-lim for all subplots
@@ -638,9 +647,12 @@ def create_regplot(df, show_cv=False, save=False):
         margin=FIGURE_MARGIN
     )
 
-    fig.show()
-    if save:
-        save_figure(fig, 'regplot.png')
+    if output == 'show':
+        fig.show()
+    elif output == 'save':
+        save_figure(fig, 'lineplot.png')
+    elif output == 'html':
+        return fig
 
 
 def save_figure(fig, fname_fig):
