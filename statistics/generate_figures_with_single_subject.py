@@ -122,7 +122,7 @@ def fetch_subject_and_session(filename_path):
     return subjectID, sessionID
 
 
-def create_lineplot(df, df_single_subject, subjectID, path_out, sex=None):
+def create_lineplot(df, df_single_subject, sub_ses, number_of_subjects, path_out, sex=None):
     """
     Create lineplot for individual metrics per vertebral levels.
     Note: we are plotting slices not levels to avoid averaging across levels.
@@ -146,11 +146,12 @@ def create_lineplot(df, df_single_subject, subjectID, path_out, sex=None):
         if sex:
             # Plot spine-generic multi-subject data for a given sex
             sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df[df['sex'] == sex], errorbar='sd',
-                         linewidth=2, color=COLORS_SEX[sex], label=f'spine-generic {SEX_TO_LEGEND[sex]}')
+                         linewidth=2, color=COLORS_SEX[sex],
+                         label=f'spine-generic {SEX_TO_LEGEND[sex]} (N = {number_of_subjects})')
         else:
             # Plot spine-generic multi-subject data
             sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', linewidth=2,
-                         label='spine-generic all subjects')
+                         label=f'spine-generic all subjects (N = {number_of_subjects})')
         # Plot single subject data
         sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df_single_subject, linewidth=2, color='black',
                      label=sub_ses)
@@ -299,14 +300,14 @@ def main():
         sub_ses = subjectID
 
     if args.single_subject_sex:
-            print(f"Number of {SEX_TO_LEGEND[single_subject_sex]}: "
-                  f"{str(len(df_participants[df_participants['sex'] == single_subject_sex]))}")
+        number_of_subjects = str(len(df_participants[df_participants['sex'] == single_subject_sex]))
+        print(f"Number of {SEX_TO_LEGEND[single_subject_sex]}: {number_of_subjects}")
     else:
-        # Print number of subjects
-        print(f'Number of subjects: {str(len(df_participants))}')
+        number_of_subjects = str(len(df_participants))
+        print(f'Number of subjects: {number_of_subjects}')
 
     # Create plots
-    create_lineplot(df, df_single_subject, subjectID, path_out_figures, sex=single_subject_sex)
+    create_lineplot(df, df_single_subject, sub_ses, number_of_subjects, path_out_figures, sex=single_subject_sex)
 
 
 if __name__ == '__main__':
