@@ -165,7 +165,7 @@ def create_lineplot(df, df_single_subject, subjectID, path_out, sex=None):
 
         # Add labels
         axs[index].set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
-        axs[index].set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
+        axs[index].set_xlabel('PAM50 Axial Slice #', fontsize=LABELS_FONT_SIZE)
         # Increase xticks and yticks font size
         axs[index].tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
 
