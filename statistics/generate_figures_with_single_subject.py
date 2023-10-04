@@ -111,12 +111,15 @@ def fetch_subject_and_session(filename_path):
     _, filename = os.path.split(filename_path)              # Get just the filename (i.e., remove the path)
     subject = re.search('sub-(.*?)[_/]', filename_path)
     subjectID = subject.group(0)[:-1] if subject else ""    # [:-1] removes the last underscore or slash
+
+    session = re.search('ses-(.*?)[_/]', filename_path)     # [_/] means either underscore or slash
+    sessionID = session.group(0)[:-1] if session else ""    # [:-1] removes the last underscore or slash
     # REGEX explanation
     # \d - digit
     # \d? - no or one occurrence of digit
     # *? - match the previous element as few times as possible (zero or more times)
 
-    return subjectID
+    return subjectID, sessionID
 
 
 def create_lineplot(df, df_single_subject, subjectID, path_out, sex=None):
@@ -126,7 +129,8 @@ def create_lineplot(df, df_single_subject, subjectID, path_out, sex=None):
     Args:
         df (pd.dataFrame): dataframe with metric values
         df_single_subject (pd.dataFrame): dataframe with metric values for a single subject
-        subjectID (str): subject ID of the single subject
+        sub_ses (str): subject and session ID
+        number_of_subjects (int): number of subjects in spine-generic dataset
         path_out (str): path to output directory
         sex (str): sex to filter spine-generic subjects on; possible options: 'M', 'F'
     """
@@ -149,7 +153,7 @@ def create_lineplot(df, df_single_subject, subjectID, path_out, sex=None):
                          label='spine-generic all subjects')
         # Plot single subject data
         sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df_single_subject, linewidth=2, color='black',
-                     label=subjectID)
+                     label=sub_ses)
 
         ymin, ymax = axs[index].get_ylim()
 
@@ -201,7 +205,7 @@ def create_lineplot(df, df_single_subject, subjectID, path_out, sex=None):
         axs[index].set_axisbelow(True)
 
     # Save figure
-    filename = 'lineplot_' + subjectID + '.png'
+    filename = sub_ses + '_T2w_lineplot_PAM50.png'
     path_filename = os.path.join(path_out, filename)
     plt.savefig(path_filename, dpi=300, bbox_inches='tight')
     print('Figure saved: ' + path_filename)
@@ -287,7 +291,12 @@ def main():
         sys.exit(1)
 
     # Get subject ID from filename
-    subjectID = fetch_subject_and_session(path_single_subject)
+    subjectID, sessionID = fetch_subject_and_session(path_single_subject)
+
+    if sessionID:
+        sub_ses = subjectID + '_' + sessionID
+    else:
+        sub_ses = subjectID
 
     if args.single_subject_sex:
             print(f"Number of {SEX_TO_LEGEND[single_subject_sex]}: "
