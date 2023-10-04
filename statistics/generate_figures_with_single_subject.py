@@ -159,6 +159,10 @@ def create_lineplot(df, df_single_subject, subjectID, path_out, sex=None):
         else:
             axs[index].get_legend().remove()
 
+        # Add master title
+        plt.suptitle(f'Morphometric measures for {sub_ses} in PAM50 template space', fontweight='bold',
+                     fontsize=LABELS_FONT_SIZE, y=0.92)
+
         # Add labels
         axs[index].set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
         axs[index].set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
