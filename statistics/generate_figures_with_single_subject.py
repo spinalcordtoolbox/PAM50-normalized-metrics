@@ -153,7 +153,8 @@ def create_lineplot(df, df_single_subject, subjectID, path_out, sex=None):
 
         ymin, ymax = axs[index].get_ylim()
 
-        if index == 0:
+        # Add legend
+        if index == 1:
             axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
         else:
             axs[index].get_legend().remove()
