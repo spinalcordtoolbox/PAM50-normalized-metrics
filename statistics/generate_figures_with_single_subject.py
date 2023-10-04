@@ -6,6 +6,7 @@
 #       python generate_figures.py
 #       -path-HC $SCT_DIR/data/PAM50_normalized_metrics
 #       -participant-file $SCT_DIR/data/PAM50_normalized_metrics/participants.tsv
+#       -single-subject-sex M
 #
 # Author: Jan Valosek
 #
