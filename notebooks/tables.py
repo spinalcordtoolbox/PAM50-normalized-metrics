@@ -30,7 +30,7 @@ def table_demographic_characteristics(path_csv, output='show'):
     font_style = FONT_STYLE
 
     # Calculate the height based on the number of rows
-    table_height = 40 + len(df) * 40  # Assuming 40px height per row
+    table_height = 25 + len(df) * 25  # Assuming 25px height per row
 
     fig = go.Figure(data=[go.Table(
         header=dict(values=header_values,
@@ -80,7 +80,7 @@ def table_normative_values(path_csv, output='show'):
     font_style = FONT_STYLE
 
     # Calculate the height based on the number of rows
-    table_height = 40 + len(df) * 40  # Assuming 40px height per row
+    table_height = 25 + len(df) * 25  # Assuming 25px height per row
 
     fig = go.Figure(data=[go.Table(
         header=dict(values=header_values,
