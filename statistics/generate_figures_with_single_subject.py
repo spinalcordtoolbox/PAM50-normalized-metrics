@@ -271,6 +271,8 @@ def main():
         df_participants = pd.read_csv(args.participant_file, sep='\t')
         df = df.merge(df_participants[["age", "sex", "height", "weight", "manufacturer", "participant_id"]],
                       on='participant_id')
+        # Recode age into age bins by 10 years (decades)
+        df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=AGE_DECADES)
 
     df = df.dropna(axis=1, how='all')
     df = df.dropna(axis=0, how='any').reset_index(drop=True)
@@ -279,8 +281,6 @@ def main():
 
     df_spine_generic_min, df_spine_generic_max = df['Slice (I->S)'].min(), df['Slice (I->S)'].max()
 
-    # Recode age into age bins by 10 years (decades)
-    df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=AGE_DECADES)
     # Multiply solidity by 100 to get percentage (sct_process_segmentation computes solidity in the interval 0-1)
     df['MEAN(solidity)'] = df['MEAN(solidity)'] * 100
 
