@@ -63,13 +63,19 @@ def get_parser():
         description="Plot single subject morphometric metrics together with normative values computed from normative "
                     "database (spine-generic dataset in PAM50 space) per slice and vertebral levels ")
     parser.add_argument('-path-HC', required=True, type=str,
-                        help="Path to data of normative dataset computed per slice.")
+                        help="Path to data of normative dataset computed per slice. "
+                             "Example: '${SCT_DIR}/data/PAM50_normalized_metrics'")
     parser.add_argument('-csv-single-subject', required=True, type=str,
-                        help="Path to single-subject CSV file of normative dataset computed per slice.")
+                        help="Path to the CSV file with single-subject morphometric metrics in the PAM50 space. "
+                             "The file can be generated using the 'sct_process_segmentation -perslice 1 "
+                             "-normalize-PAM50 1' command. "
+                             "Example: 'sub-001_T2w_metrics_PAM50.csv'")
     parser.add_argument('-single-subject-sex', required=False, type=str, choices=['M', 'F'], default=None,
-                        help="Sex of the single subject. Options: 'M', 'F'.")
+                        help="Sex of the single subject. Options: 'M', 'F'. "
+                             "If used, the '-participant-file' flag must be also specified.")
     parser.add_argument('-participant-file', required=False, type=str,
-                        help="Path to spine-generic participants.tsv file (used to filter per sex).")
+                        help="Path to the spine-generic participants.tsv file (used to filter per sex). "
+                             "Example: '${SCT_DIR}/data/PAM50_normalized_metrics/participants.tsv'")
     parser.add_argument('-path-out', required=False, type=str, default='figures',
                         help="Output directory name. Default: figures.")
 
