@@ -240,6 +240,12 @@ def main():
     path_single_subject = args.csv_single_subject
     single_subject_sex = args.single_subject_sex
     path_out_figures = os.path.abspath(args.path_out)
+
+    # Check that the arg -single-subject-sex is not used without -participant-file
+    if args.single_subject_sex and not args.participant_file:
+        print("ERROR: '-participant-file' flag is required when using the '-single-subject-sex' flag. Exiting...")
+        sys.exit(1)
+
     # If the output folder directory is not present, then create it.
     if not os.path.exists(path_out_figures):
         os.makedirs(path_out_figures)
