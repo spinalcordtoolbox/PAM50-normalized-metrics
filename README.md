@@ -22,7 +22,7 @@ CSV files from this repository are utilized within the following SCT functions:
 sct_process_segmentation -i sub-001_T2w_label-SC_mask.nii.gz -vertfile sub-001_T2w_label-SC_mask_labeled.nii.gz -perslice 1 -normalize-PAM50 1 -o sub-001_T2w_metrics_PAM50.csv
 ```
 
-- `sct_compute_compression  -normalize-hc 1`, example: 
+- `sct_compute_compression -normalize-hc 1`, example: 
 
 ```console
 sct_compute_compression -i sub-001_T2w_label-SC_mask.nii.gz -vertfile sub-001_T2w_label-SC_mask_labeled.nii.gz -l sub-001_T2w_label-compression.nii.gz -normalize-hc 1 -o sub-001_T2w_compression_metrics.csv
