@@ -172,7 +172,7 @@ def create_lineplot(df, df_single_subject, sub_ses, number_of_subjects, path_out
             axs[index].get_legend().remove()
 
         # Add master title
-        plt.suptitle(f'Morphometric measures for {sub_ses} in PAM50 template space', fontweight='bold',
+        plt.suptitle(f'Morphometric measures for {sub_ses} in the PAM50 template space', fontweight='bold',
                      fontsize=LABELS_FONT_SIZE, y=0.92)
 
         # Add labels
