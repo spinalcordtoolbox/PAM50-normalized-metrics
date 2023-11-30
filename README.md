@@ -1,6 +1,6 @@
 # PAM50 normalized metrics
 
-This repository contains CSV files of spinal cord morphometric measures in the PAM50 anatomical space computed from 203 healthy adult volunteers.
+This repository contains CSV files of spinal cord morphometric measures in the PAM50 anatomical dimensions computed from 203 healthy adult volunteers.
 
 👉 Please cite this work if you use it or if you are inspired by it:
 
@@ -14,7 +14,7 @@ Valošek et al., (2023). A database of the healthy human spinal cord morphometry
 
 The repository is part of [SCT](https://github.com/spinalcordtoolbox/spinalcordtoolbox/) and is downloaded automatically during SCT installation.
 
-CSV files from this repository are utilized within the following SCT functions:
+CSV files from this repository are used by the following SCT functions:
 
 - `sct_process_segmentation -normalize-PAM50 1`, example:
 
