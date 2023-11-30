@@ -10,7 +10,7 @@ Valošek et al., (2023). A database of the healthy human spinal cord morphometry
 
 [![DOI](https://neurolibre.org/papers/10.55458/neurolibre.00017/status.svg)](https://doi.org/10.55458/neurolibre.00017)
 
-### Usage
+## Usage
 
 The repository is part of [SCT](https://github.com/spinalcordtoolbox/spinalcordtoolbox/) and is downloaded automatically during SCT installation.
 
@@ -28,7 +28,7 @@ sct_process_segmentation -i sub-001_T2w_label-SC_mask.nii.gz -vertfile sub-001_T
 sct_compute_compression -i sub-001_T2w_label-SC_mask.nii.gz -vertfile sub-001_T2w_label-SC_mask_labeled.nii.gz -l sub-001_T2w_label-compression.nii.gz -normalize-hc 1 -o sub-001_T2w_compression_metrics.csv
 ```
 
-### Dependencies
+## Dependencies
 
 - [SCT v6.0](https://github.com/spinalcordtoolbox/spinalcordtoolbox/tree/6.0)
 
