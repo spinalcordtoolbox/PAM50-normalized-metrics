@@ -1170,6 +1170,10 @@ def main():
     # Compute mean, median, std, min, max for age
     compute_age_stats(df_participants)
 
+    # Get number of participants for each vendor
+    print('\nNumber of participants per vendor')
+    print(df_participants.groupby(['manufacturer'])['participant_id'].count())
+
     # Recode age into age bins by 10 years (decades)
     df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=AGE_DECADES)
 
