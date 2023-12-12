@@ -1090,6 +1090,28 @@ def explore_linearity(df, path_out_figures):
     print(f'Created: {fname_fig}.\n')
 
 
+def compute_age_stats(df_participants):
+    """
+    Compute mean, median, std, min, max for age
+    Args:
+        df_participants: dataframe containing participants information from participants.tsv
+
+    Returns:
+
+    """
+    # Compute age statistics
+    age_mean = df_participants['age'].mean()
+    age_std = df_participants['age'].std()
+    age_median = df_participants['age'].median()
+    age_min = df_participants['age'].min()
+    age_max = df_participants['age'].max()
+    print(f'Age statistics:\n'
+          f'Mean: {round(age_mean, 2)} ± {round(age_std, 2)}\n'
+          f'Median: {age_median}\n'
+          f'Min: {age_min}\n'
+          f'Max: {age_max}\n')
+
+
 def main():
     parser = get_parser()
     args = parser.parse_args()
@@ -1144,6 +1166,9 @@ def main():
 
     # Plot metrics as a function of age
     plot_metrics_relative_to_age(df, path_out_figures)
+
+    # Compute mean, median, std, min, max for age
+    compute_age_stats(df_participants)
 
     # Recode age into age bins by 10 years (decades)
     df['age'] = pd.cut(df['age'], bins=[10, 20, 30, 40, 50, 60], labels=AGE_DECADES)
