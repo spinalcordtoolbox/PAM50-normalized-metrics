@@ -8,16 +8,13 @@ from repo2data.repo2data import Repo2Data
 METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)', 'MEAN(compression_ratio)', 'MEAN(eccentricity)',
            'MEAN(solidity)']
 
-# FIGURE_SIZE = [1400, 800]     # for saving
-FIGURE_SIZE = [960, 649]  # for rendering
+FIGURE_SIZE = [960, 649]
 
 # vertical_spacing, horizontal_spacing
-# SUBPLOT_SPACING = [0.08, 0.05]   # for saving
-SUBPLOT_SPACING = [0.08, 0.06]  # for rendering
+SUBPLOT_SPACING = [0.08, 0.06]
 
 # Figure margins in px
-# FIGURE_MARGIN=dict(l=60, r=20, t=20, b=20)     # for saving
-FIGURE_MARGIN = dict(t=40, r=50, b=10, l=50)  # for rendering
+FIGURE_MARGIN = dict(t=40, r=50, b=10, l=50)
 
 METRIC_TO_TITLE = {
     'MEAN(area)': 'Cross-Sectional Area',
@@ -85,7 +82,7 @@ PALETTE_RGBA = {
 }
 
 
-def create_subplot(df, output='show'):
+def create_subplot(df, output='show', output_fname=None):
     """
     Create 2x3 subplot with lineplots for all MRI metric per vertebral levels.
     Note: we are ploting slices not levels to avoid averaging across levels.
@@ -93,6 +90,7 @@ def create_subplot(df, output='show'):
         df (pd.dataFrame): dataframe with metric values across all healthy subjects
         output (str): show (show figure in jupyter notebook), save (save figure as png) or html (return plotly object,
         which can be rendered as html in jupyter book)
+        output_fname: output figure filename; valid only for output='save'
     """
 
     slices = df["Slice (I->S)"]
@@ -256,12 +254,12 @@ def create_subplot(df, output='show'):
     if output == 'show':
         fig.show()
     elif output == 'save':
-        save_figure(fig, 'lineplot.png')
+        save_figure(fig, output_fname)
     elif output == 'html':
         return fig
 
 
-def create_subplot_hue(df, hue, output='show'):
+def create_subplot_hue(df, hue, output='show', output_fname=None):
     """
     Create 2x3 subplot with lineplots for all MRI metric per vertebral levels for a specific hue ('age', 'sex', 'vendor').
     Note: we are ploting slices not levels to avoid averaging across levels.
@@ -270,6 +268,7 @@ def create_subplot_hue(df, hue, output='show'):
         hue (str): column name of the dataframe to use for grouping
         output (str): show (show figure in jupyter notebook), save (save figure as png) or html (return plotly object,
         which can be rendered as html in jupyter book)
+        output_fname: output figure filename; valid only for output='save'
     """
 
     # Get a list of unique categories for the hue variable
@@ -470,12 +469,12 @@ def create_subplot_hue(df, hue, output='show'):
     if output == 'show':
         fig.show()
     elif output == 'save':
-        save_figure(fig, 'lineplot.png')
+        save_figure(fig, output_fname)
     elif output == 'html':
         return fig
 
 
-def create_regplot(df, show_cv=False, output='show'):
+def create_regplot(df, show_cv=False, output='show', output_fname=None):
     """
     Plot data and a linear regression model fit. Slices in X and Coefficient of Variation (CoV) in Y.
     Args:
@@ -483,6 +482,7 @@ def create_regplot(df, show_cv=False, output='show'):
         show_cv (bool): if True, include coefficient of variation for each vertebral level to the plot
         output (str): show (show figure in jupyter notebook), save (save figure as png) or html (return plotly object,
         which can be rendered as html in jupyter book)
+        output_fname: output figure filename; valid only for output='save'
     """
 
     # Set the same y-lim for all subplots
@@ -650,7 +650,7 @@ def create_regplot(df, show_cv=False, output='show'):
     if output == 'show':
         fig.show()
     elif output == 'save':
-        save_figure(fig, 'lineplot.png')
+        save_figure(fig, output_fname)
     elif output == 'html':
         return fig
 
@@ -661,7 +661,7 @@ def save_figure(fig, fname_fig):
     """
     if not os.path.exists('figures'):
         os.mkdir('figures')
-    fig.write_image(os.path.join('figures', fname_fig), scale=2)
+    fig.write_image(os.path.join('figures', fname_fig), scale=4)
     print(f"Created: {os.path.join('figures', fname_fig)}.")
 
 
