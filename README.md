@@ -5,7 +5,15 @@ This repository contains CSV files of spinal cord morphometric measures in the P
 👉 Please cite this work if you use it or if you are inspired by it:
 
 ```
-Valošek et al., (2023). A database of the healthy human spinal cord morphometry in the PAM50 template space. NeuroLibre Reproducible Preprints, 17, https://doi.org/10.55458/neurolibre.00017
+Valošek, Bédard et al., (2024). A database of the healthy human spinal cord morphometry in the PAM50 template space. Imaging Neuroscience, 2 1–15, https://doi.org/10.1162/imag_a_00075
+```
+
+[![DOI](https://img.shields.io/badge/ImagingNeuroscience-10.1162/imag_a_00075-status.svg)](https://doi.org/10.1162/imag_a_00075)
+
+👉 For interactive figures, please visit the [NeuroLibre preprint](https://preprint.neurolibre.org/10.55458/neurolibre.00017/):
+
+```
+Valošek, Bédard et al., (2023). A database of the healthy human spinal cord morphometry in the PAM50 template space. NeuroLibre Reproducible Preprints, 17, https://doi.org/10.55458/neurolibre.00017
 ```
 
 [![DOI](https://neurolibre.org/papers/10.55458/neurolibre.00017/status.svg)](https://doi.org/10.55458/neurolibre.00017)
