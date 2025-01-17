@@ -81,9 +81,9 @@ METRICS_TO_YLIM_OFFSET = {
 
 # Set ylim to do not overlap horizontal grid with vertebrae labels
 METRICS_TO_YLIM = {
-    'MEAN(diameter_AP)': (5.7, 9.3), #(10, 20), #TODO: use second value for canal
-    'MEAN(area)': (35, 95),  #(100, 270),
-    'MEAN(diameter_RL)': (8.5, 14.5), #(15, 35),
+    'MEAN(diameter_AP)': (4, 9.3), #(10, 20), #TODO: use second value for canal
+    'MEAN(area)': (25, 95),  #(100, 270),
+    'MEAN(diameter_RL)': (5, 14.5), #(15, 35),
     'MEAN(eccentricity)': (0.51, 0.89),
     'MEAN(solidity)': (91.2, 99.9),
     'MEAN(compression_ratio)': (0.41, 0.84),
@@ -141,11 +141,14 @@ def get_parser():
                         help="Path to data of normative dataset computed perslice 2.")
     parser.add_argument('-participant-file', required=False, type=str,
                         help="Path to participants.tsv file.")
+    parser.add_argument('-vertlevel', required=False, type=str, default='2:8',
+                        help="Path to participants.tsv file.")
+    parser.add_argument('-ref-subject', required=False, type=str, default='sub-amu01',
+                        help="Path to participants.tsv file.")
     parser.add_argument('-path-out', required=False, type=str, default='stats',
                         help="Output directory name.")
-    # TODO: add ref subject as an argument option
-    # TODO: remove participant file
-    # TODO: check to get stats and compute scaling factor
+    # TODO: add exclude list option
+    # TODO: add names of the methods
     return parser
 
 
@@ -173,10 +176,10 @@ def get_vert_indices(df):
     """
     # Get vert levels for one certain subject
     try:
-        vert = df[(df['participant_id'] == 'sub-amu01')& (df['method'] == 'DeepSegSC')]['VertLevel']
+        vert = df[(df['participant_id'] == ref) & (df['method'] == 'DeepSegSC')]['VertLevel']
     except KeyError:
         logger.info('trying something else')
-        vert = df[(df['participant_id'] == 'sub-amu01')]['VertLevel']
+        vert = df[(df['participant_id'] == ref)]['VertLevel']
     # Get indexes of where array changes value
     ind_vert = vert.diff()[vert.diff() != 0].index.values
     # Get the beginning of C1
@@ -202,7 +205,7 @@ def create_lineplot(df, hue, path_out, show_cv=False, set_axis=True):
 
    # mpl.rcParams['font.family'] = 'Arial'
 
-    fig, axes = plt.subplots(2, 3, figsize=(20, 10))
+    fig, axes = plt.subplots(2, 3, figsize=(25, 10))
     axs = axes.ravel()
 
     # Loop across metrics
@@ -219,6 +222,8 @@ def create_lineplot(df, hue, path_out, show_cv=False, set_axis=True):
             sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2)
         if set_axis:
             axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
+        else:
+            axs[index].set_ylim(0.95, 1.2)
         ymin, ymax = axs[index].get_ylim()
 
         # Add labels
@@ -576,7 +581,7 @@ def compare_metrics_across_methods(df):
 
 
 
-def copmute_scaling_factor(df):
+def compute_scaling_factor(df):
     df_scaling = pd.DataFrame()
     df_scaling['participant_id'] = df[df['method'] == 'DeepSegSC']['participant_id']
     df_scaling['Slice (I->S)'] =  df[df['method'] == 'DeepSegSC']['Slice (I->S)']
@@ -594,7 +599,7 @@ def copmute_scaling_factor(df):
         # Compute average scaling factor
         mean_scale = scaling_factor[metric].mean()
         std_scale = scaling_factor[metric].std()
-        logger.info(f'DeepSegSC: mean +/- std = {mean_scale} +/- {std_scale}')
+        logger.info(f'Scaling factor: mean +/- std = {mean_scale} +/- {std_scale}')
     return df_scaling
 
 
@@ -786,6 +791,7 @@ def read_csv_files(path_HC, participant_file=None):
     # Get number of unique subjects (unique strings under Filename column)
     subjects = df['Filename'].unique() 
     # If a participants.tsv file is provided, insert columns sex, age and manufacturer from df_participants into df
+    df_participants = pd.DataFrame()
     if participant_file:
         df_participants = pd.read_csv(participant_file, sep='\t')
         df = df.merge(df_participants[["age", "sex", "height", "weight", "manufacturer", "participant_id"]],
@@ -800,6 +806,9 @@ def main():
     args = parser.parse_args()
     path_SC_1 = args.path_SC_1
     path_SC_2 = args.path_SC_2
+    global ref
+    ref = args.ref_subject
+    vertlevels = args.vertlevel
     path_out_figures = os.path.join(args.path_out, 'figures')
     path_out_csv = os.path.join(args.path_out, 'csv')
     # If the output folder directory is not present, then create it.
@@ -820,18 +829,17 @@ def main():
     df_1['method'] = "DeepSegSC"
     df_2, df_participants, subjects = read_csv_files(path_SC_2, args.participant_file)
     df_2['method'] = "ContrastAgn2.5"
-    # Merge the 2 methods
-    df = pd.concat([df_1, df_2], ignore_index=True)
+
+    # Find common participants
+    common_participants = set(df_1['participant_id']).intersection(df_2['participant_id'])
+
+    # Filter both DataFrames to include only common participants
+    df1_filtered = df_1[df_1['participant_id'].isin(common_participants)]
+    df2_filtered = df_2[df_2['participant_id'].isin(common_participants)]
+
+    # Concatenate the filtered DataFrames
+    df = pd.concat([df1_filtered, df2_filtered], ignore_index=True)
     
-    # Get number of participants for each vendor
-    #print('\nNumber of participants per method')
-    #print(df_participants.groupby(['method'])['participant_id'].count())
-    # Compute mean, median, std, min, max for age
-    #compute_age_stats(df_participants)
-
-    # Plot correlation between weight and height per sex
-    #gen_chart_weight_height(df, df_participants, path_out_figures)
-
     path_out = path_out_figures
     # Compute descriptive statistics (mean and std age, weight, height)
 
@@ -843,12 +851,8 @@ def main():
     logger.info(f'Dropped subjects: {str(list(set(list(subjects)) - set(list(subjects_after_dropping))))}\n')
 
     # Keep only VertLevel from C1 to Th1
-    df = df[df['VertLevel'] <= 8]
-    df = df[df['VertLevel'] > 1]
-
-    # Compute Wilcoxon rank-sum test between males and females for across levels for each metric
-    #compare_metrics_across_sex(df) --> TODO compute a scaling factor persubject and plot it
-
+    df = df[df['VertLevel'] <= int(vertlevels.split(':')[-1])]
+    df = df[df['VertLevel'] >= int(vertlevels.split(':')[0])]
     # Multiply solidity by 100 to get percentage (sct_process_segmentation computes solidity in the interval 0-1)
     df['MEAN(solidity)'] = df['MEAN(solidity)'] * 100
 
@@ -858,11 +862,8 @@ def main():
     # Compute statistics between methods
     logger.info(f'\nComparing methods...')
     compare_metrics_across_methods(df)
-    df_scaling = copmute_scaling_factor(df)
-    # TODO: print meana and std per metrics
+    df_scaling = compute_scaling_factor(df)
     create_lineplot(df_scaling, hue=None, path_out=path_out, set_axis=False)
-    # Plot scatterplot metrics vs COV
-   # create_regplot_per_methods(df, path_out)
 
 if __name__ == '__main__':
     main()
