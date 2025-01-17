@@ -1,6 +1,8 @@
 # PAM50 normalized metrics
 
-This repository contains CSV files of spinal cord morphometric measures in the PAM50 anatomical dimensions computed from 203 healthy adult volunteers.
+This repository contains morphometric measures in the [PAM50](https://pubmed.ncbi.nlm.nih.gov/29061527/) anatomical dimensions computed from 203 healthy adult volunteers.
+
+ - `spinal_cord` directory - CSV files of spinal cord morphometric measures
 
 👉 Please cite this work if you use it or if you are inspired by it:
 
@@ -41,3 +43,6 @@ sct_compute_compression -i sub-001_T2w_label-SC_mask.nii.gz -vertfile sub-001_T2
 - [SCT v6.0](https://github.com/spinalcordtoolbox/spinalcordtoolbox/tree/6.0)
 
 The CSV files were generated using [process_data_spine-generic.sh, r20230222](https://github.com/sct-pipeline/dcm-metric-normalization/blob/r20230222/scripts/process_data_spine-generic.sh) script from the [spine-generic/data-multi-subject, r20230223](https://github.com/spine-generic/data-multi-subject/tree/r20230223) dataset.
+Spinal cord segmentation masks from [derivatives/labels](https://github.com/spine-generic/data-multi-subject/tree/r20230223/derivatives/labels) were used (files with the `seg-manual.nii.gz` suffix). These masks were produced by `sct_deepseg_sc` and manually corrected.
+[SCT v6.0](https://github.com/spinalcordtoolbox/spinalcordtoolbox/tree/6.0) was used to compute the morphometric measures.
+
