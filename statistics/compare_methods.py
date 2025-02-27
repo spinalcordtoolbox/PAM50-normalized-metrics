@@ -3,7 +3,7 @@
 # perslice and vertebral levels
 #
 # Example usage:
-#       python copmare_methods.py
+#       python compare_methods.py
 #       -path-HC $SCT_DIR/data/PAM50_normalized_metrics
 #       -participant-file $SCT_DIR/data/PAM50_normalized_metrics/participants.tsv
 # python compare_methods.py -path-SC-1 ~/code/PAM50-normalized-metrics -path-SC-2  ~/duke/temp/sebeda/spine_generic_canal_seg_2024-12-05/results/ -participant-file ~/code/PAM50-normalized-metrics/participants.tsv
@@ -82,7 +82,7 @@ METRICS_TO_YLIM_OFFSET = {
 # Set ylim to do not overlap horizontal grid with vertebrae labels
 METRICS_TO_YLIM = {
     'MEAN(diameter_AP)': (4, 9.3), #(10, 20), #TODO: use second value for canal
-    'MEAN(area)': (25, 95),  #(100, 270),
+    'MEAN(area)': (25, 90),  #(100, 270),
     'MEAN(diameter_RL)': (5, 14.5), #(15, 35),
     'MEAN(eccentricity)': (0.51, 0.89),
     'MEAN(solidity)': (91.2, 99.9),
@@ -139,6 +139,10 @@ def get_parser():
                         help="Path to data of normative dataset computed perslice 1.")
     parser.add_argument('-path-SC-2', required=True, type=str,
                         help="Path to data of normative dataset computed perslice 2.")
+    parser.add_argument('-name-SC-1', required=False, type=str, default='DeepSegSC',
+                        help="Name of method/contrast or else of -path-SC-1")
+    parser.add_argument('-name-SC-2', required=False, type=str, default='ContrastAgn2.5',
+                        help="Name of method/contrast or else of -path-SC-2")
     parser.add_argument('-participant-file', required=False, type=str,
                         help="Path to participants.tsv file.")
     parser.add_argument('-vertlevel', required=False, type=str, default='2:8',
@@ -176,9 +180,9 @@ def get_vert_indices(df):
     """
     # Get vert levels for one certain subject
     try:
-        vert = df[(df['participant_id'] == ref) & (df['method'] == 'DeepSegSC')]['VertLevel']
+        vert = df[(df['participant_id'] == ref) & (df['method'] == name_SC_1)]['VertLevel']
     except KeyError:
-        logger.info('trying something else')
+       # logger.info('trying something else')
         vert = df[(df['participant_id'] == ref)]['VertLevel']
     # Get indexes of where array changes value
     ind_vert = vert.diff()[vert.diff() != 0].index.values
@@ -212,8 +216,8 @@ def create_lineplot(df, hue, path_out, show_cv=False, set_axis=True):
     for index, metric in enumerate(METRICS):
         # Note: we are ploting slices not levels to avoid averaging across levels
         if hue == 'sex' or hue == 'manufacturer' or hue == 'age':
-            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2,
-                         palette=PALETTE[hue])
+            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2)#,
+                         #palette=PALETTE[hue])
             if index == 0:
                 axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
             else:
@@ -223,7 +227,7 @@ def create_lineplot(df, hue, path_out, show_cv=False, set_axis=True):
         if set_axis:
             axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
         else:
-            axs[index].set_ylim(0.95, 1.2)
+            axs[index].set_ylim(0.85, 1.2)
         ymin, ymax = axs[index].get_ylim()
 
         # Add labels
@@ -555,25 +559,25 @@ def compare_metrics_across_methods(df):
         logger.info(f"\n{metric}")
 
         # Get mean values for each slice
-        slices_deepseg = df[df['method'] == 'DeepSegSC'].groupby(['participant_id'])[metric].mean()
-        slices_ca = df[df['method'] == 'ContrastAgn2.5'].groupby(['participant_id'])[metric].mean()
+        slices_deepseg = df[df['method'] == name_SC_1].groupby(['participant_id'])[metric].mean()
+        slices_ca = df[df['method'] == name_SC_2].groupby(['participant_id'])[metric].mean()
 
         # Run normality test
         stat, pval = stats.shapiro(slices_deepseg)
-        logger.info(f'Normality test deepseg: p-value{format_pvalue(pval)}')
+        logger.info(f'Normality test {name_SC_1}: p-value{format_pvalue(pval)}')
         stat, pval = stats.shapiro(slices_ca)
-        logger.info(f'Normality test CA: p-value{format_pvalue(pval)}')
+        logger.info(f'Normality test {name_SC_2}: p-value{format_pvalue(pval)}')
         # Run Wilcoxon rank-sum test (groups are independent)
         stat, pval = stats.wilcoxon(x=slices_deepseg, y=slices_ca)
-        logger.info(f'{metric}: Wilcoxon rank-sum test between deepseg and CA: p-value{format_pvalue(pval)}')
+        logger.info(f'{metric}: Wilcoxon rank-sum test between {name_SC_1} and {name_SC_2}: p-value{format_pvalue(pval)}')
 
-        mean_deepseg = df[df['method'] == 'DeepSegSC'][metric].mean()
-        std_deepseg = df[df['method'] == 'DeepSegSC'][metric].std()
-        logger.info(f'\nDeepSegSC: mean +/- std = {mean_deepseg} +/- {std_deepseg}')
+        mean_deepseg = df[df['method'] == name_SC_1][metric].mean()
+        std_deepseg = df[df['method'] == name_SC_1][metric].std()
+        logger.info(f'\n{name_SC_1}: mean +/- std = {mean_deepseg} +/- {std_deepseg}')
 
-        mean_ca = df[df['method'] == 'ContrastAgn2.5'][metric].mean()
-        std_ca = df[df['method'] == 'ContrastAgn2.5'][metric].std()
-        logger.info(f'ContrastAgn2.5: mean +/- std = {mean_ca} +/- {std_ca}')
+        mean_ca = df[df['method'] == name_SC_2][metric].mean()
+        std_ca = df[df['method'] == name_SC_2][metric].std()
+        logger.info(f'{name_SC_2}: mean +/- std = {mean_ca} +/- {std_ca}')
         
         # Compute average scaling factor:
         mean_scale = mean_ca/mean_deepseg
@@ -583,15 +587,15 @@ def compare_metrics_across_methods(df):
 
 def compute_scaling_factor(df):
     df_scaling = pd.DataFrame()
-    df_scaling['participant_id'] = df[df['method'] == 'DeepSegSC']['participant_id']
-    df_scaling['Slice (I->S)'] =  df[df['method'] == 'DeepSegSC']['Slice (I->S)']
-    df_scaling['VertLevel'] =  df[df['method'] == 'DeepSegSC']['VertLevel']
+    df_scaling['participant_id'] = df[df['method'] == name_SC_1]['participant_id']
+    df_scaling['Slice (I->S)'] =  df[df['method'] == name_SC_1]['Slice (I->S)']
+    df_scaling['VertLevel'] =  df[df['method'] == name_SC_1]['VertLevel']
 
     for metric in METRICS:
         logger.info(f"\n{metric}")
-        slices_deepseg = df[df['method'] == 'DeepSegSC'].groupby(['Slice (I->S)', 'participant_id'])[metric].mean()
-       # slices_deepseg = df[df['method'] == 'DeepSegSC'].groupby(['participant_id'])[metric].mean()
-        slices_ca = df[df['method'] == 'ContrastAgn2.5'].groupby(['Slice (I->S)', 'participant_id'])[metric].mean()
+        slices_deepseg = df[df['method'] == name_SC_1].groupby(['Slice (I->S)', 'participant_id'])[metric].mean()
+       # slices_deepseg = df[df['method'] == name_SC_1].groupby(['participant_id'])[metric].mean()
+        slices_ca = df[df['method'] == name_SC_2].groupby(['Slice (I->S)', 'participant_id'])[metric].mean()
         scaling_factor = (slices_ca/slices_deepseg).unstack()
         scaling_factor = scaling_factor.reset_index().melt(value_name=metric, id_vars=['Slice (I->S)'], value_vars=np.unique(df_scaling['participant_id']))
         df_scaling = df_scaling.merge(scaling_factor, on=['Slice (I->S)', 'participant_id'])
@@ -806,6 +810,10 @@ def main():
     args = parser.parse_args()
     path_SC_1 = args.path_SC_1
     path_SC_2 = args.path_SC_2
+    global name_SC_1
+    name_SC_1 = args.name_SC_1
+    global name_SC_2
+    name_SC_2 = args.name_SC_2
     global ref
     ref = args.ref_subject
     vertlevels = args.vertlevel
@@ -826,9 +834,9 @@ def main():
 
     # Read csv files and create dataframe:
     df_1, df_participants, subjects = read_csv_files(path_SC_1, args.participant_file)
-    df_1['method'] = "DeepSegSC"
+    df_1['method'] = name_SC_1
     df_2, df_participants, subjects = read_csv_files(path_SC_2, args.participant_file)
-    df_2['method'] = "ContrastAgn2.5"
+    df_2['method'] = name_SC_2
 
     # Find common participants
     common_participants = set(df_1['participant_id']).intersection(df_2['participant_id'])
