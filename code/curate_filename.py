@@ -4,7 +4,10 @@ import pandas as pd
 import re
 
 def process_filename(original_path):
-    """Extracts and modifies the filename path based on given rules."""
+    """
+    Extracts and modifies the filename path based on given rules.
+    Specifically, from the absolute input path, keep only `sub-XXX/anat/sub-XXX_T2w_label-SC_seg.nii.gz`.
+    """
     match = re.search(r"(sub-[^/]+/anat/sub-[^/]+)_T2w_seg-manual\.nii\.gz$", original_path)
     if match:
         return f"{match.group(1)}_T2w_label-SC_seg.nii.gz"
