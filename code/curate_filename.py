@@ -43,6 +43,7 @@ def main():
         print("No CSV files found in the folder.")
         return
 
+    os.makedirs(args.ofolder, exist_ok=True)
     for csv_file in csv_files:
         process_csv(os.path.join(folder, csv_file), args.ofolder)
 
