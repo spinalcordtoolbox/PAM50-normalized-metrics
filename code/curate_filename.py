@@ -20,7 +20,6 @@ def process_csv(input_path, output_folder):
             df[col] = df[col].apply(process_filename)
 
     # Save the modified CSV in the output folder
-    os.makedirs(output_folder, exist_ok=True)
     output_path = os.path.join(output_folder, os.path.basename(input_path))
     df.to_csv(output_path, index=False)
     print(f"Processed and saved: {output_path}")
