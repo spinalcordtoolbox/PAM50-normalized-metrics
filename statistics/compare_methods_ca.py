@@ -29,8 +29,6 @@ logger.setLevel(logging.INFO)  # default: logging.DEBUG, logging.INFO
 hdlr = logging.StreamHandler(sys.stdout)
 logging.root.addHandler(hdlr)
 
-METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)', 'MEAN(compression_ratio)', 'MEAN(eccentricity)',
-           'MEAN(solidity)']
 METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)']
 
 METRICS_DTYPE = {
@@ -53,9 +51,9 @@ METRIC_TO_TITLE = {
 }
 
 METRIC_TO_AXIS = {
-    'MEAN(diameter_AP)': 'AP Diameter [mm]',
-    'MEAN(area)': 'Cross-Sectional Area [mm²]',
-    'MEAN(diameter_RL)': 'Transverse Diameter [mm]',
+    'MEAN(diameter_AP)': 'AP Diameter (mm)',
+    'MEAN(area)': 'CSA (mm²)',
+    'MEAN(diameter_RL)': 'Transverse Diameter (mm)',
     'MEAN(eccentricity)': 'Eccentricity [a.u.]',
     'MEAN(solidity)': 'Solidity [%]',
     'MEAN(compression_ratio)': 'Compression Ratio [a.u.]',
@@ -220,7 +218,7 @@ def create_lineplot(df, hue, path_out, show_cv=False, set_axis=True):
 
    # mpl.rcParams['font.family'] = 'Arial'
 
-    fig, axes = plt.subplots(2, 3, figsize=(25, 10))
+    fig, axes = plt.subplots(1, 3, figsize=(27, 5))
     axs = axes.ravel()
 
     # Loop across metrics
@@ -232,8 +230,11 @@ def create_lineplot(df, hue, path_out, show_cv=False, set_axis=True):
         else:
             sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, palette="Set2", linewidth=2)
             if index == 0:
-                axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
-
+                axs[index].legend(loc='upper center', fontsize=TICKS_FONT_SIZE)
+            else:
+                legend = axs[index].get_legend()
+                if legend:
+                    legend.remove()
         if set_axis:
             axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
         else:
@@ -297,6 +298,7 @@ def create_lineplot(df, hue, path_out, show_cv=False, set_axis=True):
     else:
         filename = 'lineplot.png'
     path_filename = os.path.join(path_out, filename)
+    plt.subplots_adjust(wspace=0.1)
     plt.savefig(path_filename, dpi=300, bbox_inches='tight')
     logger.info(f'Figure saved: {path_filename}')
 
