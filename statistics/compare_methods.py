@@ -31,7 +31,6 @@ logging.root.addHandler(hdlr)
 
 METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)', 'MEAN(compression_ratio)', 'MEAN(eccentricity)',
            'MEAN(solidity)']
-METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)']
 
 METRICS_DTYPE = {
     'MEAN(diameter_AP)': 'float64',
