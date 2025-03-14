@@ -31,13 +31,13 @@ CSV files from this repository are used by the following SCT functions:
 - `sct_process_segmentation -normalize-PAM50 1`, example:
 
 ```console
-sct_process_segmentation -i sub-001_T2w_label-SC_mask.nii.gz -vertfile sub-001_T2w_label-SC_mask_labeled.nii.gz -perslice 1 -normalize-PAM50 1 -o sub-001_T2w_metrics_PAM50.csv
+sct_process_segmentation -i sub-001_T2w_label-SC_seg.nii.gz -vertfile sub-001_T2w_label-SC_seg_labeled.nii.gz -perslice 1 -normalize-PAM50 1 -o sub-001_T2w_metrics_PAM50.csv
 ```
 
 - `sct_compute_compression -normalize-hc 1`, example: 
 
 ```console
-sct_compute_compression -i sub-001_T2w_label-SC_mask.nii.gz -vertfile sub-001_T2w_label-SC_mask_labeled.nii.gz -l sub-001_T2w_label-compression.nii.gz -normalize-hc 1 -o sub-001_T2w_compression_metrics.csv
+sct_compute_compression -i sub-001_T2w_label-SC_seg.nii.gz -vertfile sub-001_T2w_label-SC_seg_labeled.nii.gz -l sub-001_T2w_label-compression.nii.gz -normalize-hc 1 -o sub-001_T2w_compression_metrics.csv
 ```
 
 ### Standalone usage
@@ -52,7 +52,7 @@ git clone https://github.com/spinalcordtoolbox/PAM50-normalized-metrics.git
 
 ### `spinal_cord` directory
 
-The CSV files were generated using [process_data_spine-generic.sh, r20230222](https://github.com/sct-pipeline/dcm-metric-normalization/blob/r20230222/scripts/process_data_spine-generic.sh) script from the [spine-generic/data-multi-subject, r20230223](https://github.com/spine-generic/data-multi-subject/tree/r20230223) dataset.
-Spinal cord segmentation masks from [derivatives/labels](https://github.com/spine-generic/data-multi-subject/tree/r20230223/derivatives/labels) were used (files with the `seg-manual.nii.gz` suffix). These masks were produced by `sct_deepseg_sc` and manually corrected.
-[SCT v6.0](https://github.com/spinalcordtoolbox/spinalcordtoolbox/tree/6.0) was used to compute the morphometric measures.
+The CSV files were generated using [process_data_spine-generic.sh, r20230222](https://github.com/sct-pipeline/dcm-metric-normalization/blob/r20230222/scripts/process_data_spine-generic.sh) script from the [spine-generic/data-multi-subject, r20250314](https://github.com/spine-generic/data-multi-subject/releases/tag/r20250314) dataset.
+Spinal cord segmentation masks from [derivatives/labels](https://github.com/spine-generic/data-multi-subject/tree/r20250314/derivatives/labels) were used (files with the `label-SC_seg.nii.gz` suffix). These masks were produced by `sct_deepseg -task seg_sc_contrast_agnostic` version [3.0](https://github.com/sct-pipeline/contrast-agnostic-softseg-spinalcord/releases/tag/v3.1) and visually qc-ed.
+[SCT v7.0](https://github.com/spinalcordtoolbox/spinalcordtoolbox/tree/7.0) was used to compute the morphometric measures.
 
