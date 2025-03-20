@@ -52,7 +52,7 @@ git clone https://github.com/spinalcordtoolbox/PAM50-normalized-metrics.git
 
 ### `spinal_cord` directory
 
-The CSV files were generated using [process_data_spine-generic.sh, r20230222](https://github.com/sct-pipeline/dcm-metric-normalization/blob/r20230222/scripts/process_data_spine-generic.sh) script from the [spine-generic/data-multi-subject, r20250314](https://github.com/spine-generic/data-multi-subject/releases/tag/r20250314) dataset.
+The CSV files were generated using [process_data_spine-generic.sh, r20250320](https://github.com/sct-pipeline/dcm-metric-normalization/blob/r20250320/scripts/process_data_spine-generic.sh) script from the [spine-generic/data-multi-subject, r20250314](https://github.com/spine-generic/data-multi-subject/releases/tag/r20250314) dataset.
 Spinal cord segmentation masks from [derivatives/labels](https://github.com/spine-generic/data-multi-subject/tree/r20250314/derivatives/labels) were used (files with the `label-SC_seg.nii.gz` suffix). These masks were produced by `sct_deepseg -task seg_sc_contrast_agnostic` version [3.1](https://github.com/sct-pipeline/contrast-agnostic-softseg-spinalcord/releases/tag/v3.1) and visually qc-ed.
 [SCT v7.0](https://github.com/spinalcordtoolbox/spinalcordtoolbox/tree/7.0) was used to compute the morphometric measures.
 
