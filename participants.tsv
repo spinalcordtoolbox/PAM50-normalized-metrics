@@ -1,266 +1,266 @@
-participant_id	sex	age	height	weight	date_of_scan	institution	manufacturer	manufacturers_model_name	receive_coil_name	software_versions	researcher	pathology	notes	source_id	species
-sub-amu01	M	28	176	70	2019-02-12	amu - AMU - CEMEREM	Siemens	Verio	NeckMatrix	syngo_MR_B17	Virginie Callot	HC	n/a	n/a	homo sapiens
-sub-amu02	M	28	183	67	2019-02-13	amu - AMU - CEMEREM	Siemens	Verio	NeckMatrix	syngo_MR_B17	Virginie Callot	HC	disc protrusion Th2/3, visualised central canal	n/a	homo sapiens
-sub-amu03	F	28	163	76	2019-02-13	amu - AMU - CEMEREM	Siemens	Verio	NeckMatrix	syngo_MR_B17	Virginie Callot	HC	disc protrusion C3/4 and C5/6	n/a	homo sapiens
-sub-amu04	F	44	163	55	2019-03-01	amu - AMU - CEMEREM	Siemens	Verio	NeckMatrix	syngo_MR_B17	Virginie Callot	HC	disc protrusion C6/7	n/a	homo sapiens
-sub-amu05	F	39	175	66	2019-03-01	amu - AMU - CEMEREM	Siemens	Verio	NeckMatrix	syngo_MR_B17	Virginie Callot	HC	disc protrusion C4/5/6 and mild kyphosis	n/a	homo sapiens
-sub-balgrist01	F	31	158	60	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	Mild kyphosis	n/a	homo sapiens
-sub-balgrist02	F	22	170	72	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	Mild kyphosis	n/a	homo sapiens
-sub-balgrist03	F	23	175	85	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	disc protrusion C3/4 and mild kyphosis	n/a	homo sapiens
-sub-balgrist04	M	28	195	90	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	n/a	n/a	homo sapiens
-sub-balgrist05	M	27	168	60	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	disc protrusion C4-7	n/a	homo sapiens
-sub-balgrist06	M	23	170	64	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	visualised spinal canal C5-Th1	n/a	homo sapiens
-sub-barcelona05	F	36	164	51	2018-11-30	barcelona - Advanced Imaging in Neuroimmunological Diseases (ImaginEM) group	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	Martinez-Heras E, Solana E, Llufriu S	HC	n/a	n/a	homo sapiens
-sub-barcelona06	F	25	170	55	2018-11-30	barcelona - Advanced Imaging in Neuroimmunological Diseases (ImaginEM) group	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	Martinez-Heras E, Solana E, Llufriu S	HC	disc protrusions C4-7 and Th4-6	n/a	homo sapiens
-sub-beijingGE01	F	24	161	43	n/a	beijing750 - Beijing Tiantan Hospital	GE	MR750	n/a	24_LX_MR_Software_release:DV24.0_R01_1344.a	Yazhuo Kong	HC	n/a	n/a	homo sapiens
-sub-beijingGE02	F	23	163	55	n/a	beijing750 - Beijing Tiantan Hospital	GE	MR750	n/a	24_LX_MR_Software_release:DV24.0_R01_1344.a	Yazhuo Kong	HC	disc protrusion C5/6, mild kyphosis	n/a	homo sapiens
-sub-beijingGE03	M	30	173	70	n/a	beijing750 - Beijing Tiantan Hospital	GE	MR750	n/a	24_LX_MR_Software_release:DV24.0_R01_1344.a	Yazhuo Kong	HC	n/a	n/a	homo sapiens
-sub-beijingPrisma01	F	22	166	66	n/a	beijingPrisma - Beijing Tiantan Hospital	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Yazhuo Kong	HC	disc protrusion Th5/6	n/a	homo sapiens
-sub-beijingPrisma04	F	26	158	73	n/a	beijingPrisma - Beijing Tiantan Hospital	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Yazhuo Kong	HC	disc protrusion C5/6, mild kyphosis	n/a	homo sapiens
-sub-beijingPrisma05	M	27	173	75	n/a	beijingPrisma - Beijing Tiantan Hospital	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Yazhuo Kong	HC	disc protrusion C4-Th1	n/a	homo sapiens
-sub-beijingVerio01	F	24	161	43	n/a	beijingVerio - Beijing Tiantan Hospital	Siemens	Verio	NeckMatrix	syngo_MR_B19	Yazhuo Kong	HC	n/a	n/a	homo sapiens
-sub-beijingVerio02	F	23	163	55	n/a	beijingVerio - Beijing Tiantan Hospital	Siemens	Verio	NeckMatrix	syngo_MR_B19	Yazhuo Kong	HC	mild kyphosis, T2 flow void artifacts of CSF	n/a	homo sapiens
-sub-beijingVerio03	M	30	173	70	n/a	beijingVerio - Beijing Tiantan Hospital	Siemens	Verio	NeckMatrix	syngo_MR_B19	Yazhuo Kong	HC	T2 flow void artifacts of CFS	n/a	homo sapiens
-sub-brnoCeitec01	M	32	187	92	2019-02-04	brnoCeitec - CEITEC (Central European Institute of Technology), University Hospital Olomouc	Siemens	Prisma	HeadNeck_64	syngo MR E11	T. Horak, P. Kudlicka, J. Valosek	HC	n/a	n/a	homo sapiens
-sub-brnoCeitec02	F	27	163	56	2019-03-12	brnoCeitec - CEITEC (Central European Institute of Technology), University Hospital Olomouc	Siemens	Prisma	HeadNeck_64	syngo MR E11	T. Horak, P. Kudlicka, J. Valosek	HC	n/a	n/a	homo sapiens
-sub-brnoCeitec03	M	28	186	84	2019-03-12	brnoCeitec - CEITEC (Central European Institute of Technology), University Hospital Olomouc	Siemens	Prisma	HeadNeck_64	syngo MR E11	T. Horak, P. Kudlicka, J. Valosek	HC	n/a	n/a	homo sapiens
-sub-brnoCeitec05	F	42	172	58	2019-03-15	brnoCeitec - CEITEC (Central European Institute of Technology), University Hospital Olomouc	Siemens	Prisma	HeadNeck_64	syngo MR E11	T. Horak, P. Kudlicka, J. Valosek	HC	disc protrusions C4-7	n/a	homo sapiens
-sub-brnoCeitec06	M	28	186	70	2019-03-15	brnoCeitec - CEITEC (Central European Institute of Technology), University Hospital Olomouc	Siemens	Prisma	HeadNeck_64	syngo MR E11	T. Horak, P. Kudlicka, J. Valosek	HC	disc protrusions C5-7 and Th2/3, T2 flow void artifacts of CSF	n/a	homo sapiens
-sub-brnoUhb01	M	21	188	90	2019-02-13	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusions C4-7	n/a	homo sapiens
-sub-brnoUhb02	M	25	178	95	2019-02-13	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusion C5/6	n/a	homo sapiens
-sub-brnoUhb03	F	26	163	56	2019-02-13	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusions C4-7	n/a	homo sapiens
-sub-brnoUhb04	M	25	182	86	2019-02-13	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusion C3/4	n/a	homo sapiens
-sub-brnoUhb05	M	27	169	74	2019-02-14	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	n/a	n/a	homo sapiens
-sub-brnoUhb06	F	21	167	63	2019-02-14	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusions C3-5	n/a	homo sapiens
-sub-brnoUhb07	F	25	163	65	2019-02-14	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusions C2-6, mild kyfphosis	n/a	homo sapiens
-sub-brnoUhb08	F	26	178	68	2019-02-14	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusions C3-6	n/a	homo sapiens
-sub-cardiff01	M	31	180	100	2019-02-01	cardiff - CUBRIC, Cardiff University, Wales, UK	Siemens	Prisma	HeadNeck_64	VE11C	G. Tackley, S. Kusmia, R. Wise	HC	disc protrusions C3-7, mild kyphosis	n/a	homo sapiens
-sub-cardiff02	F	34	172	54	2019-03-05	cardiff - CUBRIC, Cardiff University, Wales, UK	Siemens	Prisma	HeadNeck_64	VE11C	G. Tackley, S. Kusmia, R. Wise	HC	disc protrusion Th2/3	n/a	homo sapiens
-sub-cardiff03	M	33	182	65	2019-03-05	cardiff - CUBRIC, Cardiff University, Wales, UK	Siemens	Prisma	HeadNeck_64	VE11C	G. Tackley, S. Kusmia, R. Wise	HC	n/a	n/a	homo sapiens
-sub-cardiff04	F	31	170	58	2019-03-12	cardiff - CUBRIC, Cardiff University, Wales, UK	Siemens	Prisma	HeadNeck_64	VE11C	G. Tackley, S. Kusmia, R. Wise	HC	disc protrusion C3-7 and Th2-4	n/a	homo sapiens
-sub-cmrra01	M	24	185	68	2019-02-27	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	n/a	n/a	homo sapiens
-sub-cmrra02	M	27	188	91	2019-03-01	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	disc protrusions C4-7	n/a	homo sapiens
-sub-cmrra03	F	28	160	64	2019-03-08	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	n/a	n/a	homo sapiens
-sub-cmrra04	F	22	163	54	2019-03-18	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	disc protrusion and kyphosis at C3/4	n/a	homo sapiens
-sub-cmrra05	F	24	152	47	2019-03-28	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	disc protrusions C3/4 and C6/7	n/a	homo sapiens
-sub-cmrra06	M	22	178	77	2019-04-02	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	T2 hyperintensity in spinal cord at C2 level - only central canal visualisation (no real pathology)	n/a	homo sapiens
-sub-cmrrb01	F	23	165	61	2019-01-15	cmrrb - University of Minnesota	Siemens	Prisma-fit	Spine_32	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	Mild kyphosis	n/a	homo sapiens
-sub-cmrrb02	M	23	180	75	2019-02-21	cmrrb - University of Minnesota	Siemens	Prisma-fit	Spine_32	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	Disc protrusion C6/7	n/a	homo sapiens
-sub-cmrrb03	M	24	185	68	2019-03-01	cmrrb - University of Minnesota	Siemens	Prisma-fit	Spine_32	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	n/a	n/a	homo sapiens
-sub-cmrrb04	M	21	185	64	2019-03-12	cmrrb - University of Minnesota	Siemens	Prisma-fit	Spine_32	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	n/a	n/a	homo sapiens
-sub-cmrrb07	F	20	165	66	2019-06-21	cmrrb - University of Minnesota	Siemens	Prisma-fit	Spine_32	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	n/a	n/a	homo sapiens
-sub-dresden01	F	33	177	60	2019-04-04	dresden - Institut_fur_Neuroradiologie, Dresden, Germany	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Kuntke Paul	HC	n/a	n/a	homo sapiens
-sub-dresden02	M	33	182	65	2019-04-04	dresden - Institut_fur_Neuroradiologie, Dresden, Germany	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Kuntke Paul	HC	Disc protrusions C2/3 and C5/6	n/a	homo sapiens
-sub-fslAchieva01	M	37	192	100	2019-02-26	fslAchieva - Santa Lucia Foundation IRCCS, Rome, Italy	Philips	Achieva	n/a	5.4.1_5.4.1.1	Michela Fratini	HC	Disc protrusion C3/4	n/a	homo sapiens
-sub-fslAchieva02	M	28	180	85	2019-03-08	fslAchieva - Santa Lucia Foundation IRCCS, Rome, Italy	Philips	Achieva	n/a	5.4.1_5.4.1.1	Michela Fratini	HC	Motion artifacts	n/a	homo sapiens
-sub-fslAchieva03	F	27	160	50	2019-03-25	fslAchieva - Santa Lucia Foundation IRCCS, Rome, Italy	Philips	Achieva	n/a	5.4.1_5.4.1.1	Michela Fratini	HC	Chondrosis, disc protrusions C5-7	n/a	homo sapiens
-sub-fslAchieva04	F	26	168	63	2019-03-29	fslAchieva - Santa Lucia Foundation IRCCS, Rome, Italy	Philips	Achieva	n/a	5.4.1_5.4.1.1	Michela Fratini	HC	n/a	n/a	homo sapiens
-sub-fslAchieva05	F	35	158	58	2019-04-10	fslAchieva - Santa Lucia Foundation IRCCS, Rome, Italy	Philips	Achieva	n/a	5.4.1_5.4.1.1	Michela Fratini	HC	n/a	n/a	homo sapiens
-sub-fslPrisma01	M	36	175	70	n/a	fslPrisma - Santa Lucia Foundation IRCCS, Rome, Italy	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Michela Fratini	HC	n/a	n/a	homo sapiens
-sub-fslPrisma03	F	25	164	46	n/a	fslPrisma - Santa Lucia Foundation IRCCS, Rome, Italy	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Michela Fratini	HC	n/a	n/a	homo sapiens
-sub-fslPrisma04	F	29	148	47	n/a	fslPrisma - Santa Lucia Foundation IRCCS, Rome, Italy	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Michela Fratini	HC	n/a	n/a	homo sapiens
-sub-fslPrisma05	F	26	160	49	n/a	fslPrisma - Santa Lucia Foundation IRCCS, Rome, Italy	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Michela Fratini	HC	Slight widening of the spinal cord central canal (striplike T2 hyperintensity)	n/a	homo sapiens
-sub-fslPrisma06	M	33	183	84	n/a	fslPrisma - Santa Lucia Foundation IRCCS, Rome, Italy	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Michela Fratini	HC	mild scoliosis	n/a	homo sapiens
-sub-geneva01	M	29	189	69	2019-02-21	geneva - Campus Biotech Geneva	Siemens	Prisma	64ch+spine	VE11C	K. Kinany, L. Mattera	HC	Chondrosis and disc protrusions C3-7	n/a	homo sapiens
-sub-geneva02	M	36	180	89	2019-02-14	geneva - Campus Biotech Geneva	Siemens	Prisma	64ch+spine	VE11C	K. Kinany, L. Mattera	HC	Mild central canal widening at C5 level	n/a	homo sapiens
-sub-geneva03	M	27	175	78	2019-03-04	geneva - Campus Biotech Geneva	Siemens	Prisma	64ch+spine	VE11C	K. Kinany, L. Mattera	HC	n/a	n/a	homo sapiens
-sub-geneva04	F	29	153	46	2019-01-30	geneva - Campus Biotech Geneva	Siemens	Prisma	64ch+spine	VE11C	K. Kinany, L. Mattera	HC	n/a	n/a	homo sapiens
-sub-geneva05	F	30	168	53	2019-02-01	geneva - Campus Biotech Geneva	Siemens	Prisma	64ch+spine	VE11C	K. Kinany, L. Mattera	HC	Mild kyphosis	n/a	homo sapiens
-sub-hamburg01	M	28	203	83	2019-03-08	hamburg - Institute of Systems Neuroscience, University Medical Center Hamburg-Eppendorf	Siemens	Prisma-fit	64ch+spine	VE11C	A. Tinnermann, J. Finsterbusch, C. Buechel	HC	Mild central canal widening	n/a	homo sapiens
-sub-hamburg03	M	21	184	87	2019-03-06	hamburg - Institute of Systems Neuroscience, University Medical Center Hamburg-Eppendorf	Siemens	Prisma-fit	64ch+spine	VE11C	A. Tinnermann, J. Finsterbusch, C. Buechel	HC	n/a	n/a	homo sapiens
-sub-hamburg04	F	33	175	60	2019-03-12	hamburg - Institute of Systems Neuroscience, University Medical Center Hamburg-Eppendorf	Siemens	Prisma-fit	64ch+spine	VE11C	A. Tinnermann, J. Finsterbusch, C. Buechel	HC	n/a	n/a	homo sapiens
-sub-hamburg06	M	38	182	83	2019-03-06	hamburg - Institute of Systems Neuroscience, University Medical Center Hamburg-Eppendorf	Siemens	Prisma-fit	64ch+spine	VE11C	A. Tinnermann, J. Finsterbusch, C. Buechel	HC	n/a	n/a	homo sapiens
-sub-juntendo750w01	F	28	169	52	2019-02-07	juntendo750w - JUNTENDO_UNV_HP	GE	MR750w	n/a	27_LX_MR_Software_release:DV26.0_R02_1810.b	Hagiwara A.	HC	Chondrosis and disc protrusions C3-7	n/a	homo sapiens
-sub-juntendo750w02	F	27	160	50	2019-02-07	juntendo750w - JUNTENDO_UNV_HP	GE	MR750w	n/a	27_LX_MR_Software_release:DV26.0_R02_1810.b	Hagiwara A.	HC	Chondrosis and disc protrusions C3-7	n/a	homo sapiens
-sub-juntendo750w05	F	26	155	71	2019-02-04	juntendo750w - JUNTENDO_UNV_HP	GE	MR750w	n/a	27_LX_MR_Software_release:DV26.0_R02_1810.b	Hagiwara A.	HC	disc protrusions C3-7, visualised central canal	n/a	homo sapiens
-sub-juntendo750w06	M	23	169	71	2019-02-05	juntendo750w - JUNTENDO_UNV_HP	GE	MR750w	n/a	27_LX_MR_Software_release:DV26.0_R02_1810.b	Hagiwara A.	HC	disc protrusions C3-7	n/a	homo sapiens
-sub-mgh01	F	28	173	73	2019-01-01	mgh - Massachusetts General Hospital	Siemens	Skyra	64ch+spine	VE11C	R. L. Barry	HC	disc protrusions C3-6	n/a	homo sapiens
-sub-mgh02	F	33	155	41	2019-01-01	mgh - Massachusetts General Hospital	Siemens	Skyra	64ch+spine	VE11C	R. L. Barry	HC	disc protrusion C5/6	n/a	homo sapiens
-sub-mgh04	M	28	183	79	2019-01-01	mgh - Massachusetts General Hospital	Siemens	Skyra	64ch+spine	VE11C	R. L. Barry	HC	n/a	n/a	homo sapiens
-sub-mgh05	M	31	183	91	2019-01-01	mgh - Massachusetts General Hospital	Siemens	Skyra	64ch+spine	VE11C	R. L. Barry	HC	disc protrusions C4-6	n/a	homo sapiens
-sub-mgh06	M	36	188	90	2019-01-01	mgh - Massachusetts General Hospital	Siemens	Skyra	64ch+spine	VE11C	R. L. Barry	HC	disc protrusions C3-5, visualised spinal canal at the level C6	n/a	homo sapiens
-sub-milan01	M	25	189	95	2018-12-18	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	ligamentum flavum hypertrophy C6/7	n/a	homo sapiens
-sub-milan02	F	35	165	53	2018-12-18	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	Mild kyphosis and disc protrusion C5/6	n/a	homo sapiens
-sub-milan03	F	28	163	65	2018-12-20	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	Mild disc protrusions C4-6 and central canal widening C5-7	n/a	homo sapiens
-sub-milan04	F	27	160	48	2018-12-20	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	n/a	n/a	homo sapiens
-sub-milan05	M	28	175	67	2019-01-09	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	n/a	n/a	homo sapiens
-sub-milan06	M	35	169	70	2019-01-10	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	Mild disc protrusions C2-4	n/a	homo sapiens
-sub-milan07	M	31	189	92	2019-01-15	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	Mild disc protrusion C5/6	n/a	homo sapiens
-sub-mniPilot1	F	30	170	60	2019-02-26	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens
-sub-mniS01	M	37	174	76	2019-02-26	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens
-sub-mniS02	M	29	180	76	2019-02-28	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens
-sub-mniS03	M	29	169	57	2019-03-04	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens
-sub-mniS04	M	33	178	77	2019-03-04	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens
-sub-mniS07	F	40	170	84	2019-03-07	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	Mild disc protrusions C5-7	n/a	homo sapiens
-sub-mniS08	F	28	175	61	2019-03-12	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens
-sub-mniS09	F	42	170	73	2019-03-12	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens
-sub-mountSinai02	M	26	175	79	2019-03-12	mountSinai - BMEII (formely TMII), Icahn School of Medicine at Mount Sinai, New York, NY USA	Siemens	Skyra	Spine_32	VE11C	J. Xu, A. Seifert, J-W. Kim	HC	Disc protrusions C5-7	n/a	homo sapiens
-sub-mountSinai05	M	31	180	79	2019-03-25	mountSinai - BMEII (formely TMII), Icahn School of Medicine at Mount Sinai, New York, NY USA	Siemens	Skyra	Spine_32	VE11C	J. Xu, A. Seifert, J-W. Kim	HC	n/a	n/a	homo sapiens
-sub-mountSinai06	M	31	185	95	2019-03-25	mountSinai - BMEII (formely TMII), Icahn School of Medicine at Mount Sinai, New York, NY USA	Siemens	Skyra	Spine_32	VE11C	J. Xu, A. Seifert, J-W. Kim	HC	Mild kyphosis	n/a	homo sapiens
-sub-mpicbs01	F	29	172	59	2019-03-26	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	n/a	n/a	homo sapiens
-sub-mpicbs02	F	30	166	56	2019-04-04	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	n/a	n/a	homo sapiens
-sub-mpicbs03	M	26	184	68	2019-04-04	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	Mild disc protrusions C4-6	n/a	homo sapiens
-sub-mpicbs05	F	20	172	53	2019-04-05	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	n/a	n/a	homo sapiens
-sub-mpicbs06	M	22	177	77	2019-04-05	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	n/a	n/a	homo sapiens
-sub-mpicbs07	M	25	177	75	2019-04-05	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	n/a	n/a	homo sapiens
-sub-nottwil01	F	25	170	64	2018-12-19	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	Central canal visualisation	n/a	homo sapiens
-sub-nottwil02	M	23	173	80	2019-01-03	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	n/a	n/a	homo sapiens
-sub-nottwil03	M	38	182	76	2019-01-03	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	n/a	n/a	homo sapiens
-sub-nottwil04	F	25	162	65	2019-01-03	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	Spinal cord T2 signal inhomogenities (artifacts?); T2w SC seg is fine	n/a	homo sapiens
-sub-nottwil05	F	28	169	69	2019-01-08	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	Mild disc protrusions C3-5, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens
-sub-nottwil06	M	36	198	97	2019-01-10	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	Mild spinal cord inhomogenities (artifacts), mesencephalon cystic lesion	n/a	homo sapiens
-sub-nwu02	F	26	163	57	2019-02-20	nwu - Northwestern University	Siemens	Prisma-fit	64ch+spine	VE11C	H. Karbasforoushan	HC	Disc hernia C5/6	n/a	homo sapiens
-sub-nwu03	F	24	167	53	2019-02-21	nwu - Northwestern University	Siemens	Prisma-fit	64ch+spine	VE11C	H. Karbasforoushan	HC	mild kyphosis	n/a	homo sapiens
-sub-nwu04	M	25	188	75	2019-02-25	nwu - Northwestern University	Siemens	Prisma-fit	64ch+spine	VE11C	H. Karbasforoushan	HC	n/a	n/a	homo sapiens
-sub-nwu05	M	27	182	68	2019-02-25	nwu - Northwestern University	Siemens	Prisma-fit	64ch+spine	VE11C	H. Karbasforoushan	HC	Mild disc protrusions C3/4 and C5-7	n/a	homo sapiens
-sub-nwu06	F	24	160	59	2019-02-27	nwu - Northwestern University	Siemens	Prisma-fit	64ch+spine	VE11C	H. Karbasforoushan	HC	Mild disc protrusions C3-5	n/a	homo sapiens
-sub-oxfordFmrib01	M	26	185	75	2019-02-04	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Mild disc protrusion C5/6	n/a	homo sapiens
-sub-oxfordFmrib02	M	22	196	84	2019-02-04	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	n/a	n/a	homo sapiens
-sub-oxfordFmrib03	M	24	179	70	2019-02-13	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Mild disc protrusions C3-6	n/a	homo sapiens
-sub-oxfordFmrib04	M	42	175	75	2019-02-13	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Disc protrusions C3-7	n/a	homo sapiens
-sub-oxfordFmrib05	M	25	170	55	2019-02-20	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Mild disc protrusion C5/6	n/a	homo sapiens
-sub-oxfordFmrib06	F	25	167	75	2019-02-20	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	n/a	n/a	homo sapiens
-sub-oxfordFmrib07	M	31	188	91	2019-02-27	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Mild disc protrusion C5/6, visualised central canal at the level C6, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens
-sub-oxfordFmrib10	F	26	167	56	2019-03-13	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Disc protrusions C4-7	n/a	homo sapiens
-sub-oxfordOhba01	F	25	167	75	2019-03-14	oxfordOhba - Oxford Centre for Human Brain Activity, Wellcome Centre for Integrative Neuroimaging, Department of Psychiatry, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	n/a	n/a	homo sapiens
-sub-oxfordOhba02	M	31	188	91	2019-03-15	oxfordOhba - Oxford Centre for Human Brain Activity, Wellcome Centre for Integrative Neuroimaging, Department of Psychiatry, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	visualised central canal at the level C3-7	n/a	homo sapiens
-sub-oxfordOhba03	M	25	170	55	2019-03-15	oxfordOhba - Oxford Centre for Human Brain Activity, Wellcome Centre for Integrative Neuroimaging, Department of Psychiatry, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Mild disc protrusion C5/6	n/a	homo sapiens
-sub-oxfordOhba04	M	42	175	75	2019-03-15	oxfordOhba - Oxford Centre for Human Brain Activity, Wellcome Centre for Integrative Neuroimaging, Department of Psychiatry, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Disc protrusions C3-7	n/a	homo sapiens
-sub-oxfordOhba05	M	22	196	84	2019-03-15	oxfordOhba - Oxford Centre for Human Brain Activity, Wellcome Centre for Integrative Neuroimaging, Department of Psychiatry, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	n/a	n/a	homo sapiens
-sub-pavia02	F	25	158	47	2019-06-19	pavia - Neuroradiology Unit, IRCCS Mondino Foundation	Siemens	Skyra	HeadNeck_20	syngo_MR_D13	G. Savini, G. Germani, A. Pichiecchio	HC	Mild kyphosis	n/a	homo sapiens
-sub-pavia03	M	28	180	68	2019-06-19	pavia - Neuroradiology Unit, IRCCS Mondino Foundation	Siemens	Skyra	HeadNeck_20	syngo_MR_D13	G. Savini, G. Germani, A. Pichiecchio	HC	Mild kyphosis	n/a	homo sapiens
-sub-pavia04	F	25	165	50	2019-06-26	pavia - Neuroradiology Unit, IRCCS Mondino Foundation	Siemens	Skyra	HeadNeck_20	syngo_MR_D13	G. Savini, G. Germani, A. Pichiecchio	HC	Disc protrusions C3-7, mild kyphosis, motion artifacts	n/a	homo sapiens
-sub-pavia06	M	29	180	65	2019-07-03	pavia - Neuroradiology Unit, IRCCS Mondino Foundation	Siemens	Skyra	HeadNeck_20	syngo_MR_D13	G. Savini, G. Germani, A. Pichiecchio	HC	n/a	n/a	homo sapiens
-sub-perform01	F	23	176	63	2018-01-30	perform - Concordia University, Perform Center, Montreal, Canada	GE	MR750	n/a	27_LX_MR_Software_release:DV25.1_R02_1649.a	J. Cohen-Adad, H. Benali	HC	Mild kyphosis	n/a	homo sapiens
-sub-perform02	M	27	n/a	83.91	2018-01-30	perform - Concordia University, Perform Center, Montreal, Canada	GE	MR750	n/a	27_LX_MR_Software_release:DV25.1_R02_1649.a	J. Cohen-Adad, H. Benali	HC	Disc protrusion C5/6	n/a	homo sapiens
-sub-perform04	M	30	n/a	57	2018-01-30	perform - Concordia University, Perform Center, Montreal, Canada	GE	MR750	n/a	27_LX_MR_Software_release:DV25.1_R02_1649.a	J. Cohen-Adad, H. Benali	HC	n/a	n/a	homo sapiens
-sub-perform05	F	28	167	54	2018-01-30	perform - Concordia University, Perform Center, Montreal, Canada	GE	MR750	n/a	27_LX_MR_Software_release:DV25.1_R02_1649.a	J. Cohen-Adad, H. Benali	HC	n/a	n/a	homo sapiens
-sub-perform06	M	27	186	86	2018-01-30	perform - Concordia University, Perform Center, Montreal, Canada	GE	MR750	n/a	27_LX_MR_Software_release:DV25.1_R02_1649.a	J. Cohen-Adad, H. Benali	HC	n/a	n/a	homo sapiens
-sub-queensland01	M	31	176	89	2018-12-19	queensland - University of Queensland	Siemens	Prisma-fit	64ch+spine	VE11C	N. Kurniawan, M. Ruitenberg, M. Barth, N. Atcheson, C. Gros	HC	Mild disc protrusion C3-5	n/a	homo sapiens
-sub-queensland03	M	25	174	60	2019-02-19	queensland - University of Queensland	Siemens	Prisma-fit	64ch+spine	VE11C	N. Kurniawan, M. Ruitenberg, M. Barth, N. Atcheson, C. Gros	HC	n/a	n/a	homo sapiens
-sub-queensland04	F	25	155	78	2019-02-19	queensland - University of Queensland	Siemens	Prisma-fit	64ch+spine	VE11C	N. Kurniawan, M. Ruitenberg, M. Barth, N. Atcheson, C. Gros	HC	Mild kyphosis	n/a	homo sapiens
-sub-queensland05	F	27	170	63	2019-02-19	queensland - University of Queensland	Siemens	Prisma-fit	64ch+spine	VE11C	N. Kurniawan, M. Ruitenberg, M. Barth, N. Atcheson, C. Gros	HC	n/a	n/a	homo sapiens
-sub-sherbrooke02	F	32	167	51	2019-10-01	sherbrooke - Universite de Sherbrooke	Philips	Ingenia	16ch head/neck+12ch posterior	R5.3.1	M. Descoteaux, G. Gilbert	HC	n/a	n/a	homo sapiens
-sub-sherbrooke04	F	29	167	70	2019-10-01	sherbrooke - Universite de Sherbrooke	Philips	Ingenia	16ch head/neck+12ch posterior	R5.3.1	M. Descoteaux, G. Gilbert	HC	Mild disc protrusion C3/4 and disc hernia C6/7	n/a	homo sapiens
-sub-sherbrooke05	F	28	165	60	2019-10-01	sherbrooke - Universite de Sherbrooke	Philips	Ingenia	16ch head/neck+12ch posterior	R5.3.1	M. Descoteaux, G. Gilbert	HC	n/a	n/a	homo sapiens
-sub-sherbrooke06	M	24	177	73	2019-10-01	sherbrooke - Universite de Sherbrooke	Philips	Ingenia	16ch head/neck+12ch posterior	R5.3.1	M. Descoteaux, G. Gilbert	HC	Mild disc protrusions C3-7, mild kyphosis	n/a	homo sapiens
-sub-sherbrooke07	M	35	181	76	2019-10-01	sherbrooke - Universite de Sherbrooke	Philips	Ingenia	16ch head/neck+12ch posterior	R5.3.1	M. Descoteaux, G. Gilbert	HC	Mild disc protrusions C3-7	n/a	homo sapiens
-sub-stanford01	M	33	173	73	2018-02-22	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	Disc protrusion C5/6	n/a	homo sapiens
-sub-stanford02	F	39	163	54	2018-02-22	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	n/a	n/a	homo sapiens
-sub-stanford03	M	36	175	73	2018-02-24	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	n/a	n/a	homo sapiens
-sub-stanford04	F	34	165	57	2018-02-24	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	Disc protrusion C5/6	n/a	homo sapiens
-sub-stanford05	M	19	178	59	2018-02-24	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	Disc protrusion C3/4	n/a	homo sapiens
-sub-stanford06	F	20	163	50	2018-02-27	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	Disc protrusion C4/5, mild kyphosis	n/a	homo sapiens
-sub-strasbourg01	M	40	179	70	2019-03-14	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Disc protrusions C3-6	n/a	homo sapiens
-sub-strasbourg02	M	52	165	70	2019-03-14	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Disc protrusions C4-7	n/a	homo sapiens
-sub-strasbourg03	F	41	166	53	2019-04-03	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Disc protrusions C4-7, visualised central canal at the level C3-7	n/a	homo sapiens
-sub-strasbourg04	F	50	165	68	2019-04-03	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Disc protrusion C4/5	n/a	homo sapiens
-sub-strasbourg05	M	33	169	74	2019-04-08	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Mild disc protrusions C4-6	n/a	homo sapiens
-sub-strasbourg06	F	28	168	52	2019-04-10	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Mild disc protrusions C4-7	n/a	homo sapiens
-sub-tehranS01	F	32	160	62	2019-02-27	tehran - National_Brain_Mappin_Lab_Iran	Siemens	Prisma-fit	64Ch+Spine	VE11B	A. Khatibi	HC	n/a	n/a	homo sapiens
-sub-tehranS02	M	33	181	77	2019-02-27	tehran - National_Brain_Mappin_Lab_Iran	Siemens	Prisma-fit	64Ch+Spine	VE11B	A. Khatibi	HC	Disc protrusions C3-7	n/a	homo sapiens
-sub-tehranS03	F	30	170	65	2019-02-27	tehran - National_Brain_Mappin_Lab_Iran	Siemens	Prisma-fit	64Ch+Spine	VE11B	A. Khatibi	HC	Disc protrusions C3-7	n/a	homo sapiens
-sub-tehranS05	M	23	174	72	2019-02-27	tehran - National_Brain_Mappin_Lab_Iran	Siemens	Prisma-fit	64Ch+Spine	VE11B	A. Khatibi	HC	Disc protrusions C3/4 and C5/6	n/a	homo sapiens
-sub-tehranS06	M	30	183	81	2019-02-16	tehran - National_Brain_Mappin_Lab_Iran	Siemens	Prisma-fit	64Ch+Spine	VE11B	A. Khatibi	HC	T2 motion artifacts	n/a	homo sapiens
-sub-tokyo750w06	F	30	160	48	2019-10-01	tokyo750w - the University of Tokyo	GE	MR750w	n/a	24_LX_MR_Software_release:DV24.0_R01_1344.a	K. Kamiya, Y. Suzuki	HC	Mild disc protrusions C4-6	n/a	homo sapiens
-sub-tokyo750w07	M	29	165	60	2019-06-21	tokyo750w - the University of Tokyo	GE	MR750w	n/a	24_LX_MR_Software_release:DV24.0_R01_1344.a	K. Kamiya, Y. Suzuki	HC	Mild disc protrusions C3-7	n/a	homo sapiens
-sub-tokyoIngenia06	F	30	160	48	2019-06-13	tokyo - Ingenia the University of Tokyo	Philips	Ingenia	n/a	5.3.1_5.3.1.1	K. Kamiya, Y. Suzuki	HC	spinal cordT2 signal inhomogenities (extensive artifacts), no spinal cord compression; T2w SC seg is fine	n/a	homo sapiens
-sub-tokyoIngenia07	M	29	165	60	2019-10-01	tokyo - Ingenia the University of Tokyo	Philips	Ingenia	n/a	5.3.1_5.3.1.1	K. Kamiya, Y. Suzuki	HC	Mild disc protrusions C3-7	n/a	homo sapiens
-sub-tokyoSkyra06	F	30	160	48	2019-10-01	tokyoSkyra - the University of Tokyo	Siemens	Skyra	HeadNeck_20	syngo_MR_E11	K. Kamiya, Y. Suzuki	HC	Mild disc protrusion C5/6	n/a	homo sapiens
-sub-tokyoSkyra07	M	29	165	60	2019-06-13	tokyoSkyra - the University of Tokyo	Siemens	Skyra	HeadNeck_20	syngo_MR_E11	K. Kamiya, Y. Suzuki	HC	Mild disc protrusions C3-7	n/a	homo sapiens
-sub-ubc01	F	23	175	61	2019-06-06	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	Spinal cord T2 signal inhomogenities (extensive artifacts), no spinal cord compression; T2w SC seg is fine	n/a	homo sapiens
-sub-ubc02	M	25	187	75	2019-06-06	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	Spinal cord T2 signal inhomogenities (extensive artifacts), no spinal cord compression; T2w SC seg is fine	n/a	homo sapiens
-sub-ubc03	F	24	180	78	2019-06-06	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	Mild disc protrusion C5/6	n/a	homo sapiens
-sub-ubc04	F	25	176	54	2019-06-06	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	Mild disc protrusion C5-7, visualised central canal at the level C6-7 and mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens
-sub-ubc05	M	24	173	59	2019-06-07	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	T2 motion artifacts	n/a	homo sapiens
-sub-ubc06	M	23	180	84	2019-06-17	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	Mild disc protrusions C4-6, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens
-sub-ucdavis01	F	32	168	86	n/a	ucdavis - UC Davis Health, California, US	Siemens	Vida	HeadNeck_64	syngo MR XA20	Allan R. Martin	HC	Mild disc protrusions C4-7	n/a	homo sapiens
-sub-ucdavis03	M	41	179	82	n/a	ucdavis - UC Davis Health, California, US	Siemens	Vida	HeadNeck_64	syngo MR XA20	Allan R. Martin	HC	Mild disc protrusions C3-7	n/a	homo sapiens
-sub-ucdavis04	F	31	165	77	n/a	ucdavis - UC Davis Health, California, US	Siemens	Vida	HeadNeck_64	syngo MR XA20	Allan R. Martin	HC	Mild disc protrusions C4-7	n/a	homo sapiens
-sub-ucdavis06	M	34	175	70	n/a	ucdavis - UC Davis Health, California, US	Siemens	Vida	HeadNeck_64	syngo MR XA20	Allan R. Martin	HC	Mild disc protrusions C3-5	n/a	homo sapiens
-sub-ucdavis07	M	36	180	80	n/a	ucdavis - UC Davis Health, California, US	Siemens	Vida	HeadNeck_64	syngo MR XA20	Allan R. Martin	HC	Mild disc protrusions C4-7, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens
-sub-ucl01	F	34	166	58	2018-11-21	ucl - University College London	Philips	Achieva-dStream	n/a	Release 5.4	F. Grussu, M. Battiston, R. S. Samson, M. C. Yiannakas, C. A. M. Gandini Wheeler-Kingshott	HC	Mild disc protrusions C3-6, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens
-sub-ucl02	M	31	161	65	2018-11-21	ucl - University College London	Philips	Achieva-dStream	n/a	Release 5.4	F. Grussu, M. Battiston, R. S. Samson, M. C. Yiannakas, C. A. M. Gandini Wheeler-Kingshott	HC	Mild disc protrusions C2-4	n/a	homo sapiens
-sub-ucl03	M	30	178	73	2018-11-21	ucl - University College London	Philips	Achieva-dStream	n/a	Release 5.4	F. Grussu, M. Battiston, R. S. Samson, M. C. Yiannakas, C. A. M. Gandini Wheeler-Kingshott	HC	Mild disc protrusions C4/5 and C6/7, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens
-sub-ucl06	F	33	162	50	2018-11-29	ucl - University College London	Philips	Achieva-dStream	n/a	Release 5.4	F. Grussu, M. Battiston, R. S. Samson, M. C. Yiannakas, C. A. M. Gandini Wheeler-Kingshott	HC	Mild disc protrusions C3-7	n/a	homo sapiens
-sub-unf03	M	22	170	60	2018-12-07	unf - Neuroimaging Functional Unit (UNF), CRIUGM, Polytechnique Montreal	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	J. Cohen-Adad, A. Foias	HC	Mild disc protrusions C5-7	n/a	homo sapiens
-sub-unf04	M	31	178	68	2018-12-07	unf - Neuroimaging Functional Unit (UNF), CRIUGM, Polytechnique Montreal	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	J. Cohen-Adad, A. Foias	HC	Mild disc protrusions C4-6	n/a	homo sapiens
-sub-unf05	F	23	162	59	2019-01-11	unf - Neuroimaging Functional Unit (UNF), CRIUGM, Polytechnique Montreal	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	J. Cohen-Adad, A. Foias	HC	Mild disc protrusions C4-7	n/a	homo sapiens
-sub-unf06	F	27	161	45	2019-01-11	unf - Neuroimaging Functional Unit (UNF), CRIUGM, Polytechnique Montreal	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	J. Cohen-Adad, A. Foias	HC	Mild disc protrusions C3-7	n/a	homo sapiens
-sub-unf07	M	21	178	74	2019-03-22	unf - Neuroimaging Functional Unit (UNF), CRIUGM, Polytechnique Montreal	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	J. Cohen-Adad, A. Foias	HC	n/a	n/a	homo sapiens
-sub-vallHebron01	M	24	170	74	2019-01-16	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	Mild disc hernia C5/6, T2 flow void artifacts of CSF	n/a	homo sapiens
-sub-vallHebron02	F	26	167	54	2019-01-16	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	T2 flow void artifacts of CSF	n/a	homo sapiens
-sub-vallHebron03	F	21	167	51	2019-01-23	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	T2 flow void artifacts of CSF, mild kyphosis	n/a	homo sapiens
-sub-vallHebron04	M	33	168	67	2019-01-25	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	Mild disc protrusions C5-7	n/a	homo sapiens
-sub-vallHebron05	F	29	169	60	2019-01-21	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	Mild disc protrusions C3-5	n/a	homo sapiens
-sub-vallHebron06	F	25	174	60	2019-01-25	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	T2 flow void artifacts of CSF, T2 motion artifacts	n/a	homo sapiens
-sub-vuiisAchieva02	M	23	183	70	2019-02-15	vuiisAchieva - Vanderbilt University Institute of Imaging Science	Philips	Achieva-dStream	16-ch neurovascular	5.3	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	Mild disc protrusions C3-7, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens
-sub-vuiisAchieva04	F	24	160	50	2019-02-27	vuiisAchieva - Vanderbilt University Institute of Imaging Science	Philips	Achieva-dStream	16-ch neurovascular	5.3	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	Mild disc protrusions C4-7	n/a	homo sapiens
-sub-vuiisAchieva06	M	24	180	77	2019-03-01	vuiisAchieva - Vanderbilt University Institute of Imaging Science	Philips	Achieva-dStream	16-ch neurovascular	5.3	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	Mild disc protrusions C3-5	n/a	homo sapiens
-sub-vuiisIngenia01	F	24	158	48	2019-02-18	vuiisIngenia - Vanderbilt University Institute of Imaging Science	Philips	Ingenia-ElitionX	16-ch neurovascular	Release 5.5.0.0	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	Mild disc protrusions C3-7	n/a	homo sapiens
-sub-vuiisIngenia03	F	25	170	61	2019-02-20	vuiisIngenia - Vanderbilt University Institute of Imaging Science	Philips	Ingenia-ElitionX	16-ch neurovascular	Release 5.5.0.0	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	n/a	n/a	homo sapiens
-sub-vuiisIngenia04	F	30	158	48	2019-02-20	vuiisIngenia - Vanderbilt University Institute of Imaging Science	Philips	Ingenia-ElitionX	16-ch neurovascular	Release 5.5.0.0	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	n/a	n/a	homo sapiens
-sub-vuiisIngenia05	M	29	180	82	2019-02-25	vuiisIngenia - Vanderbilt University Institute of Imaging Science	Philips	Ingenia-ElitionX	16-ch neurovascular	Release 5.5.0.0	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	T2 spinal cord inhomogenities (extensive artifacts), no spinal cord compression; T2w SC seg is fine	n/a	homo sapiens
-sub-vuiisIngenia06	M	31	180	95	2019-02-26	vuiisIngenia - Vanderbilt University Institute of Imaging Science	Philips	Ingenia-ElitionX	16-ch neurovascular	Release 5.5.0.0	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	Mild disc protrusions C4-7, T2 flow void artifacts of CSF, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens
-sub-amuAL	M	25	180	70	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_AL_T045	homo sapiens
-sub-amuALT	M	34	176	72	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_ALT	homo sapiens
-sub-amuAM	M	28	192	70	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_AM_T094	homo sapiens
-sub-amuAP	F	22	160	53	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_AP_T077	homo sapiens
-sub-amuCR	M	25	179	67	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_CR_T020b	homo sapiens
-sub-amuED	F	30	168	50	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_ED	homo sapiens
-sub-amuFL	M	24	176	78	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_FL_T056B	homo sapiens
-sub-amuFR	n/a	n/a	n/a	n/a	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_FR_T080	homo sapiens
-sub-amuGB	n/a	n/a	n/a	n/a	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_GB_T083	homo sapiens
-sub-amuHB	M	30	183	72	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_HB_T093	homo sapiens
-sub-amuJD	M	33	188	72	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_JD	homo sapiens
-sub-amuJW	M	26	173	77	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_JW	homo sapiens
-sub-amuLJ	F	22	175	62	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_LJ_T047	homo sapiens
-sub-amuMD	M	24	181	72	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_MD_T075	homo sapiens
-sub-amuMLL	n/a	n/a	n/a	n/a	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_MLL	homo sapiens
-sub-amuMT	M	23	179	59	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_MT	homo sapiens
-sub-amuPA	F	32	172	55	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_PA_T095	homo sapiens
-sub-amuTM	M	23	192	80	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_TM_T057c	homo sapiens
-sub-amuTR	M	29	177	73	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_TR_T076	homo sapiens
-sub-amuTT	M	25	178	70	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_TT	homo sapiens
-sub-amuVC	F	39	163	56	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_VC	homo sapiens
-sub-amuVG	F	34	155	45	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_VG	homo sapiens
-sub-amuVP	M	25	180	66	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_VP	homo sapiens
-sub-unfErssm001	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_02	homo sapiens
-sub-unfErssm002	M	37	n/a	65	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_03	homo sapiens
-sub-unfErssm003	F	28	n/a	55	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_04	homo sapiens
-sub-unfErssm004	F	33	163	55	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_05	homo sapiens
-sub-unfErssm005	F	29	n/a	59	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_09	homo sapiens
-sub-unfErssm006	F	24	180	70	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_10	homo sapiens
-sub-unfErssm007	M	22	177	65	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_11	homo sapiens
-sub-unfErssm008	F	42	n/a	55	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_12	homo sapiens
-sub-unfErssm009	M	23	n/a	76	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_13	homo sapiens
-sub-unfErssm010	F	21	155	60	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_14	homo sapiens
-sub-unfErssm011	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_15	homo sapiens
-sub-unfErssm012	F	24	n/a	52	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_16	homo sapiens
-sub-unfErssm013	F	24	171	63	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_17	homo sapiens
-sub-unfErssm014	M	21	178	84	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_18	homo sapiens
-sub-unfErssm015	M	22	185	75	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_20	homo sapiens
-sub-unfErssm016	M	24	180	78	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_21	homo sapiens
-sub-unfErssm017	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_22	homo sapiens
-sub-unfErssm018	F	24	170	55	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_23	homo sapiens
-sub-unfErssm019	F	24	173	62	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_24	homo sapiens
-sub-unfErssm020	M	56	160	61	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_25	homo sapiens
-sub-unfErssm021	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_26	homo sapiens
-sub-unfErssm022	M	23	n/a	80	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_30	homo sapiens
-sub-unfErssm023	M	21	182	75	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_31	homo sapiens
-sub-unfErssm024	M	24	177	67	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_32	homo sapiens
-sub-unfErssm025	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_33	homo sapiens
-sub-unfErssm026	M	22	175	65	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_34	homo sapiens
-sub-unfErssm027	M	27	178	58	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_35	homo sapiens
-sub-unfErssm028	M	24	191	90	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_36	homo sapiens
-sub-unfErssm029	F	23	168	68	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_37	homo sapiens
-sub-unfErssm030	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_43	homo sapiens
-sub-unfErssm031	M	22	178	73	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_44	homo sapiens
-sub-unfPain001	M	33	174	76	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_D_SP_Pain_Pilot1	homo sapiens
-sub-unfPain002	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_d_sp_pain_12	homo sapiens
-sub-unfPain003	F	31	179	60	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_d_sp_pain_pilot3	homo sapiens
-sub-unfPain004	M	22	n/a	71	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_d_sp_pain_pilot4	homo sapiens
-sub-unfPain005	M	21	n/a	68	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_d_sp_pain_pilot7	homo sapiens
-sub-unfPain006	M	31	180	75	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_p_sp_pain_pilot2	homo sapiens
-sub-unfSCT001	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_sct_001	homo sapiens
-sub-unfSCT002	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_sct_002	homo sapiens
+participant_id	sex	age	height	weight	date_of_scan	institution	manufacturer	manufacturers_model_name	receive_coil_name	software_versions	researcher	pathology	notes	source_id	species	stenosis
+sub-amu01	M	28	176	70	2019-02-12	amu - AMU - CEMEREM	Siemens	Verio	NeckMatrix	syngo_MR_B17	Virginie Callot	HC	n/a	n/a	homo sapiens	n/a
+sub-amu02	M	28	183	67	2019-02-13	amu - AMU - CEMEREM	Siemens	Verio	NeckMatrix	syngo_MR_B17	Virginie Callot	HC	disc protrusion Th2/3, visualised central canal	n/a	homo sapiens	n/a
+sub-amu03	F	28	163	76	2019-02-13	amu - AMU - CEMEREM	Siemens	Verio	NeckMatrix	syngo_MR_B17	Virginie Callot	HC	disc protrusion C3/4 and C5/6	n/a	homo sapiens	n/a
+sub-amu04	F	44	163	55	2019-03-01	amu - AMU - CEMEREM	Siemens	Verio	NeckMatrix	syngo_MR_B17	Virginie Callot	HC	disc protrusion C6/7	n/a	homo sapiens	n/a
+sub-amu05	F	39	175	66	2019-03-01	amu - AMU - CEMEREM	Siemens	Verio	NeckMatrix	syngo_MR_B17	Virginie Callot	HC	disc protrusion C4/5/6 and mild kyphosis	n/a	homo sapiens	n/a
+sub-balgrist01	F	31	158	60	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	Mild kyphosis	n/a	homo sapiens	n/a
+sub-balgrist02	F	22	170	72	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	Mild kyphosis	n/a	homo sapiens	n/a
+sub-balgrist03	F	23	175	85	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	disc protrusion C3/4 and mild kyphosis	n/a	homo sapiens	n/a
+sub-balgrist04	M	28	195	90	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	n/a	n/a	homo sapiens	n/a
+sub-balgrist05	M	27	168	60	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	disc protrusion C4-7	n/a	homo sapiens	n/a
+sub-balgrist06	M	23	170	64	n/a	balgrist - Spinal Cord Injury Center University Balgrist Clinic	Siemens	Prisma	HeadNeck_64	VE11C	M. Seif, P. Freund	HC	visualised spinal canal C5-Th1	n/a	homo sapiens	n/a
+sub-barcelona05	F	36	164	51	2018-11-30	barcelona - Advanced Imaging in Neuroimmunological Diseases (ImaginEM) group	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	Martinez-Heras E, Solana E, Llufriu S	HC	n/a	n/a	homo sapiens	n/a
+sub-barcelona06	F	25	170	55	2018-11-30	barcelona - Advanced Imaging in Neuroimmunological Diseases (ImaginEM) group	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	Martinez-Heras E, Solana E, Llufriu S	HC	disc protrusions C4-7 and Th4-6	n/a	homo sapiens	n/a
+sub-beijingGE01	F	24	161	43	n/a	beijing750 - Beijing Tiantan Hospital	GE	MR750	n/a	24_LX_MR_Software_release:DV24.0_R01_1344.a	Yazhuo Kong	HC	n/a	n/a	homo sapiens	n/a
+sub-beijingGE02	F	23	163	55	n/a	beijing750 - Beijing Tiantan Hospital	GE	MR750	n/a	24_LX_MR_Software_release:DV24.0_R01_1344.a	Yazhuo Kong	HC	disc protrusion C5/6, mild kyphosis	n/a	homo sapiens	n/a
+sub-beijingGE03	M	30	173	70	n/a	beijing750 - Beijing Tiantan Hospital	GE	MR750	n/a	24_LX_MR_Software_release:DV24.0_R01_1344.a	Yazhuo Kong	HC	n/a	n/a	homo sapiens	n/a
+sub-beijingPrisma01	F	22	166	66	n/a	beijingPrisma - Beijing Tiantan Hospital	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Yazhuo Kong	HC	disc protrusion Th5/6	n/a	homo sapiens	n/a
+sub-beijingPrisma04	F	26	158	73	n/a	beijingPrisma - Beijing Tiantan Hospital	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Yazhuo Kong	HC	disc protrusion C5/6, mild kyphosis	n/a	homo sapiens	n/a
+sub-beijingPrisma05	M	27	173	75	n/a	beijingPrisma - Beijing Tiantan Hospital	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Yazhuo Kong	HC	disc protrusion C4-Th1	n/a	homo sapiens	n/a
+sub-beijingVerio01	F	24	161	43	n/a	beijingVerio - Beijing Tiantan Hospital	Siemens	Verio	NeckMatrix	syngo_MR_B19	Yazhuo Kong	HC	n/a	n/a	homo sapiens	n/a
+sub-beijingVerio02	F	23	163	55	n/a	beijingVerio - Beijing Tiantan Hospital	Siemens	Verio	NeckMatrix	syngo_MR_B19	Yazhuo Kong	HC	mild kyphosis, T2 flow void artifacts of CSF	n/a	homo sapiens	n/a
+sub-beijingVerio03	M	30	173	70	n/a	beijingVerio - Beijing Tiantan Hospital	Siemens	Verio	NeckMatrix	syngo_MR_B19	Yazhuo Kong	HC	T2 flow void artifacts of CFS	n/a	homo sapiens	n/a
+sub-brnoCeitec01	M	32	187	92	2019-02-04	brnoCeitec - CEITEC (Central European Institute of Technology), University Hospital Olomouc	Siemens	Prisma	HeadNeck_64	syngo MR E11	T. Horak, P. Kudlicka, J. Valosek	HC	n/a	n/a	homo sapiens	n/a
+sub-brnoCeitec02	F	27	163	56	2019-03-12	brnoCeitec - CEITEC (Central European Institute of Technology), University Hospital Olomouc	Siemens	Prisma	HeadNeck_64	syngo MR E11	T. Horak, P. Kudlicka, J. Valosek	HC	n/a	n/a	homo sapiens	n/a
+sub-brnoCeitec03	M	28	186	84	2019-03-12	brnoCeitec - CEITEC (Central European Institute of Technology), University Hospital Olomouc	Siemens	Prisma	HeadNeck_64	syngo MR E11	T. Horak, P. Kudlicka, J. Valosek	HC	n/a	n/a	homo sapiens	n/a
+sub-brnoCeitec05	F	42	172	58	2019-03-15	brnoCeitec - CEITEC (Central European Institute of Technology), University Hospital Olomouc	Siemens	Prisma	HeadNeck_64	syngo MR E11	T. Horak, P. Kudlicka, J. Valosek	HC	disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-brnoCeitec06	M	28	186	70	2019-03-15	brnoCeitec - CEITEC (Central European Institute of Technology), University Hospital Olomouc	Siemens	Prisma	HeadNeck_64	syngo MR E11	T. Horak, P. Kudlicka, J. Valosek	HC	disc protrusions C5-7 and Th2/3, T2 flow void artifacts of CSF	n/a	homo sapiens	n/a
+sub-brnoUhb01	M	21	188	90	2019-02-13	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-brnoUhb02	M	25	178	95	2019-02-13	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-brnoUhb03	F	26	163	56	2019-02-13	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-brnoUhb04	M	25	182	86	2019-02-13	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusion C3/4	n/a	homo sapiens	n/a
+sub-brnoUhb05	M	27	169	74	2019-02-14	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	n/a	n/a	homo sapiens	n/a
+sub-brnoUhb06	F	21	167	63	2019-02-14	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusions C3-5	n/a	homo sapiens	n/a
+sub-brnoUhb07	F	25	163	65	2019-02-14	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusions C2-6, mild kyfphosis	n/a	homo sapiens	n/a
+sub-brnoUhb08	F	26	178	68	2019-02-14	brnoUhb - The University Hospital Brno, Department of Radiology and Nuclear Medicine, Czech Republic	GE	Signa-PETMR	n/a	MP24	Marek Dostal, Milo Kekovsk	HC	disc protrusions C3-6	n/a	homo sapiens	n/a
+sub-cardiff01	M	31	180	100	2019-02-01	cardiff - CUBRIC, Cardiff University, Wales, UK	Siemens	Prisma	HeadNeck_64	VE11C	G. Tackley, S. Kusmia, R. Wise	HC	disc protrusions C3-7, mild kyphosis	n/a	homo sapiens	n/a
+sub-cardiff02	F	34	172	54	2019-03-05	cardiff - CUBRIC, Cardiff University, Wales, UK	Siemens	Prisma	HeadNeck_64	VE11C	G. Tackley, S. Kusmia, R. Wise	HC	disc protrusion Th2/3	n/a	homo sapiens	n/a
+sub-cardiff03	M	33	182	65	2019-03-05	cardiff - CUBRIC, Cardiff University, Wales, UK	Siemens	Prisma	HeadNeck_64	VE11C	G. Tackley, S. Kusmia, R. Wise	HC	n/a	n/a	homo sapiens	n/a
+sub-cardiff04	F	31	170	58	2019-03-12	cardiff - CUBRIC, Cardiff University, Wales, UK	Siemens	Prisma	HeadNeck_64	VE11C	G. Tackley, S. Kusmia, R. Wise	HC	disc protrusion C3-7 and Th2-4	n/a	homo sapiens	n/a
+sub-cmrra01	M	24	185	68	2019-02-27	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	n/a	n/a	homo sapiens	n/a
+sub-cmrra02	M	27	188	91	2019-03-01	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-cmrra03	F	28	160	64	2019-03-08	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	n/a	n/a	homo sapiens	n/a
+sub-cmrra04	F	22	163	54	2019-03-18	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	disc protrusion and kyphosis at C3/4	n/a	homo sapiens	n/a
+sub-cmrra05	F	24	152	47	2019-03-28	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	disc protrusions C3/4 and C6/7	n/a	homo sapiens	n/a
+sub-cmrra06	M	22	178	77	2019-04-02	cmrra - University of Minnesota	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	T2 hyperintensity in spinal cord at C2 level - only central canal visualisation (no real pathology)	n/a	homo sapiens	n/a
+sub-cmrrb01	F	23	165	61	2019-01-15	cmrrb - University of Minnesota	Siemens	Prisma-fit	Spine_32	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	Mild kyphosis	n/a	homo sapiens	n/a
+sub-cmrrb02	M	23	180	75	2019-02-21	cmrrb - University of Minnesota	Siemens	Prisma-fit	Spine_32	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	Disc protrusion C6/7	n/a	homo sapiens	n/a
+sub-cmrrb03	M	24	185	68	2019-03-01	cmrrb - University of Minnesota	Siemens	Prisma-fit	Spine_32	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	n/a	n/a	homo sapiens	n/a
+sub-cmrrb04	M	21	185	64	2019-03-12	cmrrb - University of Minnesota	Siemens	Prisma-fit	Spine_32	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	n/a	n/a	homo sapiens	n/a
+sub-cmrrb07	F	20	165	66	2019-06-21	cmrrb - University of Minnesota	Siemens	Prisma-fit	Spine_32	syngo_MR_E11	R. Labounek, J. Joers, C. Nguyen, I. Nestrasil, C. Lenglet, P-G. Henry	HC	n/a	n/a	homo sapiens	n/a
+sub-dresden01	F	33	177	60	2019-04-04	dresden - Institut_fur_Neuroradiologie, Dresden, Germany	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Kuntke Paul	HC	n/a	n/a	homo sapiens	n/a
+sub-dresden02	M	33	182	65	2019-04-04	dresden - Institut_fur_Neuroradiologie, Dresden, Germany	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Kuntke Paul	HC	Disc protrusions C2/3 and C5/6	n/a	homo sapiens	n/a
+sub-fslAchieva01	M	37	192	100	2019-02-26	fslAchieva - Santa Lucia Foundation IRCCS, Rome, Italy	Philips	Achieva	n/a	5.4.1_5.4.1.1	Michela Fratini	HC	Disc protrusion C3/4	n/a	homo sapiens	n/a
+sub-fslAchieva02	M	28	180	85	2019-03-08	fslAchieva - Santa Lucia Foundation IRCCS, Rome, Italy	Philips	Achieva	n/a	5.4.1_5.4.1.1	Michela Fratini	HC	Motion artifacts	n/a	homo sapiens	n/a
+sub-fslAchieva03	F	27	160	50	2019-03-25	fslAchieva - Santa Lucia Foundation IRCCS, Rome, Italy	Philips	Achieva	n/a	5.4.1_5.4.1.1	Michela Fratini	HC	Chondrosis, disc protrusions C5-7	n/a	homo sapiens	n/a
+sub-fslAchieva04	F	26	168	63	2019-03-29	fslAchieva - Santa Lucia Foundation IRCCS, Rome, Italy	Philips	Achieva	n/a	5.4.1_5.4.1.1	Michela Fratini	HC	n/a	n/a	homo sapiens	n/a
+sub-fslAchieva05	F	35	158	58	2019-04-10	fslAchieva - Santa Lucia Foundation IRCCS, Rome, Italy	Philips	Achieva	n/a	5.4.1_5.4.1.1	Michela Fratini	HC	n/a	n/a	homo sapiens	n/a
+sub-fslPrisma01	M	36	175	70	n/a	fslPrisma - Santa Lucia Foundation IRCCS, Rome, Italy	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Michela Fratini	HC	n/a	n/a	homo sapiens	n/a
+sub-fslPrisma03	F	25	164	46	n/a	fslPrisma - Santa Lucia Foundation IRCCS, Rome, Italy	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Michela Fratini	HC	n/a	n/a	homo sapiens	n/a
+sub-fslPrisma04	F	29	148	47	n/a	fslPrisma - Santa Lucia Foundation IRCCS, Rome, Italy	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Michela Fratini	HC	n/a	n/a	homo sapiens	n/a
+sub-fslPrisma05	F	26	160	49	n/a	fslPrisma - Santa Lucia Foundation IRCCS, Rome, Italy	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Michela Fratini	HC	Slight widening of the spinal cord central canal (striplike T2 hyperintensity)	n/a	homo sapiens	n/a
+sub-fslPrisma06	M	33	183	84	n/a	fslPrisma - Santa Lucia Foundation IRCCS, Rome, Italy	Siemens	Prisma	HeadNeck_64	syngo_MR_E11	Michela Fratini	HC	mild scoliosis	n/a	homo sapiens	n/a
+sub-geneva01	M	29	189	69	2019-02-21	geneva - Campus Biotech Geneva	Siemens	Prisma	64ch+spine	VE11C	K. Kinany, L. Mattera	HC	Chondrosis and disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-geneva02	M	36	180	89	2019-02-14	geneva - Campus Biotech Geneva	Siemens	Prisma	64ch+spine	VE11C	K. Kinany, L. Mattera	HC	Mild central canal widening at C5 level	n/a	homo sapiens	n/a
+sub-geneva03	M	27	175	78	2019-03-04	geneva - Campus Biotech Geneva	Siemens	Prisma	64ch+spine	VE11C	K. Kinany, L. Mattera	HC	n/a	n/a	homo sapiens	n/a
+sub-geneva04	F	29	153	46	2019-01-30	geneva - Campus Biotech Geneva	Siemens	Prisma	64ch+spine	VE11C	K. Kinany, L. Mattera	HC	n/a	n/a	homo sapiens	n/a
+sub-geneva05	F	30	168	53	2019-02-01	geneva - Campus Biotech Geneva	Siemens	Prisma	64ch+spine	VE11C	K. Kinany, L. Mattera	HC	Mild kyphosis	n/a	homo sapiens	n/a
+sub-hamburg01	M	28	203	83	2019-03-08	hamburg - Institute of Systems Neuroscience, University Medical Center Hamburg-Eppendorf	Siemens	Prisma-fit	64ch+spine	VE11C	A. Tinnermann, J. Finsterbusch, C. Buechel	HC	Mild central canal widening	n/a	homo sapiens	n/a
+sub-hamburg03	M	21	184	87	2019-03-06	hamburg - Institute of Systems Neuroscience, University Medical Center Hamburg-Eppendorf	Siemens	Prisma-fit	64ch+spine	VE11C	A. Tinnermann, J. Finsterbusch, C. Buechel	HC	n/a	n/a	homo sapiens	n/a
+sub-hamburg04	F	33	175	60	2019-03-12	hamburg - Institute of Systems Neuroscience, University Medical Center Hamburg-Eppendorf	Siemens	Prisma-fit	64ch+spine	VE11C	A. Tinnermann, J. Finsterbusch, C. Buechel	HC	n/a	n/a	homo sapiens	n/a
+sub-hamburg06	M	38	182	83	2019-03-06	hamburg - Institute of Systems Neuroscience, University Medical Center Hamburg-Eppendorf	Siemens	Prisma-fit	64ch+spine	VE11C	A. Tinnermann, J. Finsterbusch, C. Buechel	HC	n/a	n/a	homo sapiens	n/a
+sub-juntendo750w01	F	28	169	52	2019-02-07	juntendo750w - JUNTENDO_UNV_HP	GE	MR750w	n/a	27_LX_MR_Software_release:DV26.0_R02_1810.b	Hagiwara A.	HC	Chondrosis and disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-juntendo750w02	F	27	160	50	2019-02-07	juntendo750w - JUNTENDO_UNV_HP	GE	MR750w	n/a	27_LX_MR_Software_release:DV26.0_R02_1810.b	Hagiwara A.	HC	Chondrosis and disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-juntendo750w05	F	26	155	71	2019-02-04	juntendo750w - JUNTENDO_UNV_HP	GE	MR750w	n/a	27_LX_MR_Software_release:DV26.0_R02_1810.b	Hagiwara A.	HC	disc protrusions C3-7, visualised central canal	n/a	homo sapiens	n/a
+sub-juntendo750w06	M	23	169	71	2019-02-05	juntendo750w - JUNTENDO_UNV_HP	GE	MR750w	n/a	27_LX_MR_Software_release:DV26.0_R02_1810.b	Hagiwara A.	HC	disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-mgh01	F	28	173	73	2019-01-01	mgh - Massachusetts General Hospital	Siemens	Skyra	64ch+spine	VE11C	R. L. Barry	HC	disc protrusions C3-6	n/a	homo sapiens	n/a
+sub-mgh02	F	33	155	41	2019-01-01	mgh - Massachusetts General Hospital	Siemens	Skyra	64ch+spine	VE11C	R. L. Barry	HC	disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-mgh04	M	28	183	79	2019-01-01	mgh - Massachusetts General Hospital	Siemens	Skyra	64ch+spine	VE11C	R. L. Barry	HC	n/a	n/a	homo sapiens	n/a
+sub-mgh05	M	31	183	91	2019-01-01	mgh - Massachusetts General Hospital	Siemens	Skyra	64ch+spine	VE11C	R. L. Barry	HC	disc protrusions C4-6	n/a	homo sapiens	n/a
+sub-mgh06	M	36	188	90	2019-01-01	mgh - Massachusetts General Hospital	Siemens	Skyra	64ch+spine	VE11C	R. L. Barry	HC	disc protrusions C3-5, visualised spinal canal at the level C6	n/a	homo sapiens	n/a
+sub-milan01	M	25	189	95	2018-12-18	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	ligamentum flavum hypertrophy C6/7	n/a	homo sapiens	n/a
+sub-milan02	F	35	165	53	2018-12-18	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	Mild kyphosis and disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-milan03	F	28	163	65	2018-12-20	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	Mild disc protrusions C4-6 and central canal widening C5-7	n/a	homo sapiens	n/a
+sub-milan04	F	27	160	48	2018-12-20	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	n/a	n/a	homo sapiens	n/a
+sub-milan05	M	28	175	67	2019-01-09	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	n/a	n/a	homo sapiens	n/a
+sub-milan06	M	35	169	70	2019-01-10	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	Mild disc protrusions C2-4	n/a	homo sapiens	n/a
+sub-milan07	M	31	189	92	2019-01-15	milan - IRCCS Fondazione Don Carlo Gnocchi, Milan, Italy	Siemens	Prisma	64ch+spine	VE11C	M. M. Lagana	HC	Mild disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-mniPilot1	F	30	170	60	2019-02-26	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens	n/a
+sub-mniS01	M	37	174	76	2019-02-26	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens	n/a
+sub-mniS02	M	29	180	76	2019-02-28	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens	n/a
+sub-mniS03	M	29	169	57	2019-03-04	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens	n/a
+sub-mniS04	M	33	178	77	2019-03-04	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens	n/a
+sub-mniS07	F	40	170	84	2019-03-07	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	Mild disc protrusions C5-7	n/a	homo sapiens	n/a
+sub-mniS08	F	28	175	61	2019-03-12	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens	n/a
+sub-mniS09	F	42	170	73	2019-03-12	mni - Montreal Neurological Institute, McGill University	Siemens	Prisma-fit	64ch+spine	VE11C	Benjamin De Leener, Julien Doyon	HC	n/a	n/a	homo sapiens	n/a
+sub-mountSinai02	M	26	175	79	2019-03-12	mountSinai - BMEII (formely TMII), Icahn School of Medicine at Mount Sinai, New York, NY USA	Siemens	Skyra	Spine_32	VE11C	J. Xu, A. Seifert, J-W. Kim	HC	Disc protrusions C5-7	n/a	homo sapiens	n/a
+sub-mountSinai05	M	31	180	79	2019-03-25	mountSinai - BMEII (formely TMII), Icahn School of Medicine at Mount Sinai, New York, NY USA	Siemens	Skyra	Spine_32	VE11C	J. Xu, A. Seifert, J-W. Kim	HC	n/a	n/a	homo sapiens	n/a
+sub-mountSinai06	M	31	185	95	2019-03-25	mountSinai - BMEII (formely TMII), Icahn School of Medicine at Mount Sinai, New York, NY USA	Siemens	Skyra	Spine_32	VE11C	J. Xu, A. Seifert, J-W. Kim	HC	Mild kyphosis	n/a	homo sapiens	n/a
+sub-mpicbs01	F	29	172	59	2019-03-26	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	n/a	n/a	homo sapiens	n/a
+sub-mpicbs02	F	30	166	56	2019-04-04	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	n/a	n/a	homo sapiens	n/a
+sub-mpicbs03	M	26	184	68	2019-04-04	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	Mild disc protrusions C4-6	n/a	homo sapiens	n/a
+sub-mpicbs05	F	20	172	53	2019-04-05	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	n/a	n/a	homo sapiens	n/a
+sub-mpicbs06	M	22	177	77	2019-04-05	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	n/a	n/a	homo sapiens	n/a
+sub-mpicbs07	M	25	177	75	2019-04-05	mpicbs - Max Planck Institute for Human Cognitive and Brain Sciences	Siemens	Prisma-fit	64ch+spine	VE11C	F. Eippert, T. Leutritz, N. Weiskopf	HC	n/a	n/a	homo sapiens	n/a
+sub-nottwil01	F	25	170	64	2018-12-19	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	Central canal visualisation	n/a	homo sapiens	n/a
+sub-nottwil02	M	23	173	80	2019-01-03	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	n/a	n/a	homo sapiens	n/a
+sub-nottwil03	M	38	182	76	2019-01-03	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	n/a	n/a	homo sapiens	n/a
+sub-nottwil04	F	25	162	65	2019-01-03	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	Spinal cord T2 signal inhomogenities (artifacts?); T2w SC seg is fine	n/a	homo sapiens	n/a
+sub-nottwil05	F	28	169	69	2019-01-08	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	Mild disc protrusions C3-5, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens	n/a
+sub-nottwil06	M	36	198	97	2019-01-10	nottwil - Swiss Paraplegic Centre Nottwil Switzerland	Philips	Achieva-dStream	n/a	Release 5.4.1	P.Wyss, M.Abramovic, C.Arneitz, M.Berger	HC	Mild spinal cord inhomogenities (artifacts), mesencephalon cystic lesion	n/a	homo sapiens	n/a
+sub-nwu02	F	26	163	57	2019-02-20	nwu - Northwestern University	Siemens	Prisma-fit	64ch+spine	VE11C	H. Karbasforoushan	HC	Disc hernia C5/6	n/a	homo sapiens	n/a
+sub-nwu03	F	24	167	53	2019-02-21	nwu - Northwestern University	Siemens	Prisma-fit	64ch+spine	VE11C	H. Karbasforoushan	HC	mild kyphosis	n/a	homo sapiens	n/a
+sub-nwu04	M	25	188	75	2019-02-25	nwu - Northwestern University	Siemens	Prisma-fit	64ch+spine	VE11C	H. Karbasforoushan	HC	n/a	n/a	homo sapiens	n/a
+sub-nwu05	M	27	182	68	2019-02-25	nwu - Northwestern University	Siemens	Prisma-fit	64ch+spine	VE11C	H. Karbasforoushan	HC	Mild disc protrusions C3/4 and C5-7	n/a	homo sapiens	n/a
+sub-nwu06	F	24	160	59	2019-02-27	nwu - Northwestern University	Siemens	Prisma-fit	64ch+spine	VE11C	H. Karbasforoushan	HC	Mild disc protrusions C3-5	n/a	homo sapiens	n/a
+sub-oxfordFmrib01	M	26	185	75	2019-02-04	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Mild disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-oxfordFmrib02	M	22	196	84	2019-02-04	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	n/a	n/a	homo sapiens	n/a
+sub-oxfordFmrib03	M	24	179	70	2019-02-13	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Mild disc protrusions C3-6	n/a	homo sapiens	n/a
+sub-oxfordFmrib04	M	42	175	75	2019-02-13	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-oxfordFmrib05	M	25	170	55	2019-02-20	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Mild disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-oxfordFmrib06	F	25	167	75	2019-02-20	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	n/a	n/a	homo sapiens	n/a
+sub-oxfordFmrib07	M	31	188	91	2019-02-27	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Mild disc protrusion C5/6, visualised central canal at the level C6, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens	n/a
+sub-oxfordFmrib10	F	26	167	56	2019-03-13	oxfordFmrib - Wellcome Centre for Integrative Neuroimaging, FMRIB, Nuffield Department of Clinical Neurosciences, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-oxfordOhba01	F	25	167	75	2019-03-14	oxfordOhba - Oxford Centre for Human Brain Activity, Wellcome Centre for Integrative Neuroimaging, Department of Psychiatry, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	n/a	n/a	homo sapiens	n/a
+sub-oxfordOhba02	M	31	188	91	2019-03-15	oxfordOhba - Oxford Centre for Human Brain Activity, Wellcome Centre for Integrative Neuroimaging, Department of Psychiatry, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	visualised central canal at the level C3-7	n/a	homo sapiens	n/a
+sub-oxfordOhba03	M	25	170	55	2019-03-15	oxfordOhba - Oxford Centre for Human Brain Activity, Wellcome Centre for Integrative Neuroimaging, Department of Psychiatry, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Mild disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-oxfordOhba04	M	42	175	75	2019-03-15	oxfordOhba - Oxford Centre for Human Brain Activity, Wellcome Centre for Integrative Neuroimaging, Department of Psychiatry, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	Disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-oxfordOhba05	M	22	196	84	2019-03-15	oxfordOhba - Oxford Centre for Human Brain Activity, Wellcome Centre for Integrative Neuroimaging, Department of Psychiatry, University of Oxford	Siemens	Prisma	64ch	VE11C	D. Papp, A. K. Smith	HC	n/a	n/a	homo sapiens	n/a
+sub-pavia02	F	25	158	47	2019-06-19	pavia - Neuroradiology Unit, IRCCS Mondino Foundation	Siemens	Skyra	HeadNeck_20	syngo_MR_D13	G. Savini, G. Germani, A. Pichiecchio	HC	Mild kyphosis	n/a	homo sapiens	n/a
+sub-pavia03	M	28	180	68	2019-06-19	pavia - Neuroradiology Unit, IRCCS Mondino Foundation	Siemens	Skyra	HeadNeck_20	syngo_MR_D13	G. Savini, G. Germani, A. Pichiecchio	HC	Mild kyphosis	n/a	homo sapiens	n/a
+sub-pavia04	F	25	165	50	2019-06-26	pavia - Neuroradiology Unit, IRCCS Mondino Foundation	Siemens	Skyra	HeadNeck_20	syngo_MR_D13	G. Savini, G. Germani, A. Pichiecchio	HC	Disc protrusions C3-7, mild kyphosis, motion artifacts	n/a	homo sapiens	n/a
+sub-pavia06	M	29	180	65	2019-07-03	pavia - Neuroradiology Unit, IRCCS Mondino Foundation	Siemens	Skyra	HeadNeck_20	syngo_MR_D13	G. Savini, G. Germani, A. Pichiecchio	HC	n/a	n/a	homo sapiens	n/a
+sub-perform01	F	23	176	63	2018-01-30	perform - Concordia University, Perform Center, Montreal, Canada	GE	MR750	n/a	27_LX_MR_Software_release:DV25.1_R02_1649.a	J. Cohen-Adad, H. Benali	HC	Mild kyphosis	n/a	homo sapiens	n/a
+sub-perform02	M	27	n/a	83.91	2018-01-30	perform - Concordia University, Perform Center, Montreal, Canada	GE	MR750	n/a	27_LX_MR_Software_release:DV25.1_R02_1649.a	J. Cohen-Adad, H. Benali	HC	Disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-perform04	M	30	n/a	57	2018-01-30	perform - Concordia University, Perform Center, Montreal, Canada	GE	MR750	n/a	27_LX_MR_Software_release:DV25.1_R02_1649.a	J. Cohen-Adad, H. Benali	HC	n/a	n/a	homo sapiens	n/a
+sub-perform05	F	28	167	54	2018-01-30	perform - Concordia University, Perform Center, Montreal, Canada	GE	MR750	n/a	27_LX_MR_Software_release:DV25.1_R02_1649.a	J. Cohen-Adad, H. Benali	HC	n/a	n/a	homo sapiens	n/a
+sub-perform06	M	27	186	86	2018-01-30	perform - Concordia University, Perform Center, Montreal, Canada	GE	MR750	n/a	27_LX_MR_Software_release:DV25.1_R02_1649.a	J. Cohen-Adad, H. Benali	HC	n/a	n/a	homo sapiens	n/a
+sub-queensland01	M	31	176	89	2018-12-19	queensland - University of Queensland	Siemens	Prisma-fit	64ch+spine	VE11C	N. Kurniawan, M. Ruitenberg, M. Barth, N. Atcheson, C. Gros	HC	Mild disc protrusion C3-5	n/a	homo sapiens	n/a
+sub-queensland03	M	25	174	60	2019-02-19	queensland - University of Queensland	Siemens	Prisma-fit	64ch+spine	VE11C	N. Kurniawan, M. Ruitenberg, M. Barth, N. Atcheson, C. Gros	HC	n/a	n/a	homo sapiens	n/a
+sub-queensland04	F	25	155	78	2019-02-19	queensland - University of Queensland	Siemens	Prisma-fit	64ch+spine	VE11C	N. Kurniawan, M. Ruitenberg, M. Barth, N. Atcheson, C. Gros	HC	Mild kyphosis	n/a	homo sapiens	n/a
+sub-queensland05	F	27	170	63	2019-02-19	queensland - University of Queensland	Siemens	Prisma-fit	64ch+spine	VE11C	N. Kurniawan, M. Ruitenberg, M. Barth, N. Atcheson, C. Gros	HC	n/a	n/a	homo sapiens	n/a
+sub-sherbrooke02	F	32	167	51	2019-10-01	sherbrooke - Universite de Sherbrooke	Philips	Ingenia	16ch head/neck+12ch posterior	R5.3.1	M. Descoteaux, G. Gilbert	HC	n/a	n/a	homo sapiens	n/a
+sub-sherbrooke04	F	29	167	70	2019-10-01	sherbrooke - Universite de Sherbrooke	Philips	Ingenia	16ch head/neck+12ch posterior	R5.3.1	M. Descoteaux, G. Gilbert	HC	Mild disc protrusion C3/4 and disc hernia C6/7	n/a	homo sapiens	n/a
+sub-sherbrooke05	F	28	165	60	2019-10-01	sherbrooke - Universite de Sherbrooke	Philips	Ingenia	16ch head/neck+12ch posterior	R5.3.1	M. Descoteaux, G. Gilbert	HC	n/a	n/a	homo sapiens	n/a
+sub-sherbrooke06	M	24	177	73	2019-10-01	sherbrooke - Universite de Sherbrooke	Philips	Ingenia	16ch head/neck+12ch posterior	R5.3.1	M. Descoteaux, G. Gilbert	HC	Mild disc protrusions C3-7, mild kyphosis	n/a	homo sapiens	n/a
+sub-sherbrooke07	M	35	181	76	2019-10-01	sherbrooke - Universite de Sherbrooke	Philips	Ingenia	16ch head/neck+12ch posterior	R5.3.1	M. Descoteaux, G. Gilbert	HC	Mild disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-stanford01	M	33	173	73	2018-02-22	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	Disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-stanford02	F	39	163	54	2018-02-22	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	n/a	n/a	homo sapiens	n/a
+sub-stanford03	M	36	175	73	2018-02-24	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	n/a	n/a	homo sapiens	n/a
+sub-stanford04	F	34	165	57	2018-02-24	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	Disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-stanford05	M	19	178	59	2018-02-24	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	Disc protrusion C3/4	n/a	homo sapiens	n/a
+sub-stanford06	F	20	163	50	2018-02-27	stanford - Stanford University	GE	MR750	16ch neurovascular	DV26.0_R01	C. S. Law, K. A. Weber II, S. Mackey, K. R. Epperson, K. S Epperson	HC	Disc protrusion C4/5, mild kyphosis	n/a	homo sapiens	n/a
+sub-strasbourg01	M	40	179	70	2019-03-14	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Disc protrusions C3-6	n/a	homo sapiens	n/a
+sub-strasbourg02	M	52	165	70	2019-03-14	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-strasbourg03	F	41	166	53	2019-04-03	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Disc protrusions C4-7, visualised central canal at the level C3-7	n/a	homo sapiens	n/a
+sub-strasbourg04	F	50	165	68	2019-04-03	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Disc protrusion C4/5	n/a	homo sapiens	n/a
+sub-strasbourg05	M	33	169	74	2019-04-08	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Mild disc protrusions C4-6	n/a	homo sapiens	n/a
+sub-strasbourg06	F	28	168	52	2019-04-10	strasbourg - ICube Laboratory	Siemens	Verio	12ch+4ch neck	VB17	P. L. de Sousa	HC	Mild disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-tehranS01	F	32	160	62	2019-02-27	tehran - National_Brain_Mappin_Lab_Iran	Siemens	Prisma-fit	64Ch+Spine	VE11B	A. Khatibi	HC	n/a	n/a	homo sapiens	n/a
+sub-tehranS02	M	33	181	77	2019-02-27	tehran - National_Brain_Mappin_Lab_Iran	Siemens	Prisma-fit	64Ch+Spine	VE11B	A. Khatibi	HC	Disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-tehranS03	F	30	170	65	2019-02-27	tehran - National_Brain_Mappin_Lab_Iran	Siemens	Prisma-fit	64Ch+Spine	VE11B	A. Khatibi	HC	Disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-tehranS05	M	23	174	72	2019-02-27	tehran - National_Brain_Mappin_Lab_Iran	Siemens	Prisma-fit	64Ch+Spine	VE11B	A. Khatibi	HC	Disc protrusions C3/4 and C5/6	n/a	homo sapiens	n/a
+sub-tehranS06	M	30	183	81	2019-02-16	tehran - National_Brain_Mappin_Lab_Iran	Siemens	Prisma-fit	64Ch+Spine	VE11B	A. Khatibi	HC	T2 motion artifacts	n/a	homo sapiens	n/a
+sub-tokyo750w06	F	30	160	48	2019-10-01	tokyo750w - the University of Tokyo	GE	MR750w	n/a	24_LX_MR_Software_release:DV24.0_R01_1344.a	K. Kamiya, Y. Suzuki	HC	Mild disc protrusions C4-6	n/a	homo sapiens	n/a
+sub-tokyo750w07	M	29	165	60	2019-06-21	tokyo750w - the University of Tokyo	GE	MR750w	n/a	24_LX_MR_Software_release:DV24.0_R01_1344.a	K. Kamiya, Y. Suzuki	HC	Mild disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-tokyoIngenia06	F	30	160	48	2019-06-13	tokyo - Ingenia the University of Tokyo	Philips	Ingenia	n/a	5.3.1_5.3.1.1	K. Kamiya, Y. Suzuki	HC	spinal cordT2 signal inhomogenities (extensive artifacts), no spinal cord compression; T2w SC seg is fine	n/a	homo sapiens	n/a
+sub-tokyoIngenia07	M	29	165	60	2019-10-01	tokyo - Ingenia the University of Tokyo	Philips	Ingenia	n/a	5.3.1_5.3.1.1	K. Kamiya, Y. Suzuki	HC	Mild disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-tokyoSkyra06	F	30	160	48	2019-10-01	tokyoSkyra - the University of Tokyo	Siemens	Skyra	HeadNeck_20	syngo_MR_E11	K. Kamiya, Y. Suzuki	HC	Mild disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-tokyoSkyra07	M	29	165	60	2019-06-13	tokyoSkyra - the University of Tokyo	Siemens	Skyra	HeadNeck_20	syngo_MR_E11	K. Kamiya, Y. Suzuki	HC	Mild disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-ubc01	F	23	175	61	2019-06-06	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	Spinal cord T2 signal inhomogenities (extensive artifacts), no spinal cord compression; T2w SC seg is fine	n/a	homo sapiens	n/a
+sub-ubc02	M	25	187	75	2019-06-06	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	Spinal cord T2 signal inhomogenities (extensive artifacts), no spinal cord compression; T2w SC seg is fine	n/a	homo sapiens	n/a
+sub-ubc03	F	24	180	78	2019-06-06	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	Mild disc protrusion C5/6	n/a	homo sapiens	n/a
+sub-ubc04	F	25	176	54	2019-06-06	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	Mild disc protrusion C5-7, visualised central canal at the level C6-7 and mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens	n/a
+sub-ubc05	M	24	173	59	2019-06-07	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	T2 motion artifacts	n/a	homo sapiens	n/a
+sub-ubc06	M	23	180	84	2019-06-17	ubc - University of British Columbia (UBC), Vancouver, Canada	Philips	Ingenia-ElitionX	16chHeadNeck+Posterior	R5.5	A.V. Dvorak, E. MacMillan, S. Kolind	HC	Mild disc protrusions C4-6, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens	n/a
+sub-ucdavis01	F	32	168	86	n/a	ucdavis - UC Davis Health, California, US	Siemens	Vida	HeadNeck_64	syngo MR XA20	Allan R. Martin	HC	Mild disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-ucdavis03	M	41	179	82	n/a	ucdavis - UC Davis Health, California, US	Siemens	Vida	HeadNeck_64	syngo MR XA20	Allan R. Martin	HC	Mild disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-ucdavis04	F	31	165	77	n/a	ucdavis - UC Davis Health, California, US	Siemens	Vida	HeadNeck_64	syngo MR XA20	Allan R. Martin	HC	Mild disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-ucdavis06	M	34	175	70	n/a	ucdavis - UC Davis Health, California, US	Siemens	Vida	HeadNeck_64	syngo MR XA20	Allan R. Martin	HC	Mild disc protrusions C3-5	n/a	homo sapiens	n/a
+sub-ucdavis07	M	36	180	80	n/a	ucdavis - UC Davis Health, California, US	Siemens	Vida	HeadNeck_64	syngo MR XA20	Allan R. Martin	HC	Mild disc protrusions C4-7, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens	n/a
+sub-ucl01	F	34	166	58	2018-11-21	ucl - University College London	Philips	Achieva-dStream	n/a	Release 5.4	F. Grussu, M. Battiston, R. S. Samson, M. C. Yiannakas, C. A. M. Gandini Wheeler-Kingshott	HC	Mild disc protrusions C3-6, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens	n/a
+sub-ucl02	M	31	161	65	2018-11-21	ucl - University College London	Philips	Achieva-dStream	n/a	Release 5.4	F. Grussu, M. Battiston, R. S. Samson, M. C. Yiannakas, C. A. M. Gandini Wheeler-Kingshott	HC	Mild disc protrusions C2-4	n/a	homo sapiens	n/a
+sub-ucl03	M	30	178	73	2018-11-21	ucl - University College London	Philips	Achieva-dStream	n/a	Release 5.4	F. Grussu, M. Battiston, R. S. Samson, M. C. Yiannakas, C. A. M. Gandini Wheeler-Kingshott	HC	Mild disc protrusions C4/5 and C6/7, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens	n/a
+sub-ucl06	F	33	162	50	2018-11-29	ucl - University College London	Philips	Achieva-dStream	n/a	Release 5.4	F. Grussu, M. Battiston, R. S. Samson, M. C. Yiannakas, C. A. M. Gandini Wheeler-Kingshott	HC	Mild disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-unf03	M	22	170	60	2018-12-07	unf - Neuroimaging Functional Unit (UNF), CRIUGM, Polytechnique Montreal	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	J. Cohen-Adad, A. Foias	HC	Mild disc protrusions C5-7	n/a	homo sapiens	n/a
+sub-unf04	M	31	178	68	2018-12-07	unf - Neuroimaging Functional Unit (UNF), CRIUGM, Polytechnique Montreal	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	J. Cohen-Adad, A. Foias	HC	Mild disc protrusions C4-6	n/a	homo sapiens	n/a
+sub-unf05	F	23	162	59	2019-01-11	unf - Neuroimaging Functional Unit (UNF), CRIUGM, Polytechnique Montreal	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	J. Cohen-Adad, A. Foias	HC	Mild disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-unf06	F	27	161	45	2019-01-11	unf - Neuroimaging Functional Unit (UNF), CRIUGM, Polytechnique Montreal	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	J. Cohen-Adad, A. Foias	HC	Mild disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-unf07	M	21	178	74	2019-03-22	unf - Neuroimaging Functional Unit (UNF), CRIUGM, Polytechnique Montreal	Siemens	Prisma-fit	HeadNeck_64	syngo_MR_E11	J. Cohen-Adad, A. Foias	HC	n/a	n/a	homo sapiens	n/a
+sub-vallHebron01	M	24	170	74	2019-01-16	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	Mild disc hernia C5/6, T2 flow void artifacts of CSF	n/a	homo sapiens	n/a
+sub-vallHebron02	F	26	167	54	2019-01-16	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	T2 flow void artifacts of CSF	n/a	homo sapiens	n/a
+sub-vallHebron03	F	21	167	51	2019-01-23	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	T2 flow void artifacts of CSF, mild kyphosis	n/a	homo sapiens	n/a
+sub-vallHebron04	M	33	168	67	2019-01-25	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	Mild disc protrusions C5-7	n/a	homo sapiens	n/a
+sub-vallHebron05	F	29	169	60	2019-01-21	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	Mild disc protrusions C3-5	n/a	homo sapiens	n/a
+sub-vallHebron06	F	25	174	60	2019-01-25	vallHebron - Vall d'Hebron Research Center	Siemens	TrioTim	NeckMatrix	syngo_MR_B17	Deborah Pareto Onghena	HC	T2 flow void artifacts of CSF, T2 motion artifacts	n/a	homo sapiens	n/a
+sub-vuiisAchieva02	M	23	183	70	2019-02-15	vuiisAchieva - Vanderbilt University Institute of Imaging Science	Philips	Achieva-dStream	16-ch neurovascular	5.3	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	Mild disc protrusions C3-7, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens	n/a
+sub-vuiisAchieva04	F	24	160	50	2019-02-27	vuiisAchieva - Vanderbilt University Institute of Imaging Science	Philips	Achieva-dStream	16-ch neurovascular	5.3	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	Mild disc protrusions C4-7	n/a	homo sapiens	n/a
+sub-vuiisAchieva06	M	24	180	77	2019-03-01	vuiisAchieva - Vanderbilt University Institute of Imaging Science	Philips	Achieva-dStream	16-ch neurovascular	5.3	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	Mild disc protrusions C3-5	n/a	homo sapiens	n/a
+sub-vuiisIngenia01	F	24	158	48	2019-02-18	vuiisIngenia - Vanderbilt University Institute of Imaging Science	Philips	Ingenia-ElitionX	16-ch neurovascular	Release 5.5.0.0	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	Mild disc protrusions C3-7	n/a	homo sapiens	n/a
+sub-vuiisIngenia03	F	25	170	61	2019-02-20	vuiisIngenia - Vanderbilt University Institute of Imaging Science	Philips	Ingenia-ElitionX	16-ch neurovascular	Release 5.5.0.0	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	n/a	n/a	homo sapiens	n/a
+sub-vuiisIngenia04	F	30	158	48	2019-02-20	vuiisIngenia - Vanderbilt University Institute of Imaging Science	Philips	Ingenia-ElitionX	16-ch neurovascular	Release 5.5.0.0	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	n/a	n/a	homo sapiens	n/a
+sub-vuiisIngenia05	M	29	180	82	2019-02-25	vuiisIngenia - Vanderbilt University Institute of Imaging Science	Philips	Ingenia-ElitionX	16-ch neurovascular	Release 5.5.0.0	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	T2 spinal cord inhomogenities (extensive artifacts), no spinal cord compression; T2w SC seg is fine	n/a	homo sapiens	n/a
+sub-vuiisIngenia06	M	31	180	95	2019-02-26	vuiisIngenia - Vanderbilt University Institute of Imaging Science	Philips	Ingenia-ElitionX	16-ch neurovascular	Release 5.5.0.0	K.P. O'Grady, A.J.E. Combes, S.A. Smith	HC	Mild disc protrusions C4-7, T2 flow void artifacts of CSF, mild spinal cord inhomogenities (artifacts)	n/a	homo sapiens	n/a
+sub-amuAL	M	25	180	70	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_AL_T045	homo sapiens	n/a
+sub-amuALT	M	34	176	72	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_ALT	homo sapiens	T7-T8
+sub-amuAM	M	28	192	70	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_AM_T094	homo sapiens	C3-C4,C4-C5
+sub-amuAP	F	22	160	53	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_AP_T077	homo sapiens	n/a
+sub-amuCR	M	25	179	67	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_CR_T020b	homo sapiens	n/a
+sub-amuED	F	30	168	50	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_ED	homo sapiens	n/a
+sub-amuFL	M	24	176	78	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_FL_T056B	homo sapiens	C4-C5,T6-T7
+sub-amuFR	n/a	n/a	n/a	n/a	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_FR_T080	homo sapiens	n/a
+sub-amuGB	n/a	n/a	n/a	n/a	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_GB_T083	homo sapiens	T9-T10
+sub-amuHB	M	30	183	72	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_HB_T093	homo sapiens	n/a
+sub-amuJD	M	33	188	72	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_JD	homo sapiens	n/a
+sub-amuJW	M	26	173	77	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_JW	homo sapiens	n/a
+sub-amuLJ	F	22	175	62	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_LJ_T047	homo sapiens	T4-T5
+sub-amuMD	M	24	181	72	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_MD_T075	homo sapiens	T5-T6
+sub-amuMLL	n/a	n/a	n/a	n/a	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_MLL	homo sapiens	T5-T6
+sub-amuMT	M	23	179	59	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_MT	homo sapiens	T5-T6,T7-T8
+sub-amuPA	F	32	172	55	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_PA_T095	homo sapiens	T7-T8
+sub-amuTM	M	23	192	80	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_TM_T057c	homo sapiens	n/a
+sub-amuTR	M	29	177	73	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_TR_T076	homo sapiens	n/a
+sub-amuTT	M	25	178	70	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_TT	homo sapiens	n/a
+sub-amuVC	F	39	163	56	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_VC	homo sapiens	n/a
+sub-amuVG	F	34	155	45	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_VG	homo sapiens	n/a
+sub-amuVP	M	25	180	66	n/a	amu	n/a	n/a	n/a	n/a	n/a	HC	n/a	amu_VP	homo sapiens	n/a
+sub-unfErssm001	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_02	homo sapiens	n/a
+sub-unfErssm002	M	37	n/a	65	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_03	homo sapiens	T4-T5
+sub-unfErssm003	F	28	n/a	55	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_04	homo sapiens	n/a
+sub-unfErssm004	F	33	163	55	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_05	homo sapiens	T7-T8
+sub-unfErssm005	F	29	n/a	59	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_09	homo sapiens	n/a
+sub-unfErssm006	F	24	180	70	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_10	homo sapiens	n/a
+sub-unfErssm007	M	22	177	65	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_11	homo sapiens	n/a
+sub-unfErssm008	F	42	n/a	55	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_12	homo sapiens	n/a
+sub-unfErssm009	M	23	n/a	76	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_13	homo sapiens	T3-T4
+sub-unfErssm010	F	21	155	60	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_14	homo sapiens	n/a
+sub-unfErssm011	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_15	homo sapiens	n/a
+sub-unfErssm012	F	24	n/a	52	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_16	homo sapiens	n/a
+sub-unfErssm013	F	24	171	63	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_17	homo sapiens	n/a
+sub-unfErssm014	M	21	178	84	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_18	homo sapiens	T5-T6
+sub-unfErssm015	M	22	185	75	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_20	homo sapiens	T4-T5
+sub-unfErssm016	M	24	180	78	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_21	homo sapiens	n/a
+sub-unfErssm017	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_22	homo sapiens	C3-C4,C4-C5
+sub-unfErssm018	F	24	170	55	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_23	homo sapiens	C4-C5,C6-C7
+sub-unfErssm019	F	24	173	62	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_24	homo sapiens	n/a
+sub-unfErssm020	M	56	160	61	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_25	homo sapiens	C5-C6,C6-C7,T5-T6
+sub-unfErssm021	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_26	homo sapiens	T4-T5,T6-T7
+sub-unfErssm022	M	23	n/a	80	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_30	homo sapiens	n/a
+sub-unfErssm023	M	21	182	75	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_31	homo sapiens	n/a
+sub-unfErssm024	M	24	177	67	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_32	homo sapiens	n/a
+sub-unfErssm025	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_33	homo sapiens	n/a
+sub-unfErssm026	M	22	175	65	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_34	homo sapiens	n/a
+sub-unfErssm027	M	27	178	58	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_35	homo sapiens	n/a
+sub-unfErssm028	M	24	191	90	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_36	homo sapiens	T4-T5
+sub-unfErssm029	F	23	168	68	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_37	homo sapiens	n/a
+sub-unfErssm030	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_errsm_43	homo sapiens	n/a
+sub-unfErssm031	M	22	178	73	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_errsm_44	homo sapiens	T6-T7,T7-T8
+sub-unfPain001	M	33	174	76	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_D_SP_Pain_Pilot1	homo sapiens	n/a
+sub-unfPain002	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_d_sp_pain_12	homo sapiens	n/a
+sub-unfPain003	F	31	179	60	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_d_sp_pain_pilot3	homo sapiens	C5-C6,T2-T3
+sub-unfPain004	M	22	n/a	71	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_d_sp_pain_pilot4	homo sapiens	T3-T4,T5-T6
+sub-unfPain005	M	21	n/a	68	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_d_sp_pain_pilot7	homo sapiens	n/a
+sub-unfPain006	M	31	180	75	n/a	unf	n/a	n/a	n/a	n/a	n/a	HC	n/a	unf_p_sp_pain_pilot2	homo sapiens	T8-T9
+sub-unfSCT001	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_sct_001	homo sapiens	n/a
+sub-unfSCT002	n/a	n/a	n/a	n/a	n/a	unf	n/a	n/a	n/a	n/a	n/a	n/a	n/a	unf_sct_002	homo sapiens	n/a
