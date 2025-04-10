@@ -4,7 +4,10 @@ import pandas as pd
 import re
 
 def process_filename(original_path):
-    """Extracts and modifies the filename path based on given rules."""
+    """
+    Extracts and modifies the filename path based on given rules.
+    Specifically, from the absolute input path, keep only `sub-XXX/anat/sub-XXX_T2w_label-SC_seg.nii.gz`.
+    """
     match = re.search(r"(sub-[^/]+/anat/sub-[^/]+)_T2w_seg-manual\.nii\.gz$", original_path)
     if match:
         return f"{match.group(1)}_T2w_label-SC_seg.nii.gz"
@@ -20,7 +23,6 @@ def process_csv(input_path, output_folder):
             df[col] = df[col].apply(process_filename)
 
     # Save the modified CSV in the output folder
-    os.makedirs(output_folder, exist_ok=True)
     output_path = os.path.join(output_folder, os.path.basename(input_path))
     df.to_csv(output_path, index=False)
     print(f"Processed and saved: {output_path}")
@@ -44,6 +46,7 @@ def main():
         print("No CSV files found in the folder.")
         return
 
+    os.makedirs(args.ofolder, exist_ok=True)
     for csv_file in csv_files:
         process_csv(os.path.join(folder, csv_file), args.ofolder)
 
