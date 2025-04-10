@@ -81,10 +81,10 @@ METRICS_TO_YLIM_OFFSET = {
 
 # Set ylim to do not overlap horizontal grid with vertebrae labels
 METRICS_TO_YLIM = {
-    'MEAN(diameter_AP)': (4, 9.3), #(10, 20), #TODO: use second value for canal
-    'MEAN(area)': (25, 90),  #(100, 270),
-    'MEAN(diameter_RL)': (5, 14.5), #(15, 35),
-    'MEAN(eccentricity)': (0.51, 0.89),
+    'MEAN(diameter_AP)': (5, 9.3), #(10, 20), #TODO: use second value for canal
+    'MEAN(area)': (30, 90),  #(100, 270),
+    'MEAN(diameter_RL)': (8, 14.5), #(15, 35),
+    'MEAN(eccentricity)': (0.65, 0.9),
     'MEAN(solidity)': (91.2, 99.9),
     'MEAN(compression_ratio)': (0.41, 0.84),
     'aSCOR': (20, 50),
@@ -219,7 +219,7 @@ def create_lineplot(df, hue, path_out, show_cv=False, set_axis=True):
 
    # mpl.rcParams['font.family'] = 'Arial'
 
-    fig, axes = plt.subplots(2, 3, figsize=(25, 10))
+    fig, axes = plt.subplots(2, 3, figsize=(18, 9))
     axs = axes.ravel()
 
     # Loop across metrics
@@ -229,10 +229,14 @@ def create_lineplot(df, hue, path_out, show_cv=False, set_axis=True):
             sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2)#,
                          #palette=PALETTE[hue])
         else:
-            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, palette="Set2", linewidth=2)
+            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, palette=color_palette, linewidth=2)
+            axs[index].set_xlim(700, 964)
             if index == 0:
-                axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
-
+                axs[index].legend(loc='lower center', bbox_to_anchor=(0.38, 0.1), fontsize=TICKS_FONT_SIZE)
+            else:
+                legend = axs[index].get_legend()
+                if legend:
+                    legend.remove()
         if set_axis:
             axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
         else:
