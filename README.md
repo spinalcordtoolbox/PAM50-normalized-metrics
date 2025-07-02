@@ -1,6 +1,8 @@
 # PAM50 normalized metrics
 
-This repository contains CSV files of spinal cord morphometric measures in the PAM50 anatomical dimensions computed from 203 healthy adult volunteers.
+This repository contains morphometric measures in the [PAM50](https://pubmed.ncbi.nlm.nih.gov/29061527/) anatomical dimensions computed from 203 healthy adult volunteers.
+
+ - `spinal_cord` directory - CSV files of spinal cord morphometric measures
 
 👉 Please cite this work if you use it or if you are inspired by it:
 
@@ -20,24 +22,37 @@ Valošek, Bédard et al., (2023). A database of the healthy human spinal cord mo
 
 ## Usage
 
-The repository is part of [SCT](https://github.com/spinalcordtoolbox/spinalcordtoolbox/) and is downloaded automatically during SCT installation.
+### As part of SCT
+
+The repository is downloaded automatically during the [SCT](https://github.com/spinalcordtoolbox/spinalcordtoolbox/) installation.
 
 CSV files from this repository are used by the following SCT functions:
 
 - `sct_process_segmentation -normalize-PAM50 1`, example:
 
 ```console
-sct_process_segmentation -i sub-001_T2w_label-SC_mask.nii.gz -vertfile sub-001_T2w_label-SC_mask_labeled.nii.gz -perslice 1 -normalize-PAM50 1 -o sub-001_T2w_metrics_PAM50.csv
+sct_process_segmentation -i sub-001_T2w_label-SC_seg.nii.gz -vertfile sub-001_T2w_label-SC_seg_labeled.nii.gz -perslice 1 -normalize-PAM50 1 -o sub-001_T2w_metrics_PAM50.csv
 ```
 
 - `sct_compute_compression -normalize-hc 1`, example: 
 
 ```console
-sct_compute_compression -i sub-001_T2w_label-SC_mask.nii.gz -vertfile sub-001_T2w_label-SC_mask_labeled.nii.gz -l sub-001_T2w_label-compression.nii.gz -normalize-hc 1 -o sub-001_T2w_compression_metrics.csv
+sct_compute_compression -i sub-001_T2w_label-SC_seg.nii.gz -vertfile sub-001_T2w_label-SC_seg_labeled.nii.gz -l sub-001_T2w_label-compression.nii.gz -normalize-hc 1 -o sub-001_T2w_compression_metrics.csv
 ```
 
-## Dependencies
+### Standalone usage
 
-- [SCT v6.0](https://github.com/spinalcordtoolbox/spinalcordtoolbox/tree/6.0)
+If you want to use the morphometric measures outside of SCT in your own research, you can simply download this repository and use the CSV files directly:
 
-The CSV files were generated using [process_data_spine-generic.sh, r20230222](https://github.com/sct-pipeline/dcm-metric-normalization/blob/r20230222/scripts/process_data_spine-generic.sh) script from the [spine-generic/data-multi-subject, r20230223](https://github.com/spine-generic/data-multi-subject/tree/r20230223) dataset.
+```console
+git clone https://github.com/spinalcordtoolbox/PAM50-normalized-metrics.git
+```
+
+## Details
+
+### `spinal_cord` directory
+
+The CSV files were generated using [process_data_spine-generic.sh, r20250320](https://github.com/sct-pipeline/dcm-metric-normalization/blob/r20250320/scripts/process_data_spine-generic.sh) script from the [spine-generic/data-multi-subject, r20250314](https://github.com/spine-generic/data-multi-subject/releases/tag/r20250314) dataset.
+Spinal cord segmentation masks from [derivatives/labels](https://github.com/spine-generic/data-multi-subject/tree/r20250314/derivatives/labels) were used (files with the `label-SC_seg.nii.gz` suffix). These masks were produced by `sct_deepseg -task seg_sc_contrast_agnostic` version [3.1](https://github.com/sct-pipeline/contrast-agnostic-softseg-spinalcord/releases/tag/v3.1) and visually qc-ed.
+[SCT v7.0](https://github.com/spinalcordtoolbox/spinalcordtoolbox/tree/7.0) was used to compute the morphometric measures.
+
