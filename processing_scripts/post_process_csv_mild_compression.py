@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
-
+#
+# This script processes CSV files containing PAM50 normalized spinal cord metrics by replacing metric values with NaN
+# at specified compression levels.
+# It uses the `stenosis` column from a participant TSV file to identify compressions for each subject and replaces
+# the corresponding metric values for 10 slices (5 above and 5 below) at each compression level with NaN.
+#
 # Author: Sandrine Bédard
 
 import os
