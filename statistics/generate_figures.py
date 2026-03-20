@@ -209,6 +209,23 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
     num_sub_31_40_F = len(df_21_40[(df['age'] == '31-40') & (df['sex'] == 'F')].groupby(['participant_id'])['MEAN(area)'])
     num_sub_31_40_M = len(df_21_40[(df['age'] == '31-40') & (df['sex'] == 'M')].groupby(['participant_id'])['MEAN(area)'])
 
+    # Compute number of unique subjects with valid data per vertebral level (computed once, outside metric loop).
+    # Use MEAN(area) as reference metric; drop NaN rows first to exclude subjects without coverage at a given level.
+    n_subjects_per_level = df_21_40.dropna(subset=['MEAN(area)']).groupby('VertLevel')['participant_id'].nunique()
+
+    # Get indices of slices corresponding vertebral levels (computed once, outside metric loop)
+    vert, ind_vert, ind_vert_mid = get_vert_indices(df)
+
+    # Print number of subjects per vertebral level to terminal
+    print('\nNumber of subjects per vertebral level (21-40 age group):')
+    for idx, x in enumerate(ind_vert_mid, 0):
+        if vert[x] > 7:
+            level = 'T' + str(vert[x] - 7)
+        else:
+            level = 'C' + str(vert[x])
+        n = n_subjects_per_level.get(vert[x], 0)
+        print(f'  {level}: {n}')
+
     # Loop across metrics
     for index, metric in enumerate(METRICS):
         # Note: we are ploting slices not levels to avoid averaging across levels
@@ -234,8 +251,6 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
         axs[index].spines['top'].set_visible(False)
         axs[index].spines['bottom'].set_visible(True)
 
-        # Get indices of slices corresponding vertebral levels
-        vert, ind_vert, ind_vert_mid = get_vert_indices(df)
         # Insert a vertical line for each intervertebral disc
         for idx, x in enumerate(ind_vert[1:-1]):
             axs[index].axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5, zorder=0)
@@ -244,11 +259,13 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
         for idx, x in enumerate(ind_vert_mid, 0):
             if show_cv:
                 cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
+            n = n_subjects_per_level.get(vert[x], 0)
             # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
+                                horizontalalignment='center', verticalalignment='bottom', color='black',
+                                fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
                     axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
@@ -256,8 +273,9 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
                                     color='black')
             else:
                 level = 'C' + str(vert[x])
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
+                                horizontalalignment='center', verticalalignment='bottom', color='black',
+                                fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
                     axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
@@ -303,6 +321,24 @@ def create_lineplot(df, hue, path_out, show_cv=False):
     for i in range(len(available_metrics), len(axs)):
         axs[i].set_visible(False)
 
+    # Compute number of unique subjects with valid data per vertebral level (computed once, outside metric loop).
+    # Use MEAN(area) as reference metric; drop NaN rows first to exclude subjects without coverage at a given level.
+    ref_metric = 'MEAN(area)' if 'MEAN(area)' in df.columns else available_metrics[0]
+    n_subjects_per_level = df.dropna(subset=[ref_metric]).groupby('VertLevel')['participant_id'].nunique()
+
+    # Get indices of slices corresponding vertebral levels (computed once, outside metric loop)
+    vert, ind_vert, ind_vert_mid = get_vert_indices(df)
+
+    # Print number of subjects per vertebral level to terminal
+    print('\nNumber of subjects per vertebral level:')
+    for idx, x in enumerate(ind_vert_mid, 0):
+        if vert[x] > 7:
+            level = 'T' + str(vert[x] - 7)
+        else:
+            level = 'C' + str(vert[x])
+        n = n_subjects_per_level.get(vert[x], 0)
+        print(f'  {level}: {n}')
+
     # Loop across metrics
     for index, metric in enumerate(available_metrics):
         # Note: we are ploting slices not levels to avoid averaging across levels
@@ -331,8 +367,6 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         axs[index].spines['top'].set_visible(False)
         axs[index].spines['bottom'].set_visible(True)
 
-        # Get indices of slices corresponding vertebral levels
-        vert, ind_vert, ind_vert_mid = get_vert_indices(df)
         # Insert a vertical line for each intervertebral disc
         for idx, x in enumerate(ind_vert[1:-1]):
             axs[index].axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5, zorder=0)
@@ -341,11 +375,13 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         for idx, x in enumerate(ind_vert_mid, 0):
             if show_cv:
                 cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
+            n = n_subjects_per_level.get(vert[x], 0)
             # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
+                                horizontalalignment='center', verticalalignment='bottom', color='black',
+                                fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
                     axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
@@ -353,8 +389,9 @@ def create_lineplot(df, hue, path_out, show_cv=False):
                                     color='black')
             else:
                 level = 'C' + str(vert[x])
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
+                                horizontalalignment='center', verticalalignment='bottom', color='black',
+                                fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
                     axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
@@ -394,6 +431,25 @@ def create_regplot(df, path_out, show_cv=False):
     fig, axes = plt.subplots(2, 4, figsize=(20, 10))
     axs = axes.ravel()
 
+    # Compute number of unique subjects with valid data per vertebral level (computed once, outside metric loop).
+    # Use MEAN(area) as reference metric; drop NaN rows first to exclude subjects without coverage at a given level.
+    available_metrics_regplot = [m for m in METRICS if m in df.columns]
+    ref_metric = 'MEAN(area)' if 'MEAN(area)' in df.columns else available_metrics_regplot[0]
+    n_subjects_per_level = df.dropna(subset=[ref_metric]).groupby('VertLevel')['participant_id'].nunique()
+
+    # Get indices of slices corresponding vertebral levels (computed once, outside metric loop)
+    vert, ind_vert, ind_vert_mid = get_vert_indices(df)
+
+    # Print number of subjects per vertebral level to terminal
+    print('\nNumber of subjects per vertebral level:')
+    for idx, x in enumerate(ind_vert_mid, 0):
+        if vert[x] > 7:
+            level = 'T' + str(vert[x] - 7)
+        else:
+            level = 'C' + str(vert[x])
+        n = n_subjects_per_level.get(vert[x], 0)
+        print(f'  {level}: {n}')
+
     # Loop across metrics
     for index, metric in enumerate(METRICS):
         if metric not in df.columns:
@@ -422,8 +478,6 @@ def create_regplot(df, path_out, show_cv=False):
         axs[index].spines['top'].set_visible(False)
         axs[index].spines['bottom'].set_visible(True)
 
-        # Get indices of slices corresponding vertebral levels
-        vert, ind_vert, ind_vert_mid = get_vert_indices(df)
         # Insert a vertical line for each intervertebral disc
         for idx, x in enumerate(ind_vert[1:-1]):
             axs[index].axvline(df.loc[x, 'Slice (I->S)'], color='black', linestyle='--', alpha=0.5, zorder=0)
@@ -443,11 +497,13 @@ def create_regplot(df, path_out, show_cv=False):
         for idx, x in enumerate(ind_vert_mid, 0):
             if show_cv:
                 cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
+            n = n_subjects_per_level.get(vert[x], 0)
             # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
+                                horizontalalignment='center', verticalalignment='bottom', color='black',
+                                fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
                     axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8,
@@ -455,8 +511,9 @@ def create_regplot(df, path_out, show_cv=False):
                                     color='black')
             else:
                 level = 'C' + str(vert[x])
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
+                                horizontalalignment='center', verticalalignment='bottom', color='black',
+                                fontsize=TICKS_FONT_SIZE)
                 # Show CV
                 if show_cv:
                     axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8, str(round(cv, 1)) + '%',
