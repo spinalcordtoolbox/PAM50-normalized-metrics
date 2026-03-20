@@ -18,6 +18,16 @@
 #       -path-canal /path/to/spinal_canal
 #       -participant-file /path/to/participants.tsv
 #
+# Example usage (multiple datasets, separate colors):
+#       python generate_figures.py
+#       -path-SC /path/to/MASiVar /path/to/spine-generic
+#       -participant-file /path/to/participants.tsv
+#
+# Example usage (multiple datasets, combined):
+#       python generate_figures.py
+#       -path-SC /path/to/MASiVar /path/to/spine-generic
+#       --combine-datasets
+#
 # Author: Sandrine Bédard, Jan Valosek
 #
 
@@ -135,14 +145,20 @@ def get_parser():
     parser = argparse.ArgumentParser(
         description="Plot morphometric metrics computed from normative database (spine-generic dataset in PAM50 "
                     "space) perslice and vertebral levels. At least one of -path-SC or -path-canal must be provided.")
-    parser.add_argument('-path-SC', required=False, type=str, default=None,
-                        help="Path to spinal cord data of normative dataset computed perslice.")
-    parser.add_argument('-path-canal', required=False, type=str, default=None,
-                        help="Path to spinal canal data of normative dataset computed perslice.")
+    parser.add_argument('-path-SC', required=False, type=str, nargs='+', default=None,
+                        help="Path(s) to spinal cord data of normative dataset computed perslice. "
+                             "Multiple paths can be provided to overlay datasets.")
+    parser.add_argument('-path-canal', required=False, type=str, nargs='+', default=None,
+                        help="Path(s) to spinal canal data of normative dataset computed perslice. "
+                             "Multiple paths can be provided to overlay datasets.")
     parser.add_argument('-participant-file', required=False, type=str,
                         help="Path to participants.tsv file.")
     parser.add_argument('-path-out', required=False, type=str, default='stats',
                         help="Output directory name.")
+    parser.add_argument('--combine-datasets', action='store_true', default=False,
+                        help="When multiple datasets are provided via -path-SC or -path-canal, combine them "
+                             "into a single line (same color). Default: show each dataset in a separate color "
+                             "with the dataset folder name in the legend.")
 
     return parser
 
@@ -292,7 +308,8 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
         axs[index].set_axisbelow(True)
 
     # Save figure
-    filename = 'lineplot_21-40_age_per' + hue + '.png'
+    dataset_suffix = '_' + '_'.join(df['dataset'].unique()) if 'dataset' in df.columns else ''
+    filename = 'lineplot_21-40_age_per' + hue + dataset_suffix + '.png'
     path_filename = os.path.join(path_out, filename)
     plt.savefig(path_filename, dpi=300, bbox_inches='tight')
     print('Figure saved: ' + path_filename)
@@ -342,15 +359,16 @@ def create_lineplot(df, hue, path_out, show_cv=False):
     # Loop across metrics
     for index, metric in enumerate(available_metrics):
         # Note: we are ploting slices not levels to avoid averaging across levels
-        if hue == 'sex' or hue == 'manufacturer' or hue == 'age':
+        if hue in ('sex', 'manufacturer', 'age'):
             sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2,
                          palette=PALETTE[hue])
+        else:
+            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2)
+        if hue is not None:
             if index == 0:
                 axs[index].legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
             else:
                 axs[index].get_legend().remove()
-        else:
-            sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df, errorbar='sd', hue=hue, linewidth=2)
 
         axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
         ymin, ymax = axs[index].get_ylim()
@@ -408,10 +426,11 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         axs[index].set_axisbelow(True)
 
     # Save figure
-    if hue:
-        filename = 'lineplot_per' + hue + '.png'
+    dataset_suffix = '_' + '_'.join(df['dataset'].unique()) if 'dataset' in df.columns else ''
+    if hue and hue != 'dataset':
+        filename = 'lineplot_per' + hue + dataset_suffix + '.png'
     else:
-        filename = 'lineplot.png'
+        filename = 'lineplot' + dataset_suffix + '.png'
     path_filename = os.path.join(path_out, filename)
     plt.savefig(path_filename, dpi=300, bbox_inches='tight')
     print('Figure saved: ' + path_filename)
@@ -529,7 +548,8 @@ def create_regplot(df, path_out, show_cv=False):
         axs[index].set_axisbelow(True)
 
     # Save figure
-    filename = 'cov_scatterplot.png'
+    dataset_suffix = '_' + '_'.join(df['dataset'].unique()) if 'dataset' in df.columns else ''
+    filename = 'cov_scatterplot' + dataset_suffix + '.png'
     path_filename = os.path.join(path_out, filename)
     plt.savefig(path_filename, dpi=300, bbox_inches='tight')
     print('Figure saved: ' + path_filename)
@@ -624,7 +644,8 @@ def create_regplot_per_sex(df, path_out):
         axs[index].set_axisbelow(True)
 
     # Save figure
-    filename = 'cov_scatterplot_persex.png'
+    dataset_suffix = '_' + '_'.join(df['dataset'].unique()) if 'dataset' in df.columns else ''
+    filename = 'cov_scatterplot_persex' + dataset_suffix + '.png'
     path_filename = os.path.join(path_out, filename)
     plt.savefig(path_filename, dpi=300, bbox_inches='tight')
     print('Figure saved: ' + path_filename)
@@ -1201,7 +1222,7 @@ def compute_age_stats(df_participants):
           f'Max: {age_max}\n')
 
 
-def read_csv_files(path_HC, participant_file=None):
+def read_csv_files(path_HC, participant_file=None, dataset_name=None):
     # Initialize pandas dataframe where data across all subjects will be stored
     print(f'Reading {path_HC}')
     df = pd.DataFrame()
@@ -1220,6 +1241,9 @@ def read_csv_files(path_HC, participant_file=None):
     # Get sub-id (e.g., sub-amu01) from the source CSV filename (first underscore-delimited segment)
     # This is more reliable than parsing the Filename column inside the CSV, which may be a generic path
     df.insert(0, 'participant_id', df['source_file'].str.split('_').str[0])
+    # Tag each row with the dataset name (used for multi-dataset coloring in figures)
+    if dataset_name is not None:
+        df['dataset'] = dataset_name
     # Get number of unique subjects
     subjects = df['participant_id'].unique()
     # If a participants.tsv file is provided, insert columns sex, age and manufacturer from df_participants into df
@@ -1251,8 +1275,6 @@ def main():
     if args.path_SC is None and args.path_canal is None:
         parser.error("At least one of -path-SC or -path-canal must be provided.")
 
-    path_HC = args.path_SC
-    path_canal = args.path_canal
     path_out_figures = os.path.join(args.path_out, 'figures')
     path_out_figures_canal = os.path.join(args.path_out, 'figures', 'canal')
     path_out_csv = os.path.join(args.path_out, 'csv')
@@ -1269,11 +1291,29 @@ def main():
     df_participants = None
     subjects = None
 
-    if path_HC is not None:
-        df, df_participants, subjects = read_csv_files(path_HC, args.participant_file)
+    # Helper: load one or more dataset paths and concatenate into a single dataframe.
+    # When multiple paths are provided and --combine-datasets is not set, each dataset is tagged
+    # with its folder name so figures can show them in separate colors.
+    def load_paths(path_list):
+        use_dataset_labels = not args.combine_datasets
+        dfs = []
+        last_participants = None
+        all_subjects = []
+        for path in path_list:
+            dataset_name = os.path.basename(path.rstrip('/')) if use_dataset_labels else None
+            df_single, df_part, subs = read_csv_files(path, args.participant_file, dataset_name=dataset_name)
+            dfs.append(df_single)
+            last_participants = df_part
+            if subs is not None:
+                all_subjects.extend(subs)
+        combined = pd.concat(dfs, axis=0, ignore_index=True)
+        return combined, last_participants, np.array(all_subjects) if all_subjects else None
 
-    if path_canal is not None:
-        df_canal, df_participants, subjects = read_csv_files(path_canal, args.participant_file)
+    if args.path_SC is not None:
+        df, df_participants, subjects = load_paths(args.path_SC)
+
+    if args.path_canal is not None:
+        df_canal, df_participants, subjects = load_paths(args.path_canal)
 
     # Compute aSCOR only if both spinal cord and canal data are available
     if df is not None and df_canal is not None:
@@ -1324,8 +1364,10 @@ def main():
         # Compute normative values (no demographics required)
         compute_normative_values(current_df, path_out_csv)
 
-        # Create plots across all subjects (no demographics required)
-        create_lineplot(current_df, None, path_out)
+        # Create plots across all subjects (no demographics required).
+        # If multiple datasets were loaded without --combine-datasets, colour lines by dataset.
+        dataset_hue = 'dataset' if 'dataset' in current_df.columns else None
+        create_lineplot(current_df, dataset_hue, path_out)
         create_regplot(current_df, path_out, show_cv=True)
 
         if 'sex' in current_df.columns and 'age' in current_df.columns:
