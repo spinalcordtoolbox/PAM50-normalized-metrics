@@ -1,5 +1,5 @@
 """
-Print the first N slices with non-zero CSA at the highest (most caudal) vertebral level for
+Print the N slices with non-zero CSA at the most caudal vertebral level for
 each CSV file, and flag vertebral levels where within-level CSA SD exceeds a threshold.
 
 Sweep mode (--sweep) iterates over increasing numbers of excluded caudal slices (0, 2, 4, ...)
