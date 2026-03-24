@@ -13,7 +13,7 @@ Arguments:
     path            CSV file or directory of CSV files (default: current directory)
     --n-slices      Number of slices to print at the most caudal level (default: 10)
     --std-threshold Flag vertebral levels with within-level CSA SD above this value
-                    in mm^2 (default: 10)
+                    in mm^2 (default: 5)
     --log           Path to write QC log CSV (optional); in sweep mode used as base name
     --sweep         Sweep over excluded caudal slice counts and save one log per count
     --sweep-max     Maximum number of caudal slices to exclude in sweep (default: 10)
@@ -110,14 +110,14 @@ def main():
                         help='Number of slices to print (default: 10). '
                              'Note that the slices are normalized to the PAM50 spinal cord template space and have '
                              '0.5mm slice thickness, so 10 slices correspond to 5mm of spinal cord length.')
-    parser.add_argument('--std-threshold', type=float, default=10.0,
-                        help='Flag levels with within-level CSA SD above this value in mm^2 (default: 10)')
+    parser.add_argument('--std-threshold', type=float, default=5.0,
+                        help='Flag levels with within-level CSA SD above this value in mm^2 (default: 5)')
     parser.add_argument('--log', type=str, default=None,
                         help='Path to write QC log CSV; in sweep mode used as base name (optional)')
     parser.add_argument('--sweep', action='store_true',
                         help='Sweep over excluded caudal slice counts and save one log per count')
-    parser.add_argument('--sweep-max', type=int, default=10,
-                        help='Maximum number of caudal slices to exclude in sweep (default: 10)')
+    parser.add_argument('--sweep-max', type=int, default=20,
+                        help='Maximum number of caudal slices to exclude in sweep (default: 20)')
     args = parser.parse_args()
 
     if os.path.isfile(args.path):
