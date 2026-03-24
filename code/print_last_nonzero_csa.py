@@ -10,6 +10,7 @@ Arguments:
     --n-slices      Number of slices to print at the most caudal level (default: 10)
     --std-threshold Flag vertebral levels with within-level CSA SD above this value
                     in mm^2 (default: 10)
+    --log           Path to write QC log file (optional)
 """
 
 import argparse
@@ -18,7 +19,7 @@ import os
 import pandas as pd
 
 
-def print_last_nonzero_csa(csv_path, n, std_threshold):
+def print_last_nonzero_csa(csv_path, n, std_threshold, log_entries):
     df = pd.read_csv(csv_path)
     non_zero = df[df['MEAN(area)'].notna() & (df['MEAN(area)'] > 0)]
     print(f"\n{os.path.basename(csv_path)}")
@@ -33,16 +34,17 @@ def print_last_nonzero_csa(csv_path, n, std_threshold):
     print(level_rows[['Slice (I->S)', 'VertLevel', 'MEAN(area)']].head(n).to_string(index=False))
 
     # Within-level SD QC: flag levels exceeding the threshold
-    flagged = []
     for level, group in non_zero.groupby('VertLevel'):
         std = group['MEAN(area)'].std()
         if std > std_threshold:
-            flagged.append((level, std, len(group)))
-
-    if flagged:
-        print(f" ⚠️ [QC] Levels with within-level CSA SD > {std_threshold} mm^2:")
-        for level, std, count in flagged:
-            print(f"       VertLevel {level}: SD={std:.2f} mm^2 (n={count} slices)")
+            print(f" ⚠️ [QC] VertLevel {level}: SD={std:.2f} mm^2 (n={len(group)} slices)")
+            if log_entries is not None:
+                log_entries.append({
+                    'file': os.path.basename(csv_path),
+                    'VertLevel': level,
+                    'SD': round(std, 2),
+                    'n_slices': len(group),
+                })
 
 
 def main():
@@ -54,6 +56,8 @@ def main():
                              '0.5mm slice thickness, so 10 slices correspond to 5mm of spinal cord length.')
     parser.add_argument('--std-threshold', type=float, default=10.0,
                         help='Flag levels with within-level CSA SD above this value in mm^2 (default: 10)')
+    parser.add_argument('--log', type=str, default=None,
+                        help='Path to write QC log CSV (optional)')
     args = parser.parse_args()
 
     if os.path.isfile(args.path):
@@ -64,8 +68,14 @@ def main():
             print(f"No CSV files found in: {args.path}")
             return
 
+    log_entries = [] if args.log else None
     for f in files:
-        print_last_nonzero_csa(f, n=args.n_slices, std_threshold=args.std_threshold)
+        print_last_nonzero_csa(f, n=args.n_slices, std_threshold=args.std_threshold, log_entries=log_entries)
+
+    if args.log and log_entries is not None:
+        log_df = pd.DataFrame(log_entries, columns=['file', 'VertLevel', 'SD', 'n_slices'])
+        log_df.to_csv(args.log, index=False)
+        print(f"\nQC log written to: {args.log} ({len(log_entries)} flagged entries)")
 
 
 if __name__ == '__main__':
