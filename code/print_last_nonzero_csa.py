@@ -71,9 +71,7 @@ def print_last_nonzero_csa(csv_path, n, std_threshold, log_entries):
 def run_sweep(files, std_threshold, sweep_max, log_base):
     """For each exclusion count (0, 2, 4, ..., sweep_max), compute QC flags across all
     files and save a summary log. Prints a summary table to stdout."""
-    base, ext = os.path.splitext(log_base) if log_base else ('qc_sweep', '.csv')
-    if not ext:
-        ext = '.csv'
+    base = os.path.splitext(log_base)[0] if log_base else 'qc_sweep'
 
     print(f"\n{'Excluded slices':>16}  {'Flagged files':>13}  {'Total flags':>11}  {'Log'}")
     print("-" * 70)
@@ -95,7 +93,7 @@ def run_sweep(files, std_threshold, sweep_max, log_base):
                     'excluded_slices': exclude,
                 })
 
-        log_path = f"{base}_exclude{exclude:02d}{ext}"
+        log_path = f"{base}_exclude{exclude:02d}.csv"
         log_df = pd.DataFrame(entries, columns=['file', 'VertLevel', 'SD', 'n_slices', 'excluded_slices'])
         log_df.to_csv(log_path, index=False)
 
@@ -123,7 +121,7 @@ def main():
     if os.path.isfile(args.path):
         files = [args.path]
     else:
-        files = sorted(glob.glob(os.path.join(args.path, '*.csv')))
+        files = sorted(glob.glob(os.path.join(args.path, 'sub*.csv')))
         if not files:
             print(f"No CSV files found in: {args.path}")
             return
