@@ -1,6 +1,6 @@
 """
-Print the first N slices with non-zero CSA at the highest vertebral level for each CSV file,
-and flag vertebral levels where within-level CSA SD exceeds a threshold.
+Print the first N slices with non-zero CSA at the highest (most caudal) vertebral level for
+each CSV file, and flag vertebral levels where within-level CSA SD exceeds a threshold.
 
 Sweep mode (--sweep) iterates over increasing numbers of excluded caudal slices (0, 2, 4, ...)
 and saves a separate QC log for each, to help identify the optimal exclusion count.
@@ -16,7 +16,7 @@ Arguments:
                     in mm^2 (default: 5)
     --log           Path to write QC log CSV (optional); in sweep mode used as base name
     --sweep         Sweep over excluded caudal slice counts and save one log per count
-    --sweep-max     Maximum number of caudal slices to exclude in sweep (default: 10)
+    --sweep-max     Maximum number of caudal slices to exclude in sweep (default: 20)
 """
 
 import argparse
