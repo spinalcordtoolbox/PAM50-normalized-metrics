@@ -11,7 +11,6 @@ Manually maintained columns (edit DATASET_METADATA below when adding new dataset
     coverage  -- anatomical region covered (e.g., "cervical spine", "whole spine")
     contrast  -- MRI contrast (e.g., "T2w")
     resolution -- nominal voxel size (e.g., "0.8mm iso")
-    release   -- dataset version/release tag (e.g., "r20250314", "1.1.2")
     link      -- URL to the original raw dataset
 
 Usage:
@@ -32,11 +31,10 @@ from pathlib import Path
 DATASET_METADATA = {
     'spine-generic_multi-subject': {
         # Multi-site cervical spine dataset; 42 sites, various scanner vendors.
-        # Raw data: https://github.com/spine-generic/data-multi-subject/releases/tag/r20250314
+        # Raw data: https://github.com/spine-generic/data-multi-subject
         'coverage': 'cervical spine',
         'contrast': 'T2w',
         'resolution': '0.8mm iso',
-        'release': 'r20250314',
         'link': 'https://github.com/spine-generic/data-multi-subject',
     },
     'whole-spine': {
@@ -45,12 +43,11 @@ DATASET_METADATA = {
         'coverage': 'whole spine',
         'contrast': 'T2w',
         'resolution': '1.0mm iso',
-        'release': '1.1.2',
         'link': 'https://openneuro.org/datasets/ds005616',
     },
 }
 
-MANUAL_COLUMNS = ['coverage', 'contrast', 'resolution', 'release', 'link']
+MANUAL_COLUMNS = ['coverage', 'contrast', 'resolution', 'link']
 PLACEHOLDER = 'n/a'
 # ---------------------------------------------------------------------------
 
