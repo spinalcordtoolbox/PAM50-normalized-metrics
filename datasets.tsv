@@ -1,0 +1,4 @@
+metric	dataset	num_subjects	num_sites	sex_M	sex_F	sex_unknown	age_mean	age_std	age_min	age_max	coverage	contrast	resolution	release	link
+spinal_canal	spine-generic_multi-subject	203	43	105	98	0	28.7	5.6	19	52	cervical spine	T2w	0.8mm iso	r20250314	https://github.com/spine-generic/data-multi-subject
+spinal_cord	spine-generic_multi-subject	203	43	105	98	0	28.7	5.6	19	52	cervical spine	T2w	0.8mm iso	r20250314	https://github.com/spine-generic/data-multi-subject
+spinal_cord	whole-spine	58	2	30	18	10	27.2	6.7	21	56	whole spine	T2w	1.0mm iso	1.1.2	https://openneuro.org/datasets/ds005616/versions/1.1.2
