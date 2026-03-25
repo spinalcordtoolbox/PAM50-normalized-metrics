@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Generate an overview datasets.tsv in the repository root summarizing all datasets
-by reading individual participants.tsv files.
+by reading individual participants.tsv files. Also updates the Datasets Overview
+table in README.md.
 
 Auto-computed columns (from participants.tsv):
     num_subjects, num_sites, sex_M, sex_F, sex_unknown,
@@ -12,14 +13,16 @@ Manually maintained columns (edit DATASET_METADATA below when adding new dataset
     contrast  -- MRI contrast (e.g., "T2w")
     resolution -- nominal voxel size (e.g., "0.8mm iso")
     link      -- URL to the original raw dataset
+    link_text -- display text for the link in README (e.g., "spine-generic/data-multi-subject")
 
 Usage:
     python code/generate_datasets_summary.py
 
 Output:
-    datasets.tsv in the repository root
+    datasets.tsv and README.md (Datasets Overview table) in the repository root
 """
 
+import re
 import pandas as pd
 import numpy as np
 from pathlib import Path
@@ -36,6 +39,7 @@ DATASET_METADATA = {
         'contrast': 'T2w',
         'resolution': '0.8mm iso',
         'link': 'https://github.com/spine-generic/data-multi-subject',
+        'link_text': 'spine-generic/data-multi-subject',
     },
     'whole-spine': {
         # Two-site whole-spine dataset; Aix-Marseille University (AMU) + Neuroimaging Functional Unit (UNF), Polytechnique Montréal; Siemens scanners.
@@ -44,11 +48,15 @@ DATASET_METADATA = {
         'contrast': 'T2w',
         'resolution': '1.0mm iso',
         'link': 'https://openneuro.org/datasets/ds005616',
+        'link_text': 'openneuro/ds005616',
     },
 }
 
-MANUAL_COLUMNS = ['coverage', 'contrast', 'resolution', 'link']
+MANUAL_COLUMNS = ['coverage', 'contrast', 'resolution', 'link', 'link_text']
 PLACEHOLDER = 'n/a'
+
+README_TABLE_START = '<!-- datasets-table-start -->'
+README_TABLE_END = '<!-- datasets-table-end -->'
 # ---------------------------------------------------------------------------
 
 
@@ -95,6 +103,39 @@ def compute_stats(df):
     }
 
 
+def build_readme_table(rows):
+    """Render rows as a GitHub-flavoured Markdown table."""
+    header = '| metric | dataset | num_subjects | num_sites | sex (M/F/unknown) | age (mean\u00b1SD [min\u2013max]) | coverage | contrast | resolution | link |'
+    separator = '|--------|---------|-------------:|----------:|:-----------------:|:-----------------------:|----------|----------|------------|------|'
+
+    lines = [header, separator]
+    for r in rows:
+        sex = f"{r['sex_M']}/{r['sex_F']}/{r['sex_unknown']}"
+        if r['age_mean'] == PLACEHOLDER:
+            age = PLACEHOLDER
+        else:
+            age = f"{r['age_mean']}\u00b1{r['age_std']} [{r['age_min']}\u2013{r['age_max']}]"
+        link = f"[{r['link_text']}]({r['link']})" if r['link'] != PLACEHOLDER else PLACEHOLDER
+        lines.append(
+            f"| {r['metric']} | {r['dataset']} | {r['num_subjects']} | {r['num_sites']} "
+            f"| {sex} | {age} | {r['coverage']} | {r['contrast']} | {r['resolution']} | {link} |"
+        )
+    return '\n'.join(lines)
+
+
+def update_readme(readme_path, table_md):
+    """Replace the content between the marker comments in README.md."""
+    text = readme_path.read_text()
+    new_block = f'{README_TABLE_START}\n{table_md}\n{README_TABLE_END}'
+    pattern = re.escape(README_TABLE_START) + r'.*?' + re.escape(README_TABLE_END)
+    updated, n = re.subn(pattern, new_block, text, flags=re.DOTALL)
+    if n == 0:
+        raise ValueError(f'Markers not found in {readme_path}. '
+                         f'Add "{README_TABLE_START}" and "{README_TABLE_END}" around the table.')
+    readme_path.write_text(updated)
+    print(f'Updated README table in {readme_path}')
+
+
 def main():
     repo_root = Path(__file__).resolve().parent.parent
 
@@ -113,11 +154,17 @@ def main():
 
         rows.append({'metric': metric, 'dataset': dataset, **stats, **manual})
 
-    out_df = pd.DataFrame(rows)
+    # Write datasets.tsv (drop link_text — it's only for README rendering)
+    out_df = pd.DataFrame(rows).drop(columns=['link_text'])
     out_path = repo_root / 'datasets.tsv'
     out_df.to_csv(out_path, sep='\t', index=False)
+    print(f'Saved summary for {len(rows)} dataset(s) to {out_path}')
 
-    print(f"Saved summary for {len(rows)} dataset(s) to {out_path}\n")
+    # Update README.md
+    table_md = build_readme_table(rows)
+    update_readme(repo_root / 'README.md', table_md)
+
+    print()
     print(out_df.to_string(index=False))
 
 
