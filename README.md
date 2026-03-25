@@ -60,7 +60,7 @@ The table below summarizes all datasets included in this repository. It is also 
 | spinal_cord | whole-spine | 58 | 2 | 30/18/10 | 27.2±6.7 [21–56] | whole spine | T2w | 1.0mm iso | [ds005616](https://openneuro.org/datasets/ds005616) |
 <!-- datasets-table-end -->
 
-### Organization
+## Datasets Structure
 
 ```
 PAM50-normalized-metrics/
