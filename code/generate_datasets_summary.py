@@ -5,7 +5,7 @@ by reading individual participants.tsv files. Also updates the Datasets Overview
 table in README.md.
 
 Auto-computed columns (from participants.tsv):
-    num_subjects, num_sites, sex_M, sex_F, sex_unknown,
+    num_subjects, num_sessions, num_sites, sex_M, sex_F, sex_unknown,
     age_mean, age_std, age_min, age_max
 
 Manually maintained columns (from dataset_description.json in each dataset folder):
@@ -39,10 +39,17 @@ README_TABLE_END = '<!-- datasets-table-end -->'
 
 def compute_stats(df):
     """Compute summary statistics from a participants DataFrame."""
-    n = len(df)
+    n_sessions = len(df)
 
     # Replace 'n/a' strings with NaN for consistent handling
     df = df.replace('n/a', np.nan)
+
+    # Deduplicate by participant_id for per-subject stats (sex, age, subject count)
+    if 'participant_id' in df.columns:
+        df_subjects = df.drop_duplicates(subset='participant_id')
+    else:
+        df_subjects = df
+    n_subjects = len(df_subjects)
 
     # Number of unique acquisition sites
     if 'institution' in df.columns:
@@ -50,14 +57,14 @@ def compute_stats(df):
     else:
         n_sites = PLACEHOLDER
 
-    # Sex counts
-    sex_counts = df['sex'].value_counts()
+    # Sex counts (per unique subject)
+    sex_counts = df_subjects['sex'].value_counts()
     n_m = int(sex_counts.get('M', 0))
     n_f = int(sex_counts.get('F', 0))
-    n_unknown = int(df['sex'].isna().sum())
+    n_unknown = int(df_subjects['sex'].isna().sum())
 
-    # Age stats
-    age = pd.to_numeric(df['age'], errors='coerce')
+    # Age stats (per unique subject)
+    age = pd.to_numeric(df_subjects['age'], errors='coerce')
     age_valid = age.dropna()
     if len(age_valid) > 0:
         age_mean = round(age_valid.mean(), 1)
@@ -68,7 +75,8 @@ def compute_stats(df):
         age_mean = age_std = age_min = age_max = PLACEHOLDER
 
     return {
-        'num_subjects': n,
+        'num_subjects': n_subjects,
+        'num_sessions': n_sessions,
         'num_sites': n_sites,
         'sex_M': n_m,
         'sex_F': n_f,
@@ -94,8 +102,8 @@ def load_description(dataset_dir):
 
 def build_readme_table(rows):
     """Render rows as a GitHub-flavoured Markdown table."""
-    header = '| metric | name | num_subjects | num_sites | population | sex (M/F/unknown) | age (mean\u00b1SD [min\u2013max]) | coverage | contrast | resolution | link |'
-    separator = '|--------|------|-------------:|----------:|------------|:-----------------:|:-----------------------:|----------|----------|------------|------|'
+    header = '| metric | name | num_subjects | num_sessions | num_sites | population | sex (M/F/unknown) | age (mean\u00b1SD [min\u2013max]) | coverage | contrast | resolution | link |'
+    separator = '|--------|------|-------------:|-------------:|----------:|------------|:-----------------:|:-----------------------:|----------|----------|------------|------|'
 
     lines = [header, separator]
     for r in rows:
@@ -106,7 +114,7 @@ def build_readme_table(rows):
             age = f"{r['age_mean']}\u00b1{r['age_std']} [{r['age_min']}\u2013{r['age_max']}]"
         link = f"[{r['link_text']}]({r['link']})" if r['link'] != PLACEHOLDER else PLACEHOLDER
         lines.append(
-            f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sites']} "
+            f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sessions']} | {r['num_sites']} "
             f"| {r['population']} | {sex} | {age} | {r['coverage']} | {r['contrast']} "
             f"| {r['resolution']} | {link} |"
         )
@@ -147,7 +155,7 @@ def main():
 
     # Write datasets.tsv (drop link_text — it's only for README rendering)
     # Column order: metric, name, then computed stats, then remaining manual fields
-    tsv_columns = ['metric', 'name', 'num_subjects', 'num_sites', 'population', 'sex_M', 'sex_F',
+    tsv_columns = ['metric', 'name', 'num_subjects', 'num_sessions', 'num_sites', 'population', 'sex_M', 'sex_F',
                    'sex_unknown', 'age_mean', 'age_std', 'age_min', 'age_max', 'coverage', 'contrast',
                    'resolution', 'link']
     out_df = pd.DataFrame(rows)[tsv_columns]
