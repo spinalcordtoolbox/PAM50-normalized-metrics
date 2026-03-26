@@ -1,0 +1,9 @@
+{
+    "name": "MASiVar",
+    "coverage": "cervical spine",
+    "contrast": "T1w",
+    "resolution": "1.0mm iso",
+    "link": "https://openneuro.org/datasets/ds003416",
+    "link_text": "openneuro/ds003416",
+    "population": "healthy adults and children"
+}
