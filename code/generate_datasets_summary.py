@@ -9,11 +9,12 @@ Auto-computed columns (from participants.tsv):
     age_mean, age_std, age_min, age_max
 
 Manually maintained columns (from dataset_description.json in each dataset folder):
-    coverage  -- anatomical region covered (e.g., "cervical spine", "whole spine")
-    contrast  -- MRI contrast (e.g., "T2w")
+    coverage   -- anatomical region covered (e.g., "cervical spine", "whole spine")
+    contrast   -- MRI contrast (e.g., "T2w")
     resolution -- nominal voxel size (e.g., "0.8mm iso")
-    link      -- URL to the original raw dataset
-    link_text -- display text for the link in README (e.g., "spine-generic/data-multi-subject")
+    population -- subject population (e.g., "healthy adults", "healthy adults and children")
+    link       -- URL to the original raw dataset
+    link_text  -- display text for the link in README (e.g., "spine-generic/data-multi-subject")
 
 Usage:
     python code/generate_datasets_summary.py
@@ -29,7 +30,7 @@ import numpy as np
 from pathlib import Path
 
 
-MANUAL_COLUMNS = ['name', 'coverage', 'contrast', 'resolution', 'link', 'link_text']
+MANUAL_COLUMNS = ['name', 'coverage', 'contrast', 'resolution', 'population', 'link', 'link_text']
 PLACEHOLDER = 'n/a'
 
 README_TABLE_START = '<!-- datasets-table-start -->'
@@ -93,8 +94,8 @@ def load_description(dataset_dir):
 
 def build_readme_table(rows):
     """Render rows as a GitHub-flavoured Markdown table."""
-    header = '| metric | name | num_subjects | num_sites | sex (M/F/unknown) | age (mean\u00b1SD [min\u2013max]) | coverage | contrast | resolution | link |'
-    separator = '|--------|------|-------------:|----------:|:-----------------:|:-----------------------:|----------|----------|------------|------|'
+    header = '| metric | name | num_subjects | num_sites | population | sex (M/F/unknown) | age (mean\u00b1SD [min\u2013max]) | coverage | contrast | resolution | link |'
+    separator = '|--------|------|-------------:|----------:|------------|:-----------------:|:-----------------------:|----------|----------|------------|------|'
 
     lines = [header, separator]
     for r in rows:
@@ -106,7 +107,8 @@ def build_readme_table(rows):
         link = f"[{r['link_text']}]({r['link']})" if r['link'] != PLACEHOLDER else PLACEHOLDER
         lines.append(
             f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sites']} "
-            f"| {sex} | {age} | {r['coverage']} | {r['contrast']} | {r['resolution']} | {link} |"
+            f"| {r['population']} | {sex} | {age} | {r['coverage']} | {r['contrast']} "
+            f"| {r['resolution']} | {link} |"
         )
     return '\n'.join(lines)
 
@@ -143,9 +145,9 @@ def main():
 
     # Write datasets.tsv (drop link_text — it's only for README rendering)
     # Column order: metric, name, then computed stats, then remaining manual fields
-    tsv_columns = ['metric', 'name', 'num_subjects', 'num_sites', 'sex_M', 'sex_F', 'sex_unknown',
-                   'age_mean', 'age_std', 'age_min', 'age_max', 'coverage', 'contrast', 'resolution',
-                   'link']
+    tsv_columns = ['metric', 'name', 'num_subjects', 'num_sites', 'population', 'sex_M', 'sex_F',
+                   'sex_unknown', 'age_mean', 'age_std', 'age_min', 'age_max', 'coverage', 'contrast',
+                   'resolution', 'link']
     out_df = pd.DataFrame(rows)[tsv_columns]
     out_path = repo_root / 'datasets.tsv'
     out_df.to_csv(out_path, sep='\t', index=False)

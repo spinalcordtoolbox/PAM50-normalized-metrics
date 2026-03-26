@@ -4,5 +4,6 @@
     "contrast": "T2w",
     "resolution": "0.8mm iso",
     "link": "https://github.com/spine-generic/data-multi-subject",
-    "link_text": "spine-generic/data-multi-subject"
+    "link_text": "spine-generic/data-multi-subject",
+    "population": "healthy adults"
 }
