@@ -8,7 +8,7 @@ Auto-computed columns (from participants.tsv):
     num_subjects, num_sites, sex_M, sex_F, sex_unknown,
     age_mean, age_std, age_min, age_max
 
-Manually maintained columns (edit DATASET_METADATA below when adding new datasets):
+Manually maintained columns (from dataset_description.json in each dataset folder):
     coverage  -- anatomical region covered (e.g., "cervical spine", "whole spine")
     contrast  -- MRI contrast (e.g., "T2w")
     resolution -- nominal voxel size (e.g., "0.8mm iso")
@@ -22,42 +22,18 @@ Output:
     datasets.tsv and README.md (Datasets Overview table) in the repository root
 """
 
+import json
 import re
 import pandas as pd
 import numpy as np
 from pathlib import Path
 
 
-# ---------------------------------------------------------------------------
-# Manually maintained metadata — update this dict when a new dataset is added.
-# ---------------------------------------------------------------------------
-DATASET_METADATA = {
-    'spine-generic_multi-subject': {
-        # Multi-site cervical spine dataset; 42 sites, various scanner vendors.
-        # Raw data: https://github.com/spine-generic/data-multi-subject
-        'coverage': 'cervical spine',
-        'contrast': 'T2w',
-        'resolution': '0.8mm iso',
-        'link': 'https://github.com/spine-generic/data-multi-subject',
-        'link_text': 'spine-generic/data-multi-subject',
-    },
-    'whole-spine': {
-        # Two-site whole-spine dataset; Aix-Marseille University (AMU) + Neuroimaging Functional Unit (UNF), Polytechnique Montréal; Siemens scanners.
-        # Raw data: https://openneuro.org/datasets/ds005616
-        'coverage': 'whole spine',
-        'contrast': 'T2w',
-        'resolution': '1.0mm iso',
-        'link': 'https://openneuro.org/datasets/ds005616',
-        'link_text': 'openneuro/ds005616',
-    },
-}
-
-MANUAL_COLUMNS = ['coverage', 'contrast', 'resolution', 'link', 'link_text']
+MANUAL_COLUMNS = ['name', 'coverage', 'contrast', 'resolution', 'link', 'link_text']
 PLACEHOLDER = 'n/a'
 
 README_TABLE_START = '<!-- datasets-table-start -->'
 README_TABLE_END = '<!-- datasets-table-end -->'
-# ---------------------------------------------------------------------------
 
 
 def compute_stats(df):
@@ -103,10 +79,22 @@ def compute_stats(df):
     }
 
 
+def load_description(dataset_dir):
+    """Load dataset_description.json from a dataset directory, or return placeholders."""
+    json_path = dataset_dir / 'dataset_description.json'
+    if json_path.exists():
+        with open(json_path) as f:
+            meta = json.load(f)
+    else:
+        print(f'  WARNING: {json_path} not found — using placeholders.')
+        meta = {}
+    return {col: meta.get(col, PLACEHOLDER) for col in MANUAL_COLUMNS}
+
+
 def build_readme_table(rows):
     """Render rows as a GitHub-flavoured Markdown table."""
-    header = '| metric | dataset | num_subjects | num_sites | sex (M/F/unknown) | age (mean\u00b1SD [min\u2013max]) | coverage | contrast | resolution | link |'
-    separator = '|--------|---------|-------------:|----------:|:-----------------:|:-----------------------:|----------|----------|------------|------|'
+    header = '| metric | name | num_subjects | num_sites | sex (M/F/unknown) | age (mean\u00b1SD [min\u2013max]) | coverage | contrast | resolution | link |'
+    separator = '|--------|------|-------------:|----------:|:-----------------:|:-----------------------:|----------|----------|------------|------|'
 
     lines = [header, separator]
     for r in rows:
@@ -117,7 +105,7 @@ def build_readme_table(rows):
             age = f"{r['age_mean']}\u00b1{r['age_std']} [{r['age_min']}\u2013{r['age_max']}]"
         link = f"[{r['link_text']}]({r['link']})" if r['link'] != PLACEHOLDER else PLACEHOLDER
         lines.append(
-            f"| {r['metric']} | {r['dataset']} | {r['num_subjects']} | {r['num_sites']} "
+            f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sites']} "
             f"| {sex} | {age} | {r['coverage']} | {r['contrast']} | {r['resolution']} | {link} |"
         )
     return '\n'.join(lines)
@@ -141,21 +129,24 @@ def main():
 
     rows = []
     for tsv_path in sorted(repo_root.rglob('participants.tsv')):
-        rel_parts = tsv_path.parent.relative_to(repo_root).parts
+        dataset_dir = tsv_path.parent
+        rel_parts = dataset_dir.relative_to(repo_root).parts
         # Expected structure: <metric>/<dataset>/participants.tsv
         metric = rel_parts[0] if len(rel_parts) >= 1 else 'unknown'
         dataset = rel_parts[1] if len(rel_parts) >= 2 else 'unknown'
 
         df = pd.read_csv(tsv_path, sep='\t', dtype=str)
         stats = compute_stats(df)
+        manual = load_description(dataset_dir)
 
-        meta = DATASET_METADATA.get(dataset, {})
-        manual = {col: meta.get(col, PLACEHOLDER) for col in MANUAL_COLUMNS}
-
-        rows.append({'metric': metric, 'dataset': dataset, **stats, **manual})
+        rows.append({'metric': metric, **stats, **manual})
 
     # Write datasets.tsv (drop link_text — it's only for README rendering)
-    out_df = pd.DataFrame(rows).drop(columns=['link_text'])
+    # Column order: metric, name, then computed stats, then remaining manual fields
+    tsv_columns = ['metric', 'name', 'num_subjects', 'num_sites', 'sex_M', 'sex_F', 'sex_unknown',
+                   'age_mean', 'age_std', 'age_min', 'age_max', 'coverage', 'contrast', 'resolution',
+                   'link']
+    out_df = pd.DataFrame(rows)[tsv_columns]
     out_path = repo_root / 'datasets.tsv'
     out_df.to_csv(out_path, sep='\t', index=False)
     print(f'Saved summary for {len(rows)} dataset(s) to {out_path}')
