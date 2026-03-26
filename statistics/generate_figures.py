@@ -2,30 +2,30 @@
 # Functions to plot morphometric metrics computed from normative database (spine-generic dataset in PAM50 space)
 # perslice and vertebral levels
 #
+# participants.tsv is automatically discovered inside each dataset folder. An explicit
+# -participant-file path can be provided to override this.
+#
 # Example usage (spinal cord only):
 #       python generate_figures.py
-#       -path-SC /path/to/spinal_cord
-#       -participant-file /path/to/participants.tsv
+#       -path-SC spinal_cord/spine-generic_multi-subject
 #
 # Example usage (spinal canal only):
 #       python generate_figures.py
-#       -path-canal /path/to/spinal_canal
-#       -participant-file /path/to/participants.tsv
+#       -path-canal spinal_canal/spine-generic_multi-subject
 #
 # Example usage (both spinal cord and spinal canal):
 #       python generate_figures.py
-#       -path-SC /path/to/spinal_cord
-#       -path-canal /path/to/spinal_canal
-#       -participant-file /path/to/participants.tsv
+#       -path-SC spinal_cord/spine-generic_multi-subject
+#       -path-canal spinal_canal/spine-generic_multi-subject
 #
-# Example usage (multiple datasets, separate colors):
+# Example usage (multiple datasets, separate colors, adults only):
 #       python generate_figures.py
-#       -path-SC /path/to/MASiVar /path/to/spine-generic
-#       -participant-file /path/to/participants.tsv
+#       -path-SC spinal_cord/MASiVar spinal_cord/spine-generic_multi-subject
+#       --min-age 18
 #
 # Example usage (multiple datasets, combined):
 #       python generate_figures.py
-#       -path-SC /path/to/MASiVar /path/to/spine-generic
+#       -path-SC spinal_cord/MASiVar spinal_cord/spine-generic_multi-subject
 #       --combine-datasets
 #
 # Author: Sandrine Bédard, Jan Valosek
@@ -151,14 +151,18 @@ def get_parser():
     parser.add_argument('-path-canal', required=False, type=str, nargs='+', default=None,
                         help="Path(s) to spinal canal data of normative dataset computed perslice. "
                              "Multiple paths can be provided to overlay datasets.")
-    parser.add_argument('-participant-file', required=False, type=str,
-                        help="Path to participants.tsv file.")
+    parser.add_argument('-participant-file', required=False, type=str, default=None,
+                        help="Path to participants.tsv file. If not provided, the script looks for "
+                             "participants.tsv inside each dataset folder (-path-SC / -path-canal).")
     parser.add_argument('-path-out', required=False, type=str, default='stats',
                         help="Output directory name.")
     parser.add_argument('--combine-datasets', action='store_true', default=False,
                         help="When multiple datasets are provided via -path-SC or -path-canal, combine them "
                              "into a single line (same color). Default: show each dataset in a separate color "
                              "with the dataset folder name in the legend.")
+    parser.add_argument('--min-age', required=False, type=float, default=0,
+                        help="Exclude participants younger than this age (in years). "
+                             "Use 18 to include only adults. Default: 0 (no filtering).")
 
     return parser
 
@@ -185,9 +189,14 @@ def get_vert_indices(df):
         ind_vert (np.array): indices of slices corresponding to the beginning of each level (=intervertebral disc)
         ind_vert_mid (np.array): indices of slices corresponding to mid-levels
     """
-    # Get vert levels for the first available subject
+    # Get vert levels for the first available subject (and first session, if session_id column exists)
     first_subject = df['participant_id'].iloc[0]
-    vert = df[df['participant_id'] == first_subject]['VertLevel']
+    mask = df['participant_id'] == first_subject
+    if 'session_id' in df.columns:
+        first_session = df[mask]['session_id'].iloc[0]
+        if pd.notna(first_session):
+            mask = mask & (df['session_id'] == first_session)
+    vert = df[mask]['VertLevel']
     # Get indexes of where array changes value
     ind_vert = vert.diff()[vert.diff() != 0].index.values
     # Get the beginning of C1
@@ -244,6 +253,9 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
 
     # Loop across metrics
     for index, metric in enumerate(METRICS):
+        if metric not in df_21_40.columns:
+            axs[index].set_visible(False)
+            continue
         # Note: we are ploting slices not levels to avoid averaging across levels
         sns.lineplot(ax=axs[index], x="Slice (I->S)", y=metric, data=df_21_40, errorbar=None, hue=hue, style='age',
                      linewidth=2, palette=PALETTE[hue])
@@ -327,6 +339,15 @@ def create_lineplot(df, hue, path_out, show_cv=False):
     """
 
     mpl.rcParams['font.family'] = 'Arial'
+
+    # When colouring by dataset, append per-dataset subject count to the legend label (e.g. "MASiVar (n=13)")
+    # Also pre-compute a clean filename suffix (e.g. "MASiVar_n13_spine-generic_multi-subject_n203")
+    dataset_filename_suffix = ''
+    if hue == 'dataset' and 'dataset' in df.columns:
+        n_per_dataset = df.groupby('dataset')['participant_id'].nunique()
+        dataset_filename_suffix = '_' + '_'.join(f'{d}_n{n_per_dataset[d]}' for d in df['dataset'].unique())
+        df = df.copy()
+        df['dataset'] = df['dataset'].map(lambda d: f'{d} (n={n_per_dataset[d]})')
 
     available_metrics = [m for m in METRICS if m in df.columns]
     ncols = 3
@@ -426,11 +447,12 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         axs[index].set_axisbelow(True)
 
     # Save figure
-    dataset_suffix = '_' + '_'.join(df['dataset'].unique()) if 'dataset' in df.columns else ''
+    if not dataset_filename_suffix:
+        dataset_filename_suffix = '_' + '_'.join(df['dataset'].unique()) if 'dataset' in df.columns else ''
     if hue and hue != 'dataset':
-        filename = 'lineplot_per' + hue + dataset_suffix + '.png'
+        filename = 'lineplot_per' + hue + dataset_filename_suffix + '.png'
     else:
-        filename = 'lineplot' + dataset_suffix + '.png'
+        filename = 'lineplot' + dataset_filename_suffix + '.png'
     path_filename = os.path.join(path_out, filename)
     plt.savefig(path_filename, dpi=300, bbox_inches='tight')
     print('Figure saved: ' + path_filename)
@@ -570,6 +592,9 @@ def create_regplot_per_sex(df, path_out):
 
     # Loop across metrics
     for index, metric in enumerate(METRICS):
+        if metric not in df.columns:
+            axs[index].set_visible(False)
+            continue
         mean_cov = dict()
         std_cov = dict()
         # Loop across sex
@@ -726,6 +751,8 @@ def compare_metrics_across_sex(df):
     print("")
 
     for metric in METRICS:
+        if metric not in df.columns:
+            continue
         print(f"\n{metric}")
 
         # Get mean values for each slice
@@ -750,6 +777,8 @@ def compare_metrics_across_vendors(df):
     print("")
 
     for metric in METRICS:
+        if metric not in df.columns:
+            continue
         print(f"\n{metric}")
 
         #stat, pval = stats.mannwhitneyu(df[df['sex'] == 'M'][metric], df[df['sex'] == 'F'][metric])
@@ -791,6 +820,8 @@ def analyze_metrics_across_age_decades(df):
             print(f'Number of subjects in {age_decade}, {sex}: {number_of_subjects}')
 
     for metric in METRICS:
+        if metric not in df.columns:
+            continue
         print(f"\n{metric}")
 
         # Get mean values for each slice
@@ -895,6 +926,8 @@ def create_regplot_demographics_vs_metrics(df, path_out):
 
     # Loop across metrics
     for metric in METRICS:
+        if metric not in df_c2_c3.columns:
+            continue
         for demographic in ['BMI', 'weight', 'height']:
 
             plt.figure()
@@ -952,38 +985,44 @@ def compute_descriptive_stats(df_participants, path_out_figures):
     """
     # Whole group
     print('Whole cohort')
-    print(round(df_participants[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
+    available_demo = [c for c in ['age', 'weight', 'height'] if c in df_participants.columns]
+    print(round(df_participants[available_demo].agg(['mean', 'std']), 1))
 
-    # Drop nan for weight and height
-    print(f'Number of subjects before dropping nan for weight and height: {len(df_participants)}')
-    df_temp = df_participants.dropna(axis=0, subset=['weight', 'height'])
-    print(f'Number of subjects after dropping nan for weight and height: {len(df_temp)}')
+    has_weight_height = 'weight' in df_participants.columns and 'height' in df_participants.columns
+    if has_weight_height:
+        # Drop nan for weight and height
+        print(f'Number of subjects before dropping nan for weight and height: {len(df_participants)}')
+        df_temp = df_participants.dropna(axis=0, subset=['weight', 'height'])
+        print(f'Number of subjects after dropping nan for weight and height: {len(df_temp)}')
 
-    for metric in ['age', 'weight', 'height']:
-        # Run normality test
-        stat, pval = stats.shapiro(df_temp[df_temp['sex'] == 'M'][metric])
-        print(f'{metric}: Normality test M: p-value{format_pvalue(pval)}')
-        stat, pval = stats.shapiro(df_temp[df_temp['sex'] == 'F'][metric])
-        print(f'{metric}: Normality test F: p-value{format_pvalue(pval)}')
-        # Run Wilcoxon rank-sum test (groups are independent)
-        stat, pval = stats.ranksums(x=df_temp[df_temp['sex'] == 'M'][metric],
-                                    y=df_temp[df_temp['sex'] == 'F'][metric])
-        print(f'{metric}: Wilcoxon rank-sum test between females and males: '
-              f'p-value{format_pvalue(pval)}')
+        for metric in ['age', 'weight', 'height']:
+            # Run normality test
+            stat, pval = stats.shapiro(df_temp[df_temp['sex'] == 'M'][metric])
+            print(f'{metric}: Normality test M: p-value{format_pvalue(pval)}')
+            stat, pval = stats.shapiro(df_temp[df_temp['sex'] == 'F'][metric])
+            print(f'{metric}: Normality test F: p-value{format_pvalue(pval)}')
+            # Run Wilcoxon rank-sum test (groups are independent)
+            stat, pval = stats.ranksums(x=df_temp[df_temp['sex'] == 'M'][metric],
+                                        y=df_temp[df_temp['sex'] == 'F'][metric])
+            print(f'{metric}: Wilcoxon rank-sum test between females and males: '
+                  f'p-value{format_pvalue(pval)}')
 
     # Get number of males and females per sex
     print('\nNumber of males and females')
     print(df_participants.groupby(['sex'])['participant_id'].count())
-    # Per-sex age, weight, height
-    print('\nPer-sex')
-    print(round(df_participants.groupby(['sex'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
+    # Per-sex demographics
+    if has_weight_height:
+        print('\nPer-sex')
+        print(round(df_participants.groupby(['sex'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
 
-    # Get number of males and females per vendor
-    print('\nNumber of males and females')
-    print(df_participants.groupby(['manufacturer'])['participant_id'].count())
-    # Per-vendor age, weight, height
-    print('\nPer-vendor')
-    print(round(df_participants.groupby(['manufacturer'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
+    if 'manufacturer' in df_participants.columns:
+        # Get number of males and females per vendor
+        print('\nNumber of participants per manufacturer')
+        print(df_participants.groupby(['manufacturer'])['participant_id'].count())
+        # Per-vendor age, weight, height
+        if has_weight_height:
+            print('\nPer-vendor')
+            print(round(df_participants.groupby(['manufacturer'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
 
     # Plot age distribution
     plt.figure()
@@ -1069,6 +1108,8 @@ def compute_normative_values_persex(df, path_out):
     Returns:
     """
     for metric in METRICS:
+        if metric not in df.columns:
+            continue
         print(f"\n{metric}")
         # Compute mean and std for each slice across all subjects
         slices_mean = df.groupby(['Slice (I->S)', 'sex'])[metric].mean()
@@ -1148,6 +1189,8 @@ def plot_metrics_relative_to_age(df, path_out_figures):
     df_c2_c3['sex'].replace(['F', 'M'], [0, 1], inplace=True)
 
     for metric in METRICS:
+        if metric not in df_c2_c3.columns:
+            continue
         # Get mean values for each subject
         df_c2_c3_mean = df_c2_c3.groupby(['participant_id'])[[metric, 'age', 'sex']].mean()
 
@@ -1241,17 +1284,34 @@ def read_csv_files(path_HC, participant_file=None, dataset_name=None):
     # Get sub-id (e.g., sub-amu01) from the source CSV filename (first underscore-delimited segment)
     # This is more reliable than parsing the Filename column inside the CSV, which may be a generic path
     df.insert(0, 'participant_id', df['source_file'].str.split('_').str[0])
+    # Extract session_id from the second underscore-delimited segment if it starts with 'ses-'
+    second_seg = df['source_file'].str.split('_').str[1]
+    if second_seg.str.startswith('ses-').any():
+        df['session_id'] = second_seg
     # Tag each row with the dataset name (used for multi-dataset coloring in figures)
     if dataset_name is not None:
         df['dataset'] = dataset_name
     # Get number of unique subjects
     subjects = df['participant_id'].unique()
-    # If a participants.tsv file is provided, insert columns sex, age and manufacturer from df_participants into df
+    # If no explicit participant_file given, look for participants.tsv inside the dataset folder
+    if participant_file is None:
+        auto_tsv = os.path.join(path_HC, 'participants.tsv')
+        if os.path.isfile(auto_tsv):
+            participant_file = auto_tsv
+    # Load demographic info from participants.tsv and merge into df
     df_participants = None
     if participant_file:
         df_participants = pd.read_csv(participant_file, sep='\t')
-        df = df.merge(df_participants[["age", "sex", "height", "weight", "manufacturer", "participant_id"]],
-                    on='participant_id')
+        # Only merge columns that are actually present in participants.tsv
+        possible_cols = ["age", "sex", "height", "weight", "manufacturer", "participant_id"]
+        cols_to_merge = [c for c in possible_cols if c in df_participants.columns]
+        # Merge on session_id as well when participants.tsv is session-level
+        merge_keys = ['participant_id']
+        if 'session_id' in df_participants.columns and 'session_id' in df.columns:
+            merge_keys.append('session_id')
+            if 'session_id' not in cols_to_merge:
+                cols_to_merge.append('session_id')
+        df = df.merge(df_participants[cols_to_merge], on=merge_keys)
     # Print number of subjects
     print(f'Number of subjects: {str(len(subjects))}\n')
     return df, df_participants, subjects
@@ -1301,7 +1361,9 @@ def main():
         all_subjects = []
         for path in path_list:
             dataset_name = os.path.basename(path.rstrip('/')) if use_dataset_labels else None
-            df_single, df_part, subs = read_csv_files(path, args.participant_file, dataset_name=dataset_name)
+            # Use explicit participant_file if provided, otherwise auto-discover per dataset folder
+            pfile = args.participant_file if args.participant_file else None
+            df_single, df_part, subs = read_csv_files(path, pfile, dataset_name=dataset_name)
             dfs.append(df_single)
             last_participants = df_part
             if subs is not None:
@@ -1319,12 +1381,25 @@ def main():
     if df is not None and df_canal is not None:
         df, df_canal = compute_ascor(df, df_canal)
 
+    # Apply minimum age filter
+    if args.min_age > 0:
+        if df is not None and 'age' in df.columns:
+            before = df['participant_id'].nunique()
+            df = df[df['age'] >= args.min_age]
+            after = df['participant_id'].nunique()
+            print(f'Age filter (>= {args.min_age}): {before} → {after} unique participants')
+        if df_canal is not None and 'age' in df_canal.columns:
+            df_canal = df_canal[df_canal['age'] >= args.min_age]
+        if df_participants is not None and 'age' in df_participants.columns:
+            df_participants = df_participants[df_participants['age'] >= args.min_age]
+
     if df_participants is not None:
         compute_descriptive_stats(df_participants, path_out_figures)
 
-        # Get number of participants for each vendor
-        print('\nNumber of participants per vendor')
-        print(df_participants.groupby(['manufacturer'])['participant_id'].count())
+        # Get number of participants for each vendor (only if manufacturer column present)
+        if 'manufacturer' in df_participants.columns:
+            print('\nNumber of participants per vendor')
+            print(df_participants.groupby(['manufacturer'])['participant_id'].count())
         # Compute mean, median, std, min, max for age
         compute_age_stats(df_participants)
 
@@ -1335,8 +1410,10 @@ def main():
     if df_canal is not None:
         datasets.append((df_canal, path_out_figures_canal))
 
-    # Plot correlation between weight and height per sex (only when SC data and participants are available)
-    if df is not None and df_participants is not None:
+    # Plot correlation between weight and height per sex (only when SC data and participants are available
+    # and weight/height columns are present)
+    if (df is not None and df_participants is not None
+            and 'weight' in df_participants.columns and 'height' in df_participants.columns):
         gen_chart_weight_height(df, df_participants, path_out_figures)
 
     for current_df, path_out in datasets:
@@ -1381,7 +1458,8 @@ def main():
             compare_metrics_across_sex(current_df)
 
             # Compute Wilcoxon rank-sum tests between MRI vendors across all levels for each metric
-            compare_metrics_across_vendors(current_df)
+            if 'manufacturer' in current_df.columns:
+                compare_metrics_across_vendors(current_df)
             # Get mean values for each age decade
             analyze_metrics_across_age_decades(current_df)
 
@@ -1399,7 +1477,8 @@ def main():
             # Create plots split by demographics
             create_lineplot(current_df, 'age', path_out)
             create_lineplot(current_df, 'sex', path_out)
-            create_lineplot(current_df, 'manufacturer', path_out)
+            if 'manufacturer' in current_df.columns:
+                create_lineplot(current_df, 'manufacturer', path_out)
 
             # Plot scatterplot metrics vs COV per sex
             create_regplot_per_sex(current_df, path_out)
