@@ -30,7 +30,7 @@ import numpy as np
 from pathlib import Path
 
 
-MANUAL_COLUMNS = ['name', 'coverage', 'contrast', 'resolution', 'population', 'link', 'link_text']
+MANUAL_COLUMNS = ['name', 'order', 'coverage', 'contrast', 'resolution', 'population', 'link', 'link_text']
 PLACEHOLDER = 'n/a'
 
 README_TABLE_START = '<!-- datasets-table-start -->'
@@ -142,6 +142,8 @@ def main():
         manual = load_description(dataset_dir)
 
         rows.append({'metric': metric, **stats, **manual})
+
+    rows.sort(key=lambda r: r.get('order', 999))
 
     # Write datasets.tsv (drop link_text — it's only for README rendering)
     # Column order: metric, name, then computed stats, then remaining manual fields

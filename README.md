@@ -58,6 +58,7 @@ The table below summarizes all datasets included in this repository. It is also 
 | spinal_canal | spine-generic multi-subject | 203 | 43 | healthy adults | 105/98/0 | 28.7±5.6 [19–52] | cervical spine | T2w | 0.8mm iso | [spine-generic/data-multi-subject](https://github.com/spine-generic/data-multi-subject) |
 | spinal_cord | spine-generic multi-subject | 203 | 43 | healthy adults | 105/98/0 | 28.7±5.6 [19–52] | cervical spine | T2w | 0.8mm iso | [spine-generic/data-multi-subject](https://github.com/spine-generic/data-multi-subject) |
 | spinal_cord | whole-spine | 58 | 2 | healthy adults | 30/18/10 | 27.2±6.7 [21–56] | whole spine | T2w | 1.0mm iso | [openneuro/ds005616](https://openneuro.org/datasets/ds005616) |
+| spinal_cord | MASiVar | 144 | n/a | healthy adults and children | 88/56/0 | 10.7±9.0 [5–47] | cervical spine | T1w | 1.0mm iso | [openneuro/ds003416](https://openneuro.org/datasets/ds003416) |
 <!-- datasets-table-end -->
 
 ## Datasets Structure

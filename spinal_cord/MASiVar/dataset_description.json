@@ -1,5 +1,6 @@
 {
     "name": "MASiVar",
+    "order": 4,
     "coverage": "cervical spine",
     "contrast": "T1w",
     "resolution": "1.0mm iso",
