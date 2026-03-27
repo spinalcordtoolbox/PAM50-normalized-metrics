@@ -44,7 +44,7 @@ DATASET_DESCRIPTION = {
     "order": 9,
     "coverage": "cervical spine",
     "contrast": "T1w",
-    "resolution": "n/a",
+    "resolution": "1.0mm iso",
     "link": f"https://openneuro.org/datasets/{DATASET_ID}",
     "link_text": f"openneuro/{DATASET_ID}",
     "population": "healthy controls and neuropsychiatric patients",

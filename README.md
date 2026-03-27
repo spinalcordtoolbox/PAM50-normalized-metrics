@@ -60,10 +60,10 @@ The table below summarizes all datasets included in this repository. It is also 
 | spinal_cord | whole-spine | 58 | 58 | 2 | healthy adults | 30/18/10 | 27.2±6.7 [21–56] | whole spine | T2w | 1.0mm iso | [openneuro/ds005616](https://openneuro.org/datasets/ds005616) |
 | spinal_cord | MASiVar | 96 | 144 | n/a | healthy adults and children | 55/41/0 | 9.6±8.7 [5–47] | cervical spine | T1w | 1.0mm iso | [openneuro/ds003416](https://openneuro.org/datasets/ds003416) |
 | spinal_cord | AOMIC | 576 | 576 | n/a | healthy adults | 140/436/0 | 22.8±1.8 [18–26] | cervical spine | T1w | 1.0mm iso | [openneuro/ds003097](https://openneuro.org/datasets/ds003097), [openneuro/ds002785](https://openneuro.org/datasets/ds002785), [openneuro/ds002790](https://openneuro.org/datasets/ds002790) |
-| spinal_cord | DLBS | 464 | 957 | n/a | healthy adults | 177/287/0 | 58.4±18.1 [21–89] | cervical spine | T1w | n/a | [openneuro/ds004856](https://openneuro.org/datasets/ds004856) |
+| spinal_cord | DLBS | 464 | 957 | n/a | healthy adults | 177/287/0 | 58.4±18.1 [21–89] | cervical spine | T1w | 1.0mm iso | [openneuro/ds004856](https://openneuro.org/datasets/ds004856) |
 | spinal_cord | KurtMS | 46 | 71 | n/a | healthy controls and MS patients | 0/0/46 | n/a | cervical spine | T1w | n/a | n/a |
-| spinal_cord | TempleSocial | 104 | 104 | n/a | healthy adults | 34/66/0 | 42.3±16.8 [21–80] | cervical spine | T1w | n/a | [openneuro/ds005123](https://openneuro.org/datasets/ds005123) |
-| spinal_cord | UCLA LA5c | 259 | 259 | n/a | healthy controls and neuropsychiatric patients | 149/110/0 | 33.1±9.3 [21–50] | cervical spine | T1w | n/a | [openneuro/ds000030](https://openneuro.org/datasets/ds000030) |
+| spinal_cord | TempleSocial | 104 | 104 | n/a | healthy adults | 34/66/0 | 42.3±16.8 [21–80] | cervical spine | T1w | 1.0mm iso | [openneuro/ds005123](https://openneuro.org/datasets/ds005123) |
+| spinal_cord | UCLA LA5c | 259 | 259 | n/a | healthy controls and neuropsychiatric patients | 149/110/0 | 33.1±9.3 [21–50] | cervical spine | T1w | 1.0mm iso | [openneuro/ds000030](https://openneuro.org/datasets/ds000030) |
 <!-- datasets-table-end -->
 
 ## Datasets Structure

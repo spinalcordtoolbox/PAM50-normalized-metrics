@@ -3,7 +3,7 @@
     "order": 9,
     "coverage": "cervical spine",
     "contrast": "T1w",
-    "resolution": "n/a",
+    "resolution": "1.0mm iso",
     "link": "https://openneuro.org/datasets/ds000030",
     "link_text": "openneuro/ds000030",
     "population": "healthy controls and neuropsychiatric patients"
