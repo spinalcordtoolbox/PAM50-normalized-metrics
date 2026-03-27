@@ -1,0 +1,958 @@
+participant_id	session_id	sex	age	height	weight	BMI
+sub-1003	ses-wave1	M	54	68.5	213.0	31.912
+sub-1003	ses-wave2	M	58	68.0	220.0	33.447
+sub-1003	ses-wave3	M	63			
+sub-1007	ses-wave1	M	73	68.0	197.0	29.95
+sub-1007	ses-wave2	M	77	69.0	186.5	27.538
+sub-1007	ses-wave3	M	82			
+sub-1008	ses-wave1	M	22	64.0	160.0	27.461
+sub-1008	ses-wave2	M	27	65.0	160.0	26.622
+sub-101	ses-wave1	F	44	67.0	130.0	20.359
+sub-1011	ses-wave1	M	70	72.0	205.0	27.8
+sub-1013	ses-wave1	F	22	65.0	125.0	20.799
+sub-1013	ses-wave2	F	26	65.0	130.0	21.631
+sub-1013	ses-wave3	F	31			
+sub-1022	ses-wave1	F	30	61.0	100.0	18.893
+sub-1022	ses-wave2	F	34	61.0	110.0	20.782
+sub-1022	ses-wave3	F	39			
+sub-1023	ses-wave1	F	82	64.0	140.0	24.028
+sub-1023	ses-wave2	F	86	64.0	138.0	23.685
+sub-1023	ses-wave3	F	91			
+sub-103	ses-wave1	F	41	66.0	146.0	23.562
+sub-103	ses-wave2	F	45	66.0	148.0	23.885
+sub-103	ses-wave3	F	51			
+sub-1031	ses-wave1	F	47	64.0	109.0	18.708
+sub-1031	ses-wave2	F	51	63.0	108.0	19.129
+sub-1031	ses-wave3	F	56			
+sub-1041	ses-wave1	F	24	67.0	190.0	29.755
+sub-1043	ses-wave1	M	81	66.0	175.0	28.243
+sub-1045	ses-wave1	F	81	64.0	155.0	26.603
+sub-1054	ses-wave1	F	70	65.0	153.0	25.458
+sub-1054	ses-wave2	F	74	65.0	120.0	19.967
+sub-1058	ses-wave1	F	33	63.0	116.0	20.546
+sub-1058	ses-wave3	F	43			
+sub-1084	ses-wave1	F	71	66.0	140.0	22.594
+sub-1093	ses-wave1	M	66	71.0	220.0	30.68
+sub-1093	ses-wave2	M	70	71.0	230.0	32.075
+sub-1093	ses-wave3	M	75			
+sub-110	ses-wave1	F	79	63.0	132.0	23.38
+sub-110	ses-wave2	F	83	63.0	119.0	21.078
+sub-1108	ses-wave1	M	70	67.0	165.0	25.84
+sub-1119	ses-wave1	M	23	68.0	145.0	22.045
+sub-1119	ses-wave3	M	33			
+sub-1123	ses-wave1	M	23	69.0	160.0	23.625
+sub-1124	ses-wave1	F	23	66.0	120.0	19.366
+sub-1124	ses-wave2	F	27	66.0	118.0	19.044
+sub-1136	ses-wave1	M	67	70.0	235.0	33.715
+sub-1136	ses-wave2	M	71	71.0	208.0	29.007
+sub-1139	ses-wave1	F	73	64.0	160.0	27.461
+sub-1139	ses-wave2	F	77	64.0	153.0	26.26
+sub-1139	ses-wave3	F	82			
+sub-1141	ses-wave1	M	72	72.0	184.0	24.952
+sub-1141	ses-wave2	M	75	72.0	180.0	24.41
+sub-1141	ses-wave3	M	81			
+sub-1146	ses-wave1	F	23	62.0	124.0	22.677
+sub-1146	ses-wave2	F	27	62.0	135.0	24.689
+sub-1146	ses-wave3	F	32			
+sub-1149	ses-wave1	M	37	75.0	188.0	23.496
+sub-1149	ses-wave2	M	41	75.0	200.0	24.996
+sub-1149	ses-wave3	M	46			
+sub-1153	ses-wave1	M	56	73.0	225.0	29.682
+sub-1153	ses-wave2	M	60	73.0	230.0	30.342
+sub-1153	ses-wave3	M	65			
+sub-1154	ses-wave1	F	26	67.0	220.0	34.453
+sub-1157	ses-wave1	F	29	66.0	120.0	19.366
+sub-1157	ses-wave3	F	38			
+sub-1158	ses-wave1	F	35	66.5	155.0	24.64
+sub-1159	ses-wave1	M	34	67.0	160.0	25.057
+sub-1165	ses-wave1	F	21	63.0	135.0	23.912
+sub-1168	ses-wave1	M	25	70.0	168.0	24.103
+sub-1169	ses-wave1	F	31	66.0	198.0	31.955
+sub-1169	ses-wave2	F	35	67.0	200.0	31.321
+sub-1172	ses-wave1	M	27	67.0	220.0	34.453
+sub-1172	ses-wave2	M	31	67.0	230.0	36.019
+sub-1172	ses-wave3	M	36			
+sub-1175	ses-wave1	M	43	65.0	135.0	22.463
+sub-1175	ses-wave3	M	52			
+sub-1178	ses-wave1	F	83	61.0	132.0	24.938
+sub-1183	ses-wave1	M	22	70.0	195.0	27.977
+sub-1183	ses-wave2	M	27	70.0	195.0	27.977
+sub-1183	ses-wave3	M	31			
+sub-1195	ses-wave1	F	76	67.0	130.0	20.359
+sub-1196	ses-wave1	F	24	65.0	120.0	19.967
+sub-1199	ses-wave1	M	23	70.0	170.0	24.39
+sub-12	ses-wave1	F	56	62.0	145.0	26.518
+sub-12	ses-wave2	F	60	62.0	148.0	27.067
+sub-12	ses-wave3	F	66			
+sub-1200	ses-wave1	F	71	64.0	150.0	25.745
+sub-1200	ses-wave2	F	75	63.0	150.0	26.568
+sub-1220	ses-wave1	F	55	65.0	155.0	25.791
+sub-1220	ses-wave2	F	59	65.0	150.0	24.959
+sub-1220	ses-wave3	F	64			
+sub-1225	ses-wave1	F	89	64.0	125.0	21.454
+sub-1225	ses-wave2	F	93	60.0	118.0	23.043
+sub-1226	ses-wave1	F	74	64.0	180.0	30.894
+sub-1226	ses-wave2	F	78	64.0	180.0	30.894
+sub-1226	ses-wave3	F	83			
+sub-1240	ses-wave1	F	45	62.0	160.0	29.261
+sub-1240	ses-wave2	F	49	62.0	160.0	29.261
+sub-1240	ses-wave3	F	54			
+sub-1245	ses-wave1	M	55	69.0	190.0	28.055
+sub-1245	ses-wave2	M	59	69.0	190.0	28.055
+sub-1245	ses-wave3	M	64			
+sub-1247	ses-wave1	F	73	67.5	224.0	34.562
+sub-1251	ses-wave1	F	42	63.0	127.0	22.495
+sub-1267	ses-wave1	F	22	62.0	115.0	21.031
+sub-1267	ses-wave2	F	26	62.0	120.0	21.946
+sub-1272	ses-wave1	F	24	67.0	120.0	18.793
+sub-1272	ses-wave2	F	28	66.0	145.0	23.401
+sub-1309	ses-wave1	M	36	75.0	185.0	23.121
+sub-1316	ses-wave1	M	41	67.0	152.0	23.804
+sub-1316	ses-wave2	M	45	67.0	148.0	23.178
+sub-1316	ses-wave3	M	50			
+sub-133	ses-wave1	F	22	64.0	130.0	22.312
+sub-133	ses-wave2	F	26	64.0	130.0	22.312
+sub-135	ses-wave1	F	60	62.0	165.0	30.176
+sub-135	ses-wave2	F	64	62.0	180.0	32.919
+sub-1356	ses-wave1	F	49	67.0	165.0	25.84
+sub-1356	ses-wave2	F	53	66.5	160.0	25.435
+sub-1356	ses-wave3	F	58			
+sub-1362	ses-wave1	F	54	61.0	113.0	21.349
+sub-1362	ses-wave3	F	63			
+sub-1370	ses-wave1	F	32	64.0	117.0	20.081
+sub-1370	ses-wave2	F	36	64.0	135.0	23.17
+sub-1370	ses-wave3	F	41			
+sub-1372	ses-wave1	M	49	72.0	190.0	25.766
+sub-138	ses-wave1	F	30	67.0	189.0	29.598
+sub-138	ses-wave2	F	34	67.0	160.0	25.057
+sub-138	ses-wave3	F	40			
+sub-139	ses-wave1	F	24	68.0	125.0	19.004
+sub-139	ses-wave2	F	28	68.0	125.0	19.004
+sub-139	ses-wave3	F	34			
+sub-140	ses-wave1	F	43	65.0	133.0	22.13
+sub-140	ses-wave2	F	47	65.0	143.0	23.794
+sub-1402	ses-wave1	M	62	72.0	235.0	31.868
+sub-1402	ses-wave3	M	71			
+sub-141	ses-wave1	M	54	71.0	180.0	25.102
+sub-141	ses-wave2	M	58	72.0	180.0	24.41
+sub-142	ses-wave1	F	62	67.0	125.0	19.576
+sub-1421	ses-wave1	M	44	71.0	175.0	24.405
+sub-1421	ses-wave2	M	48	71.0	155.0	21.616
+sub-1431	ses-wave1	F	40	64.0	180.0	30.894
+sub-1431	ses-wave2	F	44	64.0	176.0	30.207
+sub-1431	ses-wave3	F	49			
+sub-1432	ses-wave1	F	44	66.5	132.0	20.984
+sub-1439	ses-wave1	F	32	66.0	130.0	20.98
+sub-1439	ses-wave2	F	36	65.5	145.0	23.76
+sub-1439	ses-wave3	F	41			
+sub-1444	ses-wave1	F	31	67.0	135.0	21.142
+sub-1444	ses-wave2	F	35	67.0	145.0	22.708
+sub-1451	ses-wave1	F	33	66.0	150.0	24.208
+sub-1451	ses-wave2	F	37	66.0	155.0	25.015
+sub-1452	ses-wave1	M	36	72.0	181.0	24.545
+sub-1452	ses-wave2	M	40	72.0	200.0	27.122
+sub-1452	ses-wave3	M	45			
+sub-1457	ses-wave1	F	34	64.0	135.0	23.17
+sub-146	ses-wave1	F	21	61.0	150.0	28.339
+sub-146	ses-wave2	F	26	60.0	150.0	29.292
+sub-146	ses-wave3	F	31			
+sub-1467	ses-wave1	F	30	64.0	115.0	19.738
+sub-1467	ses-wave2	F	35	65.0	135.0	22.463
+sub-1467	ses-wave3	F	40			
+sub-1468	ses-wave1	M	30	75.0	185.0	23.121
+sub-147	ses-wave1	F	51	66.0	175.0	28.243
+sub-147	ses-wave2	F	55	66.0	168.0	27.113
+sub-147	ses-wave3	F	60			
+sub-1476	ses-wave1	M	63	72.0	172.0	23.325
+sub-1476	ses-wave2	M	67	72.0	176.0	23.867
+sub-1476	ses-wave3	M	72			
+sub-1484	ses-wave1	M	60	68.0	189.0	28.734
+sub-1484	ses-wave2	M	64	68.0	190.0	28.886
+sub-149	ses-wave1	F	68	59.0	165.0	33.322
+sub-149	ses-wave2	F	72	60.0	165.0	32.221
+sub-149	ses-wave3	F	78			
+sub-153	ses-wave1	M	64	67.0	174.0	27.249
+sub-1531	ses-wave1	M	82	67.0	164.0	25.683
+sub-1543	ses-wave1	M	50	72.0	200.0	27.122
+sub-1543	ses-wave2	M	55	72.0	220.0	29.834
+sub-1543	ses-wave3	M	59			
+sub-155	ses-wave1	M	21	74.0	150.0	19.257
+sub-1577	ses-wave1	F	24	65.0	165.0	27.454
+sub-1577	ses-wave2	F	28	65.0	200.0	33.278
+sub-1577	ses-wave3	F	33			
+sub-158	ses-wave1	F	68	63.0	186.0	32.945
+sub-158	ses-wave2	F	73	63.0	195.0	34.539
+sub-158	ses-wave3	F	79			
+sub-159	ses-wave1	M	36	69.0	182.0	26.874
+sub-159	ses-wave2	M	41	69.0	175.0	25.84
+sub-1591	ses-wave1	F	73	62.0	150.0	27.432
+sub-1591	ses-wave2	F	77	62.0	150.0	27.432
+sub-1591	ses-wave3	F	82			
+sub-1600	ses-wave1	F	86	60.0	130.0	25.386
+sub-1600	ses-wave2	F	90	60.0	122.0	23.824
+sub-1613	ses-wave1	M	71	71.0	172.0	23.987
+sub-1615	ses-wave1	F	43	64.0	130.0	22.312
+sub-1615	ses-wave2	F	47	64.0	139.0	23.857
+sub-1615	ses-wave3	F	52			
+sub-1617	ses-wave1	F	73	67.0	132.0	20.672
+sub-162	ses-wave1	M	45	68.0	160.0	24.325
+sub-162	ses-wave2	M	49	68.0	165.0	25.085
+sub-162	ses-wave3	M	55			
+sub-1626	ses-wave1	F	76	63.0	145.0	25.683
+sub-1626	ses-wave2	F	80	62.0	145.0	26.518
+sub-163	ses-wave1	F	46	67.0	143.0	22.395
+sub-163	ses-wave2	F	50	67.0	137.0	21.455
+sub-163	ses-wave3	F	56			
+sub-1637	ses-wave1	F	70	63.0	179.0	31.705
+sub-1637	ses-wave2	F	74	63.5	157.0	27.372
+sub-164	ses-wave1	M	50	72.0	225.0	30.512
+sub-164	ses-wave2	M	54	72.0	210.0	28.478
+sub-1656	ses-wave1	F	87	68.0	145.0	22.045
+sub-1656	ses-wave2	F	90	67.0	140.0	21.925
+sub-1656	ses-wave3	F	96			
+sub-1664	ses-wave1	M	74	71.0	198.0	27.612
+sub-1664	ses-wave2	M	78	71.0	210.0	29.286
+sub-1665	ses-wave1	M	31	75.0	195.0	24.371
+sub-1685	ses-wave1	F	60	64.0	122.0	20.939
+sub-1685	ses-wave2	F	64	64.0	128.0	21.969
+sub-1685	ses-wave3	F	68			
+sub-169	ses-wave1	F	56	66.5	168.0	26.707
+sub-169	ses-wave2	F	60	66.0	145.0	23.401
+sub-169	ses-wave3	F	66			
+sub-174	ses-wave1	M	50	69.0	165.0	24.364
+sub-174	ses-wave2	M	55	68.0	155.0	23.565
+sub-174	ses-wave3	M	60			
+sub-1751	ses-wave1	M	49	75.0	270.0	33.744
+sub-1751	ses-wave2	M	52	75.0	240.0	29.995
+sub-1751	ses-wave3	M	57			
+sub-1759	ses-wave1	M	61	74.0	160.0	20.541
+sub-1759	ses-wave2	M	65	74.0	164.0	21.054
+sub-1759	ses-wave3	M	70			
+sub-1767	ses-wave1	F	38	67.0	170.0	26.623
+sub-1767	ses-wave2	F	42	68.0	175.0	26.606
+sub-1767	ses-wave3	F	47			
+sub-1775	ses-wave1	M	31	72.0	205.0	27.8
+sub-1775	ses-wave2	M	35	72.0	190.0	25.766
+sub-1775	ses-wave3	M	40			
+sub-178	ses-wave1	M	52	65.0	180.0	29.95
+sub-178	ses-wave2	M	55	65.0	180.0	29.95
+sub-178	ses-wave3	M	60			
+sub-1781	ses-wave1	F	47	67.0	164.0	25.683
+sub-1784	ses-wave1	F	38	64.0	145.0	24.886
+sub-1796	ses-wave1	F	38	62.0	112.0	20.483
+sub-1796	ses-wave2	F	42	62.0	118.0	21.58
+sub-1796	ses-wave3	F	47			
+sub-1797	ses-wave1	F	35	70.0	140.0	20.086
+sub-1797	ses-wave2	F	40	69.0	145.0	21.41
+sub-1800	ses-wave1	F	63	62.0	135.0	24.689
+sub-1800	ses-wave2	F	67	61.0	125.0	23.616
+sub-182	ses-wave1	M	68	66.0	158.0	25.499
+sub-183	ses-wave1	F	62	65.0	160.0	26.622
+sub-183	ses-wave2	F	66	65.0	147.0	24.459
+sub-183	ses-wave3	F	71			
+sub-1844	ses-wave1	M	32	73.0	180.0	23.746
+sub-1844	ses-wave2	M	35	72.0	175.0	23.732
+sub-1844	ses-wave3	M	41			
+sub-1849	ses-wave1	M	31	71.0	160.0	22.313
+sub-1849	ses-wave2	M	34	71.0	165.0	23.01
+sub-1849	ses-wave3	M	39			
+sub-1850	ses-wave1	F	30	66.0	130.0	20.98
+sub-1850	ses-wave2	F	34	66.0	135.0	21.787
+sub-1850	ses-wave3	F	39			
+sub-1854	ses-wave1	F	35	65.0	128.0	21.298
+sub-1856	ses-wave1	F	80	66.0	135.0	21.787
+sub-1856	ses-wave2	F	84	64.0	134.0	22.999
+sub-1860	ses-wave1	M	31	65.0	190.0	31.614
+sub-1862	ses-wave1	M	38	68.0	165.0	25.085
+sub-1863	ses-wave1	F	82	61.0	146.0	27.583
+sub-1863	ses-wave2	F	86	61.0	146.0	27.583
+sub-1863	ses-wave3	F	91			
+sub-1864	ses-wave1	F	30	64.0	110.0	18.879
+sub-1864	ses-wave2	F	34	64.0	99.0	16.991
+sub-1866	ses-wave1	M	86	72.0	172.0	23.325
+sub-1868	ses-wave1	F	83	67.0	148.0	23.178
+sub-1868	ses-wave2	F	86	63.0	150.0	26.568
+sub-1869	ses-wave1	M	31	65.0	155.0	25.791
+sub-1874	ses-wave1	F	47	68.0	145.0	22.045
+sub-1875	ses-wave1	F	57	69.0	170.0	25.102
+sub-1875	ses-wave2	F	61	69.0	165.0	24.364
+sub-1875	ses-wave3	F	65			
+sub-1882	ses-wave1	M	86	70.0	150.0	21.52
+sub-1886	ses-wave1	F	82	63.0	150.0	26.568
+sub-189	ses-wave1	F	24	71.0	143.0	19.942
+sub-189	ses-wave2	F	29	71.0	140.0	19.524
+sub-189	ses-wave3	F	34			
+sub-1891	ses-wave1	F	88	60.5	120.0	23.048
+sub-1891	ses-wave2	F	91	59.0	124.0	25.042
+sub-1891	ses-wave3	F	97			
+sub-1915	ses-wave1	F	75	63.0	125.0	22.14
+sub-1919	ses-wave1	F	35	63.0	130.0	23.026
+sub-192	ses-wave1	F	30	62.0	99.0	18.105
+sub-192	ses-wave2	F	34	62.0	102.0	18.654
+sub-192	ses-wave3	F	39			
+sub-1922	ses-wave1	M	36	76.0	254.0	30.914
+sub-1922	ses-wave3	M	45			
+sub-1926	ses-wave1	F	57	65.0	150.0	24.959
+sub-1928	ses-wave1	F	34	66.0	112.0	18.075
+sub-1933	ses-wave1	M	83	69.0	175.0	25.84
+sub-194	ses-wave1	M	33	70.0	185.0	26.542
+sub-194	ses-wave2	M	37	70.0	165.0	23.672
+sub-196	ses-wave1	M	66	72.0	165.0	22.376
+sub-196	ses-wave2	M	71	72.0	155.0	21.019
+sub-196	ses-wave3	M	76			
+sub-1978	ses-wave1	F	74	63.0	135.0	23.912
+sub-1993	ses-wave1	F	64	62.0	136.0	24.872
+sub-1993	ses-wave2	F	68	62.0	140.0	25.604
+sub-1993	ses-wave3	F	72			
+sub-200	ses-wave1	M	52	71.0	220.0	30.68
+sub-200	ses-wave2	M	56	71.0	220.0	30.68
+sub-200	ses-wave3	M	62			
+sub-2012	ses-wave1	F	88	62.0	148.0	27.067
+sub-2012	ses-wave2	F	92	61.0	153.0	28.906
+sub-2012	ses-wave3	F	97			
+sub-2031	ses-wave1	F	56	63.0	190.0	33.653
+sub-2031	ses-wave2	F	60	63.0	190.0	33.653
+sub-2034	ses-wave1	F	86	65.0	145.0	24.127
+sub-2035	ses-wave1	M	80	70.0	200.0	28.694
+sub-2035	ses-wave2	M	84	70.0	194.0	27.833
+sub-2043	ses-wave1	F	82	64.0	158.0	27.118
+sub-2043	ses-wave2	F	86	64.0	145.0	24.886
+sub-2043	ses-wave3	F	91			
+sub-2044	ses-wave1	F	88	65.0	167.0	27.787
+sub-2053	ses-wave1	F	81	63.0	120.0	21.255
+sub-2054	ses-wave1	M	88	69.0	155.0	22.887
+sub-2058	ses-wave1	F	86	63.0	162.0	28.694
+sub-2062	ses-wave1	M	84	74.0	210.0	26.959
+sub-2064	ses-wave1	F	88	65.0	140.0	23.295
+sub-2064	ses-wave2	F	92	65.0	150.0	24.959
+sub-2067	ses-wave1	F	35	64.0	155.0	26.603
+sub-2068	ses-wave1	M	81	74.0	194.0	24.905
+sub-2068	ses-wave2	M	85			
+sub-2068	ses-wave3	M	89			
+sub-208	ses-wave1	F	54	66.0	198.0	31.955
+sub-208	ses-wave2	F	57	65.0	175.0	29.118
+sub-208	ses-wave3	F	62			
+sub-2085	ses-wave1	M	51	71.0	225.0	31.378
+sub-2085	ses-wave2	M	55	72.0	215.0	29.156
+sub-2087	ses-wave1	F	81	62.0	110.0	20.117
+sub-2093	ses-wave1	M	33	70.0	195.0	27.977
+sub-2093	ses-wave2	M	37	70.0	167.0	23.959
+sub-2093	ses-wave3	M	42			
+sub-2095	ses-wave1	M	53	74.0	185.0	23.75
+sub-2095	ses-wave2	M	57	73.0	190.0	25.065
+sub-2095	ses-wave3	M	61			
+sub-21	ses-wave1	F	72	64.0	122.0	20.939
+sub-2117	ses-wave1	F	75	61.0	142.0	26.828
+sub-2117	ses-wave2	F	78	61.5	154.0	28.624
+sub-2117	ses-wave3	F	83			
+sub-2126	ses-wave1	F	86	63.0	100.0	17.712
+sub-2127	ses-wave1	F	71	64.0	105.0	18.021
+sub-2127	ses-wave2	F	75	63.0	109.0	19.306
+sub-213	ses-wave1	F	57	62.0	187.0	34.199
+sub-213	ses-wave2	F	61	62.0	174.0	31.822
+sub-213	ses-wave3	F	67			
+sub-2133	ses-wave1	F	75	65.5	178.0	29.167
+sub-2133	ses-wave2	F	79			
+sub-215	ses-wave1	F	34	64.0	125.0	21.454
+sub-215	ses-wave3	F	43			
+sub-2152	ses-wave1	F	32	60.5	130.0	24.968
+sub-2172	ses-wave1	F	45	66.0	128.0	20.657
+sub-2172	ses-wave2	F	49	66.0	138.0	22.271
+sub-2172	ses-wave3	F	52			
+sub-220	ses-wave1	F	66	65.0	140.0	23.295
+sub-220	ses-wave2	F	70	65.5	148.0	24.251
+sub-220	ses-wave3	F	75			
+sub-2205	ses-wave1	M	43	70.0	148.0	21.233
+sub-2206	ses-wave1	M	42	69.0	150.0	22.149
+sub-2206	ses-wave2	M	46	68.0	160.0	24.325
+sub-2206	ses-wave3	M	51			
+sub-221	ses-wave1	M	53	70.0	180.0	25.824
+sub-2210	ses-wave1	F	32	66.0	190.0	30.663
+sub-2213	ses-wave1	M	48	75.0	270.0	33.744
+sub-2220	ses-wave1	F	37	66.0	125.0	20.173
+sub-2220	ses-wave2	F	41	66.0	125.0	20.173
+sub-2231	ses-wave1	F	74			
+sub-224	ses-wave1	M	86	71.0	150.0	20.918
+sub-2248	ses-wave1	F	33	62.0	131.0	23.958
+sub-2248	ses-wave2	F	37	63.0	130.0	23.026
+sub-2248	ses-wave3	F	41			
+sub-232	ses-wave1	F	78	66.0	145.0	23.401
+sub-232	ses-wave2	F	82	66.0	140.0	22.594
+sub-232	ses-wave3	F	87			
+sub-2327	ses-wave1	F	76			
+sub-236	ses-wave1	M	70	71.0	160.0	22.313
+sub-236	ses-wave2	M	74	71.0	167.0	23.289
+sub-236	ses-wave3	M	80			
+sub-2440	ses-wave1	M	67	69.0	152.0	22.444
+sub-2440	ses-wave2	M	71	69.0	153.0	22.592
+sub-2440	ses-wave3	M	75			
+sub-245	ses-wave1	F	65	66.0	185.0	29.857
+sub-245	ses-wave2	F	69	66.0	190.0	30.663
+sub-245	ses-wave3	F	75			
+sub-252	ses-wave1	M	80	71.0	249.0	34.725
+sub-253	ses-wave1	M	83	67.0	215.0	33.67
+sub-2543	ses-wave1	F	62			
+sub-2561	ses-wave1	M	54	68.0	170.0	25.846
+sub-2561	ses-wave2	M	58	71.0	180.0	25.102
+sub-2561	ses-wave3	M	62			
+sub-257	ses-wave1	F	76	61.0	165.0	31.173
+sub-261	ses-wave1	F	82	63.0	140.0	24.797
+sub-261	ses-wave2	F	86	63.0	139.0	24.62
+sub-269	ses-wave1	F	81	65.0	160.0	26.622
+sub-274	ses-wave1	M	76	71.0	188.0	26.218
+sub-274	ses-wave2	M	80	70.0	180.0	25.824
+sub-2740	ses-wave1	F	55	64.0	145.0	24.886
+sub-2743	ses-wave1	M	72	71.0	200.0	27.891
+sub-2743	ses-wave2	M	76	70.5	210.0	29.703
+sub-2748	ses-wave1	M	68	76.0	240.0	29.211
+sub-2748	ses-wave2	M	73	76.0	230.0	27.993
+sub-2790	ses-wave1	F	62	65.5	168.0	27.528
+sub-2790	ses-wave2	F	66	65.0	166.0	27.621
+sub-2790	ses-wave3	F	70			
+sub-2813	ses-wave1	F	73	64.0	160.0	27.461
+sub-2813	ses-wave2	F	77	64.0	160.0	27.461
+sub-2819	ses-wave1	F	57	66.0	145.0	23.401
+sub-2819	ses-wave2	F	61			
+sub-2852	ses-wave1	M	68	70.0	224.0	32.137
+sub-2872	ses-wave1	F	61	64.0	130.0	22.312
+sub-2872	ses-wave2	F	65			
+sub-2872	ses-wave3	F	69			
+sub-2885	ses-wave1	F	55	62.0	150.0	27.432
+sub-2885	ses-wave2	F	58	62.0	145.0	26.518
+sub-2885	ses-wave3	F	63			
+sub-2889	ses-wave1	M	60	72.0	180.0	24.41
+sub-2893	ses-wave1	F	69	62.0	121.0	22.129
+sub-2893	ses-wave2	F	73	61.0	113.0	21.349
+sub-2909	ses-wave1	F	62	70.0	132.0	18.938
+sub-2909	ses-wave2	F	65			
+sub-2939	ses-wave1	F	69	65.0	190.0	31.614
+sub-2940	ses-wave1	F	62	64.0	190.0	32.61
+sub-2940	ses-wave2	F	66	65.0	190.0	31.614
+sub-2940	ses-wave3	F	70			
+sub-295	ses-wave1	F	71	65.0	129.0	21.464
+sub-2974	ses-wave1	F	65	65.0	160.0	26.622
+sub-2976	ses-wave1	F	69	66.0	154.0	24.854
+sub-2976	ses-wave2	F	73	66.0	154.0	24.854
+sub-2976	ses-wave3	F	78			
+sub-299	ses-wave1	F	65	67.0	186.0	29.129
+sub-3003	ses-wave1	M	67	70.0	190.0	27.259
+sub-3005	ses-wave1	F	89	63.0	128.0	22.672
+sub-3005	ses-wave2	F	92	62.0	120.0	21.946
+sub-3006	ses-wave1	M	73	72.0	195.0	26.444
+sub-3010	ses-wave1	F	77	62.0	116.0	21.214
+sub-3025	ses-wave1	F	58	64.0	160.0	27.461
+sub-3025	ses-wave2	F	61			
+sub-3025	ses-wave3	F	65			
+sub-3053	ses-wave1	M	59	73.0	184.0	24.273
+sub-3053	ses-wave2	M	64	73.0	162.0	21.371
+sub-3066	ses-wave1	F	58	65.0	155.0	25.791
+sub-3066	ses-wave2	F	62			
+sub-3066	ses-wave3	F	66			
+sub-3086	ses-wave1	F	70	63.0	190.0	33.653
+sub-3102	ses-wave1	M	67	72.0	185.0	25.088
+sub-3102	ses-wave2	M	71			
+sub-3102	ses-wave3	M	75			
+sub-3108	ses-wave1	F	54	64.0	183.0	31.408
+sub-311	ses-wave1	F	75	64.0	180.0	30.894
+sub-311	ses-wave2	F	79	63.0	195.0	34.539
+sub-3126	ses-wave1	F	70	66.0	155.0	25.015
+sub-3126	ses-wave2	F	73	66.0	150.0	24.208
+sub-3126	ses-wave3	F	78			
+sub-3131	ses-wave1	F	78	61.0	114.0	21.538
+sub-3131	ses-wave2	F	81	60.0	109.0	21.285
+sub-3131	ses-wave3	F	85			
+sub-3137	ses-wave1	F	56	64.0	175.0	30.035
+sub-3146	ses-wave1	M	71	73.5	207.0	26.937
+sub-3146	ses-wave2	M	74	73.5	215.0	27.978
+sub-3146	ses-wave3	M	79			
+sub-3163	ses-wave1	M	51	72.0	176.0	23.867
+sub-3163	ses-wave2	M	55			
+sub-318	ses-wave1	F	84	62.0	115.0	21.031
+sub-3182	ses-wave1	M	60	70.0	224.0	32.137
+sub-3182	ses-wave2	M	63	70.0	226.0	32.424
+sub-3211	ses-wave1	M	81	70.0	145.0	20.803
+sub-3211	ses-wave2	M	85			
+sub-3211	ses-wave3	M	89			
+sub-3212	ses-wave1	F	80	65.0	145.0	24.127
+sub-324	ses-wave1	F	40	67.0	190.0	29.755
+sub-324	ses-wave2	F	45	67.0	185.0	28.972
+sub-3242	ses-wave1	F	70	69.0	195.0	28.793
+sub-3242	ses-wave2	F	74	68.0	210.0	31.927
+sub-326	ses-wave1	F	62	63.0	155.0	27.454
+sub-326	ses-wave2	F	66	63.0	150.0	26.568
+sub-326	ses-wave3	F	71			
+sub-327	ses-wave1	F	41	71.0	157.0	21.895
+sub-327	ses-wave2	F	45	71.0	185.0	25.799
+sub-3306	ses-wave1	F	71	63.5	122.0	21.27
+sub-3306	ses-wave2	F	74			
+sub-3306	ses-wave3	F	78			
+sub-3319	ses-wave1	F	73	62.0	144.0	26.335
+sub-3319	ses-wave2	F	77	62.0	148.0	27.067
+sub-3319	ses-wave3	F	81			
+sub-3328	ses-wave1	M	73	68.0	155.0	23.565
+sub-3328	ses-wave2	M	77	68.0	160.0	24.325
+sub-3328	ses-wave3	M	81			
+sub-3331	ses-wave1	F	65	63.0	127.0	22.495
+sub-3334	ses-wave1	M	65	69.0	170.0	25.102
+sub-3334	ses-wave2	M	69	69.0	170.0	25.102
+sub-3334	ses-wave3	M	73			
+sub-3344	ses-wave1	M	65	69.0	185.0	27.317
+sub-335	ses-wave1	F	62	63.0	140.0	24.797
+sub-335	ses-wave2	F	67	63.25	152.0	26.71
+sub-335	ses-wave3	F	72			
+sub-3350	ses-wave1	F	56	63.0	130.0	23.026
+sub-3377	ses-wave1	M	69	70.5	180.0	25.459
+sub-3392	ses-wave1	M	69	75.0	208.0	25.995
+sub-3406	ses-wave1	F	53	66.0	151.0	24.369
+sub-341	ses-wave1	M	67	72.0	186.0	25.223
+sub-341	ses-wave2	M	71	72.0	185.0	25.088
+sub-341	ses-wave3	M	76			
+sub-3446	ses-wave1	F	52	67.0	185.0	28.972
+sub-3457	ses-wave1	F	76	68.0	150.0	22.805
+sub-3457	ses-wave2	F	80			
+sub-3457	ses-wave3	F	84			
+sub-346	ses-wave1	F	69	62.0	136.0	24.872
+sub-346	ses-wave2	F	73	62.0	142.0	25.969
+sub-346	ses-wave3	F	79			
+sub-3462	ses-wave1	M	56	72.0	227.0	30.783
+sub-349	ses-wave1	F	76	65.5	183.0	29.986
+sub-349	ses-wave2	F	80	64.0	149.0	25.573
+sub-3531	ses-wave1	F	55	67.0	175.0	27.406
+sub-3531	ses-wave2	F	58			
+sub-3531	ses-wave3	F	62			
+sub-3535	ses-wave1	M	65	70.0	207.0	29.698
+sub-3535	ses-wave2	M	69			
+sub-3537	ses-wave1	F	60	65.0	205.0	34.11
+sub-3537	ses-wave3	F	67			
+sub-3567	ses-wave1	M	63	72.0	210.0	28.478
+sub-3567	ses-wave2	M	66			
+sub-3567	ses-wave3	M	70			
+sub-3571	ses-wave1	M	51	69.0	172.0	25.397
+sub-3571	ses-wave2	M	55			
+sub-3571	ses-wave3	M	59			
+sub-3592	ses-wave1	M	54	71.0	220.0	30.68
+sub-3592	ses-wave2	M	58	71.0	218.0	30.402
+sub-3592	ses-wave3	M	62			
+sub-360	ses-wave1	M	68	67.0	168.0	26.31
+sub-360	ses-wave2	M	72	66.0	168.0	27.113
+sub-360	ses-wave3	M	77			
+sub-3608	ses-wave1	M	69	72.0	190.0	25.766
+sub-3608	ses-wave2	M	73			
+sub-3608	ses-wave3	M	77			
+sub-361	ses-wave1	F	64	61.0	150.0	28.339
+sub-361	ses-wave3	F	73			
+sub-3621	ses-wave1	F	62	67.5	166.0	25.613
+sub-3639	ses-wave1	F	67	64.0	184.0	31.58
+sub-3639	ses-wave2	F	70			
+sub-3653	ses-wave1	F	63	66.5	165.0	26.23
+sub-3653	ses-wave2	F	66			
+sub-3653	ses-wave3	F	70			
+sub-3658	ses-wave1	M	62	74.0	210.0	26.959
+sub-3658	ses-wave2	M	66			
+sub-3658	ses-wave3	M	70			
+sub-3660	ses-wave1	F	63	69.0	230.0	33.961
+sub-3660	ses-wave2	F	66	69.0	231.0	34.109
+sub-3660	ses-wave3	F	71			
+sub-3693	ses-wave1	F	62	66.0	167.0	26.952
+sub-3693	ses-wave2	F	65			
+sub-3727	ses-wave1	M	62	70.0	145.0	20.803
+sub-3727	ses-wave2	M	66			
+sub-3737	ses-wave1	F	51	65.0	152.0	25.291
+sub-3744	ses-wave1	M	70	73.0	225.0	29.682
+sub-3744	ses-wave2	M	74			
+sub-3744	ses-wave3	M	77			
+sub-376	ses-wave1	F	71	65.0	184.0	30.616
+sub-376	ses-wave2	F	75	65.0	192.0	31.947
+sub-378	ses-wave1	F	73	64.0	140.0	24.028
+sub-378	ses-wave2	F	77	63.0	150.0	26.568
+sub-3799	ses-wave1	M	53	72.0	241.0	32.682
+sub-381	ses-wave1	F	64	66.0	155.0	25.015
+sub-383	ses-wave1	F	71	64.0	166.0	28.491
+sub-383	ses-wave2	F	75	64.0	168.0	28.834
+sub-383	ses-wave3	F	80			
+sub-3841	ses-wave1	F	62	63.0	129.0	22.849
+sub-3846	ses-wave1	F	74	64.0	160.0	27.461
+sub-3846	ses-wave2	F	78			
+sub-3863	ses-wave1	F	61	67.0	165.0	25.84
+sub-3863	ses-wave2	F	64			
+sub-3863	ses-wave3	F	68			
+sub-3898	ses-wave1	M	70	72.0	214.0	29.02
+sub-3898	ses-wave2	M	75			
+sub-3899	ses-wave1	F	75	63.0	177.0	31.351
+sub-3899	ses-wave2	F	79			
+sub-3907	ses-wave1	M	78	68.0	150.0	22.805
+sub-3911	ses-wave1	F	51	67.0	143.0	22.395
+sub-3911	ses-wave2	F	55			
+sub-3911	ses-wave3	F	59			
+sub-3946	ses-wave1	F	74	66.0	175.0	28.243
+sub-3946	ses-wave2	F	76	66.0	170.0	27.436
+sub-3946	ses-wave3	F	81			
+sub-3983	ses-wave1	F	62	64.0	172.0	29.521
+sub-3999	ses-wave1	F	57	66.0	195.0	31.47
+sub-4030	ses-wave1	F	66	62.0	185.0	33.833
+sub-4033	ses-wave1	M	59	74.0	270.0	34.662
+sub-4033	ses-wave2	M	63			
+sub-408	ses-wave1	M	87	61.0	170.0	32.118
+sub-408	ses-wave2	M	91	70.0	152.0	21.807
+sub-409	ses-wave1	F	68	65.0	207.0	34.443
+sub-409	ses-wave2	F	72	65.5	210.0	34.411
+sub-4104	ses-wave1	F	56	62.0	190.0	34.748
+sub-4104	ses-wave2	F	60			
+sub-4129	ses-wave1	F	58	68.0	210.0	31.927
+sub-4129	ses-wave2	F	62			
+sub-4165	ses-wave1	F	72	62.0	135.0	24.689
+sub-4169	ses-wave1	F	74	62.0	150.0	27.432
+sub-4169	ses-wave2	F	77			
+sub-4172	ses-wave1	M	55	72.0	130.0	17.629
+sub-4172	ses-wave2	M	59			
+sub-419	ses-wave1	F	70	63.0	130.0	23.026
+sub-419	ses-wave2	F	74	63.0	121.0	21.432
+sub-4195	ses-wave1	M	70	72.0	140.0	18.985
+sub-4196	ses-wave1	M	83	75.0	218.0	27.245
+sub-4196	ses-wave2	M	86			
+sub-4196	ses-wave3	M	90			
+sub-4240	ses-wave1	M	75	73.0	195.0	25.724
+sub-4240	ses-wave2	M	79			
+sub-4245	ses-wave1	F	51	68.0	150.0	22.805
+sub-4265	ses-wave1	F	68	64.0	160.0	27.461
+sub-4265	ses-wave2	F	72			
+sub-4288	ses-wave1	F	70	63.0	140.0	24.797
+sub-4288	ses-wave2	F	73			
+sub-4301	ses-wave1	F	69	61.0	152.0	28.717
+sub-4301	ses-wave2	F	72			
+sub-4312	ses-wave1	F	66	64.0	170.0	29.177
+sub-4312	ses-wave2	F	70			
+sub-4312	ses-wave3	F	73			
+sub-4315	ses-wave1	M	77	69.0	188.0	27.76
+sub-4315	ses-wave2	M	80	70.0	184.0	26.398
+sub-4315	ses-wave3	M	84			
+sub-4328	ses-wave1	M	82	65.0	145.0	24.127
+sub-4328	ses-wave2	M	85			
+sub-4328	ses-wave3	M	88			
+sub-4329	ses-wave1	F	79	66.0	150.0	24.208
+sub-4362	ses-wave1	F	67	61.0	165.0	31.173
+sub-4394	ses-wave1	M	51	67.0	220.0	34.453
+sub-4394	ses-wave2	M	55			
+sub-4394	ses-wave3	M	58			
+sub-4398	ses-wave1	M	71	71.0	215.0	29.983
+sub-4451	ses-wave1	M	53	70.0	180.0	25.824
+sub-4451	ses-wave2	M	56			
+sub-4451	ses-wave3	M	60			
+sub-4461	ses-wave1	M	64	67.0	190.0	29.755
+sub-4461	ses-wave2	M	67			
+sub-4461	ses-wave3	M	71			
+sub-4467	ses-wave1	M	87	72.0	190.0	25.766
+sub-4488	ses-wave1	F	73			
+sub-4488	ses-wave2	F	77			
+sub-4507	ses-wave1	M	76	77.0	200.0	23.714
+sub-4539	ses-wave1	F	81	60.0	115.0	22.457
+sub-4540	ses-wave1	F	79			
+sub-4540	ses-wave2	F	83			
+sub-4556	ses-wave1	M	68	69.0	183.0	27.021
+sub-4565	ses-wave1	F	85	63.0	104.0	18.421
+sub-4565	ses-wave2	F	89			
+sub-4575	ses-wave1	M	85	71.0	175.0	24.405
+sub-458	ses-wave1	F	24	64.0	130.0	22.312
+sub-4581	ses-wave1	F	73	68.0	162.0	24.629
+sub-4581	ses-wave2	F	76			
+sub-4581	ses-wave3	F	79			
+sub-4582	ses-wave1	F	78	67.5	190.0	29.316
+sub-4582	ses-wave2	F	82			
+sub-4582	ses-wave3	F	85			
+sub-4586	ses-wave1	M	82	72.0	184.0	24.952
+sub-4607	ses-wave1	M	72	68.0	160.0	24.325
+sub-4607	ses-wave2	M	77			
+sub-4613	ses-wave1	M	79	76.0	239.0	29.089
+sub-4613	ses-wave2	M	83			
+sub-4615	ses-wave1	M	75	72.0	205.0	27.8
+sub-4615	ses-wave2	M	78			
+sub-4629	ses-wave1	F	74	67.0	125.0	19.576
+sub-4641	ses-wave1	F	71	66.0	162.0	26.145
+sub-4641	ses-wave2	F	74			
+sub-4641	ses-wave3	F	78			
+sub-465	ses-wave1	F	51	68.0	161.0	24.477
+sub-465	ses-wave2	F	55	68.0	154.0	23.413
+sub-465	ses-wave3	F	61			
+sub-4658	ses-wave1	F	72	65.0	155.0	25.791
+sub-4658	ses-wave2	F	75			
+sub-4659	ses-wave1	F	77	62.0	123.0	22.495
+sub-466	ses-wave1	F	23	64.0	100.0	17.163
+sub-466	ses-wave2	F	27	64.0	115.0	19.738
+sub-466	ses-wave3	F	32			
+sub-4660	ses-wave1	F	66	65.0	202.0	33.611
+sub-4664	ses-wave1	M	73	65.5	130.0	21.302
+sub-4664	ses-wave2	M	77			
+sub-4679	ses-wave1	M	70	72.0	195.0	26.444
+sub-4679	ses-wave2	M	74			
+sub-4679	ses-wave3	M	77			
+sub-4682	ses-wave1	M	53	69.0	180.0	26.578
+sub-4682	ses-wave2	M	56			
+sub-4684	ses-wave1	M	57	67.0	212.0	33.2
+sub-4684	ses-wave2	M	60			
+sub-4691	ses-wave1	M	71	66.0	180.0	29.05
+sub-4691	ses-wave2	M	75			
+sub-470	ses-wave1	F	25	63.0	125.0	22.14
+sub-470	ses-wave3	F	35			
+sub-4722	ses-wave1	F	57	60.0	155.0	30.268
+sub-4727	ses-wave1	M	65	70.0	200.0	28.694
+sub-4737	ses-wave1	M	55	74.0	198.0	25.419
+sub-4737	ses-wave2	M	59			
+sub-474	ses-wave1	F	62	70.0	190.0	27.259
+sub-4743	ses-wave1	F	57	62.0	136.0	24.872
+sub-4743	ses-wave2	F	60			
+sub-4749	ses-wave1	F	57	60.0	188.0	36.712
+sub-4749	ses-wave2	F	61			
+sub-4754	ses-wave1	M	53	71.0	210.0	29.286
+sub-476	ses-wave1	M	87	71.0	168.0	23.429
+sub-4769	ses-wave1	F	56	64.0	118.0	20.252
+sub-4769	ses-wave2	F	60			
+sub-4769	ses-wave3	F	63			
+sub-4788	ses-wave1	F	66	60.0	104.0	20.309
+sub-4788	ses-wave2	F	69			
+sub-4791	ses-wave1	F	57			
+sub-4794	ses-wave1	F	71	62.0	186.0	34.016
+sub-4795	ses-wave1	F	58	71.0	140.0	19.524
+sub-4795	ses-wave2	F	62			
+sub-4795	ses-wave3	F	65			
+sub-4799	ses-wave1	F	61	63.0	124.0	21.963
+sub-4800	ses-wave1	F	54	69.0	185.0	27.317
+sub-4800	ses-wave2	F	58			
+sub-4805	ses-wave1	F	63	64.0	155.0	26.603
+sub-4828	ses-wave1	M	71	67.25	210.0	32.643
+sub-483	ses-wave1	F	81	64.0	180.0	30.894
+sub-483	ses-wave2	F	85	63.0	178.0	31.528
+sub-4841	ses-wave1	F	67	66.0	148.0	23.885
+sub-4841	ses-wave2	F	70			
+sub-4847	ses-wave1	F	70	69.0	220.0	32.485
+sub-4847	ses-wave2	F	74			
+sub-4847	ses-wave3	F	77			
+sub-4868	ses-wave1	F	64	64.0	145.0	24.886
+sub-4868	ses-wave2	F	67			
+sub-4868	ses-wave3	F	70			
+sub-4869	ses-wave1	M	74	72.0	210.0	28.478
+sub-4869	ses-wave2	M	77			
+sub-4869	ses-wave3	M	80			
+sub-4876	ses-wave1	F	63	61.0	141.0	26.639
+sub-4876	ses-wave2	F	67			
+sub-4876	ses-wave3	F	70			
+sub-49	ses-wave1	F	70			
+sub-49	ses-wave2	F	74	65.0	134.0	22.296
+sub-492	ses-wave1	F	70	63.0	135.0	23.912
+sub-492	ses-wave2	F	74	63.0	137.0	24.266
+sub-495	ses-wave1	M	69	69.0	186.0	27.464
+sub-503	ses-wave1	F	67	64.0	190.0	32.61
+sub-503	ses-wave2	F	72	64.0	190.0	32.61
+sub-503	ses-wave3	F	78			
+sub-509	ses-wave1	F	61	62.0	113.0	20.666
+sub-509	ses-wave2	F	65	61.0	105.0	19.837
+sub-509	ses-wave3	F	71			
+sub-520	ses-wave1	F	60	70.0	135.0	19.368
+sub-520	ses-wave2	F	64	71.0	128.0	17.85
+sub-528	ses-wave1	M	69	72.0	220.0	29.834
+sub-528	ses-wave2	M	73	72.0	200.0	27.122
+sub-532	ses-wave1	M	64	72.0	240.0	32.546
+sub-532	ses-wave2	M	68	72.0	245.0	33.224
+sub-543	ses-wave1	M	67	67.0	150.0	23.491
+sub-543	ses-wave2	M	71	67.0	145.0	22.708
+sub-557	ses-wave1	F	61	63.0	145.0	25.683
+sub-557	ses-wave2	F	65	64.0	140.0	24.028
+sub-557	ses-wave3	F	71			
+sub-562	ses-wave1	M	75	72.0	197.0	26.715
+sub-562	ses-wave2	M	79	72.0	200.0	27.122
+sub-562	ses-wave3	M	85			
+sub-567	ses-wave1	F	29	66.0	159.0	25.66
+sub-567	ses-wave2	F	33	66.0	167.0	26.952
+sub-575	ses-wave1	F	54	65.0	155.0	25.791
+sub-575	ses-wave2	F	58	65.0	170.0	28.286
+sub-575	ses-wave3	F	63			
+sub-580	ses-wave1	M	24	71.0	200.0	27.891
+sub-584	ses-wave1	M	37	73.0	205.0	27.044
+sub-587	ses-wave1	F	49	65.0	185.0	30.782
+sub-587	ses-wave2	F	53	65.0	185.0	30.782
+sub-591	ses-wave1	F	51	66.0	176.0	28.404
+sub-591	ses-wave2	F	55	66.0	184.0	29.695
+sub-591	ses-wave3	F	60			
+sub-595	ses-wave1	F	60	63.0	155.0	27.454
+sub-595	ses-wave2	F	64	64.0	168.0	28.834
+sub-595	ses-wave3	F	70			
+sub-599	ses-wave1	M	80	67.0	165.0	25.84
+sub-604	ses-wave1	M	75	69.0	173.0	25.545
+sub-604	ses-wave2	M	79	69.0	183.0	27.021
+sub-604	ses-wave3	M	85			
+sub-606	ses-wave1	M	71	70.0	174.0	24.964
+sub-606	ses-wave2	M	75	69.0	164.0	24.216
+sub-609	ses-wave1	M	66	76.0	215.0	26.168
+sub-61	ses-wave1	F	55	66.0	150.0	24.208
+sub-61	ses-wave2	F	59	66.5	165.0	26.23
+sub-611	ses-wave1	F	54	63.75	158.0	27.331
+sub-611	ses-wave2	F	58	63.0	168.0	29.757
+sub-611	ses-wave3	F	63			
+sub-612	ses-wave1	F	21	70.0	130.0	18.651
+sub-612	ses-wave2	F	25	70.0	125.0	17.934
+sub-615	ses-wave1	M	21	72.0	140.0	18.985
+sub-616	ses-wave1	M	21	71.0	165.0	23.01
+sub-634	ses-wave1	M	23	71.0	225.0	31.378
+sub-634	ses-wave2	M	27	71.0	215.0	29.983
+sub-634	ses-wave3	M	32			
+sub-639	ses-wave1	F	59	64.0	150.0	25.745
+sub-639	ses-wave2	F	63	64.0	145.0	24.886
+sub-665	ses-wave1	M	25	69.0	174.0	25.693
+sub-671	ses-wave1	F	66	67.0	175.0	27.406
+sub-671	ses-wave2	F	70	67.0	190.0	29.755
+sub-674	ses-wave1	M	65	69.0	170.0	25.102
+sub-674	ses-wave2	M	69	69.0	175.0	25.84
+sub-674	ses-wave3	M	73			
+sub-676	ses-wave1	F	81	65.0	147.0	24.459
+sub-680	ses-wave1	M	65	72.0	205.0	27.8
+sub-680	ses-wave2	M	69	72.0	205.0	27.8
+sub-680	ses-wave3	M	74			
+sub-684	ses-wave1	F	73	64.0	139.0	23.857
+sub-684	ses-wave2	F	77	64.0	140.0	24.028
+sub-684	ses-wave3	F	82			
+sub-688	ses-wave1	M	67	71.0	193.0	26.915
+sub-688	ses-wave2	M	71	71.0	185.0	25.799
+sub-688	ses-wave3	M	77			
+sub-695	ses-wave1	F	68	67.0	185.0	28.972
+sub-695	ses-wave2	F	73	67.0	185.0	28.972
+sub-695	ses-wave3	F	78			
+sub-719	ses-wave1	F	63	63.0	172.0	30.465
+sub-719	ses-wave2	F	67	63.0	180.0	31.882
+sub-719	ses-wave3	F	72			
+sub-741	ses-wave1	F	33	62.0	165.0	30.176
+sub-741	ses-wave2	F	37	62.0	185.0	33.833
+sub-741	ses-wave3	F	42			
+sub-746	ses-wave1	F	43	66.0	130.0	20.98
+sub-746	ses-wave3	F	53			
+sub-752	ses-wave1	F	83	62.0	142.0	25.969
+sub-752	ses-wave2	F	87	60.0	134.0	26.167
+sub-754	ses-wave1	F	61			
+sub-754	ses-wave2	F	65	67.0	160.0	25.057
+sub-760	ses-wave1	M	81	66.0	144.0	23.24
+sub-770	ses-wave1	M	74	74.0	180.0	23.108
+sub-770	ses-wave2	M	78	73.0	178.0	23.482
+sub-770	ses-wave3	M	84			
+sub-772	ses-wave1	M	71	70.5	190.0	26.874
+sub-772	ses-wave2	M	75	70.5	200.0	28.288
+sub-772	ses-wave3	M	80			
+sub-779	ses-wave1	F	47	60.0	155.0	30.268
+sub-779	ses-wave2	F	51	60.0	138.0	26.948
+sub-779	ses-wave3	F	56			
+sub-784	ses-wave1	F	51	72.0	170.0	23.054
+sub-784	ses-wave2	F	55	72.0	200.0	27.122
+sub-784	ses-wave3	F	60			
+sub-799	ses-wave1	F	63	67.0	132.0	20.672
+sub-799	ses-wave2	F	67	67.0	135.0	21.142
+sub-799	ses-wave3	F	73			
+sub-80	ses-wave1	M	41	73.0	195.0	25.724
+sub-80	ses-wave2	M	45	73.0	185.0	24.405
+sub-801	ses-wave1	F	51	65.0	130.0	21.631
+sub-801	ses-wave3	F	60			
+sub-81	ses-wave1	F	41	65.0	114.0	18.969
+sub-81	ses-wave2	F	45	65.0	122.0	20.3
+sub-812	ses-wave1	F	57	65.0	195.0	32.446
+sub-812	ses-wave2	F	61	65.0	170.0	28.286
+sub-812	ses-wave3	F	66			
+sub-815	ses-wave1	F	40	64.0	145.0	24.886
+sub-815	ses-wave2	F	44	64.0	145.0	24.886
+sub-815	ses-wave3	F	49			
+sub-817	ses-wave1	F	45	66.0	200.0	32.277
+sub-817	ses-wave2	F	49	66.0	226.0	36.473
+sub-817	ses-wave3	F	55			
+sub-818	ses-wave1	F	49	64.0	170.0	29.177
+sub-818	ses-wave2	F	54			
+sub-819	ses-wave1	M	83	69.0	125.0	18.457
+sub-823	ses-wave1	F	78	64.5	115.0	19.433
+sub-823	ses-wave2	F	81	64.0	110.0	18.879
+sub-823	ses-wave3	F	87			
+sub-829	ses-wave1	M	50	75.0	195.0	24.371
+sub-829	ses-wave2	M	54			
+sub-829	ses-wave3	M	59			
+sub-831	ses-wave1	F	60	67.0	125.0	19.576
+sub-831	ses-wave2	F	64	66.0	122.0	19.689
+sub-831	ses-wave3	F	69			
+sub-832	ses-wave1	M	52	69.0	200.0	29.532
+sub-833	ses-wave1	F	71	64.0	138.0	23.685
+sub-833	ses-wave2	F	75	63.0	135.0	23.912
+sub-833	ses-wave3	F	81			
+sub-835	ses-wave1	F	37	66.0	155.0	25.015
+sub-835	ses-wave2	F	42	66.75	170.0	26.823
+sub-835	ses-wave3	F	46			
+sub-836	ses-wave1	F	54	65.0	150.0	24.959
+sub-841	ses-wave1	F	50	64.0	114.0	19.566
+sub-841	ses-wave2	F	54	64.0	113.0	19.394
+sub-841	ses-wave3	F	59			
+sub-843	ses-wave1	M	74	69.0	165.0	24.364
+sub-849	ses-wave1	M	33	70.0	183.0	26.255
+sub-849	ses-wave2	M	38	70.0	175.0	25.107
+sub-849	ses-wave3	M	43			
+sub-860	ses-wave1	F	81	64.0	130.0	22.312
+sub-860	ses-wave2	F	85	63.0	135.0	23.912
+sub-860	ses-wave3	F	90			
+sub-865	ses-wave1	F	81	63.0	130.0	23.026
+sub-867	ses-wave1	M	84	66.0	168.0	27.113
+sub-867	ses-wave2	M	88	66.0	155.0	25.015
+sub-872	ses-wave1	F	60	62.0	135.0	24.689
+sub-872	ses-wave2	F	64	62.0	135.0	24.689
+sub-872	ses-wave3	F	69			
+sub-881	ses-wave1	F	71	64.0	165.0	28.319
+sub-881	ses-wave2	F	75	64.0	141.0	24.2
+sub-883	ses-wave1	F	46	65.0	110.0	18.303
+sub-883	ses-wave2	F	50	65.0	110.0	18.303
+sub-884	ses-wave1	F	25	68.0	161.0	24.477
+sub-884	ses-wave2	F	29	69.0	170.0	25.102
+sub-884	ses-wave3	F	34			
+sub-886	ses-wave1	F	50	64.0	120.0	20.596
+sub-889	ses-wave1	F	41	62.0	116.0	21.214
+sub-889	ses-wave2	F	45	62.0	120.0	21.946
+sub-889	ses-wave3	F	50			
+sub-890	ses-wave1	M	71	70.0	155.0	22.238
+sub-890	ses-wave2	M	75	71.0	165.0	23.01
+sub-891	ses-wave1	M	26	72.0	230.0	31.19
+sub-891	ses-wave2	M	30	72.0	225.0	30.512
+sub-891	ses-wave3	M	36			
+sub-898	ses-wave1	F	50	61.0	125.0	23.616
+sub-898	ses-wave2	F	54	61.0	125.0	23.616
+sub-898	ses-wave3	F	59			
+sub-92	ses-wave1	M	53	71.0	175.0	24.405
+sub-92	ses-wave2	M	57	71.0	180.0	25.102
+sub-92	ses-wave3	M	63			
+sub-927	ses-wave1	F	38	60.0	117.0	22.848
+sub-927	ses-wave2	F	43	60.0	120.0	23.433
+sub-927	ses-wave3	F	48			
+sub-929	ses-wave1	F	29	62.0	191.0	34.931
+sub-929	ses-wave2	F	33	62.0	223.0	40.783
+sub-934	ses-wave1	F	55	66.0	150.0	24.208
+sub-934	ses-wave2	F	59	65.0	130.0	21.631
+sub-934	ses-wave3	F	64			
+sub-935	ses-wave1	M	86	73.0	171.0	22.558
+sub-935	ses-wave2	M	90	72.0	168.0	22.782
+sub-940	ses-wave1	F	57	64.0	168.0	28.834
+sub-940	ses-wave2	F	62	64.0	160.0	27.461
+sub-940	ses-wave3	F	67			
+sub-941	ses-wave1	F	52	68.0	173.0	26.302
+sub-941	ses-wave3	F	61			
+sub-943	ses-wave1	M	46	68.0	190.0	28.886
+sub-943	ses-wave2	M	50	69.0	200.0	29.532
+sub-946	ses-wave1	M	48	70.0	180.0	25.824
+sub-953	ses-wave1	F	84	70.0	178.0	25.538
+sub-953	ses-wave2	F	88	70.0	163.0	23.386
+sub-961	ses-wave1	M	21	75.0	250.0	31.244
+sub-961	ses-wave2	M	25	76.0	260.0	31.645
+sub-965	ses-wave1	F	53	67.0	140.0	21.925
+sub-974	ses-wave1	M	48	72.0	253.0	34.309
+sub-974	ses-wave2	M	52	72.0	255.0	34.58
+sub-974	ses-wave3	M	57			
+sub-975	ses-wave1	F	29	61.0	185.0	34.952
+sub-976	ses-wave1	F	48	64.0	151.0	25.916
+sub-976	ses-wave2	F	52	64.0	165.0	28.319
+sub-976	ses-wave3	F	57			
+sub-978	ses-wave1	M	53	69.0	165.0	24.364
+sub-980	ses-wave1	M	54	66.0	180.0	29.05
+sub-988	ses-wave1	F	23	63.0	145.0	25.683
+sub-988	ses-wave2	F	27	63.0	140.0	24.797
+sub-988	ses-wave3	F	33			
+sub-989	ses-wave1	M	26	77.0	190.0	22.528
+sub-989	ses-wave2	M	30	77.0	185.0	21.935
+sub-989	ses-wave3	M	36			
+sub-998	ses-wave1	F	25	66.0	140.0	22.594
+sub-998	ses-wave2	F	29			
