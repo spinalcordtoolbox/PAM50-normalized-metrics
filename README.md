@@ -1,6 +1,6 @@
 # PAM50 normalized metrics
 
-This repository contains morphometric measures in the [PAM50](https://pubmed.ncbi.nlm.nih.gov/29061527/) anatomical dimensions computed from healthy adult volunteers and children across multiple datasets.
+This repository contains morphometric measures in the [PAM50](https://pubmed.ncbi.nlm.nih.gov/29061527/) anatomical dimensions computed from adults (healthy controls and patients) and children across multiple datasets.
 
 👉 If you find this work and/or code useful for your research, please cite our paper:
 
