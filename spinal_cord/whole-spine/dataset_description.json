@@ -1,5 +1,6 @@
 {
     "name": "whole-spine",
+    "order": 3,
     "coverage": "whole spine",
     "contrast": "T2w",
     "resolution": "1.0mm iso",

@@ -1,5 +1,6 @@
 {
     "name": "spine-generic multi-subject",
+    "order": 2,
     "coverage": "cervical spine",
     "contrast": "T2w",
     "resolution": "0.8mm iso",
