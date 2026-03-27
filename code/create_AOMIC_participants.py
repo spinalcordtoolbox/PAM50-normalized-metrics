@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Create participants.tsv and dataset_description.json for the AOMIC dataset.
+Create participants.tsv for the AOMIC dataset.
 
 AOMIC (Amsterdam Open MRI Collection) comprises three sub-datasets that are
 all stored under spinal_cord/AOMIC/ with distinct subject-ID prefixes:
@@ -15,7 +15,6 @@ The script:
   3. Retains only rows whose participant_id has a corresponding CSV file in
      spinal_cord/AOMIC/
   4. Combines the three sub-datasets and writes participants.tsv
-  5. Writes dataset_description.json
 
 Usage:
     python code/create_AOMIC_participants.py
@@ -24,7 +23,6 @@ Requirements:
     pip install pandas requests
 """
 
-import json
 import sys
 import requests
 import pandas as pd
@@ -56,19 +54,6 @@ SUBDATASETS = [
     },
 ]
 
-DATASET_DESCRIPTION = {
-    "name": "AOMIC",
-    "order": 5,
-    "coverage": "cervical spine",
-    "contrast": "T1w",
-    "resolution": "1.0mm iso",
-    "links": [
-        {"link": "https://openneuro.org/datasets/ds003097", "link_text": "openneuro/ds003097"},
-        {"link": "https://openneuro.org/datasets/ds002785", "link_text": "openneuro/ds002785"},
-        {"link": "https://openneuro.org/datasets/ds002790", "link_text": "openneuro/ds002790"},
-    ],
-    "population": "healthy adults",
-}
 # ---------------------------------------------------------------------------
 
 
@@ -136,17 +121,6 @@ def main():
     out_tsv = aomic_dir / "participants.tsv"
     combined.to_csv(out_tsv, sep="\t", index=False)
     print(f"\nWritten {len(combined)} rows → {out_tsv.relative_to(repo_root)}")
-
-    # Write dataset_description.json (preserve existing order field)
-    out_json = aomic_dir / "dataset_description.json"
-    if out_json.exists():
-        with open(out_json) as f:
-            existing = json.load(f)
-        DATASET_DESCRIPTION["order"] = existing.get("order", DATASET_DESCRIPTION["order"])
-    with open(out_json, "w") as f:
-        json.dump(DATASET_DESCRIPTION, f, indent=4)
-        f.write("\n")
-    print(f"Written: {out_json.relative_to(repo_root)}")
 
 
 if __name__ == "__main__":

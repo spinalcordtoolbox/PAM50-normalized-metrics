@@ -119,6 +119,14 @@ Each CSV file contains per-slice morphometric measures for one subject, normaliz
     }
     ```
 
+    For datasets available on [OpenNeuro](https://openneuro.org/), a dedicated script under `code/` can be used to fetch participant metadata (sex, age, and other demographics) and generate `participants.tsv` automatically. For example:
+
+    ```console
+    python code/create_<dataset>_participants.py
+    ```
+
+    These scripts fetch `participants.tsv` from the dataset's OpenNeuro GitHub mirror, filter to subjects with available CSV files, and write `participants.tsv` to the dataset folder.
+
 2. **Regenerate `datasets.tsv` and update README** — run the script from the repository root; it will auto-compute subject counts, sex, and age statistics from `participants.tsv`, fetch the dataset metadata from `dataset_description.json`, and automatically update the summary table in the [Datasets Overview](#datasets-overview) section above:
 
     ```console

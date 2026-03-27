@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Create participants.tsv and dataset_description.json for the DLBS dataset.
+Create participants.tsv for the DLBS dataset.
 
 DLBS (Dallas Lifespan Brain Study) is a longitudinal dataset with up to three
 imaging waves. Subjects are identified as sub-XXXX and sessions as ses-wave1,
@@ -13,7 +13,6 @@ The script:
   3. Retains only rows whose (participant_id, session_id) pair has a
      corresponding CSV file in spinal_cord/DLBS/
   4. Writes the result to spinal_cord/DLBS/participants.tsv
-  5. Writes spinal_cord/DLBS/dataset_description.json
 
 Usage:
     python code/create_DLBS_participants.py
@@ -22,7 +21,6 @@ Requirements:
     pip install pandas requests
 """
 
-import json
 import sys
 import requests
 import pandas as pd
@@ -48,16 +46,6 @@ WAVE_TO_SESSION = {
     "W3": "ses-wave3",
 }
 
-DATASET_DESCRIPTION = {
-    "name": "DLBS",
-    "order": 6,
-    "coverage": "cervical spine",
-    "contrast": "T1w",
-    "resolution": "1.0mm iso",
-    "link": f"https://openneuro.org/datasets/{DATASET_ID}",
-    "link_text": f"openneuro/{DATASET_ID}",
-    "population": "healthy adults",
-}
 # ---------------------------------------------------------------------------
 
 
@@ -133,17 +121,6 @@ def main():
     out_tsv = dlbs_dir / "participants.tsv"
     session_df.to_csv(out_tsv, sep="\t", index=False)
     print(f"\nWritten {len(session_df)} rows → {out_tsv.relative_to(repo_root)}")
-
-    # 5. Write dataset_description.json (preserve existing order field)
-    out_json = dlbs_dir / "dataset_description.json"
-    if out_json.exists():
-        with open(out_json) as f:
-            existing = json.load(f)
-        DATASET_DESCRIPTION["order"] = existing.get("order", DATASET_DESCRIPTION["order"])
-    with open(out_json, "w") as f:
-        json.dump(DATASET_DESCRIPTION, f, indent=4)
-        f.write("\n")
-    print(f"Written: {out_json.relative_to(repo_root)}")
 
 
 if __name__ == "__main__":
