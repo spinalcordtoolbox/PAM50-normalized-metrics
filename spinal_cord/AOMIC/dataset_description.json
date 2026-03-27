@@ -1,0 +1,22 @@
+{
+    "name": "AOMIC",
+    "order": 5,
+    "coverage": "cervical spine",
+    "contrast": "T1w",
+    "resolution": "1.0mm iso",
+    "links": [
+        {
+            "link": "https://openneuro.org/datasets/ds003097",
+            "link_text": "openneuro/ds003097"
+        },
+        {
+            "link": "https://openneuro.org/datasets/ds002785",
+            "link_text": "openneuro/ds002785"
+        },
+        {
+            "link": "https://openneuro.org/datasets/ds002790",
+            "link_text": "openneuro/ds002790"
+        }
+    ],
+    "population": "healthy adults"
+}
