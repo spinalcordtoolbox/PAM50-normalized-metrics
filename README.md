@@ -1,10 +1,8 @@
 # PAM50 normalized metrics
 
-This repository contains morphometric measures in the [PAM50](https://pubmed.ncbi.nlm.nih.gov/29061527/) anatomical dimensions computed from 203 healthy adult volunteers.
+This repository contains morphometric measures in the [PAM50](https://pubmed.ncbi.nlm.nih.gov/29061527/) anatomical dimensions computed from adults (healthy controls and patients) and children across multiple datasets.
 
- - `spinal_cord` directory - CSV files of spinal cord morphometric measures
-
-👉 Please cite this work if you use it or if you are inspired by it:
+👉 If you find this work and/or code useful for your research, please cite our paper:
 
 ```
 Valošek, Bédard et al., (2024). A database of the healthy human spinal cord morphometry in the PAM50 template space. Imaging Neuroscience, 2 1–15, https://doi.org/10.1162/imag_a_00075
