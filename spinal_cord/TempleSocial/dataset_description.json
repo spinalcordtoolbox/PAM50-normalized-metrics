@@ -1,0 +1,10 @@
+{
+    "name": "TempleSocial",
+    "order": 8,
+    "coverage": "cervical spine",
+    "contrast": "T1w",
+    "resolution": "1.0mm iso",
+    "link": "https://openneuro.org/datasets/ds005123",
+    "link_text": "openneuro/ds005123",
+    "population": "healthy adults"
+}

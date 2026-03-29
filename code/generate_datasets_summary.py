@@ -97,7 +97,13 @@ def load_description(dataset_dir):
     else:
         print(f'  WARNING: {json_path} not found — using placeholders.')
         meta = {}
-    return {col: meta.get(col, PLACEHOLDER) for col in MANUAL_COLUMNS}
+    result = {col: meta.get(col, PLACEHOLDER) for col in MANUAL_COLUMNS}
+    if 'links' in meta:
+        result['links'] = meta['links']
+        # Store all URLs joined by ', ' in the 'link' column of datasets.tsv
+        result['link'] = ', '.join(e['link'] for e in meta['links'])
+        result['link_text'] = ', '.join(e['link_text'] for e in meta['links'])
+    return result
 
 
 def build_readme_table(rows):
@@ -112,7 +118,13 @@ def build_readme_table(rows):
             age = PLACEHOLDER
         else:
             age = f"{r['age_mean']}\u00b1{r['age_std']} [{r['age_min']}\u2013{r['age_max']}]"
-        link = f"[{r['link_text']}]({r['link']})" if r['link'] != PLACEHOLDER else PLACEHOLDER
+        # Support multiple links via optional 'links' list of {link, link_text} dicts
+        if r.get('links'):
+            link = ', '.join(f"[{e['link_text']}]({e['link']})" for e in r['links'])
+        elif r['link'] != PLACEHOLDER:
+            link = f"[{r['link_text']}]({r['link']})"
+        else:
+            link = PLACEHOLDER
         lines.append(
             f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sessions']} | {r['num_sites']} "
             f"| {r['population']} | {sex} | {age} | {r['coverage']} | {r['contrast']} "

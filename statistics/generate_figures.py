@@ -1312,6 +1312,8 @@ def read_csv_files(path_HC, participant_file=None, dataset_name=None):
             if 'session_id' not in cols_to_merge:
                 cols_to_merge.append('session_id')
         df = df.merge(df_participants[cols_to_merge], on=merge_keys)
+        # Replace 'n/a' placeholder strings with NaN so downstream numeric operations work correctly
+        df = df.replace({'n/a': np.nan})
     # Print number of subjects
     print(f'Number of subjects: {str(len(subjects))}\n')
     return df, df_participants, subjects
