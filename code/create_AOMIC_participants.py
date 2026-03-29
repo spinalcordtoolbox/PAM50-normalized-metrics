@@ -113,7 +113,12 @@ def main():
         df["age"] = pd.to_numeric(df["age"], errors="coerce")
         df["BMI"] = pd.to_numeric(df["BMI"], errors="coerce")
 
-        all_rows.append(df[["participant_id", "sex", "age", "BMI"]])
+        # All AOMIC sub-datasets consist of healthy adults (verified on OpenNeuro):
+        # https://openneuro.org/datasets/ds003097 (ID1000)
+        # https://openneuro.org/datasets/ds002785 (PIOP1)
+        # https://openneuro.org/datasets/ds002790 (PIOP2)
+        df["pathology"] = "HC"
+        all_rows.append(df[["participant_id", "sex", "age", "BMI", "pathology"]])
 
     combined = pd.concat(all_rows, ignore_index=True).sort_values("participant_id")
 

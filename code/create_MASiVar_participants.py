@@ -89,6 +89,9 @@ def main():
         "session_id":     df["session_id"],
         "sex":            df["sex"].map(sex_map).fillna("n/a"),
         "age":            pd.to_numeric(df["age"], errors="coerce"),
+        # MASiVar consists of healthy adults (verified on OpenNeuro):
+        # https://openneuro.org/datasets/ds003416
+        "pathology":      "HC",
     })
 
     # 4. Write participants.tsv
