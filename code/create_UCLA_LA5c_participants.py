@@ -86,7 +86,7 @@ def main():
         "participant_id": df["participant_id"],
         "sex":            df["gender"].fillna("n/a"),
         "age":            pd.to_numeric(df["age"], errors="coerce"),
-        "diagnosis":      df["diagnosis"].fillna("n/a"),
+        "pathology":      df["diagnosis"].replace("CONTROL", "HC").fillna("n/a"),
     })
 
     # 4. Write participants.tsv
