@@ -126,6 +126,9 @@ echo "  MASK_SIZE   : ${MASK_SIZE}mm"
 echo "  SEG_METHOD  : ${SEG_METHOD}"
 echo "  DENOISE     : ${DENOISE}"
 
+# Log preprocessing arguments to file
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] SUBJECT: ${SUBJECT} | MASK_METHOD: ${MASK_METHOD} | MASK_SIZE: ${MASK_SIZE}mm | SEG_METHOD: ${SEG_METHOD} | DENOISE: ${DENOISE}" >> "${PATH_LOG}/DWI_preprocessing_args.log"
+
 # get starting time
 start=`date +%s`
 
