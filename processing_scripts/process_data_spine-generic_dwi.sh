@@ -380,30 +380,40 @@ mkdir -p ${PATH_RESULTS}/dwi
 
 dti_metrics=(FA MD RD AD)
 
-for dti_metric in ${dti_metrics[@]}; do
-  # Warp DTI map to PAM50 template space using the inverse warp from registration
-  sct_apply_transfo \
-    -i ${file_dwi}_${dti_metric}.nii.gz \
-    -d $SCT_DIR/data/PAM50/template/PAM50_t2.nii.gz \
-    -w warp_dwi2template.nii.gz \
-    -o ${file_dwi}_${dti_metric}_PAM50.nii.gz
+# Process DTI metrics in parallel for faster processing
+pids=()
+for dti_metric in "${dti_metrics[@]}"; do
+  (
+    # Warp DTI map to PAM50 template space using the inverse warp from registration
+    sct_apply_transfo \
+      -i ${file_dwi}_${dti_metric}.nii.gz \
+      -d $SCT_DIR/data/PAM50/template/PAM50_t2.nii.gz \
+      -w warp_dwi2template.nii.gz \
+      -o ${file_dwi}_${dti_metric}_PAM50.nii.gz
 
-  file_out="${PATH_RESULTS}/dwi/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
-  echo "👉 Extracting ${dti_metric} metrics in PAM50 space..."
+    file_out="${PATH_RESULTS}/dwi/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
+    echo "👉 Extracting ${dti_metric} metrics in PAM50 space..."
 
-  for tract in "${tracts[@]}"; do
-    sct_extract_metric \
-      -i ${file_dwi}_${dti_metric}_PAM50.nii.gz \
-      -f $SCT_DIR/data/PAM50/atlas \
-      -l ${tract} \
-      -combine 1 \
-      -method map \
-      -vert 2:5 \
-      -vertfile $SCT_DIR/data/PAM50/template/PAM50_levels.nii.gz \
-      -perslice 1 \
-      -o ${file_out} \
-      -append 1
-  done
+    for tract in "${tracts[@]}"; do
+      sct_extract_metric \
+        -i ${file_dwi}_${dti_metric}_PAM50.nii.gz \
+        -f $SCT_DIR/data/PAM50/atlas \
+        -l ${tract} \
+        -combine 1 \
+        -method map \
+        -vert 2:5 \
+        -vertfile $SCT_DIR/data/PAM50/template/PAM50_levels.nii.gz \
+        -perslice 1 \
+        -o ${file_out} \
+        -append 1
+    done
+  ) &
+  pids+=($!)
+done
+
+# Wait for all parallel jobs and propagate any failure
+for pid in "${pids[@]}"; do
+  wait "$pid"
 done
 
 # Go back to subject folder
