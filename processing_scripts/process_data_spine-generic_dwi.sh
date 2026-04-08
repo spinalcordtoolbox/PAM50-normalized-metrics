@@ -150,16 +150,19 @@ segment_if_does_not_exist() {
   fi
   FILESEG="${file}_label-SC_seg"
   FILESEGMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/${folder_contrast}/${FILESEG}.nii.gz"
+  # Define log prefix to have consistent log files for T2w and DWI files
+  local log_prefix
+  if [[ $contrast == "t2" ]]; then log_prefix="T2w"; else log_prefix="${contrast}"; fi
   echo
   echo "Looking for manual segmentation: $FILESEGMANUAL"
   if [[ -e $FILESEGMANUAL ]]; then
     echo "✏️ [$(date '+%Y-%m-%d %H:%M:%S')] Found! Using manual segmentation."
-    echo "✏️ [$(date '+%Y-%m-%d %H:%M:%S')] ${FILESEG}.nii.gz found --> using manual segmentation" >> "${PATH_LOG}/${contrast}_SC_segmentations.log"
+    echo "✏️ [$(date '+%Y-%m-%d %H:%M:%S')] ${FILESEG}.nii.gz found --> using manual segmentation" >> "${PATH_LOG}/${log_prefix}_SC_segmentations.log"
     rsync -avzh $FILESEGMANUAL ${FILESEG}.nii.gz
     sct_qc -i ${file}.nii.gz -s ${FILESEG}.nii.gz -p sct_deepseg_sc -qc ${PATH_QC} -qc-subject ${SUBJECT}
   else
     echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] Not found. Proceeding with automatic segmentation (${seg_method})."
-    echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] ${FILESEG}.nii.gz NOT found --> segmenting automatically with ${seg_method}" >> "${PATH_LOG}/${contrast}_SC_segmentations.log"
+    echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] ${FILESEG}.nii.gz NOT found --> segmenting automatically with ${seg_method}" >> "${PATH_LOG}/${log_prefix}_SC_segmentations.log"
     if [[ "${seg_method}" == "deepseg" ]]; then
       sct_deepseg spinalcord -i ${file}.nii.gz -o ${FILESEG}.nii.gz -qc ${PATH_QC} -qc-subject ${SUBJECT}
     else
