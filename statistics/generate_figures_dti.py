@@ -191,79 +191,95 @@ def style_ax(ax):
 
 def create_lineplot_dti(df, metric, labels, path_out, use_hue):
     """
-    Create a figure with one subplot per ROI label for a single DTI metric,
-    allowing direct comparison of metric values across tracts/regions.
+    Create a grid figure (nrows=2, ncols=ceil(n_labels/2)) for a single DTI metric,
+    with one subplot per ROI label.
 
-    Layout: 3 columns, ceil(n_labels / 3) rows.
+    Y-axis limits are shared across all subplots to allow cross-ROI comparison.
+    Y-axis label is shown only on the first column to avoid repetition.
+    When multiple datasets are present (use_hue=True), lines are coloured by dataset.
 
     Args:
         df       (pd.DataFrame): long-format dataframe for all metrics / subjects / datasets.
         metric   (str): DTI metric to plot (e.g. 'FA').
-        labels   (list[str]): tract/region labels to show as subplots.
+        labels   (list[str]): tract/region labels, one subplot each.
         path_out (str): output directory.
         use_hue  (bool): True when multiple datasets are present → colour by 'dataset'.
     """
     mpl.rcParams['font.family'] = 'Arial'
 
-    df_metric = df[df['metric'] == metric].copy()
-
-    ncols = 3
-    nrows = int(np.ceil(len(labels) / ncols))
+    nrows = 2
+    ncols = int(np.ceil(len(labels) / nrows))
     fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6, nrows * 5))
     axs = np.array(axes).ravel()
 
-    # Hide unused subplots
+    # Hide unused subplots (when n_labels is odd)
     for i in range(len(labels), len(axs)):
         axs[i].set_visible(False)
 
-    n_datasets = df_metric['dataset'].nunique()
+    n_datasets = df['dataset'].nunique()
     palette = sns.color_palette('tab10', n_colors=n_datasets)
 
-    for ax, label in zip(axs, labels):
-        df_label = df_metric[df_metric['Label'] == label]
+    # Pre-compute vertebral indices once (slice positions are the same across all labels)
+    df_ref = df[(df['metric'] == metric) & (df['Label'] == labels[0])].copy()
+    first_sub = df_ref['participant_id'].iloc[0]
+    first_ds = df_ref['dataset'].iloc[0]
+    ref = df_ref[(df_ref['participant_id'] == first_sub) & (df_ref['dataset'] == first_ds)]
+    disc_slices, mid_slices, vert_at_mid = get_vert_indices(ref)
+
+    n_per_level = (
+        df_ref.dropna(subset=['value'])
+        .groupby('VertLevel')['participant_id']
+        .nunique()
+        .to_dict()
+    )
+
+    # Print n per vertebral level to terminal
+    print('  Subjects per vertebral level:')
+    for v in sorted(n_per_level):
+        print(f'    {vert_num_to_label(v)}: {n_per_level[v]}')
+
+    # --- First pass: draw lineplots ---
+    active_axes = []
+    for i, (ax, label) in enumerate(zip(axs, labels)):
+        df_label = df[(df['metric'] == metric) & (df['Label'] == label)].copy()
         if df_label.empty:
             print(f'  Warning: no data for label "{label}", skipping subplot')
             ax.set_visible(False)
             continue
 
-        # Vertebral index reference from first subject/dataset
-        first_sub = df_label['participant_id'].iloc[0]
-        first_ds = df_label['dataset'].iloc[0]
-        ref = df_label[
-            (df_label['participant_id'] == first_sub) &
-            (df_label['dataset'] == first_ds)
-        ]
-        disc_slices, mid_slices, vert_at_mid = get_vert_indices(ref)
-
-        n_per_level = (
-            df_label.dropna(subset=['value'])
-            .groupby('VertLevel')['participant_id']
-            .nunique()
-            .to_dict()
-        )
-
         if use_hue:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
                          hue='dataset', errorbar='sd', linewidth=2, palette=palette)
-            ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
+            if i == 0:
+                ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
+            else:
+                ax.get_legend().remove()
         else:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
                          errorbar='sd', linewidth=2, color='steelblue')
 
-        display_label = LABEL_DISPLAY_NAMES.get(label, label)
-        ax.set_title(display_label, fontsize=LABELS_FONT_SIZE)
-        ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
+        ax.set_title(LABEL_DISPLAY_NAMES.get(label, label), fontsize=LABELS_FONT_SIZE)
         ax.set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
+        # Y-axis label only on first column
+        if i % ncols == 0:
+            ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
+        else:
+            ax.set_ylabel('')
         style_ax(ax)
+        active_axes.append(ax)
 
-        ymin, _ = ax.get_ylim()
-        annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ymin)
+    # --- Shared y-axis limits across all subplots ---
+    all_ymins = [ax.get_ylim()[0] for ax in active_axes]
+    all_ymaxs = [ax.get_ylim()[1] for ax in active_axes]
+    shared_ymin, shared_ymax = min(all_ymins), max(all_ymaxs)
+    for ax in active_axes:
+        ax.set_ylim(shared_ymin, shared_ymax)
 
-    n_total = df_metric['participant_id'].nunique()
-    fig.suptitle(
-        f'{metric} (PAM50 space, n={n_total})',
-        fontsize=LABELS_FONT_SIZE + 2, y=1.01
-    )
+    # --- Second pass: vertebral annotations (need final ymin) ---
+    for ax in active_axes:
+        annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, shared_ymin)
+
+    fig.suptitle(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE + 2, y=1.01)
     plt.tight_layout()
 
     filename = f'lineplot_dti_{metric}.png'
@@ -300,7 +316,7 @@ def main():
 
     use_hue = df_all['dataset'].nunique() > 1
 
-    # One figure per DTI metric, all requested labels as subplots
+    # One figure per DTI metric, one subplot per ROI
     for metric in DTI_METRICS:
         print(f'\nPlotting: {metric}')
         create_lineplot_dti(df_all, metric, args.labels_to_plot, args.path_out, use_hue)
