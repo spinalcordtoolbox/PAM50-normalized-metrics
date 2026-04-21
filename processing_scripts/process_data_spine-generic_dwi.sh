@@ -303,6 +303,17 @@ segment_if_does_not_exist ${file_dwi_mean} "dwi" "${SEG_METHOD}"
 file_dwi_seg=$FILESEG
 
 # ----------
+# DTI computation
+# ----------
+# Compute FA, MD, RD, AD maps from the preprocessed (cropped, moco, denoised) data
+sct_dmri_compute_dti \
+  -i ${file_dwi}.nii.gz \
+  -bvec ${file_bvec} \
+  -bval ${file_bval} \
+  -method standard \
+  -o ${file_dwi}_
+
+# ----------
 # Template registration
 # ----------
 # Register PAM50 template to DWI space.
@@ -347,17 +358,6 @@ sct_qc \
   -s PAM50_levels_reg.nii.gz \
   -p sct_label_vertebrae \
   -qc ${PATH_QC} -qc-subject "PAM50_levels_DWI_to_T2w"
-
-# ----------
-# DTI computation
-# ----------
-# Compute FA, MD, RD, AD maps from the preprocessed (cropped, moco, denoised) data
-sct_dmri_compute_dti \
-  -i ${file_dwi}.nii.gz \
-  -bvec ${file_bvec} \
-  -bval ${file_bval} \
-  -method standard \
-  -o ${file_dwi}_
 
 # ----------
 # Warp DTI maps to PAM50 template space and extract metrics
