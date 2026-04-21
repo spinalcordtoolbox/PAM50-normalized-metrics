@@ -52,6 +52,9 @@ LABEL_DISPLAY_NAMES = {
 LABELS_FONT_SIZE = 14
 TICKS_FONT_SIZE = 12
 
+SEX_PALETTE = {'Males': 'blue', 'Females': 'red'}
+SEX_LABEL_MAP = {'M': 'Males', 'F': 'Females'}
+
 
 def get_parser():
     parser = argparse.ArgumentParser(
@@ -71,6 +74,10 @@ def get_parser():
         default=['white matter'],
         help='Tract/region label(s) to plot. Default: "white matter". '
              f'Available: {list(LABEL_DISPLAY_NAMES.keys())}')
+    parser.add_argument(
+        '-participant-file', required=False, default=None,
+        help='Path to participants.tsv with at least participant_id and sex columns. '
+             'Required to generate per-sex figures.')
     parser.add_argument(
         '-path-out', required=False, default='stats',
         help='Output directory for saved figures. Default: stats/')
@@ -189,21 +196,22 @@ def style_ax(ax):
     ax.tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
 
 
-def create_lineplot_dti(df, metric, labels, path_out, use_hue):
+def create_lineplot_dti(df, metric, labels, path_out, hue=None):
     """
     Create a grid figure (nrows=2, ncols=ceil(n_labels/2)) for a single DTI metric,
     with one subplot per ROI label.
 
     Y-axis limits are shared across all subplots to allow cross-ROI comparison.
     Y-axis label is shown only on the first column to avoid repetition.
-    When multiple datasets are present (use_hue=True), lines are coloured by dataset.
+    X-axis label and tick numbers shown only on the bottom row.
 
     Args:
         df       (pd.DataFrame): long-format dataframe for all metrics / subjects / datasets.
         metric   (str): DTI metric to plot (e.g. 'FA').
         labels   (list[str]): tract/region labels, one subplot each.
         path_out (str): output directory.
-        use_hue  (bool): True when multiple datasets are present → colour by 'dataset'.
+        hue      (str or None): column to colour lines by — 'dataset', 'sex', or None
+                                (single steelblue line).
     """
     mpl.rcParams['font.family'] = 'Arial'
 
@@ -216,8 +224,13 @@ def create_lineplot_dti(df, metric, labels, path_out, use_hue):
     for i in range(len(labels), len(axs)):
         axs[i].set_visible(False)
 
-    n_datasets = df['dataset'].nunique()
-    palette = sns.color_palette('tab10', n_colors=n_datasets)
+    if hue == 'sex':
+        palette = SEX_PALETTE
+    elif hue == 'dataset':
+        n_datasets = df['dataset'].nunique()
+        palette = sns.color_palette('tab10', n_colors=n_datasets)
+    else:
+        palette = None
 
     # Pre-compute vertebral indices once (slice positions are the same across all labels)
     df_ref = df[(df['metric'] == metric) & (df['Label'] == labels[0])].copy()
@@ -242,14 +255,16 @@ def create_lineplot_dti(df, metric, labels, path_out, use_hue):
     active_axes = []
     for i, (ax, label) in enumerate(zip(axs, labels)):
         df_label = df[(df['metric'] == metric) & (df['Label'] == label)].copy()
+        if hue == 'sex' and 'sex' in df_label.columns:
+            df_label['sex'] = df_label['sex'].map(SEX_LABEL_MAP).fillna(df_label['sex'])
         if df_label.empty:
             print(f'  Warning: no data for label "{label}", skipping subplot')
             ax.set_visible(False)
             continue
 
-        if use_hue:
+        if hue is not None:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
-                         hue='dataset', errorbar='sd', linewidth=2, palette=palette)
+                         hue=hue, errorbar='sd', linewidth=2, palette=palette)
             if i == 0:
                 ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
             else:
@@ -259,7 +274,7 @@ def create_lineplot_dti(df, metric, labels, path_out, use_hue):
                          errorbar='sd', linewidth=2, color='steelblue')
 
         ax.set_title(LABEL_DISPLAY_NAMES.get(label, label), fontsize=LABELS_FONT_SIZE)
-        # x-axis label and ticks only on bottom row
+        # X-axis label and ticks only on bottom row
         if i >= ncols:
             ax.set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
         else:
@@ -287,7 +302,8 @@ def create_lineplot_dti(df, metric, labels, path_out, use_hue):
     fig.suptitle(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE + 2, y=1.01)
     plt.tight_layout()
 
-    filename = f'lineplot_dti_{metric}.png'
+    suffix = f'_per{hue}' if hue is not None else ''
+    filename = f'lineplot_dti_{metric}{suffix}.png'
     path_filename = os.path.join(path_out, filename)
     plt.savefig(path_filename, dpi=300, bbox_inches='tight')
     print(f'  Figure saved: {path_filename}')
@@ -319,12 +335,28 @@ def main():
         all_frames.append(df)
     df_all = pd.concat(all_frames, ignore_index=True)
 
-    use_hue = df_all['dataset'].nunique() > 1
+    # Merge sex from participants.tsv when provided
+    if args.participant_file is not None:
+        df_participants = pd.read_csv(args.participant_file, sep='\t')
+        if 'sex' in df_participants.columns:
+            df_all = df_all.merge(
+                df_participants[['participant_id', 'sex']],
+                on='participant_id', how='left'
+            )
+            n_with_sex = df_all['participant_id'][df_all['sex'].notna()].nunique()
+            print(f'  Sex merged for {n_with_sex} subject(s)')
+        else:
+            print('  Warning: participants.tsv has no "sex" column — per-sex figures skipped')
+
+    default_hue = 'dataset' if df_all['dataset'].nunique() > 1 else None
 
     # One figure per DTI metric, one subplot per ROI
     for metric in DTI_METRICS:
         print(f'\nPlotting: {metric}')
-        create_lineplot_dti(df_all, metric, args.labels_to_plot, args.path_out, use_hue)
+        create_lineplot_dti(df_all, metric, args.labels_to_plot, args.path_out, hue=default_hue)
+        if 'sex' in df_all.columns and df_all['sex'].notna().any():
+            print(f'  Plotting per-sex: {metric}')
+            create_lineplot_dti(df_all, metric, args.labels_to_plot, args.path_out, hue='sex')
 
     print('\nDone.')
 
