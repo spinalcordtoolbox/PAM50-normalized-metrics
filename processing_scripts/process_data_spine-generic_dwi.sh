@@ -53,10 +53,6 @@
 #   PATH_RESULTS/dwi/sub-XXXX_dwi_RD_PAM50.csv
 #   PATH_RESULTS/dwi/sub-XXXX_dwi_AD_PAM50.csv
 #
-# Note on initial warp:
-#   Spine-generic has T2w and DWI but no T1w. Therefore, the T2w-to-template
-#   warp is used as -initwarp for sct_register_multimodal (instead of the
-#   T1w-based warp used in dcm-olomouc / spine-generic's own process_data.sh).
 #
 # Authors: Jan Valosek
 # Inspired by:
@@ -310,9 +306,7 @@ file_dwi_seg=$FILESEG
 # Template registration
 # ----------
 # Register PAM50 template to DWI space.
-# Key: use warp_template2T2w.nii.gz as -initwarp (no T1w available in
-# spine-generic; T2w is used as the anatomical bridge instead).
-# PAM50_t2 is used as the fixed contrast image (closer to DWI b0 than PAM50_t1).
+# Key: use warp_template2T2w.nii.gz as -initwarp
 # Three-step registration:
 #   1. centermass: coarse alignment accounting for cord position
 #   2. bsplinesyn (regularized SyN) on seg: preserves internal WM/GM structure
