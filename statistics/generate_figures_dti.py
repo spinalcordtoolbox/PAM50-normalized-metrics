@@ -259,7 +259,12 @@ def create_lineplot_dti(df, metric, labels, path_out, use_hue):
                          errorbar='sd', linewidth=2, color='steelblue')
 
         ax.set_title(LABEL_DISPLAY_NAMES.get(label, label), fontsize=LABELS_FONT_SIZE)
-        ax.set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
+        # x-axis label and ticks only on bottom row
+        if i >= ncols:
+            ax.set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
+        else:
+            ax.set_xlabel('')
+            ax.tick_params(axis='x', labelbottom=False)
         # Y-axis label only on first column
         if i % ncols == 0:
             ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
