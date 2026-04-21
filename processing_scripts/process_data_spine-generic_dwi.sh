@@ -323,13 +323,12 @@ sct_register_multimodal \
   -owarpinv warp_dwi2template.nii.gz \
   -qc ${PATH_QC} -qc-subject ${SUBJECT}
 
-# Warp PAM50 template and WM atlas to DWI space
+# Warp PAM50 template and WM atlas to DWI space for QC purposes
 sct_warp_template \
   -d ${file_dwi_mean}.nii.gz \
   -w warp_template2dwi.nii.gz \
   -ofolder label_${file_dwi} \
   -qc ${PATH_QC} -qc-subject ${SUBJECT}
-
 # QC: overlay PAM50 vertebral levels on mean DWI (checks registration quality)
 sct_qc \
   -i ${file_dwi_mean}.nii.gz \
