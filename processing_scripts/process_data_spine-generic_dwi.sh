@@ -248,19 +248,14 @@ echo "👉 Processing DWI: ${file_dwi}"
 # ----------
 # Preprocessing
 # ----------
-
 # Separate b=0 and DWI volumes; creates *_dwi_mean.nii.gz
 sct_dmri_separate_b0_and_dwi -i ${file_dwi}.nii.gz -bvec ${file_bvec}
 
 # Create a mask around the cord to restrict motion correction and speed up processing.
-# Use either spinal cord segmentation or spinal cord centerline.
-# Method controlled by --mask-method.
+# Use either spinal cord segmentation or spinal cord centerline; controlled by --mask-method.
 if [[ "${MASK_METHOD}" == "deepseg" ]]; then
   # SCT tutorial approach: segment cord, pass segmentation as the centerline reference
-  sct_deepseg spinalcord \
-    -i ${file_dwi}_dwi_mean.nii.gz \
-    -o ${file_dwi}_dwi_mean_seg.nii.gz \
-    -qc ${PATH_QC} -qc-subject ${SUBJECT}
+  sct_deepseg spinalcord -i ${file_dwi}_dwi_mean.nii.gz -o ${file_dwi}_dwi_mean_seg.nii.gz -qc ${PATH_QC} -qc-subject ${SUBJECT}
   centerline_for_mask="${file_dwi}_dwi_mean_seg.nii.gz"
 else
   # spine-generic approach: extract centerline (default)
@@ -268,13 +263,12 @@ else
   centerline_for_mask="${file_dwi}_dwi_mean_centerline.nii.gz"
 fi
 
-# Size of the mask (usually 30mm or 35mm).
-# Size controlled by --mask-size.
-sct_create_mask \
-  -i ${file_dwi}_dwi_mean.nii.gz \
-  -p centerline,${centerline_for_mask} \
-  -size ${MASK_SIZE}mm
+# Size of the mask (usually 30mm or 35mm); controlled by --mask-size.
+sct_create_mask -i ${file_dwi}_dwi_mean.nii.gz -p centerline,${centerline_for_mask} -size ${MASK_SIZE}mm
 
+# ----------
+# Motion correction
+# ----------
 # Motion correction using the mask
 sct_dmri_moco -i ${file_dwi}.nii.gz -bvec ${file_bvec} -m mask_${file_dwi}_dwi_mean.nii.gz -x spline
 file_dwi=${file_dwi}_moco
@@ -284,19 +278,18 @@ file_dwi=${file_dwi}_moco
 mv ${file_dwi}_dwi_mean.nii.gz ${SUBJECT}_rec-average_dwi.nii.gz
 file_dwi_mean="${SUBJECT}_rec-average_dwi"
 
+# ----------
+# Denoising
+# ----------
 # Denoise with patch2self (controlled by --denoise flag; default: enabled)
 if [[ "${DENOISE}" == "1" ]]; then
-  sct_dmri_denoise_patch2self \
-    -i ${file_dwi}.nii.gz \
-    -b ${file_bval} \
-    -o ${file_dwi}_denoised.nii.gz
+  sct_dmri_denoise_patch2self -i ${file_dwi}.nii.gz -b ${file_bval} -o ${file_dwi}_denoised.nii.gz
   file_dwi=${file_dwi}_denoised
 fi
 
 # ----------
 # Spinal cord segmentation in DWI space
 # ----------
-
 # Segment SC in mean DWI image (check for manual seg first; method controlled by --seg-method)
 # sct_deepseg spinalcord or sct_deepseg_sc
 segment_if_does_not_exist ${file_dwi_mean} "dwi" "${SEG_METHOD}"
@@ -306,12 +299,7 @@ file_dwi_seg=$FILESEG
 # DTI computation
 # ----------
 # Compute FA, MD, RD, AD maps from the preprocessed (cropped, moco, denoised) data
-sct_dmri_compute_dti \
-  -i ${file_dwi}.nii.gz \
-  -bvec ${file_bvec} \
-  -bval ${file_bval} \
-  -method standard \
-  -o ${file_dwi}_
+sct_dmri_compute_dti -i ${file_dwi}.nii.gz -bvec ${file_bvec} -bval ${file_bval} -method standard -o ${file_dwi}_
 
 # ----------
 # Template registration
