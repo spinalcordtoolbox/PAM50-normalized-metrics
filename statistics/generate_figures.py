@@ -58,7 +58,7 @@ METRIC_TO_TITLE = {
     'MEAN(diameter_RL)': 'Transverse Diameter',
     'MEAN(eccentricity)': 'Eccentricity',
     'MEAN(solidity)': 'Solidity',
-    'MEAN(compression_ratio)': 'Compression Ratio',
+    'MEAN(compression_ratio)': 'AP/RL Ratio',
     'aSCOR':'aSCOR',
 }
 
@@ -68,7 +68,7 @@ METRIC_TO_AXIS = {
     'MEAN(diameter_RL)': 'Transverse Diameter [mm]',
     'MEAN(eccentricity)': 'Eccentricity [a.u.]',
     'MEAN(solidity)': 'Solidity [%]',
-    'MEAN(compression_ratio)': 'Compression Ratio [a.u.]',
+    'MEAN(compression_ratio)': 'AP/RL Ratio [a.u.]',
     'aSCOR':'aSCOR [%]',
 }
 
@@ -1274,7 +1274,7 @@ def read_csv_files(path_HC, participant_file=None, dataset_name=None):
         if 'PAM50.csv' in file:
             # Read csv file as pandas dataframe for given subject
             df_subject = pd.read_csv(os.path.join(path_HC, file), dtype=METRICS_DTYPE)
-            # Compute compression ratio (CR) as MEAN(diameter_AP) / MEAN(diameter_RL)
+            # Compute AP/RL ratio as MEAN(diameter_AP) / MEAN(diameter_RL)
             df_subject['MEAN(compression_ratio)'] = df_subject['MEAN(diameter_AP)'] / df_subject['MEAN(diameter_RL)']
             # Track source CSV filename to reliably extract participant_id
             df_subject['source_file'] = file
@@ -1312,6 +1312,8 @@ def read_csv_files(path_HC, participant_file=None, dataset_name=None):
             if 'session_id' not in cols_to_merge:
                 cols_to_merge.append('session_id')
         df = df.merge(df_participants[cols_to_merge], on=merge_keys)
+        # Replace 'n/a' placeholder strings with NaN so downstream numeric operations work correctly
+        df = df.replace({'n/a': np.nan})
     # Print number of subjects
     print(f'Number of subjects: {str(len(subjects))}\n')
     return df, df_participants, subjects

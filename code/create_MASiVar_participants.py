@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-Create participants.tsv and dataset_description.json for the MASiVar dataset.
+Create participants.tsv for the MASiVar dataset.
 
 The script:
   1. Fetches the participants.tsv from OpenNeuro (ds003416 v2.0.2)
   2. Retains only rows whose (participant_id, session_id) pair has a
      corresponding CSV file in the spinal_cord/MASiVar/ directory
   3. Writes the result to spinal_cord/MASiVar/participants.tsv
-  4. Writes spinal_cord/MASiVar/dataset_description.json
 
 Usage:
     python code/create_MASiVar_participants.py
@@ -16,7 +15,6 @@ Requirements:
     pip install pandas requests
 """
 
-import json
 import sys
 import requests
 import pandas as pd
@@ -35,14 +33,6 @@ PARTICIPANTS_URL = (
     f"refs/tags/{VERSION}/participants.tsv"
 )
 
-DATASET_DESCRIPTION = {
-    "name": "MASiVar",
-    "coverage": "cervical spine",
-    "contrast": "T1w",
-    "resolution": "1.0mm iso",
-    "link": f"https://openneuro.org/datasets/{DATASET_ID}",
-    "link_text": f"openneuro/{DATASET_ID}",
-}
 # ---------------------------------------------------------------------------
 
 
@@ -65,21 +55,6 @@ def get_csv_pairs(masivar_dir: Path) -> set:
             if ses:
                 pairs.add((sub, ses))
     return pairs
-
-
-CHILD_AGE_THRESHOLD = 18  # years; below this age a participant is considered a child
-
-
-def determine_population(age_series: pd.Series) -> str:
-    """Return a population label based on participant ages."""
-    ages = pd.to_numeric(age_series, errors="coerce").dropna()
-    has_adults   = (ages >= CHILD_AGE_THRESHOLD).any()
-    has_children = (ages <  CHILD_AGE_THRESHOLD).any()
-    if has_adults and has_children:
-        return "healthy adults and children"
-    if has_children:
-        return "healthy children"
-    return "healthy adults"
 
 
 def main():
@@ -114,22 +89,15 @@ def main():
         "session_id":     df["session_id"],
         "sex":            df["sex"].map(sex_map).fillna("n/a"),
         "age":            pd.to_numeric(df["age"], errors="coerce"),
+        # MASiVar consists of healthy adults (verified on OpenNeuro):
+        # https://openneuro.org/datasets/ds003416
+        "pathology":      "HC",
     })
 
-    # 4. Determine population label from age
-    DATASET_DESCRIPTION["population"] = determine_population(out["age"])
-
-    # 6. Write participants.tsv
+    # 4. Write participants.tsv
     out_tsv = masivar_dir / "participants.tsv"
     out.to_csv(out_tsv, sep="\t", index=False)
     print(f"  Written: {out_tsv.relative_to(repo_root)}")
-
-    # 7. Write dataset_description.json
-    out_json = masivar_dir / "dataset_description.json"
-    with open(out_json, "w") as f:
-        json.dump(DATASET_DESCRIPTION, f, indent=4)
-        f.write("\n")
-    print(f"  Written: {out_json.relative_to(repo_root)}")
 
 
 if __name__ == "__main__":

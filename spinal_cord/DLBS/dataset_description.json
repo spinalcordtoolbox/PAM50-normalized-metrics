@@ -1,0 +1,10 @@
+{
+    "name": "DLBS",
+    "order": 6,
+    "coverage": "cervical spine",
+    "contrast": "T1w",
+    "resolution": "1.0mm iso",
+    "link": "https://openneuro.org/datasets/ds004856",
+    "link_text": "openneuro/ds004856",
+    "population": "healthy adults"
+}
