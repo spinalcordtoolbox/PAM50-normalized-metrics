@@ -163,6 +163,9 @@ def get_parser():
     parser.add_argument('--min-age', required=False, type=float, default=0,
                         help="Exclude participants younger than this age (in years). "
                              "Use 18 to include only adults. Default: 0 (no filtering).")
+    parser.add_argument('--lineplot-only', action='store_true', default=False,
+                        help="Skip all heavy analyses (correlation matrix, normative values, statistical "
+                             "tests) and only produce the main lineplot. Useful for large datasets.")
 
     return parser
 
@@ -1397,7 +1400,7 @@ def main():
         if df_participants is not None and 'age' in df_participants.columns:
             df_participants = df_participants[df_participants['age'] >= args.min_age]
 
-    if df_participants is not None:
+    if df_participants is not None and not args.lineplot_only:
         compute_descriptive_stats(df_participants, path_out_figures)
 
         # Get number of participants for each vendor (only if manufacturer column present)
@@ -1434,10 +1437,17 @@ def main():
         # Keep only VertLevel from C1 to Th1
         current_df = current_df[current_df['VertLevel'] <= 8]
 
-        explore_linearity(current_df, path_out)
-
         # Multiply solidity by 100 to get percentage (sct_process_segmentation computes solidity in the interval 0-1)
         current_df['MEAN(solidity)'] = current_df['MEAN(solidity)'] * 100
+
+        # Create main lineplot (always)
+        dataset_hue = 'dataset' if 'dataset' in current_df.columns else None
+        create_lineplot(current_df, dataset_hue, path_out)
+
+        if args.lineplot_only:
+            continue
+
+        explore_linearity(current_df, path_out)
 
         # Uncomment to save aggregated dataframe with metrics across all subjects as .csv file
         #current_df.to_csv(os.path.join(path_out_csv, 'HC_metrics.csv'), index=False)
@@ -1445,10 +1455,6 @@ def main():
         # Compute normative values (no demographics required)
         compute_normative_values(current_df, path_out_csv)
 
-        # Create plots across all subjects (no demographics required).
-        # If multiple datasets were loaded without --combine-datasets, colour lines by dataset.
-        dataset_hue = 'dataset' if 'dataset' in current_df.columns else None
-        create_lineplot(current_df, dataset_hue, path_out)
         create_regplot(current_df, path_out, show_cv=True)
 
         if 'sex' in current_df.columns and 'age' in current_df.columns:
