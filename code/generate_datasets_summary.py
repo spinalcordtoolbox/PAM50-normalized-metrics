@@ -58,13 +58,17 @@ def compute_stats(df):
         n_sites = PLACEHOLDER
 
     # Sex counts (per unique subject)
-    sex_counts = df_subjects['sex'].value_counts()
-    n_m = int(sex_counts.get('M', 0))
-    n_f = int(sex_counts.get('F', 0))
-    n_unknown = int(df_subjects['sex'].isna().sum())
+    if 'sex' in df_subjects.columns:
+        sex_counts = df_subjects['sex'].value_counts()
+        n_m = int(sex_counts.get('M', 0))
+        n_f = int(sex_counts.get('F', 0))
+        n_unknown = int(df_subjects['sex'].isna().sum())
+    else:
+        n_m = n_f = 0
+        n_unknown = n_subjects
 
     # Age stats (per unique subject)
-    age = pd.to_numeric(df_subjects['age'], errors='coerce')
+    age = pd.to_numeric(df_subjects['age'], errors='coerce') if 'age' in df_subjects.columns else pd.Series([], dtype=float)
     age_valid = age.dropna()
     if len(age_valid) > 0:
         age_mean = round(age_valid.mean(), 1)

@@ -62,6 +62,7 @@ The table below summarizes all datasets included in this repository. It is also 
 | spinal_cord | KurtMS | 46 | 71 | n/a | healthy controls and MS patients | 0/0/46 | n/a | cervical spine | T1w | n/a | n/a |
 | spinal_cord | TempleSocial | 104 | 104 | n/a | healthy adults | 34/66/0 | 42.3±16.8 [21–80] | cervical spine | T1w | 1.0mm iso | [openneuro/ds005123](https://openneuro.org/datasets/ds005123) |
 | spinal_cord | UCLA LA5c | 259 | 259 | n/a | healthy controls and neuropsychiatric patients | 149/110/0 | 33.1±9.3 [21–50] | cervical spine | T1w | 1.0mm iso | [openneuro/ds000030](https://openneuro.org/datasets/ds000030) |
+| spinal_cord | BLSA | 1118 | 3263 | n/a | healthy adults | 0/0/1118 | n/a | cervical spine | T1w | 1.0mm iso | [blsa.nih.gov](https://www.blsa.nih.gov) |
 <!-- datasets-table-end -->
 
 ## Datasets Structure
