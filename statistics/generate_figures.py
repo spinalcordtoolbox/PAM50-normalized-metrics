@@ -343,14 +343,27 @@ def create_lineplot(df, hue, path_out, show_cv=False):
 
     mpl.rcParams['font.family'] = 'Arial'
 
-    # When colouring by dataset, append per-dataset subject count to the legend label (e.g. "MASiVar (n=13)")
-    # Also pre-compute a clean filename suffix (e.g. "MASiVar_n13_spine-generic_multi-subject_n203")
+    # When colouring by dataset, append per-dataset counts to the legend label.
+    # For datasets with multiple sessions per subject (longitudinal), show both subjects and sessions,
+    # e.g. "BLSA (n=1118 subjects, 3263 sessions)"; for cross-sectional data show just "n=203".
+    # Also pre-compute a clean filename suffix using subject counts.
     dataset_filename_suffix = ''
     if hue == 'dataset' and 'dataset' in df.columns:
-        n_per_dataset = df.groupby('dataset')['participant_id'].nunique()
-        dataset_filename_suffix = '_' + '_'.join(f'{d}_n{n_per_dataset[d]}' for d in df['dataset'].unique())
+        n_subjects = df.groupby('dataset')['participant_id'].nunique()
+        has_sessions = 'session_id' in df.columns
+        dataset_filename_suffix = '_' + '_'.join(f'{d}_n{n_subjects[d]}' for d in df['dataset'].unique())
         df = df.copy()
-        df['dataset'] = df['dataset'].map(lambda d: f'{d} (n={n_per_dataset[d]})')
+        if has_sessions:
+            n_sessions = df.groupby('dataset')[['participant_id', 'session_id']].apply(
+                lambda g: g.drop_duplicates().shape[0]
+            )
+            df['dataset'] = df['dataset'].map(
+                lambda d: (f'{d} (n={n_subjects[d]} subjects, {n_sessions[d]} sessions)'
+                           if n_sessions[d] > n_subjects[d]
+                           else f'{d} (n={n_subjects[d]})')
+            )
+        else:
+            df['dataset'] = df['dataset'].map(lambda d: f'{d} (n={n_subjects[d]})')
 
     available_metrics = [m for m in METRICS if m in df.columns]
     ncols = 3
@@ -362,22 +375,34 @@ def create_lineplot(df, hue, path_out, show_cv=False):
     for i in range(len(available_metrics), len(axs)):
         axs[i].set_visible(False)
 
-    # Compute number of unique subjects with valid data per vertebral level (computed once, outside metric loop).
-    # Use MEAN(area) as reference metric; drop NaN rows first to exclude subjects without coverage at a given level.
+    # Compute per-level counts (computed once, outside metric loop).
+    # For longitudinal data (session_id present with more sessions than subjects), count
+    # unique (participant_id, session_id) pairs so the label reflects actual data points.
     ref_metric = 'MEAN(area)' if 'MEAN(area)' in df.columns else available_metrics[0]
-    n_subjects_per_level = df.dropna(subset=[ref_metric]).groupby('VertLevel')['participant_id'].nunique()
+    df_valid = df.dropna(subset=[ref_metric])
+    longitudinal = ('session_id' in df.columns and
+                    df['session_id'].notna().any() and
+                    df[['participant_id', 'session_id']].drop_duplicates().shape[0] > df['participant_id'].nunique())
+    if longitudinal:
+        n_per_level = df_valid.groupby('VertLevel').apply(
+            lambda g: g[['participant_id', 'session_id']].drop_duplicates().shape[0]
+        )
+        n_label = 'sessions'
+    else:
+        n_per_level = df_valid.groupby('VertLevel')['participant_id'].nunique()
+        n_label = 'subjects'
 
     # Get indices of slices corresponding vertebral levels (computed once, outside metric loop)
     vert, ind_vert, ind_vert_mid = get_vert_indices(df)
 
-    # Print number of subjects per vertebral level to terminal
-    print('\nNumber of subjects per vertebral level:')
+    # Print number of subjects/sessions per vertebral level to terminal
+    print(f'\nNumber of {n_label} per vertebral level:')
     for idx, x in enumerate(ind_vert_mid, 0):
         if vert[x] > 7:
             level = 'T' + str(vert[x] - 7)
         else:
             level = 'C' + str(vert[x])
-        n = n_subjects_per_level.get(vert[x], 0)
+        n = n_per_level.get(vert[x], 0)
         print(f'  {level}: {n}')
 
     # Loop across metrics
@@ -417,13 +442,14 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         for idx, x in enumerate(ind_vert_mid, 0):
             if show_cv:
                 cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
-            n = n_subjects_per_level.get(vert[x], 0)
+            n = n_per_level.get(vert[x], 0)
+            n_str = f"n={n}"
             # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\n{n_str}',
                                 horizontalalignment='center', verticalalignment='bottom', color='black',
-                                fontsize=TICKS_FONT_SIZE)
+                                fontsize=TICKS_FONT_SIZE-2)
                 # Show CV
                 if show_cv:
                     axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
@@ -431,9 +457,9 @@ def create_lineplot(df, hue, path_out, show_cv=False):
                                     color='black')
             else:
                 level = 'C' + str(vert[x])
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\n{n_str}',
                                 horizontalalignment='center', verticalalignment='bottom', color='black',
-                                fontsize=TICKS_FONT_SIZE)
+                                fontsize=TICKS_FONT_SIZE-2)
                 # Show CV
                 if show_cv:
                     axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
@@ -1027,17 +1053,16 @@ def compute_descriptive_stats(df_participants, path_out_figures):
             print('\nPer-vendor')
             print(round(df_participants.groupby(['manufacturer'])[['age', 'weight', 'height']].agg(['mean', 'std']), 1))
 
-    # Plot age distribution
-    plt.figure()
-    fig, ax = plt.subplots()
-    sns.displot(df_participants['age'], kde=True, color='black')
-    # add title
-    plt.title('Age distribution', fontsize=LABELS_FONT_SIZE)
-    # save figure
-    fname_fig = os.path.join(path_out_figures, 'age_distribution.png')
-    plt.savefig(fname_fig, dpi=200, bbox_inches="tight")
-    plt.close()
-    print(f'Created: {fname_fig}.\n')
+    # Plot age distribution (only when age column is available)
+    if 'age' in df_participants.columns and df_participants['age'].notna().any():
+        plt.figure()
+        fig, ax = plt.subplots()
+        sns.displot(df_participants['age'], kde=True, color='black')
+        plt.title('Age distribution', fontsize=LABELS_FONT_SIZE)
+        fname_fig = os.path.join(path_out_figures, 'age_distribution.png')
+        plt.savefig(fname_fig, dpi=200, bbox_inches="tight")
+        plt.close()
+        print(f'Created: {fname_fig}.\n')
 
 
 def compute_normative_values(df, path_out):
