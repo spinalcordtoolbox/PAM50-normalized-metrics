@@ -62,6 +62,7 @@ The table below summarizes all datasets included in this repository. It is also 
 | spinal_cord | KurtMS | 46 | 71 | n/a | healthy controls and MS patients | 0/0/46 | n/a | cervical spine | T1w | n/a | n/a |
 | spinal_cord | TempleSocial | 104 | 104 | n/a | healthy adults | 34/66/0 | 42.3±16.8 [21–80] | cervical spine | T1w | 1.0mm iso | [openneuro/ds005123](https://openneuro.org/datasets/ds005123) |
 | spinal_cord | UCLA LA5c | 259 | 259 | n/a | healthy controls and neuropsychiatric patients | 149/110/0 | 33.1±9.3 [21–50] | cervical spine | T1w | 1.0mm iso | [openneuro/ds000030](https://openneuro.org/datasets/ds000030) |
+| spinal_cord | BLSA | 1118 | 3263 | n/a | healthy adults | 0/0/1118 | n/a | cervical spine | T1w | 1.0mm iso | [blsa.nih.gov](https://www.blsa.nih.gov) |
 <!-- datasets-table-end -->
 
 ## Datasets Structure
@@ -92,7 +93,9 @@ Each CSV file contains per-slice morphometric measures for one subject, normaliz
 
 ## Adding a New Dataset
 
-1. **Create a new dataset folder** — under the appropriate metric directory (e.g., `spinal_cord/<new-dataset>/`), add the per-subject CSV files, a `participants.tsv` with subject metadata, and a `dataset_description.json` with the dataset metadata:
+1. **Create a new dataset folder** — under the appropriate metric directory (e.g., `spinal_cord/<new-dataset>/`), 
+add the per-subject CSV files, a `participants.tsv` with subject metadata (can be generated; see below), 
+and a `dataset_description.json` with the dataset metadata:
 
     ```
     spinal_cord/
@@ -129,4 +132,15 @@ Each CSV file contains per-slice morphometric measures for one subject, normaliz
 
     ```console
     python code/generate_datasets_summary.py
+    ```
+
+3. **Generate a lineplot** — run `statistics/generate_figures.py`, passing the new dataset alongside spine-generic multi-subject for comparison. 
+Use `--lineplot-only` to skip heavy analyses (correlation matrix, normative values, statistical tests) and only produce the lineplot — recommended for large datasets:
+
+    ```console
+    cd statistics
+    python generate_figures.py \
+        -path-SC ../spinal_cord/<new-dataset> ../spinal_cord/spine-generic_multi-subject \
+        -path-out <new-dataset>_spinegeneric \
+        --lineplot-only
     ```
