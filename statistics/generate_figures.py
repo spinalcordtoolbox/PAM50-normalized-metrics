@@ -1267,20 +1267,22 @@ def compute_age_stats(df_participants):
 
 def read_csv_files(path_HC, participant_file=None, dataset_name=None):
     # Initialize pandas dataframe where data across all subjects will be stored
-    print(f'Reading {path_HC}')
-    df = pd.DataFrame()
-    # Loop through .csv files of healthy controls
-    for file in os.listdir(path_HC):
-        if 'PAM50.csv' in file:
-            # Read csv file as pandas dataframe for given subject
-            df_subject = pd.read_csv(os.path.join(path_HC, file), dtype=METRICS_DTYPE)
-            # Compute AP/RL ratio as MEAN(diameter_AP) / MEAN(diameter_RL)
-            df_subject['MEAN(compression_ratio)'] = df_subject['MEAN(diameter_AP)'] / df_subject['MEAN(diameter_RL)']
-            # Track source CSV filename to reliably extract participant_id
-            df_subject['source_file'] = file
-
-            # Concatenate DataFrame objects
-            df = pd.concat([df, df_subject], axis=0, ignore_index=True)
+    csv_files = [f for f in os.listdir(path_HC) if 'PAM50.csv' in f]
+    n_total = len(csv_files)
+    print(f'Reading {path_HC} ({n_total} files)')
+    dfs = []
+    for i, file in enumerate(csv_files, 1):
+        # Read csv file as pandas dataframe for given subject
+        df_subject = pd.read_csv(os.path.join(path_HC, file), dtype=METRICS_DTYPE)
+        # Compute AP/RL ratio as MEAN(diameter_AP) / MEAN(diameter_RL)
+        df_subject['MEAN(compression_ratio)'] = df_subject['MEAN(diameter_AP)'] / df_subject['MEAN(diameter_RL)']
+        # Track source CSV filename to reliably extract participant_id
+        df_subject['source_file'] = file
+        dfs.append(df_subject)
+        if i % 100 == 0 or i == n_total:
+            print(f'  {i}/{n_total} files read ({100 * i // n_total}%)', end='\r', flush=True)
+    print()
+    df = pd.concat(dfs, axis=0, ignore_index=True)
     # Get sub-id (e.g., sub-amu01) from the source CSV filename (first underscore-delimited segment)
     # This is more reliable than parsing the Filename column inside the CSV, which may be a generic path
     df.insert(0, 'participant_id', df['source_file'].str.split('_').str[0])
