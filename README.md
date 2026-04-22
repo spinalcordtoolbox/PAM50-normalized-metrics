@@ -93,7 +93,9 @@ Each CSV file contains per-slice morphometric measures for one subject, normaliz
 
 ## Adding a New Dataset
 
-1. **Create a new dataset folder** — under the appropriate metric directory (e.g., `spinal_cord/<new-dataset>/`), add the per-subject CSV files, a `participants.tsv` with subject metadata, and a `dataset_description.json` with the dataset metadata:
+1. **Create a new dataset folder** — under the appropriate metric directory (e.g., `spinal_cord/<new-dataset>/`), 
+add the per-subject CSV files, a `participants.tsv` with subject metadata (can be generated; see below), 
+and a `dataset_description.json` with the dataset metadata:
 
     ```
     spinal_cord/
@@ -130,4 +132,15 @@ Each CSV file contains per-slice morphometric measures for one subject, normaliz
 
     ```console
     python code/generate_datasets_summary.py
+    ```
+
+3. **Generate a lineplot** — run `statistics/generate_figures.py`, passing the new dataset alongside spine-generic multi-subject for comparison. 
+Use `--lineplot-only` to skip heavy analyses (correlation matrix, normative values, statistical tests) and only produce the lineplot — recommended for large datasets:
+
+    ```console
+    cd statistics
+    python generate_figures.py \
+        -path-SC ../spinal_cord/<new-dataset> ../spinal_cord/spine-generic_multi-subject \
+        -path-out <new-dataset>_spinegeneric \
+        --lineplot-only
     ```
