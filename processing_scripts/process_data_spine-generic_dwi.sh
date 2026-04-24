@@ -307,9 +307,9 @@ sct_dmri_compute_dti -i ${file_dwi}.nii.gz -bvec ${file_bvec} -bval ${file_bval}
 # Register PAM50 template to DWI space.
 # Key: use warp_template2T2w.nii.gz as -initwarp
 # Three-step registration:
-#   1. centermass: coarse alignment accounting for cord position
-#   2. bsplinesyn (regularized SyN) on seg: preserves internal WM/GM structure
-#   3. syn on image: fine-scale deformation using image intensity (metric=CC)
+#   1. centermass: account for cord rotations
+#   2. bsplinesyn (regularized SyN) on seg: to deal with fine cord shape adjustment
+#   3. syn on image: fine-tune deformation using image intensity (metric=CC)
 sct_register_multimodal \
   -i $SCT_DIR/data/PAM50/template/PAM50_t2.nii.gz \
   -iseg $SCT_DIR/data/PAM50/template/PAM50_cord.nii.gz \
