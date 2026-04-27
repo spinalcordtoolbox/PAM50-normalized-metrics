@@ -431,6 +431,42 @@ for pid in "${pids[@]}"; do
   wait "$pid"
 done
 
+# ----------
+# Extract DTI metrics in native space and interpolate to PAM50 using -normalize-PAM50
+# ----------
+# Uses the new sct_extract_metric -normalize-PAM50 flag (SCT's branch jv/sct_extract_metric_normalize_pam50).
+# Metrics are extracted in native DWI space and each slice is mapped to its PAM50 equivalent
+# on-the-fly, without explicitly warping the DTI maps first.
+mkdir -p ${PATH_RESULTS}/dwi_interpolation_to_PAM50
+
+pids=()
+for dti_metric in "${dti_metrics[@]}"; do
+  (
+    file_out="${PATH_RESULTS}/dwi_interpolation_to_PAM50/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
+    echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50..."
+
+    for tract in "${tracts[@]}"; do
+      sct_extract_metric \
+        -i ${file_dwi}_${dti_metric}.nii.gz \
+        -f label_${file_dwi}/atlas \
+        -l ${tract} \
+        -combine 1 \
+        -method map \
+        -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
+        -perslice 1 \
+        -normalize-PAM50 1 \
+        -o ${file_out} \
+        -append 1
+    done
+  ) &
+  pids+=($!)
+done
+
+# Wait for all parallel jobs and propagate any failure
+for pid in "${pids[@]}"; do
+  wait "$pid"
+done
+
 # Go back to subject folder
 cd ..
 
