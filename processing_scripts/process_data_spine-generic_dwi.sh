@@ -347,6 +347,42 @@ sct_qc \
   -p sct_label_vertebrae \
   -qc ${PATH_QC} -qc-subject "PAM50_levels_DWI_to_T2w"
 
+dti_metrics=(FA MD RD AD)
+
+# ----------
+# Extract metrics in the native space as a sanity check (optional; not used for final database)
+# ----------
+mkdir -p ${PATH_RESULTS}/dwi_native
+
+# Process DTI metrics in parallel for faster processing
+pids=()
+for dti_metric in "${dti_metrics[@]}"; do
+  (
+    file_out="${PATH_RESULTS}/dwi_native/${SUBJECT}_dwi_${dti_metric}_native.csv"
+    echo "👉 Extracting ${dti_metric} metrics in native space..."
+
+    for tract in "${tracts[@]}"; do
+      sct_extract_metric \
+        -i ${file_dwi}_${dti_metric}.nii.gz \
+        -f label_${file_dwi}/atlas \
+        -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
+        -l ${tract} \
+        -combine 1 \
+        -method map \
+        -perslice 1 \
+        -o ${PATH_RESULTS}/dwi_native/${SUBJECT}_dwi_FA_native.csv \
+        -append 1
+    done
+  ) &
+  pids+=($!)
+done
+
+# Wait for all parallel jobs and propagate any failure
+for pid in "${pids[@]}"; do
+  wait "$pid"
+done
+
+
 # ----------
 # Warp DTI maps to PAM50 template space and extract metrics
 # ----------
@@ -357,8 +393,6 @@ sct_qc \
 # between subjects), all maps are brought into a common coordinate frame first.
 # The PAM50 atlas and levels files are used directly from the template, since
 # the metric maps are already in that space.
-
-dti_metrics=(FA MD RD AD)
 mkdir -p ${PATH_RESULTS}/dwi_PAM50
 
 # Process DTI metrics in parallel for faster processing
