@@ -357,9 +357,9 @@ sct_qc \
 # between subjects), all maps are brought into a common coordinate frame first.
 # The PAM50 atlas and levels files are used directly from the template, since
 # the metric maps are already in that space.
-mkdir -p ${PATH_RESULTS}/dwi
 
 dti_metrics=(FA MD RD AD)
+mkdir -p ${PATH_RESULTS}/dwi_PAM50
 
 # Process DTI metrics in parallel for faster processing
 pids=()
@@ -372,7 +372,7 @@ for dti_metric in "${dti_metrics[@]}"; do
       -w warp_dwi2template.nii.gz \
       -o ${file_dwi}_${dti_metric}_PAM50.nii.gz
 
-    file_out="${PATH_RESULTS}/dwi/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
+    file_out="${PATH_RESULTS}/dwi_PAM50/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
     echo "👉 Extracting ${dti_metric} metrics in PAM50 space..."
 
     for tract in "${tracts[@]}"; do
