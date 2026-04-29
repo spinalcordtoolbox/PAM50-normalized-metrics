@@ -416,7 +416,6 @@ for dti_metric in "${dti_metrics[@]}"; do
         -l ${tract} \
         -combine 1 \
         -method map \
-        -vert 2:5 \
         -vertfile $SCT_DIR/data/PAM50/template/PAM50_levels.nii.gz \
         -perslice 1 \
         -o ${file_out} \
