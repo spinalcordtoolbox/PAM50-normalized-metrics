@@ -370,7 +370,7 @@ for dti_metric in "${dti_metrics[@]}"; do
         -combine 1 \
         -method map \
         -perslice 1 \
-        -o ${PATH_RESULTS}/dwi_native/${SUBJECT}_dwi_FA_native.csv \
+        -o ${file_out} \
         -append 1
     done
   ) &
