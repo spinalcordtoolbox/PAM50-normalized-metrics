@@ -395,50 +395,40 @@ done
 # the metric maps are already in that space.
 mkdir -p ${PATH_RESULTS}/dwi_PAM50
 
-# Process DTI metrics in parallel for faster processing
-pids=()
+# Process DTI metrics sequentially to avoid memory pressure from parallel sct_extract_metric
+# (sct_run_batch already parallelises across subjects; per-metric parallelism caused OOM kills)
 for dti_metric in "${dti_metrics[@]}"; do
-  (
-    # Warp DTI map to PAM50 template space using the inverse warp from registration
-    sct_apply_transfo \
-      -i ${file_dwi}_${dti_metric}.nii.gz \
-      -d $SCT_DIR/data/PAM50/template/PAM50_t2.nii.gz \
-      -w warp_dwi2template.nii.gz \
-      -o ${file_dwi}_${dti_metric}_PAM50.nii.gz
+  # Warp DTI map to PAM50 template space using the inverse warp from registration
+  sct_apply_transfo \
+    -i ${file_dwi}_${dti_metric}.nii.gz \
+    -d $SCT_DIR/data/PAM50/template/PAM50_t2.nii.gz \
+    -w warp_dwi2template.nii.gz \
+    -o ${file_dwi}_${dti_metric}_PAM50.nii.gz
 
-    file_out="${PATH_RESULTS}/dwi_PAM50/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
-    echo "👉 Extracting ${dti_metric} metrics in PAM50 space..."
+  file_out="${PATH_RESULTS}/dwi_PAM50/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
+  echo "👉 Extracting ${dti_metric} metrics in PAM50 space..."
 
-    # Write each tract to a separate file to avoid -append race conditions,
-    # then concatenate into one CSV.
-    first_tract=1
-    for tract in "${tracts[@]}"; do
-      tract_name="${tract//,/-}"
-      tmp_csv="${PATH_RESULTS}/dwi_PAM50/${SUBJECT}_dwi_${dti_metric}_PAM50_tmp_${tract_name}.csv"
-      sct_extract_metric \
-        -i ${file_dwi}_${dti_metric}_PAM50.nii.gz \
-        -f $SCT_DIR/data/PAM50/atlas \
-        -l ${tract} \
-        -combine 1 \
-        -method map \
-        -vertfile $SCT_DIR/data/PAM50/template/PAM50_levels.nii.gz \
-        -perslice 1 \
-        -o "${tmp_csv}"
-      if [[ ${first_tract} -eq 1 ]]; then
-        cat "${tmp_csv}" > "${file_out}"
-        first_tract=0
-      else
-        tail -n +2 "${tmp_csv}" >> "${file_out}"
-      fi
-      rm "${tmp_csv}"
-    done
-  ) &
-  pids+=($!)
-done
-
-# Wait for all parallel jobs and propagate any failure
-for pid in "${pids[@]}"; do
-  wait "$pid"
+  first_tract=1
+  for tract in "${tracts[@]}"; do
+    tract_name="${tract//,/-}"
+    tmp_csv="${PATH_RESULTS}/dwi_PAM50/${SUBJECT}_dwi_${dti_metric}_PAM50_tmp_${tract_name}.csv"
+    sct_extract_metric \
+      -i ${file_dwi}_${dti_metric}_PAM50.nii.gz \
+      -f $SCT_DIR/data/PAM50/atlas \
+      -l ${tract} \
+      -combine 1 \
+      -method map \
+      -vertfile $SCT_DIR/data/PAM50/template/PAM50_levels.nii.gz \
+      -perslice 1 \
+      -o "${tmp_csv}"
+    if [[ ${first_tract} -eq 1 ]]; then
+      cat "${tmp_csv}" > "${file_out}"
+      first_tract=0
+    else
+      tail -n +2 "${tmp_csv}" >> "${file_out}"
+    fi
+    rm "${tmp_csv}"
+  done
 done
 
 # ----------
@@ -449,41 +439,32 @@ done
 # on-the-fly, without explicitly warping the DTI maps first.
 mkdir -p ${PATH_RESULTS}/dwi_interpolation_to_PAM50
 
-pids=()
 for dti_metric in "${dti_metrics[@]}"; do
-  (
-    file_out="${PATH_RESULTS}/dwi_interpolation_to_PAM50/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
-    echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50..."
+  file_out="${PATH_RESULTS}/dwi_interpolation_to_PAM50/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
+  echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50..."
 
-    first_tract=1
-    for tract in "${tracts[@]}"; do
-      tract_name="${tract//,/-}"
-      tmp_csv="${PATH_RESULTS}/dwi_interpolation_to_PAM50/${SUBJECT}_dwi_${dti_metric}_tmp_${tract_name}.csv"
-      sct_extract_metric \
-        -i ${file_dwi}_${dti_metric}.nii.gz \
-        -f label_${file_dwi}/atlas \
-        -l ${tract} \
-        -combine 1 \
-        -method map \
-        -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
-        -perslice 1 \
-        -normalize-PAM50 1 \
-        -o "${tmp_csv}"
-      if [[ ${first_tract} -eq 1 ]]; then
-        cat "${tmp_csv}" > "${file_out}"
-        first_tract=0
-      else
-        tail -n +2 "${tmp_csv}" >> "${file_out}"
-      fi
-      rm "${tmp_csv}"
-    done
-  ) &
-  pids+=($!)
-done
-
-# Wait for all parallel jobs and propagate any failure
-for pid in "${pids[@]}"; do
-  wait "$pid"
+  first_tract=1
+  for tract in "${tracts[@]}"; do
+    tract_name="${tract//,/-}"
+    tmp_csv="${PATH_RESULTS}/dwi_interpolation_to_PAM50/${SUBJECT}_dwi_${dti_metric}_tmp_${tract_name}.csv"
+    sct_extract_metric \
+      -i ${file_dwi}_${dti_metric}.nii.gz \
+      -f label_${file_dwi}/atlas \
+      -l ${tract} \
+      -combine 1 \
+      -method map \
+      -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
+      -perslice 1 \
+      -normalize-PAM50 1 \
+      -o "${tmp_csv}"
+    if [[ ${first_tract} -eq 1 ]]; then
+      cat "${tmp_csv}" > "${file_out}"
+      first_tract=0
+    else
+      tail -n +2 "${tmp_csv}" >> "${file_out}"
+    fi
+    rm "${tmp_csv}"
+  done
 done
 
 # Go back to subject folder
