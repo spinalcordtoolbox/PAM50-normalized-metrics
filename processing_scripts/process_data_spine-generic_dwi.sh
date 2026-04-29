@@ -409,7 +409,12 @@ for dti_metric in "${dti_metrics[@]}"; do
     file_out="${PATH_RESULTS}/dwi_PAM50/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
     echo "👉 Extracting ${dti_metric} metrics in PAM50 space..."
 
+    # Write each tract to a separate file to avoid -append race conditions,
+    # then concatenate into one CSV.
+    first_tract=1
     for tract in "${tracts[@]}"; do
+      tract_name="${tract//,/-}"
+      tmp_csv="${PATH_RESULTS}/dwi_PAM50/${SUBJECT}_dwi_${dti_metric}_PAM50_tmp_${tract_name}.csv"
       sct_extract_metric \
         -i ${file_dwi}_${dti_metric}_PAM50.nii.gz \
         -f $SCT_DIR/data/PAM50/atlas \
@@ -418,8 +423,14 @@ for dti_metric in "${dti_metrics[@]}"; do
         -method map \
         -vertfile $SCT_DIR/data/PAM50/template/PAM50_levels.nii.gz \
         -perslice 1 \
-        -o ${file_out} \
-        -append 1
+        -o "${tmp_csv}"
+      if [[ ${first_tract} -eq 1 ]]; then
+        cat "${tmp_csv}" > "${file_out}"
+        first_tract=0
+      else
+        tail -n +2 "${tmp_csv}" >> "${file_out}"
+      fi
+      rm "${tmp_csv}"
     done
   ) &
   pids+=($!)
@@ -444,7 +455,10 @@ for dti_metric in "${dti_metrics[@]}"; do
     file_out="${PATH_RESULTS}/dwi_interpolation_to_PAM50/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
     echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50..."
 
+    first_tract=1
     for tract in "${tracts[@]}"; do
+      tract_name="${tract//,/-}"
+      tmp_csv="${PATH_RESULTS}/dwi_interpolation_to_PAM50/${SUBJECT}_dwi_${dti_metric}_tmp_${tract_name}.csv"
       sct_extract_metric \
         -i ${file_dwi}_${dti_metric}.nii.gz \
         -f label_${file_dwi}/atlas \
@@ -454,8 +468,14 @@ for dti_metric in "${dti_metrics[@]}"; do
         -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
         -perslice 1 \
         -normalize-PAM50 1 \
-        -o ${file_out} \
-        -append 1
+        -o "${tmp_csv}"
+      if [[ ${first_tract} -eq 1 ]]; then
+        cat "${tmp_csv}" > "${file_out}"
+        first_tract=0
+      else
+        tail -n +2 "${tmp_csv}" >> "${file_out}"
+      fi
+      rm "${tmp_csv}"
     done
   ) &
   pids+=($!)
