@@ -3,7 +3,7 @@
   "path_output" : "~/results/dwi_normative_database/dwi_normative_database_2026-04-14",
   "script"      : "~/code/PAM50-normalized-metrics/processing_scripts/process_data_spine-generic_dwi.sh",
   "script_args" : "--mask-method centerline --mask-size 35 --seg-method deepseg --denoise 0",
-  "jobs"        : 8,
+  "jobs"        : 16,
   "include_list" : [
     "sub-amu01",
     "sub-amu02",
