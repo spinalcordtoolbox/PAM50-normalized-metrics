@@ -269,8 +269,11 @@ sct_create_mask -i ${file_dwi}_dwi_mean.nii.gz -p centerline,${centerline_for_ma
 # ----------
 # Motion correction
 # ----------
+# Context for 'metric=CC':
+# https://github.com/sct-pipeline/spine-park/commit/924e332c3b4836baa087ea740a7837120d0b7cbf
+# https://forum.spinalcordmri.org/t/spacing-error-when-running-sct-dmri-moco/487
 # Motion correction using the mask
-sct_dmri_moco -i ${file_dwi}.nii.gz -bvec ${file_bvec} -m mask_${file_dwi}_dwi_mean.nii.gz -x spline
+sct_dmri_moco -i ${file_dwi}.nii.gz -bvec ${file_bvec} -m mask_${file_dwi}_dwi_mean.nii.gz -x spline -param metric=CC
 file_dwi=${file_dwi}_moco
 
 # Rename mean DWI to the BIDS rec-average convention used by spine-generic derivatives
