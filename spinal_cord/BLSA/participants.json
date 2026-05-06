@@ -1,0 +1,44 @@
+{
+    "participant_id": {
+        "Description": "Unique Participant ID",
+        "LongName": "Participant ID"
+    },
+    "session_id": {
+        "Description": "Session ID derived from the CSV filename",
+        "LongName": "Session ID"
+    },
+    "sex": {
+        "Description": "Sex of the participant as reported by the participant",
+        "LongName": "Sex",
+        "Levels": {
+            "M": "male",
+            "F": "female"
+        }
+    },
+    "age": {
+        "Description": "Participant age at the time of the session",
+        "LongName": "Participant age",
+        "Units": "years"
+    },
+    "pathology": {
+        "Description": "Cognitive status / diagnosis of the participant",
+        "LongName": "Pathology name",
+        "Levels": {
+            "CN": "Typically Developing/Aging Cognitively Normal",
+            "MCI": "Mild Cognitive Impairment",
+            "dementia": "Dementia"
+        }
+    },
+    "handedness": {
+        "Description": "Dominant hand of the participant",
+        "LongName": "Handedness"
+    },
+    "scanner": {
+        "Description": "Scanner identifier",
+        "LongName": "Scanner ID"
+    },
+    "race": {
+        "Description": "Self-reported race of the participant",
+        "LongName": "Race"
+    }
+}
