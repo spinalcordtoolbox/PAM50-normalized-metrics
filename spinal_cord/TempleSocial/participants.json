@@ -1,0 +1,53 @@
+{
+    "participant_id": {
+        "Description": "Unique Participant ID",
+        "LongName": "Participant ID"
+    },
+    "sex": {
+        "Description": "Sex of the participant as reported by the participant",
+        "LongName": "Sex",
+        "Levels": {
+            "M": "male",
+            "F": "female"
+        }
+    },
+    "age": {
+        "Description": "Participant age",
+        "LongName": "Participant age",
+        "Units": "years"
+    },
+    "pathology": {
+        "Description": "The diagnosis of pathology of the participant",
+        "LongName": "Pathology name",
+        "Levels": {
+            "CN": "Cognitively Normal"
+        }
+    },
+    "handedness": {
+        "Description": "Dominant hand of the participant",
+        "LongName": "Handedness"
+    },
+    "scanner": {
+        "Description": "Scanner identifier",
+        "LongName": "Scanner ID"
+    },
+    "race": {
+        "Description": "Self-reported race of the participant",
+        "LongName": "Race"
+    },
+    "weight": {
+        "Description": "Participant weight",
+        "LongName": "Weight",
+        "Units": "kg"
+    },
+    "height": {
+        "Description": "Participant height",
+        "LongName": "Height",
+        "Units": "cm"
+    },
+    "BMI": {
+        "Description": "Body mass index",
+        "LongName": "BMI",
+        "Units": "kg/m\u00b2"
+    }
+}
