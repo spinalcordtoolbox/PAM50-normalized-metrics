@@ -162,7 +162,7 @@ def main():
     out = out[OUT_COLS].sort_values(["participant_id", "session_id"]).reset_index(drop=True)
 
     out_tsv = dataset_dir / "participants.tsv"
-    out.to_csv(out_tsv, sep="\t", index=False)
+    out.to_csv(out_tsv, sep="	", index=False, na_rep="n/a")
     print(f"\nWritten {len(out)} rows → {out_tsv.relative_to(repo_root)}")
 
     out_json = dataset_dir / "participants.json"

@@ -156,7 +156,7 @@ def main():
 
     # 4. Write participants.tsv
     out_tsv = dataset_dir / "participants.tsv"
-    out.to_csv(out_tsv, sep="\t", index=False)
+    out.to_csv(out_tsv, sep="	", index=False, na_rep="n/a")
     print(f"\nWritten {len(out)} rows → {out_tsv.relative_to(repo_root)}")
     print(f"  pathology value counts: {out['pathology'].value_counts().to_dict()}")
 

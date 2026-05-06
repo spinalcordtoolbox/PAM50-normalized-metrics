@@ -80,7 +80,7 @@ def main():
     df = pd.DataFrame(rows, columns=OUT_COLS)
 
     out_tsv = dataset_dir / "participants.tsv"
-    df.to_csv(out_tsv, sep="\t", index=False)
+    df.to_csv(out_tsv, sep="	", index=False, na_rep="n/a")
     print(f"Written {len(df)} rows → {out_tsv.relative_to(repo_root)}")
     print(f"  pathology value counts: {df['pathology'].value_counts().to_dict()}")
 
