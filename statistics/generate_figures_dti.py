@@ -52,6 +52,9 @@ LABEL_DISPLAY_NAMES = {
 LABELS_FONT_SIZE = 14
 TICKS_FONT_SIZE = 12
 
+# X-axis is restricted to this inclusive range of vertebral levels (C1=1 … C7=7, T1=8 …).
+XLIM_VERT_RANGE = (2, 5)
+
 SEX_PALETTE = {'Males': 'blue', 'Females': 'red'}
 SEX_LABEL_MAP = {'M': 'Males', 'F': 'Females'}
 
@@ -98,7 +101,9 @@ def load_dti_csvs(path_results, dataset_label):
     """
     frames = []
     for metric in DTI_METRICS:
-        pattern = os.path.join(path_results, f'*_dwi_{metric}_PAM50.csv')
+        # Matches both direct (`*_dwi_FA_PAM50.csv`) and interpolated
+        # (`*_dwi_FA_interpolated_to_PAM50.csv`) naming.
+        pattern = os.path.join(path_results, f'*_dwi_{metric}_*PAM50.csv')
         csv_files = sorted(glob.glob(pattern))
         if not csv_files:
             print(f'  Warning: no {metric} CSVs found in {path_results}')
@@ -115,6 +120,8 @@ def load_dti_csvs(path_results, dataset_label):
             df['metric'] = metric
             df['dataset'] = dataset_label
             df = df.rename(columns={'MAP()': 'value', 'STD()': 'std'})
+            if 'std' not in df.columns:
+                df['std'] = np.nan
             frames.append(df[['participant_id', 'Slice (I->S)', 'VertLevel', 'Label',
                                'metric', 'value', 'std', 'dataset']])
     if not frames:
@@ -135,7 +142,9 @@ def get_vert_indices(df_single_trace):
         mid_slices   (list[int]): slice numbers at the middle of each vertebral level.
         vert_at_mid  (list[int]): vertebral level number at each mid-slice.
     """
-    df = df_single_trace.sort_values('Slice (I->S)').reset_index(drop=True)
+    df = (df_single_trace.dropna(subset=['VertLevel'])
+                         .sort_values('Slice (I->S)')
+                         .reset_index(drop=True))
     vert = df['VertLevel'].tolist()
     slices = df['Slice (I->S)'].tolist()
 
@@ -239,6 +248,12 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None):
     ref = df_ref[(df_ref['participant_id'] == first_sub) & (df_ref['dataset'] == first_ds)]
     disc_slices, mid_slices, vert_at_mid = get_vert_indices(ref)
 
+    # Slice range covering the requested vertebral levels (used to clip data and xlim).
+    ref_in_range = ref[ref['VertLevel'].between(*XLIM_VERT_RANGE)]
+    xlim_min = ref_in_range['Slice (I->S)'].min()
+    xlim_max = ref_in_range['Slice (I->S)'].max()
+    df = df[df['Slice (I->S)'].between(xlim_min, xlim_max)]
+
     n_per_level = (
         df_ref.dropna(subset=['value'])
         .groupby('VertLevel')['participant_id']
@@ -294,6 +309,15 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None):
     shared_ymin, shared_ymax = min(all_ymins), max(all_ymaxs)
     for ax in active_axes:
         ax.set_ylim(shared_ymin, shared_ymax)
+
+    # Restrict x-axis and keep only annotations within the visible range
+    disc_slices = [s for s in disc_slices if xlim_min <= s <= xlim_max]
+    mid_slices, vert_at_mid = zip(*[
+        (s, v) for s, v in zip(mid_slices, vert_at_mid)
+        if xlim_min <= s <= xlim_max
+    ]) if mid_slices else ([], [])
+    for ax in active_axes:
+        ax.set_xlim(xlim_max, xlim_min)  # inverted x-axis (rostral on the left)
 
     # --- Second pass: vertebral annotations (need final ymin) ---
     for ax in active_axes:
