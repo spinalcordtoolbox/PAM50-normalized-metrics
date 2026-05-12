@@ -154,7 +154,7 @@ file_t2_discs=$FILELABEL
 # Note: '-v 2' flag is used to get all available vertebral levels from PAM50 template. This assures that the output CSV
 #  files will have the same number of rows, regardless of the subject's vertebral levels.
 # Note: '-anat' flag is used to specify the anatomical image to compute spinal cord orientation (using HOG method).
-#  It is required to compute symmetry and quadrants area metrics
+#  It is required to compute symmetry and quadrants area metrics.
 mkdir -p ${PATH_RESULTS}/spinalcord
 sct_process_segmentation -i ${file_t2_seg}.nii.gz -anat ${file_t2}.nii.gz -discfile ${file_t2_discs}.nii.gz -perslice 1 -normalize-PAM50 1 -v 2 -o ${PATH_RESULTS}/spinalcord/${file_t2}_PAM50.csv
 
