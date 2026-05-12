@@ -156,14 +156,14 @@ file_t2_discs=$FILELABEL
 # Note: '-anat' flag is used to specify the anatomical image to compute spinal cord orientation (using HOG method).
 #  It is required to compute symmetry and quadrants area metrics.
 mkdir -p ${PATH_RESULTS}/spinalcord
-sct_process_segmentation -i ${file_t2_seg}.nii.gz -anat ${file_t2}.nii.gz -discfile ${file_t2_discs}.nii.gz -perslice 1 -normalize-PAM50 1 -v 2 -o ${PATH_RESULTS}/spinalcord/${file_t2}_PAM50.csv
+sct_process_segmentation -i ${file_t2_seg}.nii.gz -anat ${file_t2}.nii.gz -discfile ${file_t2_discs}.nii.gz -perslice 1 -normalize-PAM50 1 -o ${PATH_RESULTS}/spinalcord/${file_t2}_PAM50.csv
 
 # ------------------------------------------------------------------------------
 # Segment canal
 segment_canal_if_does_not_exist ${file_t2} 't2'
 file_t2_seg_canal=$FILESEG
 mkdir -p ${PATH_RESULTS}/canal
-sct_process_segmentation -i ${file_t2_seg_canal}.nii.gz -anat ${file_t2}.nii.gz -discfile ${file_t2_discs}.nii.gz -perslice 1 -normalize-PAM50 1 -v 2 -o ${PATH_RESULTS}/canal/${file_t2}_PAM50.csv
+sct_process_segmentation -i ${file_t2_seg_canal}.nii.gz -anat ${file_t2}.nii.gz -discfile ${file_t2_discs}.nii.gz -perslice 1 -normalize-PAM50 1 -o ${PATH_RESULTS}/canal/${file_t2}_PAM50.csv
 
 
 # ------------------------------------------------------------------------------
