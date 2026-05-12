@@ -16,6 +16,8 @@
 # PATH_LOG="~/log"
 # PATH_QC="~/qc"
 #
+# SCT version: v7.3
+#
 # Authors: Jan Valosek, Sandrine Bedard, Julien Cohen-Adad
 #
 
