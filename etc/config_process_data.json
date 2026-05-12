@@ -1,0 +1,6 @@
+{
+  "path_data"   : "~/data/data.neuro.polymtl.ca/data-multi-subject",
+  "path_output" : "~/results/PAM50-normalized-metrics/spine-generic_2026-05-12_symmetry",
+  "script"      : "~/code/PAM50-normalized-metrics/processing_scripts/process_data_spine-generic.sh",
+  "jobs"        : 16
+}
