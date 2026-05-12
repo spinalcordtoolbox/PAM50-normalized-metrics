@@ -146,19 +146,20 @@ file_t2_seg=$FILESEG
 
 # Create labeling from manual disc labels located at /derivatives
 label_if_does_not_exist ${file_t2} ${file_t2_seg} 't2'
+file_t2_discs=$FILELABEL
 
 # Compute metrics from SC segmentation and normalize them to PAM50 ('-normalize-PAM50' flag)
 # Note: '-v 2' flag is used to get all available vertebral levels from PAM50 template. This assures that the output CSV
 # files will have the same number of rows, regardless of the subject's vertebral levels.
 mkdir -p ${PATH_RESULTS}/spinalcord
-sct_process_segmentation -i ${file_t2_seg}.nii.gz -vertfile ${file_t2_seg}_labeled.nii.gz -perslice 1 -normalize-PAM50 1 -v 2 -o ${PATH_RESULTS}/spinalcord/${file_t2}_PAM50.csv
+sct_process_segmentation -i ${file_t2_seg}.nii.gz -discfile ${file_t2_discs}.nii.gz -perslice 1 -normalize-PAM50 1 -v 2 -o ${PATH_RESULTS}/spinalcord/${file_t2}_PAM50.csv
 
 # ------------------------------------------------------------------------------
 # Segment canal
 segment_canal_if_does_not_exist ${file_t2} 't2'
 file_t2_seg_canal=$FILESEG
 mkdir -p ${PATH_RESULTS}/canal
-sct_process_segmentation -i ${file_t2_seg_canal}.nii.gz -vertfile ${file_t2_seg}_labeled.nii.gz -perslice 1 -normalize-PAM50 1 -v 2 -o ${PATH_RESULTS}/canal/${file_t2}_PAM50.csv
+sct_process_segmentation -i ${file_t2_seg_canal}.nii.gz -discfile ${file_t2_discs}.nii.gz -perslice 1 -normalize-PAM50 1 -v 2 -o ${PATH_RESULTS}/canal/${file_t2}_PAM50.csv
 
 
 # ------------------------------------------------------------------------------
