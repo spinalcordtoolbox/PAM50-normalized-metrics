@@ -56,13 +56,13 @@ The table below summarizes all datasets included in this repository. It is also 
 | spinal_canal | spine-generic multi-subject | 203 | 203 | 43 | healthy adults | 105/98/0 | 28.7±5.6 [19–52] | cervical spine | T2w | 0.8mm iso | [spine-generic/data-multi-subject](https://github.com/spine-generic/data-multi-subject) |
 | spinal_cord | spine-generic multi-subject | 203 | 203 | 43 | healthy adults | 105/98/0 | 28.7±5.6 [19–52] | cervical spine | T2w | 0.8mm iso | [spine-generic/data-multi-subject](https://github.com/spine-generic/data-multi-subject) |
 | spinal_cord | whole-spine | 58 | 58 | 2 | healthy adults | 30/18/10 | 27.2±6.7 [21–56] | whole spine | T2w | 1.0mm iso | [openneuro/ds005616](https://openneuro.org/datasets/ds005616) |
-| spinal_cord | MASiVar | 96 | 144 | n/a | healthy adults and children | 55/41/0 | 9.6±8.7 [5–47] | cervical spine | T1w | 1.0mm iso | [openneuro/ds003416](https://openneuro.org/datasets/ds003416) |
-| spinal_cord | AOMIC | 576 | 576 | n/a | healthy adults | 140/436/0 | 22.8±1.8 [18–26] | cervical spine | T1w | 1.0mm iso | [openneuro/ds003097](https://openneuro.org/datasets/ds003097), [openneuro/ds002785](https://openneuro.org/datasets/ds002785), [openneuro/ds002790](https://openneuro.org/datasets/ds002790) |
-| spinal_cord | DLBS | 464 | 957 | n/a | healthy adults | 177/287/0 | 58.4±18.1 [21–89] | cervical spine | T1w | 1.0mm iso | [openneuro/ds004856](https://openneuro.org/datasets/ds004856) |
-| spinal_cord | VUIIS-MS | 46 | 71 | n/a | healthy controls and MS patients | 0/0/46 | n/a | cervical spine | T1w | n/a | n/a |
-| spinal_cord | TempleSocial | 104 | 104 | n/a | healthy adults | 34/66/0 | 42.3±16.8 [21–80] | cervical spine | T1w | 1.0mm iso | [openneuro/ds005123](https://openneuro.org/datasets/ds005123) |
-| spinal_cord | UCLA LA5c | 259 | 259 | n/a | healthy controls and neuropsychiatric patients | 149/110/0 | 33.1±9.3 [21–50] | cervical spine | T1w | 1.0mm iso | [openneuro/ds000030](https://openneuro.org/datasets/ds000030) |
-| spinal_cord | BLSA | 1118 | 3263 | n/a | Cognitively Normal, MCI, and dementia | 488/587/43 | 66.2±14.8 [22–94] | cervical spine | T1w | 1.0mm iso | [blsa.nih.gov](https://www.blsa.nih.gov) |
+| spinal_cord | MASiVar | 96 | 143 | n/a | healthy adults and children | 55/41/0 | 9.6±8.7 [5–47] | cervical spine | T1w | 1.0mm iso | [openneuro/ds003416](https://openneuro.org/datasets/ds003416) |
+| spinal_cord | AOMIC | 573 | 573 | n/a | healthy adults | 138/435/0 | 22.8±1.8 [18–26] | cervical spine | T1w | 1.0mm iso | [openneuro/ds003097](https://openneuro.org/datasets/ds003097), [openneuro/ds002785](https://openneuro.org/datasets/ds002785), [openneuro/ds002790](https://openneuro.org/datasets/ds002790) |
+| spinal_cord | DLBS | 463 | 951 | n/a | healthy adults | 176/287/0 | 58.4±18.2 [21–89] | cervical spine | T1w | 1.0mm iso | [openneuro/ds004856](https://openneuro.org/datasets/ds004856) |
+| spinal_cord | VUIIS-MS | 46 | 70 | n/a | healthy controls and MS patients | 11/35/0 | 41.4±11.1 [23–64] | cervical spine | T1w | n/a | n/a |
+| spinal_cord | TempleSocial | 90 | 90 | n/a | healthy adults | 28/60/2 | 42.2±16.7 [21–80] | cervical spine | T1w | 1.0mm iso | [openneuro/ds005123](https://openneuro.org/datasets/ds005123) |
+| spinal_cord | UCLA LA5c | 254 | 254 | n/a | healthy controls and neuropsychiatric patients | 146/108/0 | 33.0±9.3 [21–50] | cervical spine | T1w | 1.0mm iso | [openneuro/ds000030](https://openneuro.org/datasets/ds000030) |
+| spinal_cord | BLSA | 1095 | 3170 | n/a | Cognitively Normal, MCI, and dementia | 484/577/34 | 66.1±14.8 [22–94] | cervical spine | T1w | 1.0mm iso | [blsa.nih.gov](https://www.blsa.nih.gov) |
 <!-- datasets-table-end -->
 
 ## Datasets Structure

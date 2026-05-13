@@ -71,7 +71,6 @@ sub-1169	ses-wave1	F	31.0	CN	n/a	n/a	white	198.0	66.0	31.955
 sub-1169	ses-wave2	F	35.0	CN	n/a	n/a	white	200.0	67.0	31.321
 sub-1172	ses-wave1	M	27.0	CN	n/a	n/a	white	220.0	67.0	34.453
 sub-1172	ses-wave2	M	31.0	CN	n/a	n/a	white	230.0	67.0	36.019
-sub-1172	ses-wave3	M	36.0	CN	n/a	n/a	white	n/a	n/a	n/a
 sub-1175	ses-wave1	M	43.0	CN	n/a	n/a	asian	135.0	65.0	22.463
 sub-1175	ses-wave3	M	52.0	CN	n/a	n/a	asian	n/a	n/a	n/a
 sub-1178	ses-wave1	F	83.0	CN	n/a	n/a	white	132.0	61.0	24.938
@@ -283,7 +282,6 @@ sub-189	ses-wave1	F	24.0	CN	n/a	n/a	white	143.0	71.0	19.942
 sub-189	ses-wave2	F	29.0	CN	n/a	n/a	white	140.0	71.0	19.524
 sub-189	ses-wave3	F	34.0	CN	n/a	n/a	white	n/a	n/a	n/a
 sub-1891	ses-wave1	F	88.0	CN	n/a	n/a	white	120.0	60.5	23.048
-sub-1891	ses-wave2	F	91.0	CN	n/a	n/a	white	124.0	59.0	25.042
 sub-1891	ses-wave3	F	97.0	CN	n/a	n/a	white	n/a	n/a	n/a
 sub-1915	ses-wave1	F	75.0	CN	n/a	n/a	white	125.0	63.0	22.14
 sub-1919	ses-wave1	F	35.0	CN	n/a	n/a	white	130.0	63.0	23.026
@@ -402,7 +400,6 @@ sub-269	ses-wave1	F	81.0	CN	n/a	n/a	white	160.0	65.0	26.622
 sub-274	ses-wave1	M	76.0	CN	n/a	n/a	white	188.0	71.0	26.218
 sub-274	ses-wave2	M	80.0	CN	n/a	n/a	white	180.0	70.0	25.824
 sub-2740	ses-wave1	F	55.0	CN	n/a	n/a	black	145.0	64.0	24.886
-sub-2743	ses-wave1	M	72.0	CN	n/a	n/a	white	200.0	71.0	27.891
 sub-2743	ses-wave2	M	76.0	CN	n/a	n/a	white	210.0	70.5	29.703
 sub-2748	ses-wave1	M	68.0	CN	n/a	n/a	white	240.0	76.0	29.211
 sub-2748	ses-wave2	M	73.0	CN	n/a	n/a	white	230.0	76.0	27.993
@@ -472,7 +469,6 @@ sub-3182	ses-wave1	M	60.0	CN	n/a	n/a	white	224.0	70.0	32.137
 sub-3182	ses-wave2	M	63.0	CN	n/a	n/a	white	226.0	70.0	32.424
 sub-3211	ses-wave1	M	81.0	CN	n/a	n/a	white	145.0	70.0	20.803
 sub-3211	ses-wave2	M	85.0	CN	n/a	n/a	white	n/a	n/a	n/a
-sub-3211	ses-wave3	M	89.0	CN	n/a	n/a	white	n/a	n/a	n/a
 sub-3212	ses-wave1	F	80.0	CN	n/a	n/a	white	145.0	65.0	24.127
 sub-324	ses-wave1	F	40.0	CN	n/a	n/a	white	190.0	67.0	29.755
 sub-324	ses-wave2	F	45.0	CN	n/a	n/a	white	185.0	67.0	28.972
@@ -718,7 +714,6 @@ sub-4799	ses-wave1	F	61.0	CN	n/a	n/a	other	124.0	63.0	21.963
 sub-4800	ses-wave1	F	54.0	CN	n/a	n/a	white	185.0	69.0	27.317
 sub-4800	ses-wave2	F	58.0	CN	n/a	n/a	white	n/a	n/a	n/a
 sub-4805	ses-wave1	F	63.0	CN	n/a	n/a	white	155.0	64.0	26.603
-sub-4828	ses-wave1	M	71.0	CN	n/a	n/a	white	210.0	67.25	32.643
 sub-483	ses-wave1	F	81.0	CN	n/a	n/a	white	180.0	64.0	30.894
 sub-483	ses-wave2	F	85.0	CN	n/a	n/a	white	178.0	63.0	31.528
 sub-4841	ses-wave1	F	67.0	CN	n/a	n/a	white	148.0	66.0	23.885
@@ -807,7 +802,6 @@ sub-680	ses-wave1	M	65.0	CN	n/a	n/a	white	205.0	72.0	27.8
 sub-680	ses-wave2	M	69.0	CN	n/a	n/a	white	205.0	72.0	27.8
 sub-680	ses-wave3	M	74.0	CN	n/a	n/a	white	n/a	n/a	n/a
 sub-684	ses-wave1	F	73.0	CN	n/a	n/a	native american	139.0	64.0	23.857
-sub-684	ses-wave2	F	77.0	CN	n/a	n/a	native american	140.0	64.0	24.028
 sub-684	ses-wave3	F	82.0	CN	n/a	n/a	native american	n/a	n/a	n/a
 sub-688	ses-wave1	M	67.0	CN	n/a	n/a	white	193.0	71.0	26.915
 sub-688	ses-wave2	M	71.0	CN	n/a	n/a	white	185.0	71.0	25.799
