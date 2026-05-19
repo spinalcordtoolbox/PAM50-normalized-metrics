@@ -65,15 +65,15 @@
 # Inspired by: Valosek et al., 2021, DOI: 10.1111/ene.15027
 tracts=(
   "51"      # white matter (combined)
-  "52"      # gray matter (combined)
-  "53"      # dorsal columns
-  "54"      # lateral columns
-  "55"      # ventral columns
-  "0,1"     # left and right fasciculus gracilis
-  "2,3"     # left and right fasciculus cuneatus
-  "4,5"     # left and right lateral corticospinal tract
-  "12,13"   # left and right spinal lemniscus (spinothalamic + spinoreticular)
-  "30,31"   # ventral gray matter horns
+  # "52"      # gray matter (combined)
+  # "53"      # dorsal columns
+  # "54"      # lateral columns
+  # "55"      # ventral columns
+  # "0,1"     # left and right fasciculus gracilis
+  # "2,3"     # left and right fasciculus cuneatus
+  # "4,5"     # left and right lateral corticospinal tract
+  # "12,13"   # left and right spinal lemniscus (spinothalamic + spinoreticular)
+  # "30,31"   # ventral gray matter horns
 )
 
 # Uncomment for full verbose
