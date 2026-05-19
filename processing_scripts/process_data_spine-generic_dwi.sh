@@ -223,9 +223,9 @@ file_t2_seg=$FILESEG
 label_if_does_not_exist ${file_t2} ${file_t2_seg} 't2'
 
 # Select the C2-C3 and T1-T2 intervertebral disc labels. These labels are needed for template registration.
-sct_label_utils -i ${file_t2_seg}_labeled_discs.nii.gz -keep 3,9 -o t2_labels_discs.nii.gz
-# Generate a QC report to visualize the two selected labels on the anatomical image
-sct_qc -i ${file_t2}.nii.gz -s t2_labels_discs.nii.gz -p sct_label_utils -qc ${PATH_QC} -qc-subject ${SUBJECT}
+#sct_label_utils -i ${file_t2_seg}_labeled_discs.nii.gz -keep 3,9 -o t2_labels_discs.nii.gz
+## Generate a QC report to visualize the two selected labels on the anatomical image
+#sct_qc -i ${file_t2}.nii.gz -s t2_labels_discs.nii.gz -p sct_label_utils -qc ${PATH_QC} -qc-subject ${SUBJECT}
 
 # Register T2w to PAM50 template
 # Step 1: centermassrot accounts for cord rotation
@@ -233,7 +233,7 @@ sct_qc -i ${file_t2}.nii.gz -s t2_labels_discs.nii.gz -p sct_label_utils -qc ${P
 sct_register_to_template \
   -i ${file_t2}.nii.gz \
   -s ${file_t2_seg}.nii.gz \
-  -ldisc t2_labels_discs.nii.gz \
+  -ldisc ${file_t2_seg}_labeled_discs.nii.gz \
   -c t2 \
   -param step=1,type=seg,algo=centermassrot:step=2,type=seg,algo=syn,metric=MeanSquares,slicewise=1,smooth=0,iter=5 \
   -qc ${PATH_QC} -qc-subject ${SUBJECT}
