@@ -24,6 +24,7 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn as sns
+from tqdm import tqdm
 
 DTI_METRICS = ['FA', 'MD', 'RD', 'AD']
 
@@ -108,7 +109,7 @@ def load_dti_csvs(path_results, dataset_label):
         if not csv_files:
             print(f'  Warning: no {metric} CSVs found in {path_results}')
             continue
-        for csv_file in csv_files:
+        for csv_file in tqdm(csv_files, desc=f'    {metric}', unit='subj', leave=False):
             basename = os.path.basename(csv_file)
             m = re.match(r'(sub-\w+)_dwi_', basename)
             if not m:
