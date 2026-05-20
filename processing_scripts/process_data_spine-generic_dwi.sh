@@ -461,10 +461,9 @@ for eval_idx in 1 2 3; do
     -o ${file_dwi}_E${eval_idx}_PAM50.nii.gz
 done
 
-# Recompute FA, MD, RD, AD from the warped eigenvalues.
-# Helper lives in the repo; sct_run_batch copies only the bash script to PATH_RESULTS,
-# so the helper path is resolved relative to ~/code/PAM50-normalized-metrics.
-python ~/code/PAM50-normalized-metrics/processing_scripts/compute_dti_from_evals.py \
+# Recompute FA, MD, RD, AD from the warped eigenvalues using a helper script from this repo
+$SCT_DIR/python/envs/venv_sct/bin/python \
+  ~/code/PAM50-normalized-metrics/processing_scripts/compute_dti_from_evals.py \
   -e1 ${file_dwi}_E1_PAM50.nii.gz \
   -e2 ${file_dwi}_E2_PAM50.nii.gz \
   -e3 ${file_dwi}_E3_PAM50.nii.gz \
