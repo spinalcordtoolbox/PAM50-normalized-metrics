@@ -82,9 +82,6 @@ set -x
 # Immediately exit if error
 set -e -o pipefail
 
-# Absolute path to this script's directory (used to locate sibling Python helpers)
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 # Exit if user presses CTRL+C (Linux) or CMD+C (OSX)
 trap "echo Caught Keyboard Interrupt within script. Exiting now.; exit" INT
 
@@ -464,8 +461,10 @@ for eval_idx in 1 2 3; do
     -o ${file_dwi}_E${eval_idx}_PAM50.nii.gz
 done
 
-# Recompute FA, MD, RD, AD from the warped eigenvalues
-python "${SCRIPT_DIR}/compute_dti_from_evals.py" \
+# Recompute FA, MD, RD, AD from the warped eigenvalues.
+# Helper lives in the repo; sct_run_batch copies only the bash script to PATH_RESULTS,
+# so the helper path is resolved relative to ~/code/PAM50-normalized-metrics.
+python ~/code/PAM50-normalized-metrics/processing_scripts/compute_dti_from_evals.py \
   -e1 ${file_dwi}_E1_PAM50.nii.gz \
   -e2 ${file_dwi}_E2_PAM50.nii.gz \
   -e3 ${file_dwi}_E3_PAM50.nii.gz \
