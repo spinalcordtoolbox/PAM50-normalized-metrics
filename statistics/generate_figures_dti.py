@@ -102,9 +102,10 @@ def load_dti_csvs(path_results, dataset_label):
     """
     frames = []
     for metric in DTI_METRICS:
-        # Matches both direct (`*_dwi_FA_PAM50.csv`) and interpolated
-        # (`*_dwi_FA_interpolated_to_PAM50.csv`) naming.
-        pattern = os.path.join(path_results, f'*_dwi_{metric}_*PAM50.csv')
+        # Matches direct (`*_dwi_FA_PAM50.csv`), interpolated
+        # (`*_dwi_FA_interpolated_to_PAM50.csv`), and via-evals
+        # (`*_dwi_FA_PAM50_via_evals.csv`) naming.
+        pattern = os.path.join(path_results, f'*_dwi_{metric}_*PAM50*.csv')
         csv_files = sorted(glob.glob(pattern))
         if not csv_files:
             print(f'  Warning: no {metric} CSVs found in {path_results}')
@@ -279,10 +280,13 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None):
             continue
 
         if hue is not None:
+            # style=hue varies linestyle per dataset (1st solid, 2nd dashed, ...)
+            # and alpha lets overlapping traces be seen through one another.
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
-                         hue=hue, errorbar='sd', linewidth=2, palette=palette)
+                         hue=hue, style=hue, errorbar='sd', linewidth=2,
+                         palette=palette, alpha=0.7)
             if i == 0:
-                ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE)
+                ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE-5)
             else:
                 ax.get_legend().remove()
         else:
