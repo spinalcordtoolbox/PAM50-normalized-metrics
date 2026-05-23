@@ -50,8 +50,8 @@ LABEL_DISPLAY_NAMES = {
     '30,31': 'Ventral Horn (L+R)',
 }
 
-LABELS_FONT_SIZE = 14
-TICKS_FONT_SIZE = 12
+LABELS_FONT_SIZE = 20
+TICKS_FONT_SIZE = LABELS_FONT_SIZE-2
 
 # X-axis is restricted to this inclusive range of vertebral levels (C1=1 … C7=7, T1=8 …).
 XLIM_VERT_RANGE = (2, 5)
