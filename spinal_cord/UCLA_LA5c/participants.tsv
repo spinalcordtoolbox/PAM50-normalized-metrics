@@ -1,8 +1,6 @@
 participant_id	sex	age	pathology	handedness	scanner	race	weight	height	BMI
-sub-10159	F	30.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-10171	M	24.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-10189	M	49.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
-sub-10193	M	40.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-10206	M	21.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-10217	F	33.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-10227	F	31.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
@@ -90,7 +88,6 @@ sub-10968	M	24.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-10975	M	32.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-10977	M	47.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-10987	F	26.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
-sub-10998	M	49.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-11019	M	47.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-11030	M	40.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
 sub-11044	M	40.0	CN	n/a	n/a	n/a	n/a	n/a	n/a
@@ -131,7 +128,6 @@ sub-50015	M	23.0	SCHZ	n/a	n/a	n/a	n/a	n/a	n/a
 sub-50016	M	49.0	SCHZ	n/a	n/a	n/a	n/a	n/a	n/a
 sub-50020	M	25.0	SCHZ	n/a	n/a	n/a	n/a	n/a	n/a
 sub-50021	F	41.0	SCHZ	n/a	n/a	n/a	n/a	n/a	n/a
-sub-50022	M	33.0	SCHZ	n/a	n/a	n/a	n/a	n/a	n/a
 sub-50023	F	49.0	SCHZ	n/a	n/a	n/a	n/a	n/a	n/a
 sub-50025	M	48.0	SCHZ	n/a	n/a	n/a	n/a	n/a	n/a
 sub-50027	F	30.0	SCHZ	n/a	n/a	n/a	n/a	n/a	n/a
@@ -218,7 +214,6 @@ sub-60084	F	32.0	bipolar	n/a	n/a	n/a	n/a	n/a	n/a
 sub-60087	M	41.0	bipolar	n/a	n/a	n/a	n/a	n/a	n/a
 sub-60089	F	29.0	bipolar	n/a	n/a	n/a	n/a	n/a	n/a
 sub-70001	F	50.0	ADHD	n/a	n/a	n/a	n/a	n/a	n/a
-sub-70002	F	44.0	ADHD	n/a	n/a	n/a	n/a	n/a	n/a
 sub-70004	F	26.0	ADHD	n/a	n/a	n/a	n/a	n/a	n/a
 sub-70007	M	32.0	ADHD	n/a	n/a	n/a	n/a	n/a	n/a
 sub-70010	M	48.0	ADHD	n/a	n/a	n/a	n/a	n/a	n/a

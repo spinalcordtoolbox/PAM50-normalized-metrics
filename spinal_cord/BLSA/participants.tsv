@@ -8,7 +8,6 @@ sub-BLSA0270	ses-320scanner10	M	88.1	CN	n/a	n/a	white
 sub-BLSA0276	ses-230scanner10	M	84.3	CN	n/a	n/a	white
 sub-BLSA0276	ses-240scanner10	M	85.6	CN	n/a	n/a	white
 sub-BLSA0276	ses-260scanner10	M	88.2	CN	n/a	n/a	white
-sub-BLSA0303	ses-090scanner10	M	80.1	CN	n/a	n/a	white
 sub-BLSA0303	ses-100scanner10	M	81.2	CN	n/a	n/a	white
 sub-BLSA0303	ses-110scanner10	M	83.1	CN	n/a	n/a	white
 sub-BLSA0303	ses-120scanner10	M	87.3	CN	n/a	n/a	white
@@ -37,7 +36,6 @@ sub-BLSA0478	ses-170scanner10	M	90.5	MCI	n/a	n/a	white
 sub-BLSA0498	ses-250scanner10	M	85.0	CN	n/a	n/a	white
 sub-BLSA0498	ses-260scanner10	M	86.1	CN	n/a	n/a	white
 sub-BLSA0498	ses-270scanner10	M	87.8	CN	n/a	n/a	white
-sub-BLSA0501	ses-240scanner03	M	75.0	CN	n/a	n/a	white
 sub-BLSA0517	ses-240scanner08	M	77.6	CN	n/a	n/a	white
 sub-BLSA0531	ses-260scanner09	M	75.5	CN	n/a	n/a	white
 sub-BLSA0531	ses-270scanner10	M	77.6	CN	n/a	n/a	white
@@ -75,7 +73,6 @@ sub-BLSA0748	ses-290scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA0749	ses-180scanner10	M	81.5	CN	n/a	n/a	white
 sub-BLSA0749	ses-190scanner10	M	82.6	CN	n/a	n/a	white
 sub-BLSA0749	ses-200scanner10	M	83.8	CN	n/a	n/a	white
-sub-BLSA0749	ses-210scanner10	M	84.8	MCI	n/a	n/a	white
 sub-BLSA0751	ses-200scanner10	M	82.4	dementia	n/a	n/a	white
 sub-BLSA0774	ses-220scanner09	M	72.4	CN	n/a	n/a	white
 sub-BLSA0774	ses-230scanner10	M	74.6	CN	n/a	n/a	white
@@ -103,7 +100,6 @@ sub-BLSA0924	ses-190scanner10	M	87.0	CN	n/a	n/a	white
 sub-BLSA0930	ses-160scanner10	M	71.5	MCI	n/a	n/a	black
 sub-BLSA0930	ses-170scanner10	M	73.9	dementia	n/a	n/a	black
 sub-BLSA0930	ses-180scanner10	M	75.9	dementia	n/a	n/a	black
-sub-BLSA0935	ses-190scanner10	M	73.7	CN	n/a	n/a	black
 sub-BLSA0935	ses-200scanner10	M	75.8	CN	n/a	n/a	black
 sub-BLSA0950	ses-190scanner10	M	72.0	CN	n/a	n/a	white
 sub-BLSA0950	ses-200scanner10	M	73.9	CN	n/a	n/a	white
@@ -251,13 +247,11 @@ sub-BLSA1228	ses-160scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA1235	ses-130scanner10	M	69.2	CN	n/a	n/a	white
 sub-BLSA1235	ses-140scanner10	M	71.2	CN	n/a	n/a	white
 sub-BLSA1242	ses-100scanner10	M	57.5	CN	n/a	n/a	white
-sub-BLSA1248	ses-095scanner02	M	85.0	CN	n/a	n/a	white
 sub-BLSA1253	ses-150scanner10	M	80.2	dementia	n/a	n/a	white
 sub-BLSA1256	ses-110scanner10	M	70.7	CN	n/a	n/a	white
 sub-BLSA1256	ses-120scanner10	M	73.7	CN	n/a	n/a	white
 sub-BLSA1256	ses-130scanner10	M	76.7	CN	n/a	n/a	white
 sub-BLSA1259	ses-110scanner09	M	73.3	CN	n/a	n/a	white
-sub-BLSA1259	ses-120scanner10	M	75.7	CN	n/a	n/a	white
 sub-BLSA1261	ses-110scanner10	M	60.3	CN	n/a	n/a	white
 sub-BLSA1261	ses-120scanner10	M	62.3	CN	n/a	n/a	white
 sub-BLSA1261	ses-130scanner10	M	68.0	CN	n/a	n/a	white
@@ -273,7 +267,6 @@ sub-BLSA1283	ses-120scanner10	M	56.3	CN	n/a	n/a	white
 sub-BLSA1293	ses-120scanner10	M	64.4	CN	n/a	n/a	white
 sub-BLSA1328	ses-120scanner10	M	62.4	CN	n/a	n/a	white
 sub-BLSA1328	ses-130scanner10	M	64.2	CN	n/a	n/a	white
-sub-BLSA1328	ses-140scanner10	M	66.3	CN	n/a	n/a	white
 sub-BLSA1366	ses-120scanner10	M	59.9	CN	n/a	n/a	white
 sub-BLSA1367	ses-100scanner10	M	59.6	CN	n/a	n/a	white
 sub-BLSA1367	ses-110scanner10	M	62.7	CN	n/a	n/a	white
@@ -332,7 +325,6 @@ sub-BLSA1483	ses-150scanner10	M	85.9	dementia	n/a	n/a	white
 sub-BLSA1487	ses-110scanner08	M	76.1	CN	n/a	n/a	white
 sub-BLSA1487	ses-120scanner09	M	78.1	CN	n/a	n/a	white
 sub-BLSA1487	ses-120scanner10	M	78.1	CN	n/a	n/a	white
-sub-BLSA1487	ses-130scanner10	M	80.2	CN	n/a	n/a	white
 sub-BLSA1487	ses-140scanner10	M	81.1	CN	n/a	n/a	white
 sub-BLSA1487	ses-150scanner10	M	82.0	CN	n/a	n/a	white
 sub-BLSA1490	ses-100scanner10	M	82.4	CN	n/a	n/a	white
@@ -369,13 +361,10 @@ sub-BLSA1537	ses-140scanner10	M	81.8	CN	n/a	n/a	white
 sub-BLSA1538	ses-100scanner09	M	79.2	CN	n/a	n/a	white
 sub-BLSA1538	ses-110scanner09	M	81.0	CN	n/a	n/a	white
 sub-BLSA1538	ses-110scanner10	M	81.0	CN	n/a	n/a	white
-sub-BLSA1538	ses-120scanner10	M	82.3	CN	n/a	n/a	white
-sub-BLSA1538	ses-130scanner10	M	83.4	CN	n/a	n/a	white
 sub-BLSA1538	ses-140scanner10	M	84.6	CN	n/a	n/a	white
 sub-BLSA1538	ses-150scanner10	M	85.7	CN	n/a	n/a	white
 sub-BLSA1538	ses-160scanner10	M	87.4	CN	n/a	n/a	white
 sub-BLSA1538	ses-170scanner10	M	88.3	CN	n/a	n/a	white
-sub-BLSA1540	ses-140scanner10	M	90.8	CN	n/a	n/a	white
 sub-BLSA1547	ses-130scanner09	M	87.9	CN	n/a	n/a	white
 sub-BLSA1547	ses-140scanner09	M	88.7	CN	n/a	n/a	white
 sub-BLSA1547	ses-150scanner10	M	89.8	CN	n/a	n/a	white
@@ -387,7 +376,6 @@ sub-BLSA1547	ses-200scanner10	M	94.8	dementia	n/a	n/a	white
 sub-BLSA1550	ses-110scanner10	M	84.0	CN	n/a	n/a	black
 sub-BLSA1556	ses-100scanner09	M	82.8	CN	n/a	n/a	white
 sub-BLSA1556	ses-110scanner10	M	84.8	CN	n/a	n/a	white
-sub-BLSA1556	ses-120scanner10	M	86.7	CN	n/a	n/a	white
 sub-BLSA1556	ses-130scanner10	M	87.8	CN	n/a	n/a	white
 sub-BLSA1556	ses-140scanner10	M	88.8	MCI	n/a	n/a	white
 sub-BLSA1557	ses-060scanner10	M	40.5	CN	n/a	n/a	white
@@ -444,8 +432,6 @@ sub-BLSA1634	ses-070scanner10	M	60.3	CN	n/a	n/a	black
 sub-BLSA1640	ses-060scanner10	M	57.3	CN	n/a	n/a	black
 sub-BLSA1640	ses-070scanner11	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA1640	ses-070scanner12	n/a	n/a	n/a	n/a	n/a	n/a
-sub-BLSA1644	ses-040scanner02	M	75.6	CN	n/a	n/a	black
-sub-BLSA1644	ses-070scanner01	M	81.8	dementia	n/a	n/a	black
 sub-BLSA1644	ses-100scanner09	M	85.2	dementia	n/a	n/a	black
 sub-BLSA1644	ses-110scanner09	M	86.4	dementia	n/a	n/a	black
 sub-BLSA1644	ses-120scanner10	M	87.6	dementia	n/a	n/a	black
@@ -503,7 +489,6 @@ sub-BLSA1703	ses-100scanner10	M	84.0	CN	n/a	n/a	n/a
 sub-BLSA1703	ses-110scanner10	M	85.0	CN	n/a	n/a	n/a
 sub-BLSA1703	ses-120scanner10	M	86.0	CN	n/a	n/a	n/a
 sub-BLSA1703	ses-130scanner10	M	87.0	CN	n/a	n/a	n/a
-sub-BLSA1703	ses-140scanner10	M	88.0	CN	n/a	n/a	n/a
 sub-BLSA1704	ses-070scanner10	M	72.3	CN	n/a	n/a	black
 sub-BLSA1704	ses-080scanner10	M	74.3	CN	n/a	n/a	black
 sub-BLSA1704	ses-090scanner10	M	76.9	CN	n/a	n/a	black
@@ -626,7 +611,6 @@ sub-BLSA1818	ses-050scanner10	M	59.3	CN	n/a	n/a	n/a
 sub-BLSA1818	ses-060scanner10	M	64.2	CN	n/a	n/a	n/a
 sub-BLSA1818	ses-070scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA1820	ses-020scanner10	M	35.2	CN	n/a	n/a	white
-sub-BLSA1821	ses-060scanner10	M	80.2	CN	n/a	n/a	black
 sub-BLSA1821	ses-070scanner10	M	81.2	CN	n/a	n/a	black
 sub-BLSA1825	ses-030scanner10	M	61.0	CN	n/a	n/a	black
 sub-BLSA1825	ses-050scanner10	M	65.1	CN	n/a	n/a	black
@@ -758,7 +742,6 @@ sub-BLSA4568	ses-010scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4572	ses-010scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4573	ses-010scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4576	ses-010scanner12	n/a	n/a	n/a	n/a	n/a	n/a
-sub-BLSA4577	ses-010scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4578	ses-010scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4579	ses-010scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4580	ses-010scanner12	n/a	n/a	n/a	n/a	n/a	n/a
@@ -846,7 +829,6 @@ sub-BLSA4670	ses-040scanner10	M	84.7	CN	n/a	n/a	white
 sub-BLSA4670	ses-060scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4676	ses-010scanner10	M	81.7	CN	n/a	n/a	white
 sub-BLSA4676	ses-020scanner10	M	82.7	CN	n/a	n/a	white
-sub-BLSA4676	ses-030scanner10	M	83.7	CN	n/a	n/a	white
 sub-BLSA4676	ses-040scanner10	M	84.7	CN	n/a	n/a	white
 sub-BLSA4676	ses-080scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4677	ses-010scanner10	M	83.0	CN	n/a	n/a	white
@@ -972,8 +954,6 @@ sub-BLSA4772	ses-010scanner10	M	84.3	CN	n/a	n/a	white
 sub-BLSA4774	ses-020scanner10	M	82.1	CN	n/a	n/a	white
 sub-BLSA4774	ses-030scanner10	M	83.9	CN	n/a	n/a	white
 sub-BLSA4775	ses-010scanner10	M	71.2	CN	n/a	n/a	white
-sub-BLSA4775	ses-020scanner10	M	73.1	CN	n/a	n/a	white
-sub-BLSA4775	ses-030scanner10	M	75.2	CN	n/a	n/a	white
 sub-BLSA4775	ses-040scanner10	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4775	ses-050scanner10	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4775	ses-060scanner12	n/a	n/a	n/a	n/a	n/a	n/a
@@ -1031,7 +1011,6 @@ sub-BLSA4806	ses-020scanner10	M	86.5	CN	n/a	n/a	white
 sub-BLSA4806	ses-030scanner10	M	87.9	MCI	n/a	n/a	white
 sub-BLSA4806	ses-040scanner10	M	88.7	MCI	n/a	n/a	white
 sub-BLSA4806	ses-050scanner10	M	89.6	MCI	n/a	n/a	white
-sub-BLSA4806	ses-060scanner10	M	90.5	MCI	n/a	n/a	white
 sub-BLSA4806	ses-070scanner10	M	91.5	dementia	n/a	n/a	white
 sub-BLSA4808	ses-010scanner10	M	80.7	CN	n/a	n/a	white
 sub-BLSA4808	ses-020scanner10	M	81.7	CN	n/a	n/a	white
@@ -1058,7 +1037,6 @@ sub-BLSA4822	ses-010scanner10	M	81.2	CN	n/a	n/a	n/a
 sub-BLSA4826	ses-010scanner10	M	70.2	CN	n/a	n/a	white
 sub-BLSA4826	ses-020scanner10	M	72.2	CN	n/a	n/a	white
 sub-BLSA4826	ses-030scanner10	M	77.0	CN	n/a	n/a	white
-sub-BLSA4827	ses-010scanner10	M	82.9	CN	n/a	n/a	white
 sub-BLSA4827	ses-020scanner10	M	84.2	CN	n/a	n/a	white
 sub-BLSA4827	ses-040scanner10	M	86.2	CN	n/a	n/a	white
 sub-BLSA4827	ses-050scanner10	M	87.5	CN	n/a	n/a	white
@@ -1075,12 +1053,10 @@ sub-BLSA4832	ses-060scanner10	M	87.4	CN	n/a	n/a	white
 sub-BLSA4832	ses-070scanner10	M	88.4	CN	n/a	n/a	white
 sub-BLSA4834	ses-010scanner10	M	63.3	CN	n/a	n/a	white
 sub-BLSA4834	ses-020scanner10	M	65.2	CN	n/a	n/a	white
-sub-BLSA4834	ses-030scanner10	M	67.2	CN	n/a	n/a	white
 sub-BLSA4834	ses-040scanner10	M	69.5	CN	n/a	n/a	white
 sub-BLSA4834	ses-050scanner10	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4834	ses-060scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4840	ses-020scanner10	M	82.9	CN	n/a	n/a	white
-sub-BLSA4840	ses-030scanner10	M	86.2	CN	n/a	n/a	white
 sub-BLSA4841	ses-010scanner10	M	80.9	CN	n/a	n/a	white
 sub-BLSA4841	ses-030scanner10	M	83.0	CN	n/a	n/a	white
 sub-BLSA4841	ses-040scanner10	M	83.9	CN	n/a	n/a	white
@@ -1111,7 +1087,6 @@ sub-BLSA4853	ses-010scanner10	M	71.7	CN	n/a	n/a	white
 sub-BLSA4853	ses-020scanner10	M	73.7	CN	n/a	n/a	white
 sub-BLSA4853	ses-030scanner10	M	75.7	CN	n/a	n/a	white
 sub-BLSA4853	ses-040scanner10	M	77.9	CN	n/a	n/a	white
-sub-BLSA4854	ses-020scanner10	M	91.4	CN	n/a	n/a	white
 sub-BLSA4854	ses-040scanner10	M	93.5	CN	n/a	n/a	white
 sub-BLSA4854	ses-050scanner10	M	94.7	MCI	n/a	n/a	white
 sub-BLSA4854	ses-060scanner10	M	95.7	MCI	n/a	n/a	white
@@ -1153,7 +1128,6 @@ sub-BLSA4872	ses-040scanner10	M	86.4	CN	n/a	n/a	white
 sub-BLSA4875	ses-010scanner10	M	80.2	CN	n/a	n/a	white
 sub-BLSA4875	ses-130scanner10	M	n/a	n/a	n/a	n/a	white
 sub-BLSA4876	ses-010scanner10	M	87.3	CN	n/a	n/a	white
-sub-BLSA4876	ses-020scanner10	M	88.6	CN	n/a	n/a	white
 sub-BLSA4876	ses-030scanner10	M	89.6	CN	n/a	n/a	white
 sub-BLSA4877	ses-030scanner10	M	85.6	CN	n/a	n/a	white
 sub-BLSA4877	ses-040scanner10	M	86.7	CN	n/a	n/a	white
@@ -1188,7 +1162,6 @@ sub-BLSA4888	ses-030scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4889	ses-010scanner10	M	33.4	CN	n/a	n/a	white
 sub-BLSA4889	ses-020scanner10	M	39.1	CN	n/a	n/a	white
 sub-BLSA4891	ses-010scanner10	M	71.8	CN	n/a	n/a	white
-sub-BLSA4891	ses-020scanner10	M	73.8	CN	n/a	n/a	white
 sub-BLSA4891	ses-030scanner10	M	75.8	CN	n/a	n/a	white
 sub-BLSA4891	ses-040scanner10	M	77.8	CN	n/a	n/a	white
 sub-BLSA4891	ses-050scanner10	M	79.8	CN	n/a	n/a	white
@@ -1310,7 +1283,6 @@ sub-BLSA4917	ses-050scanner10	M	79.5	CN	n/a	n/a	white
 sub-BLSA4918	ses-060scanner10	M	90.7	CN	n/a	n/a	white
 sub-BLSA4919	ses-010scanner10	M	71.5	CN	n/a	n/a	white
 sub-BLSA4919	ses-020scanner10	M	73.8	CN	n/a	n/a	white
-sub-BLSA4919	ses-030scanner10	M	75.6	CN	n/a	n/a	white
 sub-BLSA4919	ses-040scanner10	M	77.7	CN	n/a	n/a	white
 sub-BLSA4919	ses-050scanner10	M	79.7	CN	n/a	n/a	white
 sub-BLSA4919	ses-060scanner10	M	82.2	CN	n/a	n/a	white
@@ -1338,7 +1310,6 @@ sub-BLSA4930	ses-050scanner10	M	84.1	CN	n/a	n/a	white
 sub-BLSA4930	ses-060scanner10	M	85.4	CN	n/a	n/a	white
 sub-BLSA4930	ses-070scanner10	M	86.4	CN	n/a	n/a	white
 sub-BLSA4930	ses-080scanner10	M	88.1	CN	n/a	n/a	white
-sub-BLSA4931	ses-030scanner10	M	78.8	CN	n/a	n/a	white
 sub-BLSA4931	ses-040scanner10	M	81.0	CN	n/a	n/a	white
 sub-BLSA4931	ses-050scanner10	M	82.0	CN	n/a	n/a	white
 sub-BLSA4931	ses-060scanner10	M	83.0	CN	n/a	n/a	white
@@ -1367,7 +1338,6 @@ sub-BLSA4936	ses-020scanner10	M	73.9	CN	n/a	n/a	white
 sub-BLSA4936	ses-040scanner10	M	78.5	CN	n/a	n/a	white
 sub-BLSA4937	ses-030scanner10	M	80.8	CN	n/a	n/a	white
 sub-BLSA4938	ses-020scanner10	M	76.2	CN	n/a	n/a	white
-sub-BLSA4938	ses-030scanner10	M	78.7	CN	n/a	n/a	white
 sub-BLSA4938	ses-050scanner10	M	83.1	CN	n/a	n/a	white
 sub-BLSA4938	ses-060scanner10	M	84.7	CN	n/a	n/a	white
 sub-BLSA4938	ses-070scanner10	n/a	n/a	n/a	n/a	n/a	n/a
@@ -1405,7 +1375,6 @@ sub-BLSA4959	ses-040scanner10	M	56.1	CN	n/a	n/a	white
 sub-BLSA4959	ses-050scanner10	M	60.6	CN	n/a	n/a	white
 sub-BLSA4959	ses-060scanner10	M	62.5	CN	n/a	n/a	white
 sub-BLSA4960	ses-040scanner10	M	73.5	CN	n/a	n/a	black
-sub-BLSA4960	ses-050scanner10	M	75.7	CN	n/a	n/a	black
 sub-BLSA4960	ses-060scanner10	M	77.6	CN	n/a	n/a	black
 sub-BLSA4960	ses-070scanner10	M	80.4	CN	n/a	n/a	black
 sub-BLSA4960	ses-080scanner10	M	81.6	CN	n/a	n/a	black
@@ -1413,7 +1382,6 @@ sub-BLSA4960	ses-090scanner10	M	83.1	CN	n/a	n/a	black
 sub-BLSA4960	ses-110scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4963	ses-030scanner10	M	48.0	CN	n/a	n/a	black
 sub-BLSA4964	ses-080scanner10	M	75.9	CN	n/a	n/a	black
-sub-BLSA4964	ses-090scanner10	M	77.8	CN	n/a	n/a	black
 sub-BLSA4964	ses-110scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA4965	ses-020scanner10	M	46.6	CN	n/a	n/a	black
 sub-BLSA4971	ses-080scanner10	M	86.2	MCI	n/a	n/a	white
@@ -1426,7 +1394,6 @@ sub-BLSA4979	ses-070scanner10	M	87.3	CN	n/a	n/a	white
 sub-BLSA4979	ses-080scanner10	M	88.3	CN	n/a	n/a	white
 sub-BLSA4985	ses-040scanner10	M	59.6	CN	n/a	n/a	black
 sub-BLSA4987	ses-040scanner10	M	61.0	CN	n/a	n/a	black
-sub-BLSA4988	ses-070scanner10	M	75.6	CN	n/a	n/a	white
 sub-BLSA4995	ses-040scanner10	M	59.6	CN	n/a	n/a	black
 sub-BLSA4995	ses-050scanner10	M	63.6	CN	n/a	n/a	black
 sub-BLSA4996	ses-040scanner10	M	57.6	CN	n/a	n/a	white
@@ -1460,8 +1427,6 @@ sub-BLSA5071	ses-180scanner10	F	88.0	CN	n/a	n/a	white
 sub-BLSA5071	ses-190scanner10	F	89.0	CN	n/a	n/a	white
 sub-BLSA5081	ses-110scanner10	F	63.5	CN	n/a	n/a	white
 sub-BLSA5083	ses-110scanner10	F	69.1	CN	n/a	n/a	white
-sub-BLSA5097	ses-147scanner07	F	83.7	CN	n/a	n/a	white
-sub-BLSA5097	ses-150scanner07	F	85.8	MCI	n/a	n/a	white
 sub-BLSA5097	ses-157scanner09	F	86.9	MCI	n/a	n/a	white
 sub-BLSA5100	ses-160scanner10	F	79.4	CN	n/a	n/a	white
 sub-BLSA5105	ses-160scanner10	F	68.0	CN	n/a	n/a	white
@@ -1511,8 +1476,6 @@ sub-BLSA5140	ses-150scanner10	F	68.5	CN	n/a	n/a	white
 sub-BLSA5140	ses-160scanner10	F	71.4	CN	n/a	n/a	white
 sub-BLSA5140	ses-170scanner10	F	74.0	CN	n/a	n/a	white
 sub-BLSA5140	ses-190scanner12	n/a	n/a	n/a	n/a	n/a	n/a
-sub-BLSA5143	ses-105scanner01	F	77.8	CN	n/a	n/a	white
-sub-BLSA5143	ses-140scanner07	F	83.0	CN	n/a	n/a	white
 sub-BLSA5143	ses-150scanner09	F	84.0	CN	n/a	n/a	white
 sub-BLSA5143	ses-160scanner09	F	85.0	CN	n/a	n/a	white
 sub-BLSA5143	ses-160scanner10	F	85.0	CN	n/a	n/a	white
@@ -1524,9 +1487,6 @@ sub-BLSA5145	ses-180scanner10	F	86.0	CN	n/a	n/a	white
 sub-BLSA5145	ses-190scanner10	F	87.2	CN	n/a	n/a	white
 sub-BLSA5157	ses-120scanner10	F	73.7	CN	n/a	n/a	black
 sub-BLSA5165	ses-110scanner10	F	60.4	CN	n/a	n/a	white
-sub-BLSA5169	ses-090scanner03	F	67.0	CN	n/a	n/a	white
-sub-BLSA5169	ses-095scanner02	F	68.0	CN	n/a	n/a	white
-sub-BLSA5169	ses-105scanner01	F	70.3	CN	n/a	n/a	white
 sub-BLSA5169	ses-140scanner09	F	78.5	CN	n/a	n/a	white
 sub-BLSA5169	ses-150scanner10	F	80.8	CN	n/a	n/a	white
 sub-BLSA5169	ses-160scanner10	F	81.7	CN	n/a	n/a	white
@@ -1535,7 +1495,6 @@ sub-BLSA5175	ses-070scanner10	F	59.1	CN	n/a	n/a	white
 sub-BLSA5176	ses-110scanner10	F	63.1	CN	n/a	n/a	white
 sub-BLSA5176	ses-120scanner10	F	68.0	CN	n/a	n/a	white
 sub-BLSA5179	ses-080scanner12	n/a	n/a	n/a	n/a	n/a	n/a
-sub-BLSA5188	ses-115scanner02	F	63.7	CN	n/a	n/a	white
 sub-BLSA5188	ses-160scanner08	F	73.4	CN	n/a	n/a	white
 sub-BLSA5188	ses-180scanner10	F	77.5	CN	n/a	n/a	white
 sub-BLSA5188	ses-190scanner10	F	79.4	CN	n/a	n/a	white
@@ -1553,7 +1512,6 @@ sub-BLSA5208	ses-230scanner10	F	94.1	CN	n/a	n/a	white
 sub-BLSA5208	ses-240scanner10	F	95.2	CN	n/a	n/a	white
 sub-BLSA5208	ses-250scanner10	F	96.1	CN	n/a	n/a	white
 sub-BLSA5208	ses-260scanner10	F	97.1	CN	n/a	n/a	white
-sub-BLSA5209	ses-160scanner07	F	82.5	CN	n/a	n/a	white
 sub-BLSA5209	ses-170scanner09	F	83.6	CN	n/a	n/a	white
 sub-BLSA5209	ses-180scanner10	F	84.5	CN	n/a	n/a	white
 sub-BLSA5209	ses-190scanner10	F	85.6	CN	n/a	n/a	white
@@ -1577,7 +1535,6 @@ sub-BLSA5231	ses-130scanner10	F	61.6	CN	n/a	n/a	white
 sub-BLSA5231	ses-160scanner10	F	67.6	CN	n/a	n/a	white
 sub-BLSA5231	ses-170scanner10	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA5231	ses-180scanner12	n/a	n/a	n/a	n/a	n/a	n/a
-sub-BLSA5242	ses-085scanner02	F	77.2	CN	n/a	n/a	white
 sub-BLSA5246	ses-085scanner02	F	56.2	CN	n/a	n/a	white
 sub-BLSA5246	ses-150scanner10	F	70.9	CN	n/a	n/a	white
 sub-BLSA5246	ses-160scanner10	F	72.9	CN	n/a	n/a	white
@@ -1598,7 +1555,6 @@ sub-BLSA5255	ses-160scanner10	F	65.3	CN	n/a	n/a	white
 sub-BLSA5255	ses-170scanner10	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA5255	ses-180scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA5270	ses-120scanner10	F	79.6	CN	n/a	n/a	black
-sub-BLSA5276	ses-150scanner10	F	76.9	CN	n/a	n/a	white
 sub-BLSA5276	ses-160scanner10	F	78.9	CN	n/a	n/a	white
 sub-BLSA5276	ses-170scanner10	F	80.9	CN	n/a	n/a	white
 sub-BLSA5276	ses-190scanner10	F	82.9	CN	n/a	n/a	white
@@ -1636,14 +1592,10 @@ sub-BLSA5314	ses-070scanner10	F	57.5	CN	n/a	n/a	white
 sub-BLSA5314	ses-080scanner10	F	61.9	CN	n/a	n/a	white
 sub-BLSA5315	ses-150scanner10	F	77.1	CN	n/a	n/a	white
 sub-BLSA5320	ses-120scanner10	F	62.8	CN	n/a	n/a	white
-sub-BLSA5327	ses-075scanner02	F	86.1	CN	n/a	n/a	white
 sub-BLSA5331	ses-090scanner10	F	67.4	CN	n/a	n/a	white
 sub-BLSA5331	ses-130scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA5333	ses-020scanner10	F	54.0	CN	n/a	n/a	white
 sub-BLSA5335	ses-075scanner02	F	82.8	CN	n/a	n/a	white
-sub-BLSA5335	ses-090scanner03	F	86.0	CN	n/a	n/a	white
-sub-BLSA5335	ses-130scanner01	F	89.8	CN	n/a	n/a	white
-sub-BLSA5335	ses-140scanner01	F	90.8	CN	n/a	n/a	white
 sub-BLSA5337	ses-120scanner10	F	59.6	CN	n/a	n/a	white
 sub-BLSA5337	ses-130scanner10	F	64.8	CN	n/a	n/a	white
 sub-BLSA5339	ses-100scanner10	F	60.9	CN	n/a	n/a	white
@@ -1652,7 +1604,6 @@ sub-BLSA5343	ses-120scanner10	F	61.1	CN	n/a	n/a	white
 sub-BLSA5343	ses-130scanner10	F	63.2	CN	n/a	n/a	white
 sub-BLSA5343	ses-140scanner10	F	65.2	CN	n/a	n/a	white
 sub-BLSA5343	ses-160scanner12	n/a	n/a	n/a	n/a	n/a	n/a
-sub-BLSA5355	ses-075scanner02	F	69.5	CN	n/a	n/a	white
 sub-BLSA5359	ses-100scanner10	F	61.5	CN	n/a	n/a	white
 sub-BLSA5359	ses-110scanner10	F	63.8	CN	n/a	n/a	white
 sub-BLSA5359	ses-120scanner10	F	65.6	CN	n/a	n/a	white
@@ -1675,7 +1626,6 @@ sub-BLSA5414	ses-100scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA5417	ses-100scanner10	F	61.4	CN	n/a	n/a	white
 sub-BLSA5417	ses-110scanner10	F	63.5	CN	n/a	n/a	white
 sub-BLSA5417	ses-120scanner10	F	65.9	CN	n/a	n/a	white
-sub-BLSA5421	ses-065scanner02	F	83.3	CN	n/a	n/a	white
 sub-BLSA5431	ses-090scanner10	F	78.6	CN	n/a	n/a	white
 sub-BLSA5434	ses-070scanner10	F	67.1	CN	n/a	n/a	white
 sub-BLSA5434	ses-080scanner10	F	70.0	CN	n/a	n/a	white
@@ -1716,15 +1666,11 @@ sub-BLSA5498	ses-120scanner10	F	67.6	CN	n/a	n/a	white
 sub-BLSA5499	ses-100scanner10	F	60.2	CN	n/a	n/a	white
 sub-BLSA5499	ses-110scanner10	F	62.8	CN	n/a	n/a	white
 sub-BLSA5499	ses-120scanner10	F	66.5	CN	n/a	n/a	white
-sub-BLSA5506	ses-120scanner01	F	86.4	CN	n/a	n/a	black
 sub-BLSA5506	ses-170scanner09	F	91.8	CN	n/a	n/a	black
 sub-BLSA5506	ses-180scanner09	F	92.8	CN	n/a	n/a	black
 sub-BLSA5506	ses-190scanner10	F	93.9	CN	n/a	n/a	black
 sub-BLSA5506	ses-200scanner10	F	94.9	CN	n/a	n/a	black
 sub-BLSA5506	ses-210scanner10	F	n/a	n/a	n/a	n/a	black
-sub-BLSA5507	ses-060scanner03	F	82.2	CN	n/a	n/a	white
-sub-BLSA5507	ses-090scanner01	F	86.3	CN	n/a	n/a	white
-sub-BLSA5513	ses-045scanner02	F	81.1	CN	n/a	n/a	white
 sub-BLSA5519	ses-070scanner10	F	80.2	CN	n/a	n/a	white
 sub-BLSA5520	ses-110scanner10	F	76.7	CN	n/a	n/a	white
 sub-BLSA5520	ses-120scanner10	F	78.8	CN	n/a	n/a	white
@@ -1737,13 +1683,7 @@ sub-BLSA5520	ses-190scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA5528	ses-080scanner10	F	58.3	CN	n/a	n/a	white
 sub-BLSA5530	ses-045scanner02	F	80.8	CN	n/a	n/a	white
 sub-BLSA5530	ses-050scanner02	F	81.8	CN	n/a	n/a	white
-sub-BLSA5530	ses-055scanner03	F	83.2	CN	n/a	n/a	white
-sub-BLSA5530	ses-060scanner03	F	83.8	CN	n/a	n/a	white
-sub-BLSA5530	ses-065scanner03	F	84.9	CN	n/a	n/a	white
 sub-BLSA5530	ses-070scanner02	F	85.9	CN	n/a	n/a	white
-sub-BLSA5530	ses-110scanner01	F	90.0	CN	n/a	n/a	white
-sub-BLSA5530	ses-120scanner01	F	91.1	CN	n/a	n/a	white
-sub-BLSA5530	ses-140scanner07	F	94.1	CN	n/a	n/a	white
 sub-BLSA5530	ses-150scanner08	F	95.1	CN	n/a	n/a	white
 sub-BLSA5530	ses-160scanner09	F	96.2	CN	n/a	n/a	white
 sub-BLSA5530	ses-170scanner10	F	97.0	CN	n/a	n/a	white
@@ -1764,7 +1704,6 @@ sub-BLSA5572	ses-060scanner10	F	47.4	CN	n/a	n/a	white
 sub-BLSA5586	ses-110scanner10	F	80.5	CN	n/a	n/a	white
 sub-BLSA5586	ses-130scanner10	F	82.5	CN	n/a	n/a	white
 sub-BLSA5586	ses-140scanner10	F	83.5	CN	n/a	n/a	white
-sub-BLSA5587	ses-090scanner10	F	81.3	CN	n/a	n/a	white
 sub-BLSA5588	ses-070scanner01	F	62.6	CN	n/a	n/a	white
 sub-BLSA5588	ses-100scanner09	F	69.1	CN	n/a	n/a	white
 sub-BLSA5588	ses-110scanner10	F	71.1	CN	n/a	n/a	white
@@ -1772,8 +1711,6 @@ sub-BLSA5588	ses-120scanner10	F	73.4	CN	n/a	n/a	white
 sub-BLSA5588	ses-130scanner10	F	75.6	CN	n/a	n/a	white
 sub-BLSA5588	ses-140scanner10	F	77.5	CN	n/a	n/a	white
 sub-BLSA5588	ses-150scanner10	F	79.5	CN	n/a	n/a	white
-sub-BLSA5590	ses-060scanner01	F	76.1	CN	n/a	n/a	white
-sub-BLSA5590	ses-100scanner07	F	82.9	CN	n/a	n/a	white
 sub-BLSA5590	ses-110scanner08	F	84.3	CN	n/a	n/a	white
 sub-BLSA5590	ses-120scanner09	F	86.1	CN	n/a	n/a	white
 sub-BLSA5590	ses-130scanner10	F	87.2	CN	n/a	n/a	white
@@ -1788,25 +1725,20 @@ sub-BLSA5591	ses-150scanner10	F	84.0	CN	n/a	n/a	white
 sub-BLSA5593	ses-045scanner03	F	61.5	CN	n/a	n/a	white
 sub-BLSA5593	ses-060scanner01	F	64.6	CN	n/a	n/a	white
 sub-BLSA5593	ses-070scanner01	F	66.5	CN	n/a	n/a	white
-sub-BLSA5594	ses-055scanner02	F	63.3	CN	n/a	n/a	white
-sub-BLSA5594	ses-090scanner07	F	70.2	CN	n/a	n/a	white
 sub-BLSA5594	ses-110scanner10	F	74.3	CN	n/a	n/a	white
 sub-BLSA5595	ses-110scanner10	F	76.0	MCI	n/a	n/a	white
 sub-BLSA5600	ses-100scanner09	F	77.9	CN	n/a	n/a	white
 sub-BLSA5600	ses-110scanner10	F	80.1	CN	n/a	n/a	white
-sub-BLSA5600	ses-120scanner10	F	81.4	CN	n/a	n/a	white
 sub-BLSA5600	ses-130scanner10	F	82.9	CN	n/a	n/a	white
 sub-BLSA5600	ses-140scanner10	F	84.1	CN	n/a	n/a	white
 sub-BLSA5600	ses-160scanner10	F	86.1	CN	n/a	n/a	white
 sub-BLSA5600	ses-170scanner10	F	87.3	CN	n/a	n/a	white
 sub-BLSA5604	ses-140scanner10	F	84.8	CN	n/a	n/a	white
-sub-BLSA5605	ses-050scanner03	F	89.9	CN	n/a	n/a	white
 sub-BLSA5606	ses-100scanner08	F	79.5	CN	n/a	n/a	black
 sub-BLSA5606	ses-110scanner10	F	82.5	CN	n/a	n/a	black
 sub-BLSA5609	ses-090scanner09	F	76.0	CN	n/a	n/a	white
 sub-BLSA5609	ses-090scanner10	F	76.0	CN	n/a	n/a	white
 sub-BLSA5609	ses-100scanner10	F	78.9	CN	n/a	n/a	white
-sub-BLSA5611	ses-050scanner03	F	72.3	CN	n/a	n/a	white
 sub-BLSA5616	ses-090scanner10	F	78.5	CN	n/a	n/a	white
 sub-BLSA5619	ses-110scanner10	F	75.9	CN	n/a	n/a	white
 sub-BLSA5619	ses-120scanner10	F	77.8	CN	n/a	n/a	white
@@ -1873,7 +1805,6 @@ sub-BLSA5708	ses-110scanner10	F	75.2	CN	n/a	n/a	black
 sub-BLSA5708	ses-120scanner10	F	77.7	CN	n/a	n/a	black
 sub-BLSA5708	ses-140scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA5714	ses-025scanner02	F	72.1	CN	n/a	n/a	black
-sub-BLSA5714	ses-040scanner03	F	75.1	CN	n/a	n/a	black
 sub-BLSA5714	ses-060scanner01	F	79.2	CN	n/a	n/a	black
 sub-BLSA5715	ses-070scanner10	F	65.0	CN	n/a	n/a	black
 sub-BLSA5721	ses-100scanner10	F	75.5	CN	n/a	n/a	black
@@ -1887,9 +1818,6 @@ sub-BLSA5734	ses-070scanner10	F	64.5	CN	n/a	n/a	black
 sub-BLSA5734	ses-080scanner10	F	66.5	CN	n/a	n/a	black
 sub-BLSA5735	ses-050scanner10	F	69.1	CN	n/a	n/a	black
 sub-BLSA5735	ses-060scanner10	F	73.7	CN	n/a	n/a	black
-sub-BLSA5736	ses-045scanner01	F	64.7	CN	n/a	n/a	black
-sub-BLSA5736	ses-055scanner01	F	66.6	CN	n/a	n/a	black
-sub-BLSA5736	ses-060scanner07	F	71.9	CN	n/a	n/a	black
 sub-BLSA5736	ses-070scanner09	F	74.0	CN	n/a	n/a	black
 sub-BLSA5736	ses-070scanner10	F	74.0	CN	n/a	n/a	black
 sub-BLSA5736	ses-090scanner10	F	78.4	CN	n/a	n/a	black
@@ -1939,7 +1867,6 @@ sub-BLSA5788	ses-090scanner10	F	70.6	CN	n/a	n/a	white
 sub-BLSA5788	ses-100scanner10	F	72.6	CN	n/a	n/a	white
 sub-BLSA5788	ses-110scanner10	F	74.6	CN	n/a	n/a	white
 sub-BLSA5788	ses-120scanner10	F	76.7	CN	n/a	n/a	white
-sub-BLSA5790	ses-035scanner03	F	65.4	CN	n/a	n/a	black
 sub-BLSA5790	ses-080scanner08	F	75.0	CN	n/a	n/a	black
 sub-BLSA5790	ses-090scanner09	F	77.1	CN	n/a	n/a	black
 sub-BLSA5790	ses-090scanner10	F	77.1	CN	n/a	n/a	black
@@ -1967,7 +1894,6 @@ sub-BLSA5809	ses-070scanner10	F	68.7	CN	n/a	n/a	white
 sub-BLSA5809	ses-080scanner10	F	71.6	CN	n/a	n/a	white
 sub-BLSA5809	ses-090scanner10	F	73.9	CN	n/a	n/a	white
 sub-BLSA5809	ses-110scanner12	n/a	n/a	n/a	n/a	n/a	n/a
-sub-BLSA5812	ses-020scanner02	F	64.1	CN	n/a	n/a	black
 sub-BLSA5812	ses-100scanner10	F	81.0	CN	n/a	n/a	black
 sub-BLSA5812	ses-110scanner10	F	82.1	CN	n/a	n/a	black
 sub-BLSA5812	ses-120scanner10	F	83.1	CN	n/a	n/a	black
@@ -1978,7 +1904,6 @@ sub-BLSA5812	ses-160scanner10	F	87.1	CN	n/a	n/a	black
 sub-BLSA5812	ses-190scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA5815	ses-080scanner10	F	71.8	CN	n/a	n/a	white
 sub-BLSA5816	ses-080scanner10	F	67.5	CN	n/a	n/a	white
-sub-BLSA5816	ses-100scanner10	F	71.7	CN	n/a	n/a	white
 sub-BLSA5816	ses-110scanner10	F	73.8	CN	n/a	n/a	white
 sub-BLSA5816	ses-120scanner10	F	75.7	CN	n/a	n/a	white
 sub-BLSA5816	ses-130scanner10	n/a	n/a	n/a	n/a	n/a	n/a
@@ -2150,8 +2075,6 @@ sub-BLSA5956	ses-090scanner10	F	73.4	CN	n/a	n/a	white
 sub-BLSA5956	ses-100scanner10	F	75.4	CN	n/a	n/a	white
 sub-BLSA5956	ses-110scanner10	F	77.4	CN	n/a	n/a	white
 sub-BLSA5956	ses-120scanner10	n/a	n/a	n/a	n/a	n/a	n/a
-sub-BLSA5963	ses-050scanner01	F	85.3	MCI	n/a	n/a	white
-sub-BLSA5963	ses-060scanner01	F	86.3	MCI	n/a	n/a	white
 sub-BLSA5963	ses-070scanner01	F	87.3	MCI	n/a	n/a	white
 sub-BLSA5963	ses-080scanner01	F	88.3	MCI	n/a	n/a	white
 sub-BLSA5965	ses-070scanner10	F	74.3	CN	n/a	n/a	asian
@@ -2176,7 +2099,6 @@ sub-BLSA5974	ses-080scanner10	F	77.5	CN	n/a	n/a	white
 sub-BLSA5976	ses-050scanner10	F	63.9	CN	n/a	n/a	white
 sub-BLSA5976	ses-060scanner10	F	66.5	CN	n/a	n/a	white
 sub-BLSA5976	ses-070scanner10	F	70.6	CN	n/a	n/a	white
-sub-BLSA5977	ses-120scanner10	F	93.7	CN	n/a	n/a	asian
 sub-BLSA5977	ses-130scanner10	F	94.6	CN	n/a	n/a	asian
 sub-BLSA5977	ses-140scanner10	F	95.7	CN	n/a	n/a	asian
 sub-BLSA5977	ses-150scanner10	F	96.7	CN	n/a	n/a	asian
@@ -2345,7 +2267,6 @@ sub-BLSA6106	ses-060scanner10	F	66.1	CN	n/a	n/a	black
 sub-BLSA6106	ses-070scanner10	F	68.1	CN	n/a	n/a	black
 sub-BLSA6108	ses-030scanner10	F	58.6	CN	n/a	n/a	asian
 sub-BLSA6111	ses-040scanner10	F	70.0	CN	n/a	n/a	n/a
-sub-BLSA6111	ses-050scanner10	F	72.0	CN	n/a	n/a	n/a
 sub-BLSA6111	ses-060scanner10	F	74.0	CN	n/a	n/a	n/a
 sub-BLSA6111	ses-100scanner11	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA6111	ses-100scanner12	n/a	n/a	n/a	n/a	n/a	n/a
@@ -2875,7 +2796,6 @@ sub-BLSA7753	ses-010scanner10	F	80.5	CN	n/a	n/a	white
 sub-BLSA7755	ses-010scanner10	F	71.2	CN	n/a	n/a	black
 sub-BLSA7755	ses-020scanner10	F	74.8	MCI	n/a	n/a	black
 sub-BLSA7755	ses-030scanner10	F	78.1	MCI	n/a	n/a	black
-sub-BLSA7759	ses-010scanner10	F	57.2	CN	n/a	n/a	white
 sub-BLSA7759	ses-020scanner10	F	61.2	CN	n/a	n/a	white
 sub-BLSA7761	ses-010scanner10	F	80.6	CN	n/a	n/a	white
 sub-BLSA7761	ses-020scanner10	F	81.6	CN	n/a	n/a	white
@@ -2886,7 +2806,6 @@ sub-BLSA7765	ses-020scanner10	F	82.1	CN	n/a	n/a	white
 sub-BLSA7765	ses-030scanner10	F	83.5	CN	n/a	n/a	white
 sub-BLSA7768	ses-010scanner10	F	51.7	CN	n/a	n/a	white
 sub-BLSA7768	ses-020scanner10	n/a	n/a	n/a	n/a	n/a	n/a
-sub-BLSA7769	ses-010scanner10	F	67.2	CN	n/a	n/a	black
 sub-BLSA7769	ses-030scanner10	F	71.6	CN	n/a	n/a	black
 sub-BLSA7769	ses-040scanner10	F	73.9	CN	n/a	n/a	black
 sub-BLSA7771	ses-010scanner10	F	86.3	CN	n/a	n/a	white
@@ -3094,7 +3013,6 @@ sub-BLSA7884	ses-060scanner10	F	84.1	CN	n/a	n/a	white
 sub-BLSA7884	ses-070scanner10	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA7884	ses-090scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA7885	ses-030scanner10	F	85.8	CN	n/a	n/a	white
-sub-BLSA7885	ses-040scanner10	F	87.1	CN	n/a	n/a	white
 sub-BLSA7885	ses-050scanner10	F	88.0	CN	n/a	n/a	white
 sub-BLSA7885	ses-060scanner10	F	89.0	CN	n/a	n/a	white
 sub-BLSA7885	ses-070scanner10	F	90.2	CN	n/a	n/a	white
@@ -3134,7 +3052,6 @@ sub-BLSA7894	ses-090scanner10	F	86.6	CN	n/a	n/a	white
 sub-BLSA7895	ses-030scanner10	F	77.2	CN	n/a	n/a	white
 sub-BLSA7895	ses-040scanner10	F	79.2	CN	n/a	n/a	white
 sub-BLSA7896	ses-020scanner10	F	74.3	CN	n/a	n/a	white
-sub-BLSA7896	ses-030scanner10	F	76.9	CN	n/a	n/a	white
 sub-BLSA7897	ses-030scanner12	n/a	n/a	n/a	n/a	n/a	n/a
 sub-BLSA7898	ses-030scanner10	F	77.1	CN	n/a	n/a	white
 sub-BLSA7898	ses-040scanner10	F	79.2	CN	n/a	n/a	white
@@ -3150,7 +3067,6 @@ sub-BLSA7900	ses-020scanner10	F	80.6	CN	n/a	n/a	black
 sub-BLSA7900	ses-030scanner10	F	81.8	CN	n/a	n/a	black
 sub-BLSA7900	ses-040scanner10	F	82.8	CN	n/a	n/a	black
 sub-BLSA7902	ses-020scanner10	F	35.2	CN	n/a	n/a	n/a
-sub-BLSA7906	ses-030scanner10	F	31.4	CN	n/a	n/a	white
 sub-BLSA7907	ses-040scanner10	F	65.9	CN	n/a	n/a	asian
 sub-BLSA7907	ses-050scanner10	F	67.8	CN	n/a	n/a	asian
 sub-BLSA7907	ses-060scanner10	F	69.8	CN	n/a	n/a	asian
@@ -3253,12 +3169,3 @@ sub-BLSA7996	ses-060scanner10	F	67.1	CN	n/a	n/a	black
 sub-BLSA7996	ses-070scanner10	F	69.6	CN	n/a	n/a	black
 sub-BLSA7996	ses-080scanner10	F	72.0	CN	n/a	n/a	black
 sub-BLSA7998	ses-030scanner10	F	41.4	CN	n/a	n/a	white
-sub-MD138206	ses-010scanner11	n/a	n/a	n/a	n/a	n/a	n/a
-sub-MD138206	ses-020scanner11	n/a	n/a	n/a	n/a	n/a	n/a
-sub-MD189086	ses-010scanner11	n/a	n/a	n/a	n/a	n/a	n/a
-sub-MD189795	ses-010scanner11	n/a	n/a	n/a	n/a	n/a	n/a
-sub-MD189903	ses-010scanner11	n/a	n/a	n/a	n/a	n/a	n/a
-sub-MD190086	ses-010scanner11	n/a	n/a	n/a	n/a	n/a	n/a
-sub-MD190290	ses-010scanner11	n/a	n/a	n/a	n/a	n/a	n/a
-sub-MD190707	ses-010scanner11	n/a	n/a	n/a	n/a	n/a	n/a
-sub-MD191114	ses-010scanner11	n/a	n/a	n/a	n/a	n/a	n/a
