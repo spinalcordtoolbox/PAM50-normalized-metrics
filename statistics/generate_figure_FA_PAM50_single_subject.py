@@ -2,7 +2,7 @@
 Plot FA in PAM50 space for a single subject: warped vs. interpolation.
 
 Usage:
-    python compare_FA_PAM50_single_subject.py \
+    python generate_figure_FA_PAM50_single_subject.py \
         -path-warp    <path>/dwi_PAM50/sub-XX_dwi_FA_PAM50.csv \
         -path-interp  <path>/dwi_interpolation_to_PAM50/sub-XX_dwi_FA_interpolated_to_PAM50.csv \
         -path-out     <path>/figures/sub-XX_compare_FA_PAM50.png \
@@ -103,7 +103,6 @@ def plot(df_direct, df_interp, subject, output, label):
     df = df[df['Slice (I->S)'].between(xlim_min, xlim_max)]
 
     mpl.rcParams['font.family'] = 'Arial'
-    # Match a single subplot size from generate_figures_dti.py (6 wide × 5 tall).
     fig, ax = plt.subplots(figsize=(6, 5))
 
     palette = sns.color_palette('tab10', n_colors=2)

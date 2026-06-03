@@ -4,11 +4,11 @@
 # from sct_extract_metric output CSVs produced by process_data_spine-generic_dwi.sh.
 #
 # Usage (single run):
-#     python statistics/generate_figures_dti.py \
+#     python statistics/generate_figures_dti_PAM50_all_subjects.py \
 #         -path-results /path/to/results/dwi
 #
 # Usage (compare two preprocessing pipelines):
-#     python statistics/generate_figures_dti.py \
+#     python statistics/generate_figures_dti_PAM50_all_subjects.py \
 #         -path-results /path/to/run_A/results/dwi /path/to/run_B/results/dwi \
 #         -dataset-labels "Centerline 30mm" "Deepseg 35mm"
 #
