@@ -138,7 +138,6 @@ start=`date +%s`
 segment_if_does_not_exist() {
   local file="$1"
   local contrast="$2"          # 't2', 'dwi'
-  local seg_method="${3:-deepseg_sc}"  # deepseg_sc | deepseg (only used for auto-seg fallback)
   if [[ $contrast == "dwi" ]]; then
     folder_contrast="dwi"
   else
@@ -157,13 +156,9 @@ segment_if_does_not_exist() {
     rsync -avzh $FILESEGMANUAL ${FILESEG}.nii.gz
     sct_qc -i ${file}.nii.gz -s ${FILESEG}.nii.gz -p sct_deepseg_sc -qc ${PATH_QC} -qc-subject ${SUBJECT}
   else
-    echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] Not found. Proceeding with automatic segmentation (${seg_method})."
-    echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] ${FILESEG}.nii.gz NOT found --> segmenting automatically with ${seg_method}" >> "${PATH_LOG}/${log_prefix}_SC_segmentations.log"
-    if [[ "${seg_method}" == "deepseg" ]]; then
-      sct_deepseg spinalcord -i ${file}.nii.gz -o ${FILESEG}.nii.gz -qc ${PATH_QC} -qc-subject ${SUBJECT}
-    else
-      sct_deepseg_sc -i ${file}.nii.gz -c ${contrast} -o ${FILESEG}.nii.gz -qc ${PATH_QC} -qc-subject ${SUBJECT}
-    fi
+    echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] Not found. Proceeding with automatic segmentation (sct_deepseg spinalcord)."
+    echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] ${FILESEG}.nii.gz NOT found --> segmenting automatically with sct_deepseg spinalcord" >> "${PATH_LOG}/${log_prefix}_SC_segmentations.log"
+    sct_deepseg spinalcord -i ${file}.nii.gz -o ${FILESEG}.nii.gz -qc ${PATH_QC} -qc-subject ${SUBJECT}
   fi
 }
 
