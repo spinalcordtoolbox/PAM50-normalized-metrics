@@ -1,8 +1,7 @@
 #!/bin/bash
 #
 # Process T2w and DWI data from spine-generic multi-subject dataset to build a
-# normative database of microstructural metrics (FA, MD, RD, AD) normalized to
-# PAM50 template space.
+# normative database of DTI metrics (FA, MD, RD, AD) normalized to PAM50 template space.
 #
 # Requires:
 #   - T2w processing must run first (or be included): the T2w-to-template warp
