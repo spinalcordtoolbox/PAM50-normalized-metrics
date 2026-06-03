@@ -157,8 +157,9 @@ def get_vert_indices(df_single_trace):
             changes.append(i)
     changes.append(len(df))
 
-    # Slice positions at disc boundaries (skip the very first boundary at index 0)
-    disc_slices = [slices[i] for i in changes[1:-1]]
+    # Slice positions at disc boundaries (skip the very first boundary at index 0).
+    # Place vertical lines between the last slice of one level and the first slice of the next
+    disc_slices = [(slices[i - 1] + slices[i]) / 2 for i in changes[1:-1]]
 
     # Mid-slice position and vertebral level for each level segment
     mid_slices, vert_at_mid = [], []
