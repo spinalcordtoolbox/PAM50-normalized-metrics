@@ -358,7 +358,7 @@ sct_qc \
 dti_metrics=(FA MD RD AD)
 
 # =================================
-# Method 1: Warping DTI metrics to PAM50
+# Method 1: Warp DTI metrics to PAM50
 # =================================
 # Warp DTI maps to PAM50 template space and extract metrics
 # Steps:
@@ -398,7 +398,7 @@ for dti_metric in "${dti_metrics[@]}"; do
 done
 
 # =================================
-# Method 2: Interpolating DTI metrics to PAM50
+# Method 2: Interpolate DTI metrics to PAM50
 # =================================
 # DTI metrics are extracted in native space (using atlas warped from PAM50 to DWI) and each slice is mapped
 # (using linear interpolation) to PAM50, without warping the DTI maps first.
@@ -426,7 +426,7 @@ for dti_metric in "${dti_metrics[@]}"; do
 done
 
 # =================================
-# Extract metrics in the native space as a sanity check (optional; not used for final database)
+# Extra: Extract metrics in the native space as a sanity check (optional; not used for final database)
 # =================================
 mkdir -p ${PATH_RESULTS}/dwi_native
 
