@@ -43,8 +43,9 @@
 #   PATH_RESULTS/dwi/sub-XXXX_dwi_RD_PAM50.csv
 #   PATH_RESULTS/dwi/sub-XXXX_dwi_AD_PAM50.csv
 #
+# Requires SCT v7.3 or higher with the jv/sct_extract_metric_normalize_pam50 branch.
 #
-# Authors: Jan Valosek
+# Authors: Jan Valosek, Julien Cohen-Adad, Sandrine Bedard
 # Inspired by:
 #   https://github.com/valosekj/dcm-olomouc/blob/main/scripts/01_process_data.sh
 #   https://github.com/spine-generic/spine-generic/blob/master/process_data.sh
