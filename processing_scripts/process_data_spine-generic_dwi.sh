@@ -357,50 +357,16 @@ sct_qc \
 
 dti_metrics=(FA MD RD AD)
 
-# ----------
-# Extract metrics in the native space as a sanity check (optional; not used for final database)
-# ----------
-mkdir -p ${PATH_RESULTS}/dwi_native
-
-# Process DTI metrics in parallel for faster processing
-pids=()
-for dti_metric in "${dti_metrics[@]}"; do
-  (
-    file_out="${PATH_RESULTS}/dwi_native/${SUBJECT}_dwi_${dti_metric}_native.csv"
-    echo "👉 Extracting ${dti_metric} metrics in native space..."
-
-    for tract in "${tracts[@]}"; do
-      sct_extract_metric \
-        -i ${file_dwi}_${dti_metric}.nii.gz \
-        -f label_${file_dwi}/atlas \
-        -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
-        -l ${tract} \
-        -combine 1 \
-        -method map \
-        -perslice 1 \
-        -o ${file_out} \
-        -append 1
-    done
-  ) &
-  pids+=($!)
-done
-
-# Wait for all parallel jobs and propagate any failure
-for pid in "${pids[@]}"; do
-  wait "$pid"
-done
-
-
-# ----------
+# =================================
+# Method 1: Warping DTI metrics to PAM50
+# =================================
 # Warp DTI maps to PAM50 template space and extract metrics
-# ----------
-# DTI metrics are warped to the PAM50 template space before extraction so that
-# each slice index corresponds to the same anatomical location across subjects.
-# This is the DWI equivalent of 'sct_process_segmentation -normalize-PAM50':
-# instead of extracting in native space (where slice counts per level differ
-# between subjects), all maps are brought into a common coordinate frame first.
-# The PAM50 atlas and levels files are used directly from the template, since
-# the metric maps are already in that space.
+# Steps:
+#   1. sct_register_to_template (T2w to PAM50) (using all discs)
+#   2. sct_register_multimodal (PAM50 to DWI; using T2w-PAM50 as init warp)
+#   3. sct_apply_transfo (Warp DTI maps to PAM50) (spline interpolation)
+# Note that steps 1 and 2 are done only above as even for Method 2 we need the PAM50-to-DWI warp to bring the PAM50 atlas to DWI space.
+
 mkdir -p ${PATH_RESULTS}/dwi_PAM50
 
 # Process DTI metrics sequentially to avoid memory pressure from parallel sct_extract_metric
@@ -439,12 +405,12 @@ for dti_metric in "${dti_metrics[@]}"; do
   done
 done
 
-# ----------
-# Extract DTI metrics in native space and interpolate to PAM50 using -normalize-PAM50
-# ----------
+# =================================
+# Method 2: Interpolating DTI metrics to PAM50
+# =================================
+# DTI metrics are extracted in native space (using atlas warped from PAM50 to DWI) and each slice is mapped
+# (using linear interpolation) to PAM50, without warping the DTI maps first.
 # Uses the new sct_extract_metric -normalize-PAM50 flag (SCT's branch jv/sct_extract_metric_normalize_pam50).
-# Metrics are extracted in native DWI space and each slice is mapped to its PAM50 equivalent
-# on-the-fly, without explicitly warping the DTI maps first.
 mkdir -p ${PATH_RESULTS}/dwi_interpolation_to_PAM50
 
 for dti_metric in "${dti_metrics[@]}"; do
@@ -473,6 +439,39 @@ for dti_metric in "${dti_metrics[@]}"; do
     fi
     rm "${tmp_csv}"
   done
+done
+
+# =================================
+# Extract metrics in the native space as a sanity check (optional; not used for final database)
+# =================================
+mkdir -p ${PATH_RESULTS}/dwi_native
+
+# Process DTI metrics in parallel for faster processing
+pids=()
+for dti_metric in "${dti_metrics[@]}"; do
+  (
+    file_out="${PATH_RESULTS}/dwi_native/${SUBJECT}_dwi_${dti_metric}_native.csv"
+    echo "👉 Extracting ${dti_metric} metrics in native space..."
+
+    for tract in "${tracts[@]}"; do
+      sct_extract_metric \
+        -i ${file_dwi}_${dti_metric}.nii.gz \
+        -f label_${file_dwi}/atlas \
+        -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
+        -l ${tract} \
+        -combine 1 \
+        -method map \
+        -perslice 1 \
+        -o ${file_out} \
+        -append 1
+    done
+  ) &
+  pids+=($!)
+done
+
+# Wait for all parallel jobs and propagate any failure
+for pid in "${pids[@]}"; do
+  wait "$pid"
 done
 
 # Go back to subject folder
