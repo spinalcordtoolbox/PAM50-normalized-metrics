@@ -304,7 +304,7 @@ segment_if_does_not_exist ${file_dwi_mean} "dwi" "${SEG_METHOD}"
 file_dwi_seg=$FILESEG
 
 # ----------
-# DTI computation
+# DTI computation in native DWI space
 # ----------
 # Compute FA, MD, RD, AD maps from the preprocessed data.
 sct_dmri_compute_dti -i ${file_dwi}.nii.gz -bvec ${file_bvec} -bval ${file_bval} -method standard -o ${file_dwi}_
@@ -330,7 +330,7 @@ sct_register_multimodal \
   -owarpinv warp_dwi2template.nii.gz \
   -qc ${PATH_QC} -qc-subject ${SUBJECT}
 
-# Warp PAM50 template and WM atlas to DWI space for QC purposes
+# Warp PAM50 template and WM atlas to DWI space for QC purposes and to extract metrics in native DWI space (Method 2).
 sct_warp_template \
   -d ${file_dwi_mean}.nii.gz \
   -w warp_template2dwi.nii.gz \
@@ -369,8 +369,8 @@ dti_metrics=(FA MD RD AD)
 
 mkdir -p ${PATH_RESULTS}/dwi_PAM50
 
-# Process DTI metrics sequentially to avoid memory pressure from parallel sct_extract_metric
-# (sct_run_batch already parallelises across subjects; per-metric parallelism caused OOM kills)
+# Process DTI metrics sequentially to avoid memory issues from parallel sct_extract_metric
+# (sct_run_batch already parallelizes across subjects)
 for dti_metric in "${dti_metrics[@]}"; do
   # Warp DTI map to PAM50 template space using the inverse warp from registration
   sct_apply_transfo \
