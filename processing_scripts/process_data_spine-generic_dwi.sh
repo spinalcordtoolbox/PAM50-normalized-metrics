@@ -128,28 +128,26 @@ segment_if_does_not_exist() {
   fi
 }
 
-# Check if manual disc labels exist in derivatives/labels. If yes, use them to
-# generate labeled segmentation; if no, run automatic labeling.
-# Sets global variable FILELABEL.
+# Check if manual disc labels exist in derivatives/labels. If yes, use them
+# directly; if no, run TotalSpineSeg (sct_deepseg spine -label-vert 0) for
+# automatic disc labeling.
+# Sets global variable FILELABEL (disc-label file without .nii.gz) for -ldisc.
 label_if_does_not_exist() {
   local file="$1"
-  local file_seg="$2"
-  local contrast="$3"
   FILELABEL="${file}_label-discs_dlabel"
   FILELABELMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/anat/${FILELABEL}.nii.gz"
   echo "Looking for manual disc labels: $FILELABELMANUAL"
   if [[ -e $FILELABELMANUAL ]]; then
     echo "✏️ [$(date '+%Y-%m-%d %H:%M:%S')] Found! Using manual disc labels."
     echo "✏️ [$(date '+%Y-%m-%d %H:%M:%S')] ${FILELABEL}.nii.gz found --> using manual disc labels" >> "${PATH_LOG}/T2w_disc_labels.log"
+    # Use the manual disc labels directly
     rsync -avzh $FILELABELMANUAL ${FILELABEL}.nii.gz
-    sct_image -i ${file}.nii.gz -set-sform-to-qform
-    sct_image -i ${file_seg}.nii.gz -set-sform-to-qform
-    sct_image -i ${FILELABEL}.nii.gz -set-sform-to-qform
-    sct_label_vertebrae -i ${file}.nii.gz -s ${file_seg}.nii.gz -discfile ${FILELABEL}.nii.gz -c ${contrast} -qc ${PATH_QC} -qc-subject ${SUBJECT}
+    sct_qc -i ${file}.nii.gz -s ${FILELABEL}.nii.gz -p sct_label_vertebrae -qc ${PATH_QC} -qc-subject ${SUBJECT}
   else
-    echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] Not found. Proceeding with automatic labeling."
-    echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] ${FILELABEL}.nii.gz NOT found --> using automatic labeling" >> "${PATH_LOG}/T2w_disc_labels.log"
-    sct_label_vertebrae -i ${file}.nii.gz -s ${file_seg}.nii.gz -c ${contrast} -qc ${PATH_QC} -qc-subject ${SUBJECT}
+    echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] Not found. Running TotalSpineSeg for disc labeling."
+    echo "🤖 [$(date '+%Y-%m-%d %H:%M:%S')] ${FILELABEL}.nii.gz NOT found --> labeling with TotalSpineSeg (sct_deepseg spine)" >> "${PATH_LOG}/T2w_disc_labels.log"
+    sct_deepseg spine -i ${file}.nii.gz -label-vert 0 -qc ${PATH_QC} -qc-subject ${SUBJECT}
+    FILELABEL="${file}_totalspineseg_discs"
   fi
 }
 
@@ -178,20 +176,21 @@ segment_if_does_not_exist ${file_t2} 't2'
 file_t2_seg=$FILESEG
 
 # Label vertebrae from manual disc labels (or automatically)
-label_if_does_not_exist ${file_t2} ${file_t2_seg} 't2'
+label_if_does_not_exist ${file_t2}
 
 # Select the C2-C3 and T1-T2 intervertebral disc labels. These labels are needed for template registration.
-#sct_label_utils -i ${file_t2_seg}_labeled_discs.nii.gz -keep 3,9 -o t2_labels_discs.nii.gz
+#sct_label_utils -i ${FILELABEL}.nii.gz -keep 3,9 -o t2_labels_discs.nii.gz
 ## Generate a QC report to visualize the two selected labels on the anatomical image
 #sct_qc -i ${file_t2}.nii.gz -s t2_labels_discs.nii.gz -p sct_label_utils -qc ${PATH_QC} -qc-subject ${SUBJECT}
 
 # Register T2w to PAM50 template
 # Step 1: centermassrot accounts for cord rotation
 # Step 2: syn for small-scale deformations
+# NOTE: using all discs (two-disc option is commented out above)
 sct_register_to_template \
   -i ${file_t2}.nii.gz \
   -s ${file_t2_seg}.nii.gz \
-  -ldisc ${file_t2_seg}_labeled_discs.nii.gz \
+  -ldisc ${FILELABEL}.nii.gz \
   -c t2 \
   -param step=1,type=seg,algo=centermassrot:step=2,type=seg,algo=syn,metric=MeanSquares,slicewise=1,smooth=0,iter=5 \
   -qc ${PATH_QC} -qc-subject ${SUBJECT}
