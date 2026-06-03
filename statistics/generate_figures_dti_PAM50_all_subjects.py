@@ -102,10 +102,9 @@ def load_dti_csvs(path_results, dataset_label):
     """
     frames = []
     for metric in DTI_METRICS:
-        # Matches direct (`*_dwi_FA_PAM50.csv`), interpolated
-        # (`*_dwi_FA_interpolated_to_PAM50.csv`), and via-evals
-        # (`*_dwi_FA_PAM50_via_evals.csv`) naming.
-        pattern = os.path.join(path_results, f'*_dwi_{metric}_*PAM50*.csv')
+        # Matches both warped (`*_dwi_FA_PAM50.csv`) and interpolated
+        # (`*_dwi_FA_interpolated_to_PAM50.csv`) naming.
+        pattern = os.path.join(path_results, f'*_dwi_{metric}_*PAM50.csv')
         csv_files = sorted(glob.glob(pattern))
         if not csv_files:
             print(f'  Warning: no {metric} CSVs found in {path_results}')

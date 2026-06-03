@@ -307,9 +307,7 @@ file_dwi_seg=$FILESEG
 # DTI computation
 # ----------
 # Compute FA, MD, RD, AD maps from the preprocessed data.
-# `-evecs 1` additionally outputs eigenvectors (V1, V2, V3) and eigenvalues (E1, E2, E3);
-# the eigenvalues are needed for the "via evals" sanity check below.
-sct_dmri_compute_dti -i ${file_dwi}.nii.gz -bvec ${file_bvec} -bval ${file_bval} -method standard -evecs 1 -o ${file_dwi}_
+sct_dmri_compute_dti -i ${file_dwi}.nii.gz -bvec ${file_bvec} -bval ${file_bval} -method standard -o ${file_dwi}_
 
 # ----------
 # Template registration
@@ -424,62 +422,6 @@ for dti_metric in "${dti_metrics[@]}"; do
     tmp_csv="${PATH_RESULTS}/dwi_PAM50/${SUBJECT}_dwi_${dti_metric}_PAM50_tmp_${tract_name}.csv"
     sct_extract_metric \
       -i ${file_dwi}_${dti_metric}_PAM50.nii.gz \
-      -f $SCT_DIR/data/PAM50/atlas \
-      -l ${tract} \
-      -combine 1 \
-      -method map \
-      -vertfile $SCT_DIR/data/PAM50/template/PAM50_levels.nii.gz \
-      -perslice 1 \
-      -o "${tmp_csv}"
-    if [[ ${first_tract} -eq 1 ]]; then
-      cat "${tmp_csv}" > "${file_out}"
-      first_tract=0
-    else
-      tail -n +2 "${tmp_csv}" >> "${file_out}"
-    fi
-    rm "${tmp_csv}"
-  done
-done
-
-# ----------
-# Sanity check: warp eigenvalues to PAM50, then recompute DTI metrics in PAM50 space
-# ----------
-# Cross-check that the order of (warp, compute) does not matter:
-#   compute(warp(E1,E2,E3)) should match warp(compute(E1,E2,E3)) = warp(FA/MD/RD/AD).
-# E1, E2, E3 are warped to PAM50 (sct_apply_transfo) and FA/MD/RD/AD are then
-# re-derived from the warped eigenvalues via compute_dti_from_evals.py.
-# Results land in ${PATH_RESULTS}/dwi_PAM50_via_evals and can be compared against
-# ${PATH_RESULTS}/dwi_PAM50.
-mkdir -p ${PATH_RESULTS}/dwi_PAM50_via_evals
-
-# Warp eigenvalue maps E1, E2, E3 to PAM50 space
-for eval_idx in 1 2 3; do
-  sct_apply_transfo \
-    -i ${file_dwi}_E${eval_idx}.nii.gz \
-    -d $SCT_DIR/data/PAM50/template/PAM50_t2.nii.gz \
-    -w warp_dwi2template.nii.gz \
-    -o ${file_dwi}_E${eval_idx}_PAM50.nii.gz
-done
-
-# Recompute FA, MD, RD, AD from the warped eigenvalues using a helper script from this repo
-$SCT_DIR/python/envs/venv_sct/bin/python \
-  ~/code/PAM50-normalized-metrics/processing_scripts/compute_dti_from_evals.py \
-  -e1 ${file_dwi}_E1_PAM50.nii.gz \
-  -e2 ${file_dwi}_E2_PAM50.nii.gz \
-  -e3 ${file_dwi}_E3_PAM50.nii.gz \
-  -o ${file_dwi}_via_evals_PAM50_
-
-# Extract per-slice metrics in PAM50 space
-for dti_metric in "${dti_metrics[@]}"; do
-  file_out="${PATH_RESULTS}/dwi_PAM50_via_evals/${SUBJECT}_dwi_${dti_metric}_PAM50_via_evals.csv"
-  echo "👉 Extracting ${dti_metric} (recomputed from warped eigenvalues) in PAM50 space..."
-
-  first_tract=1
-  for tract in "${tracts[@]}"; do
-    tract_name="${tract//,/-}"
-    tmp_csv="${PATH_RESULTS}/dwi_PAM50_via_evals/${SUBJECT}_dwi_${dti_metric}_PAM50_via_evals_tmp_${tract_name}.csv"
-    sct_extract_metric \
-      -i ${file_dwi}_via_evals_PAM50_${dti_metric}.nii.gz \
       -f $SCT_DIR/data/PAM50/atlas \
       -l ${tract} \
       -combine 1 \
