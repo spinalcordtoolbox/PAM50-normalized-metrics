@@ -14,28 +14,19 @@
 # Usage:
 #     sct_run_batch -c <PATH_TO_REPO>/etc/config_process_data_dwi.json
 #
-# Preprocessing flags (passed via "script_args" in the config or -script-args on the CLI):
-#   --mask-method  centerline|deepseg  Method for creating the mask used in motion correction.
-#                                      centerline: sct_get_centerline (default; spine-generic pipeline)
-#                                      deepseg:    sct_deepseg spinalcord (SCT tutorial pipeline)
-#   --mask-size    30|35               Mask radius in mm (default: 30; SCT tutorial uses 35).
-#   --denoise      0|1                 Apply sct_dmri_denoise_patch2self after motion correction
-#                                      (default: 1).
-#   --seg-method   deepseg_sc|deepseg  DWI cord segmentation method.
-#                                      deepseg_sc: sct_deepseg_sc (default; compatible with
-#                                                  spine-generic derivatives/labels)
-#                                      deepseg:    sct_deepseg spinalcord (newer contrast-agnostic model)
+# Preprocessing configuration (fixed after validation; see previous commits for testing of different options):
+#   mask method : centerline (sct_get_centerline)
+#   mask size   : 35mm
+#   seg method  : deepseg (sct_deepseg spinalcord) for DWI cord segmentation
+#   denoising   : no denoising
 #
-# Example config_process_data_dwi.json (all defaults shown explicitly):
+# Example config_process_data_dwi.json:
 # {
 #   "path_data"   : "<PATH_TO_SPINE_GENERIC_DATASET>",
 #   "path_output" : "<PATH_TO_OUTPUT>",
 #   "script"      : "<PATH_TO_REPO>/processing_scripts/process_data_spine-generic_dwi.sh",
-#   "script_args" : "--mask-method centerline --mask-size 30 --seg-method deepseg_sc --denoise 1",
 #   "jobs"        : 8
 # }
-# To test an alternative configuration, change "script_args", e.g.:
-# "script_args" : "--mask-method deepseg --mask-size 35 --seg-method deepseg --denoise 0"
 #
 # The following global variables are retrieved from the caller sct_run_batch:
 # PATH_DATA_PROCESSED="~/data_processed"
@@ -99,31 +90,7 @@ PATH_DERIVATIVES="${PATH_DATA}/derivatives"
 SUBJECT=$1
 shift
 
-# ---- Preprocessing flags (controlled via script_args in config or -script-args CLI) ----
-MASK_METHOD="centerline"   # centerline | deepseg
-MASK_SIZE=30               # mm; spine-generic uses 30mm, SCT tutorial uses 35mm
-SEG_METHOD="deepseg_sc"    # deepseg_sc | deepseg
-DENOISE=1                  # 1=yes, 0=no
-
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --mask-method) MASK_METHOD="$2"; shift 2 ;;
-    --mask-size)   MASK_SIZE="$2";   shift 2 ;;
-    --seg-method)  SEG_METHOD="$2";  shift 2 ;;
-    --denoise)     DENOISE="$2";     shift 2 ;;
-    *) echo "Unknown argument: $1"; exit 1 ;;
-  esac
-done
-
 echo "SUBJECT: ${SUBJECT}"
-echo "Preprocessing options:"
-echo "  MASK_METHOD : ${MASK_METHOD}"
-echo "  MASK_SIZE   : ${MASK_SIZE}mm"
-echo "  SEG_METHOD  : ${SEG_METHOD}"
-echo "  DENOISE     : ${DENOISE}"
-
-# Log preprocessing arguments to file
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] SUBJECT: ${SUBJECT} | MASK_METHOD: ${MASK_METHOD} | MASK_SIZE: ${MASK_SIZE}mm | SEG_METHOD: ${SEG_METHOD} | DENOISE: ${DENOISE}" >> "${PATH_LOG}/DWI_preprocessing_args.log"
 
 # get starting time
 start=`date +%s`
@@ -252,19 +219,11 @@ echo "👉 Processing DWI: ${file_dwi}"
 sct_dmri_separate_b0_and_dwi -i ${file_dwi}.nii.gz -bvec ${file_bvec}
 
 # Create a mask around the cord to restrict motion correction and speed up processing.
-# Use either spinal cord segmentation or spinal cord centerline; controlled by --mask-method.
-if [[ "${MASK_METHOD}" == "deepseg" ]]; then
-  # SCT tutorial approach: segment cord, pass segmentation as the centerline reference
-  sct_deepseg spinalcord -i ${file_dwi}_dwi_mean.nii.gz -o ${file_dwi}_dwi_mean_seg.nii.gz -qc ${PATH_QC} -qc-subject ${SUBJECT}
-  centerline_for_mask="${file_dwi}_dwi_mean_seg.nii.gz"
-else
-  # spine-generic approach: extract centerline (default)
-  sct_get_centerline -i ${file_dwi}_dwi_mean.nii.gz -c dwi -qc ${PATH_QC} -qc-subject ${SUBJECT}
-  centerline_for_mask="${file_dwi}_dwi_mean_centerline.nii.gz"
-fi
+sct_get_centerline -i ${file_dwi}_dwi_mean.nii.gz -c dwi -qc ${PATH_QC} -qc-subject ${SUBJECT}
+centerline_for_mask="${file_dwi}_dwi_mean_centerline.nii.gz"
 
-# Size of the mask (usually 30mm or 35mm); controlled by --mask-size.
-sct_create_mask -i ${file_dwi}_dwi_mean.nii.gz -p centerline,${centerline_for_mask} -size ${MASK_SIZE}mm
+# Create a 35mm mask around the centerline.
+sct_create_mask -i ${file_dwi}_dwi_mean.nii.gz -p centerline,${centerline_for_mask} -size 35mm
 
 # ----------
 # Motion correction
@@ -282,20 +241,10 @@ mv ${file_dwi}_dwi_mean.nii.gz ${SUBJECT}_rec-average_dwi.nii.gz
 file_dwi_mean="${SUBJECT}_rec-average_dwi"
 
 # ----------
-# Denoising
-# ----------
-# Denoise with patch2self (controlled by --denoise flag; default: enabled)
-if [[ "${DENOISE}" == "1" ]]; then
-  sct_dmri_denoise_patch2self -i ${file_dwi}.nii.gz -b ${file_bval} -o ${file_dwi}_denoised.nii.gz
-  file_dwi=${file_dwi}_denoised
-fi
-
-# ----------
 # Spinal cord segmentation in DWI space
 # ----------
-# Segment SC in mean DWI image (check for manual seg first; method controlled by --seg-method)
-# sct_deepseg spinalcord or sct_deepseg_sc
-segment_if_does_not_exist ${file_dwi_mean} "dwi" "${SEG_METHOD}"
+# Segment SC in mean DWI image (check for manual seg first; auto-seg uses sct_deepseg spinalcord)
+segment_if_does_not_exist ${file_dwi_mean} "dwi"
 file_dwi_seg=$FILESEG
 
 # ----------
