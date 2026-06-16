@@ -118,27 +118,30 @@ def compute_summary(wide_df):
     Compute per-metric agreement statistics for each vertebral level.
 
     Returns:
-        pd.DataFrame: one row per metric with n_subjects, means, diff, abs diff,
-                      relative diff (%) and Pearson r.
+        pd.DataFrame: one row per vertebral level and metric with n_subjects,
+                      means, diff, abs diff, relative diff (%) and Pearson r.
     """
     summary = []
     for metric in METRICS:
-        metric_df = wide_df[wide_df['metric'] == metric]
-        x, y = metric_df['1rep'].values, metric_df['2rep'].values
-        # Absolute difference
-        diff = x - y                          # 1rep - 2rep (2rep = full acquisition)
-        # Relative difference in %
-        rel = diff / y * 100
-        summary.append({
-            'metric': metric,
-            'n_subjects': metric_df['participant_id'].nunique(),
-            '1rep (mean±SD)': f'{x.mean():.4g} ± {x.std():.2g}',
-            '2rep (mean±SD)': f'{y.mean():.4g} ± {y.std():.2g}',
-            'diff (1rep-2rep)': f'{diff.mean():.3g}',
-            'abs diff': f'{np.abs(diff).mean():.3g}',
-            'rel diff [%]': f'{np.abs(rel).mean():.2f}',
-            'Pearson r': f'{pearsonr(x, y)[0]:.3f}',
-        })
+        metric_all = wide_df[wide_df['metric'] == metric]
+        for level in sorted(wide_df['VertLevel'].unique()):
+            metric_df = metric_all[metric_all['VertLevel'] == level]
+            x, y = metric_df['1rep'].values, metric_df['2rep'].values
+            # Absolute difference
+            diff = x - y                          # 1rep - 2rep (2rep = full acquisition)
+            # Relative difference in %
+            rel = diff / y * 100
+            summary.append({
+                'VertLevel': f'C{int(level)}',
+                'metric': metric,
+                'n_subjects': metric_df['participant_id'].nunique(),
+                '1rep (mean±SD)': f'{x.mean():.4g} ± {x.std():.2g}',
+                '2rep (mean±SD)': f'{y.mean():.4g} ± {y.std():.2g}',
+                'diff (1rep-2rep)': f'{diff.mean():.3g}',
+                'abs diff': f'{np.abs(diff).mean():.3g}',
+                'rel diff [%]': f'{rel:.2f}',
+                'Pearson r': f'{pearsonr(x, y)[0]:.3f}',
+            })
     return pd.DataFrame(summary)
 
 
