@@ -8,8 +8,8 @@
 #
 # For each metric the script reports, across all subject x level pairs:
 #   - mean +/- SD for 1rep and 2rep
-#   - bias and absolute difference (1rep - 2rep), in absolute and relative (%) units
-#   - paired Wilcoxon signed-rank p-value and Pearson correlation
+#   - signed, absolute, and relative (%) difference (1rep - 2rep)
+#   - Pearson correlation
 # and saves a scatter figure (1rep vs 2rep) with the identity line.
 #
 # Usage:
@@ -27,7 +27,7 @@ import numpy as np
 import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-from scipy.stats import wilcoxon, pearsonr
+from scipy.stats import pearsonr
 
 METRICS = ['FA', 'MD', 'RD', 'AD', 'RMS']
 
@@ -47,7 +47,7 @@ METRIC_TO_AXIS = {
     'RMS': 'Fit residual RMS [a.u.]',
 }
 
-LABELS_FONT_SIZE = 16
+LABELS_FONT_SIZE = 22
 TICKS_FONT_SIZE = LABELS_FONT_SIZE - 2
 
 
@@ -66,7 +66,7 @@ def get_parser():
 
 def load_csvs(path_results):
     """
-    Load all compare-reps CSVs into a single long-format dataframe.
+    Load all CSVs into a single dataframe.
 
     Args:
         path_results (str): directory containing *_dwi_{metric}_{n}rep.csv files.
@@ -78,17 +78,12 @@ def load_csvs(path_results):
     for csv_file in sorted(glob.glob(os.path.join(path_results, '*_dwi_*rep.csv'))):
         basename = os.path.basename(csv_file)
         m = re.match(r'(sub-\w+)_dwi_(\w+)_(\d)rep\.csv', basename)
-        if not m:
-            print(f'  Warning: could not parse {basename}, skipping')
-            continue
         subject, metric, nrep = m.group(1), m.group(2), int(m.group(3))
         df = pd.read_csv(csv_file).rename(columns={'MAP()': 'value'})
         df['participant_id'] = subject
         df['metric'] = metric
         df['nrep'] = nrep
         rows.append(df[['participant_id', 'metric', 'VertLevel', 'nrep', 'value']])
-    if not rows:
-        raise FileNotFoundError(f'No compare-reps CSVs found in {path_results}')
     df = pd.concat(rows, ignore_index=True)
     df['value'] *= df['metric'].map(scaling_factor).fillna(1)
     return df
@@ -112,52 +107,66 @@ def pivot_df(df):
 
 def compute_summary(wide_df):
     """
-    Compute per-metric agreement statistics across all subject x level pairs.
+    Compute per-metric agreement statistics across subject and levels (C2, C3).
 
     Returns:
-        pd.DataFrame: one row per metric with n, means, bias, abs diff, relative
-                      diff (%), Wilcoxon p and Pearson r.
+        pd.DataFrame: one row per metric with n_subjects, means, diff, abs diff,
+                      relative diff (%) and Pearson r.
     """
     summary = []
     for metric in METRICS:
         metric_df = wide_df[wide_df['metric'] == metric]
-        x, y = metric_df['1rep'].values, d['2rep'].values
+        x, y = metric_df['1rep'].values, metric_df['2rep'].values
         # Absolute difference
         diff = x - y                          # 1rep - 2rep (2rep = full acquisition)
         # Relative difference in %
         rel = diff / y * 100
         summary.append({
             'metric': metric,
-            'n': len(d),
+            'n_subjects': metric_df['participant_id'].nunique(),
             '1rep (mean±SD)': f'{x.mean():.4g} ± {x.std():.2g}',
             '2rep (mean±SD)': f'{y.mean():.4g} ± {y.std():.2g}',
-            'bias (1rep-2rep)': f'{diff.mean():.3g}',
+            'diff (1rep-2rep)': f'{diff.mean():.3g}',
             'abs diff': f'{np.abs(diff).mean():.3g}',
             'rel diff [%]': f'{np.abs(rel).mean():.2f}',
-            'Wilcoxon p': f'{wilcoxon(x, y).pvalue:.3g}',
             'Pearson r': f'{pearsonr(x, y)[0]:.3f}',
         })
     return pd.DataFrame(summary)
 
 
 def create_scatter(wide, path_out):
-    """Scatter 1rep vs 2rep per metric with the identity line; save one figure."""
+    """
+    Create scatter plot 1rep vs 2rep per metric.
+    One row per vertebral level (C2, C3).
+    """
     mpl.rcParams['font.family'] = 'Arial'
-    fig, axes = plt.subplots(1, len(METRICS), figsize=(len(METRICS) * 4, 4))
-    for ax, metric in zip(axes, METRICS):
-        d = wide[wide['metric'] == metric]
-        x, y = d['1rep'].values, d['2rep'].values
-        ax.scatter(x, y, s=25, color='steelblue', alpha=0.7, edgecolor='none')
-        lims = [min(x.min(), y.min()), max(x.max(), y.max())]
-        ax.plot(lims, lims, color='black', linestyle='--', alpha=0.5)
-        ax.set_title(metric, fontsize=LABELS_FONT_SIZE)
-        ax.set_xlabel('1 repetition', fontsize=TICKS_FONT_SIZE)
-        ax.set_ylabel('2 repetitions', fontsize=TICKS_FONT_SIZE)
-        ax.tick_params(axis='both', labelsize=TICKS_FONT_SIZE - 4)
-        ax.set_aspect('equal', adjustable='datalim')
-        r = pearsonr(x, y)[0]
-        ax.text(0.05, 0.95, f'r = {r:.2f}', transform=ax.transAxes,
-                ha='left', va='top', fontsize=TICKS_FONT_SIZE - 2)
+    levels = [2, 3]  # one row per vertebral level (C2, C3)
+    fig, axes = plt.subplots(len(levels), len(METRICS), figsize=(len(METRICS) * 4, len(levels) * 4), sharex='col')
+    # Loop across levels (rows)
+    for row, level in enumerate(levels):
+        # Loop across metrics (columns)
+        for col, metric in enumerate(METRICS):
+            ax = axes[row, col]
+            d = wide[(wide['metric'] == metric) & (wide['VertLevel'] == level)]
+            x, y = d['1rep'].values, d['2rep'].values
+            ax.scatter(x, y, s=60, color='steelblue', alpha=0.7, edgecolor='none')
+            lims = [min(x.min(), y.min()), max(x.max(), y.max())]
+            ax.plot(lims, lims, color='black', linestyle='--', alpha=0.5)
+            # Show metric name only on the first row
+            if row == 0:
+                ax.set_title(metric, fontsize=LABELS_FONT_SIZE)
+            # Show x-axis label only on the last row
+            if row == len(levels) - 1:
+                ax.set_xlabel('1 repetition', fontsize=TICKS_FONT_SIZE)
+            # Show y-axis label only on the first column
+            if col == 0:
+                ax.set_ylabel(f'C{level}\n2 repetitions', fontsize=TICKS_FONT_SIZE)
+            ax.tick_params(axis='both', labelsize=TICKS_FONT_SIZE - 4)
+            ax.set_box_aspect(1)  # square subplot box (independent of data range)
+            ax.spines[['top', 'right']].set_visible(False)
+            r = pearsonr(x, y)[0]
+            ax.text(0.05, 0.95, f'r = {r:.2f}', transform=ax.transAxes,
+                    ha='left', va='top', fontsize=TICKS_FONT_SIZE - 2)
     plt.tight_layout()
     path_filename = os.path.join(path_out, 'scatter_dti_compare_reps.png')
     plt.savefig(path_filename, dpi=300, bbox_inches='tight')
@@ -174,12 +183,11 @@ def main():
     # Pivot the dataframe to have one row per (participant, metric, level) with 1rep and 2rep values side by side
     wide_df = pivot_df(df)
     # 21 participants × 5 metrics × 2 levels (C2, C3) = 210 rows. Then 210 / 5 (metrics) = 42
-    n_pairs = len(wide_df) / wide_df['metric'].nunique()
+    n_pairs = len(wide_df) // wide_df['metric'].nunique()
     print(f'Loaded {wide_df["participant_id"].nunique()} subjects, {n_pairs} subject × level pairs per metric.\n')
 
     summary = compute_summary(wide_df)
     print(summary.to_string(index=False))
-
     path_csv = os.path.join(args.path_out, 'compare_dti_across_reps.csv')
     summary.to_csv(path_csv, index=False)
     print(f'\nSummary saved: {path_csv}')
