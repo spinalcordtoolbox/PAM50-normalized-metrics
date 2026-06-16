@@ -4,9 +4,9 @@
 #   - 1rep, first 31 volumes vs
 #   - the full acquisition (2rep)
 #
-# Comparison is done for WM at C2 and C3 using the sct_extract_metric output
+# Comparison is done for WM per vertebral level (C2-C5) using the sct_extract_metric output
 #
-# For each metric the script reports, across all subject x level pairs:
+# For each metric and vertebral level the script reports, across subjects:
 #   - mean +/- SD for 1rep and 2rep
 #   - signed, absolute, and relative (%) difference (1rep - 2rep)
 #   - Pearson correlation
@@ -109,7 +109,7 @@ def pivot_df(df):
 
 def compute_summary(wide_df):
     """
-    Compute per-metric agreement statistics across subject and levels (C2, C3).
+    Compute per-metric agreement statistics for each vertebral level.
 
     Returns:
         pd.DataFrame: one row per metric with n_subjects, means, diff, abs diff,
@@ -142,8 +142,8 @@ def create_scatter(wide, path_out):
     One row per vertebral level (C2, C3).
     """
     mpl.rcParams['font.family'] = 'Arial'
-    levels = [2, 3, 4, 5]  # one row per vertebral level (C2, C3, ...)
-    fig, axes = plt.subplots(len(levels), len(METRICS), figsize=(len(METRICS) * 4, len(levels) * 4), sharex='col')
+    levels = sorted(wide['VertLevel'].unique())  # one row per vertebral level (C2-C5)
+    fig, axes = plt.subplots(len(levels), len(METRICS), figsize=(len(METRICS) * 4, len(levels) * 4))
     # Loop across levels (rows)
     for row, level in enumerate(levels):
         # Loop across metrics (columns)
@@ -194,9 +194,9 @@ def main():
     df = load_csvs(args.path_results)
     # Pivot the dataframe to have one row per (participant, metric, level) with 1rep and 2rep values side by side
     wide_df = pivot_df(df)
-    # 21 participants × 5 metrics × 2 levels (C2, C3) = 210 rows. Then 210 / 5 (metrics) = 42
-    n_pairs = len(wide_df) // wide_df['metric'].nunique()
-    print(f'Loaded {wide_df["participant_id"].nunique()} subjects, {n_pairs} subject × level pairs per metric.\n')
+    levels = sorted(wide_df['VertLevel'].unique())
+    print(f'Loaded {wide_df["participant_id"].nunique()} subjects, '
+          f'levels {", ".join(f"C{int(l)}" for l in levels)}\n')
 
     summary = compute_summary(wide_df)
     print(summary.to_string(index=False))
