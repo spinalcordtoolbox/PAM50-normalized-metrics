@@ -142,7 +142,7 @@ def create_scatter(wide, path_out):
     One row per vertebral level (C2, C3).
     """
     mpl.rcParams['font.family'] = 'Arial'
-    levels = [2, 3]  # one row per vertebral level (C2, C3)
+    levels = [2, 3, 4, 5]  # one row per vertebral level (C2, C3, ...)
     fig, axes = plt.subplots(len(levels), len(METRICS), figsize=(len(METRICS) * 4, len(levels) * 4), sharex='col')
     # Loop across levels (rows)
     for row, level in enumerate(levels):
