@@ -289,7 +289,7 @@ for nrep in 1 2; do
         -method map \
         -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
         -perlevel 1 \
-        -vert 2,3 \
+        -vert 2,3,4,5 \
         -o "${file_out}" \
         -append 1
     done
