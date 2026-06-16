@@ -1,7 +1,7 @@
 {
   "path_data"   : "~/data/data-multi-subject",
   "path_output" : "~/results/dwi_normative_database/dwi_compare_reps_2026-06-12",
-  "script"      : "~/code/PAM50-normalized-metrics/processing_scripts/process_data_spine-generic_dwi_compare_reps.sh",
+  "script"      : "~/code/PAM50-normalized-metrics/dwi_compare_reps/01_process_data_spine-generic_dwi_compare_reps.sh",
   "jobs"        : 16,
   "include_list" : [
     "sub-amu01",

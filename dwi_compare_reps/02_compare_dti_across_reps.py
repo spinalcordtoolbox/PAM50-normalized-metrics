@@ -13,7 +13,7 @@
 # and saves a scatter figure (1rep vs 2rep) with the identity line.
 #
 # Usage:
-#     python statistics/compare_dti_across_reps.py \
+#     python dwi_compare_reps/02_compare_dti_across_reps.py \
 #         -path-results /path/to/results/dwi_compare_reps
 #
 # Author: Jan Valosek
