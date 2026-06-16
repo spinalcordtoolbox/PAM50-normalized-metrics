@@ -48,6 +48,12 @@ METRIC_TO_AXIS = {
     'RMS': 'Fit residual RMS [a.u.]',
 }
 
+# Weird DTI values at C5; TODO: double-check these manually.
+EXCLUDE_SUBJECT_LEVELS = [
+    ('sub-mgh05', 5),
+    ('sub-mgh06', 5),
+]
+
 LABELS_FONT_SIZE = 22
 TICKS_FONT_SIZE = LABELS_FONT_SIZE - 2
 
@@ -192,6 +198,9 @@ def main():
     os.makedirs(args.path_out, exist_ok=True)
 
     df = load_csvs(args.path_results)
+    # Drop subject/level
+    for subject, level in EXCLUDE_SUBJECT_LEVELS:
+        df = df[~((df['participant_id'] == subject) & (df['VertLevel'] == level))]
     # Pivot the dataframe to have one row per (participant, metric, level) with 1rep and 2rep values side by side
     wide_df = pivot_df(df)
     levels = sorted(wide_df['VertLevel'].unique())
