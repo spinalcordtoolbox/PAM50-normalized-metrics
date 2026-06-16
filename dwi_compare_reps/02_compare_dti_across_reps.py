@@ -154,6 +154,10 @@ def create_scatter(wide, path_out):
             ax.scatter(x, y, s=60, color='steelblue', alpha=0.7, edgecolor='none')
             lims = [min(x.min(), y.min()), max(x.max(), y.max())]
             ax.plot(lims, lims, color='black', linestyle='--', alpha=0.5)
+            # Linear regression line
+            slope, intercept = np.polyfit(x, y, 1)
+            xfit = np.array([x.min(), x.max()])
+            ax.plot(xfit, slope * xfit + intercept, color='red', linewidth=1.5)
             # Show metric name only on the first row
             if row == 0:
                 ax.set_title(metric, fontsize=LABELS_FONT_SIZE)
@@ -167,8 +171,9 @@ def create_scatter(wide, path_out):
             ax.set_box_aspect(1)  # square subplot box (independent of data range)
             ax.spines[['top', 'right']].set_visible(False)
             r = pearsonr(x, y)[0]
-            ax.text(0.05, 0.95, f'r = {r:.2f}', transform=ax.transAxes,
-                    ha='left', va='top', fontsize=TICKS_FONT_SIZE - 2)
+            sign = '+' if intercept >= 0 else '−'
+            ax.text(0.05, 0.95, f'y = {slope:.2f}x {sign} {abs(intercept):.2f}\nr = {r:.2f}',
+                    transform=ax.transAxes, ha='left', va='top', fontsize=TICKS_FONT_SIZE - 2)
     plt.tight_layout()
     path_filename = os.path.join(path_out, 'scatter_dti_compare_reps.png')
     plt.savefig(path_filename, dpi=300, bbox_inches='tight')
