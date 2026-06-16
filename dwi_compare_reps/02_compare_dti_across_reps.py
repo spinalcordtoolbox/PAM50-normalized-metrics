@@ -152,7 +152,10 @@ def create_scatter(wide, path_out):
             d = wide[(wide['metric'] == metric) & (wide['VertLevel'] == level)]
             x, y = d['1rep'].values, d['2rep'].values
             ax.scatter(x, y, s=60, color='steelblue', alpha=0.7, edgecolor='none')
-            lims = [min(x.min(), y.min()), max(x.max(), y.max())]
+            # Equal x/y range (with a small margin) so the identity line is a true diagonal
+            lo, hi = min(x.min(), y.min()), max(x.max(), y.max())
+            pad = 0.05 * (hi - lo)
+            lims = [lo - pad, hi + pad]
             ax.plot(lims, lims, color='black', linestyle='--', alpha=0.5)
             # Linear regression line
             slope, intercept = np.polyfit(x, y, 1)
@@ -166,9 +169,11 @@ def create_scatter(wide, path_out):
                 ax.set_xlabel('1 repetition', fontsize=TICKS_FONT_SIZE)
             # Show y-axis label only on the first column
             if col == 0:
-                ax.set_ylabel(f'C{level}\n2 repetitions', fontsize=TICKS_FONT_SIZE)
+                ax.set_ylabel(f'C{int(level)}\n2 repetitions', fontsize=TICKS_FONT_SIZE)
             ax.tick_params(axis='both', labelsize=TICKS_FONT_SIZE - 4)
-            ax.set_box_aspect(1)  # square subplot box (independent of data range)
+            ax.set_xlim(lims)
+            ax.set_ylim(lims)
+            ax.set_box_aspect(1)  # square box + equal limits -> identity line is 45°
             ax.spines[['top', 'right']].set_visible(False)
             r = pearsonr(x, y)[0]
             sign = '+' if intercept >= 0 else '−'
