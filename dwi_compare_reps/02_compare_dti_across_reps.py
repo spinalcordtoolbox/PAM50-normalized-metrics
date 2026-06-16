@@ -79,6 +79,7 @@ def load_csvs(path_results):
     for csv_file in sorted(glob.glob(os.path.join(path_results, '*_dwi_*rep.csv'))):
         basename = os.path.basename(csv_file)
         m = re.match(r'(sub-\w+)_dwi_(\w+)_(\d)rep\.csv', basename)
+        # sub-01_dwi_FA_1rep.csv ->  sub-01, FA, 1
         subject, metric, nrep = m.group(1), m.group(2), int(m.group(3))
         df = pd.read_csv(csv_file).rename(columns={'MAP()': 'value'})
         df['participant_id'] = subject
