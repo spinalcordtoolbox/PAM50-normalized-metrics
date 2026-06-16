@@ -37,6 +37,7 @@ scaling_factor = {
     'MD': 1000,
     'AD': 1000,
     'RD': 1000,
+    'RMS': 1,
     }
 
 METRIC_TO_AXIS = {
@@ -85,7 +86,7 @@ def load_csvs(path_results):
         df['nrep'] = nrep
         rows.append(df[['participant_id', 'metric', 'VertLevel', 'nrep', 'value']])
     df = pd.concat(rows, ignore_index=True)
-    df['value'] *= df['metric'].map(scaling_factor).fillna(1)
+    df['value'] *= df['metric'].map(scaling_factor)
     return df
 
 
