@@ -139,7 +139,7 @@ def compute_summary(wide_df):
                 '2rep (mean±SD)': f'{y.mean():.4g} ± {y.std():.2g}',
                 'diff (1rep-2rep)': f'{diff.mean():.3g}',
                 'abs diff': f'{np.abs(diff).mean():.3g}',
-                'rel diff [%]': f'{rel:.2f}',
+                'rel diff [%]': f'{np.abs(rel).mean():.2f}',
                 'Pearson r': f'{pearsonr(x, y)[0]:.3f}',
             })
     return pd.DataFrame(summary)
