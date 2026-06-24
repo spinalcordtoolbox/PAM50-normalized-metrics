@@ -1293,19 +1293,44 @@ def compute_age_stats(df_participants):
           f'Max: {age_max}\n')
 
 
+def _discover_pam50_csvs(path_HC):
+    """
+    Find per-subject PAM50 CSV files under ``path_HC``.
+
+    Supports two filename conventions:
+      - flat layout used by this repo, e.g. ``sub-amuAL_T2w_PAM50.csv``
+      - nested SCT default, e.g.
+        ``<sub>/<contrast>/sub-XXX_..._space-PAM50_desc-sct-morphometrics_stat.csv``
+
+    Returns a list of (basename, absolute_path) tuples.
+    """
+    # Flat layout first (existing behavior, fast path)
+    flat = [f for f in os.listdir(path_HC) if 'PAM50.csv' in f]
+    if flat:
+        return [(f, os.path.join(path_HC, f)) for f in flat]
+
+    # Fall back to recursive search for SCT's default morphometrics-stat naming
+    found = []
+    for root, _, files in os.walk(path_HC):
+        for f in files:
+            if 'space-PAM50' in f and f.endswith('morphometrics_stat.csv'):
+                found.append((f, os.path.join(root, f)))
+    return found
+
+
 def read_csv_files(path_HC, participant_file=None, dataset_name=None):
     # Initialize pandas dataframe where data across all subjects will be stored
-    csv_files = [f for f in os.listdir(path_HC) if 'PAM50.csv' in f]
+    csv_files = _discover_pam50_csvs(path_HC)
     n_total = len(csv_files)
     print(f'Reading {path_HC} ({n_total} files)')
     dfs = []
-    for i, file in enumerate(csv_files, 1):
+    for i, (fname, fpath) in enumerate(csv_files, 1):
         # Read csv file as pandas dataframe for given subject
-        df_subject = pd.read_csv(os.path.join(path_HC, file), dtype=METRICS_DTYPE)
+        df_subject = pd.read_csv(fpath, dtype=METRICS_DTYPE)
         # Compute AP/RL ratio as MEAN(diameter_AP) / MEAN(diameter_RL)
         df_subject['MEAN(compression_ratio)'] = df_subject['MEAN(diameter_AP)'] / df_subject['MEAN(diameter_RL)']
         # Track source CSV filename to reliably extract participant_id
-        df_subject['source_file'] = file
+        df_subject['source_file'] = fname
         dfs.append(df_subject)
         if i % 100 == 0 or i == n_total:
             print(f'  {i}/{n_total} files read ({100 * i // n_total}%)', end='\r', flush=True)
