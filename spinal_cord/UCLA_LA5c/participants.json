@@ -20,7 +20,7 @@
         "Description": "The diagnosis of pathology of the participant",
         "LongName": "Pathology name",
         "Levels": {
-            "CN": "Cognitively Normal",
+            "HC": "Healthy Control",
             "SCHZ": "Schizophrenia",
             "bipolar": "Bipolar Disorder",
             "ADHD": "Attention-Deficit/Hyperactivity Disorder"

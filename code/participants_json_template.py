@@ -37,7 +37,6 @@ FIELDS = {
         "LongName": "Pathology name",
         "Levels": {
             "HC":             "Healthy Control",
-            "CN":             "Cognitively Normal",
             "MCI":            "Mild Cognitive Impairment",
             "dementia":       "Dementia",
             "MS":             "Multiple Sclerosis",
