@@ -39,7 +39,7 @@ PARTICIPANTS_URL = (
 WAVE_TO_SESSION = {"W1": "ses-wave1", "W2": "ses-wave2", "W3": "ses-wave3"}
 
 SEX_MAP  = {0.0: "F", 1.0: "M", 0: "F", 1: "M"}
-DIAG_MAP = {"cn": "CN"}
+DIAG_MAP = {"cn": "HC"}
 
 OUT_COLS = ['participant_id', 'session_id', 'sex', 'age', 'pathology',
             'handedness', 'scanner', 'race', 'weight', 'height', 'BMI']
@@ -94,7 +94,7 @@ def expand_openneuro(df: pd.DataFrame, csv_pairs: set) -> pd.DataFrame:
                 "session_id":     session,
                 "sex":            sex,
                 "age":            age,
-                "pathology":      "CN",
+                "pathology":      "HC",
                 "handedness":     "n/a",
                 "scanner":        "n/a",
                 "race":           race,
@@ -144,7 +144,7 @@ def main():
             "session_id":     df_kurt["session_id"],
             "sex":            df_kurt["sex"].map(SEX_MAP).fillna("n/a"),
             "age":            pd.to_numeric(df_kurt["age"], errors="coerce"),
-            "pathology":      df_kurt["diagnosis"].map(DIAG_MAP).fillna("CN"),
+            "pathology":      df_kurt["diagnosis"].map(DIAG_MAP).fillna("HC"),
             "handedness":     "n/a",
             "scanner":        "n/a",
             "race":           df_kurt["race"].fillna("n/a") if "race" in df_kurt.columns else "n/a",
@@ -169,7 +169,7 @@ def main():
     with open(out_json, "w") as f:
         json.dump(make_participants_json(
             OUT_COLS,
-            pathology_levels={'CN': 'Cognitively Normal'}
+            pathology_levels={'HC': 'Healthy Control'}
         ), f, indent=4)
     print(f"Written: {out_json.relative_to(repo_root)}")
 

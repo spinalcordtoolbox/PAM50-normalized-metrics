@@ -44,7 +44,7 @@ PARTICIPANTS_URL = (
     f"refs/tags/{VERSION}/participants.tsv"
 )
 
-DIAG_MAP = {"cn": "CN", "schz": "SCHZ", "bipolar": "bipolar", "adhd": "ADHD"}
+DIAG_MAP = {"cn": "HC", "schz": "SCHZ", "bipolar": "bipolar", "adhd": "ADHD"}
 SEX_MAP  = {0.0: "F", 1.0: "M", 0: "F", 1: "M"}
 
 # ---------------------------------------------------------------------------
@@ -103,7 +103,7 @@ def main():
           f"(those with CSV files in {dataset_dir.relative_to(repo_root)})")
 
     # OpenNeuro sex column is 'gender' with F/M values; diagnosis is CONTROL/SCHZ/…
-    openneuro_diag_map = {"CONTROL": "CN", "SCHZ": "SCHZ", "BIPOLAR": "bipolar", "ADHD": "ADHD"}
+    openneuro_diag_map = {"CONTROL": "HC", "SCHZ": "SCHZ", "BIPOLAR": "bipolar", "ADHD": "ADHD"}
     df_openneuro["sex"]       = df_openneuro["gender"].fillna("n/a")
     df_openneuro["age"]       = pd.to_numeric(df_openneuro["age"], errors="coerce")
     df_openneuro["pathology"] = df_openneuro["diagnosis"].map(openneuro_diag_map).fillna("n/a")
@@ -166,7 +166,7 @@ def main():
         json.dump(make_participants_json(
             ['participant_id', 'sex', 'age', 'pathology', 'handedness', 'scanner', 'race', 'weight', 'height', 'BMI'],
             pathology_levels={
-                'CN':      'Cognitively Normal',
+                'HC':      'Healthy Control',
                 'SCHZ':    'Schizophrenia',
                 'bipolar': 'Bipolar Disorder',
                 'ADHD':    'Attention-Deficit/Hyperactivity Disorder',

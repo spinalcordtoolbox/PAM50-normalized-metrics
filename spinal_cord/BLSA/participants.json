@@ -24,7 +24,7 @@
         "Description": "Cognitive status / diagnosis of the participant",
         "LongName": "Pathology name",
         "Levels": {
-            "CN": "Typically Developing/Aging Cognitively Normal",
+            "HC": "Healthy Control",
             "MCI": "Mild Cognitive Impairment",
             "dementia": "Dementia"
         }

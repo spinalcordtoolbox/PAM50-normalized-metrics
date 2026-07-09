@@ -8,4 +8,4 @@ spinal_cord	DLBS	463	951	n/a	healthy adults	176	287	0	58.4	18.2	21	89	cervical s
 spinal_cord	VUIIS-MS	46	70	n/a	healthy controls and MS patients	11	35	0	41.4	11.1	23	64	cervical spine	T1w	n/a	n/a
 spinal_cord	TempleSocial	90	90	n/a	healthy adults	28	60	2	42.2	16.7	21	80	cervical spine	T1w	1.0mm iso	https://openneuro.org/datasets/ds005123
 spinal_cord	UCLA LA5c	254	254	n/a	healthy controls and neuropsychiatric patients	146	108	0	33.0	9.3	21	50	cervical spine	T1w	1.0mm iso	https://openneuro.org/datasets/ds000030
-spinal_cord	BLSA	1095	3170	n/a	Cognitively Normal, MCI, and dementia	484	577	34	66.1	14.8	22	94	cervical spine	T1w	1.0mm iso	https://www.blsa.nih.gov
+spinal_cord	BLSA	1095	3170	n/a	Healthy Control, MCI, and dementia	484	577	34	66.1	14.8	22	94	cervical spine	T1w	1.0mm iso	https://www.blsa.nih.gov

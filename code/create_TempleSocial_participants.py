@@ -36,7 +36,7 @@ PARTICIPANTS_URL = (
 )
 
 SEX_MAP  = {0.0: "F", 1.0: "M", 0: "F", 1: "M"}
-DIAG_MAP = {"cn": "CN"}
+DIAG_MAP = {"cn": "HC"}
 
 OUT_COLS = ['participant_id', 'sex', 'age', 'pathology',
             'handedness', 'scanner', 'race', 'weight', 'height', 'BMI']
@@ -109,7 +109,7 @@ def main():
             "participant_id": df_kurt["participant_id"],
             "sex":            df_kurt["sex"].map(SEX_MAP).fillna("n/a"),
             "age":            pd.to_numeric(df_kurt["age"], errors="coerce"),
-            "pathology":      df_kurt["diagnosis"].map(DIAG_MAP).fillna("CN"),
+            "pathology":      df_kurt["diagnosis"].map(DIAG_MAP).fillna("HC"),
             "handedness":     "n/a",
             "scanner":        "n/a",
             "race":           df_kurt["race"].fillna("n/a") if "race" in df_kurt.columns else "n/a",
@@ -126,7 +126,7 @@ def main():
             "participant_id": on_extra["participant_id"],
             "sex":            on_extra["sex_on"],
             "age":            on_extra["age_on"],
-            "pathology":      "CN",
+            "pathology":      "HC",
             "handedness":     "n/a",
             "scanner":        "n/a",
             "race":           on_extra["race_on"],
@@ -145,7 +145,7 @@ def main():
     with open(out_json, "w") as f:
         json.dump(make_participants_json(
             OUT_COLS,
-            pathology_levels={'CN': 'Cognitively Normal'}
+            pathology_levels={'HC': 'Healthy Control'}
         ), f, indent=4)
     print(f"Written: {out_json.relative_to(repo_root)}")
 

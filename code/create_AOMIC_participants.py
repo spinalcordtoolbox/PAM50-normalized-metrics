@@ -33,7 +33,7 @@ from participants_json_template import make_participants_json
 
 
 SEX_MAP  = {0.0: "F", 1.0: "M", 0: "F", 1: "M"}
-DIAG_MAP = {"cn": "CN"}
+DIAG_MAP = {"cn": "HC"}
 
 # OpenNeuro sub-dataset config used only for the fallback path
 SUBDATASETS = [
@@ -89,7 +89,7 @@ def from_kurt(demog_file: str, csv_subjects: set) -> pd.DataFrame:
         "participant_id": df_kurt["participant_id"],
         "sex":            df_kurt["sex"].map(SEX_MAP).fillna("n/a"),
         "age":            pd.to_numeric(df_kurt["age"], errors="coerce"),
-        "pathology":      df_kurt["diagnosis"].map(DIAG_MAP).fillna("CN"),
+        "pathology":      df_kurt["diagnosis"].map(DIAG_MAP).fillna("HC"),
         "handedness":     df_kurt["handedness"].fillna("n/a") if "handedness" in df_kurt.columns else "n/a",
         "scanner":        "n/a",
         "race":           "n/a",
@@ -120,7 +120,7 @@ def from_openneuro(csv_subjects: set) -> pd.DataFrame:
 
         df["sex"] = df["sex"].map(cfg["sex_map"]).fillna("n/a")
         df["age"] = pd.to_numeric(df["age"], errors="coerce")
-        df["pathology"]  = "CN"
+        df["pathology"]  = "HC"
         df["handedness"] = "n/a"
         df["scanner"]    = "n/a"
         df["race"]       = "n/a"
@@ -160,7 +160,7 @@ def main():
     with open(out_json, "w") as f:
         json.dump(make_participants_json(
             OUT_COLS,
-            pathology_levels={'CN': 'Cognitively Normal'}
+            pathology_levels={'HC': 'Healthy Control'}
         ), f, indent=4)
     print(f"Written: {out_json.relative_to(repo_root)}")
 

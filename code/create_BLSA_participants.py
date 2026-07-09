@@ -54,7 +54,7 @@ PARTICIPANTS_JSON = {
         "Description": "Cognitive status / diagnosis of the participant",
         "LongName": "Pathology name",
         "Levels": {
-            "CN": "Typically Developing/Aging Cognitively Normal",
+            "HC": "Healthy Control",
             "MCI": "Mild Cognitive Impairment",
             "dementia": "Dementia"
         }
@@ -125,7 +125,7 @@ def main():
         df['sex'] = df['sex'].map({0.0: 'F', 1.0: 'M'})
 
         # Map diagnosis to pathology
-        df['pathology'] = df['diagnosis'].map({'cn': 'CN', 'mci': 'MCI', 'dementia': 'dementia'})
+        df['pathology'] = df['diagnosis'].map({'cn': 'HC', 'mci': 'MCI', 'dementia': 'dementia'})
 
         # Round age to 1 decimal
         df['age'] = df['age'].round(1)
