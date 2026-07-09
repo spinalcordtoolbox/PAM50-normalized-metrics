@@ -330,7 +330,7 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
     print('Figure saved: ' + path_filename)
 
 
-def create_lineplot(df, hue, path_out, show_cv=False):
+def create_lineplot(df, hue, path_out, show_cv=False, show_n=True):
     """
     Create lineplot for individual metrics per vertebral levels.
     Note: we are ploting slices not levels to avoid averaging across levels.
@@ -339,6 +339,8 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         hue (str): column name of the dataframe to use for grouping; if None, no grouping is applied
         path_out (str): path to output directory
         show_cv (bool): if True, include coefficient of variation for each vertebral level to the plot
+        show_n (bool): if True, print the per-level subject/session count under each vertebral label.
+                       Set to False for wide coverage (e.g. C1-T12) where the counts would overlap.
     """
 
     mpl.rcParams['font.family'] = 'Arial'
@@ -443,11 +445,11 @@ def create_lineplot(df, hue, path_out, show_cv=False):
             if show_cv:
                 cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
             n = n_per_level.get(vert[x], 0)
-            n_str = f"n={n}"
+            n_str = f"\nn={n}" if show_n else ""
             # Deal with T1 label (C8 -> T1)
             if vert[x] > 7:
                 level = 'T' + str(vert[x] - 7)
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\n{n_str}',
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}{n_str}',
                                 horizontalalignment='center', verticalalignment='bottom', color='black',
                                 fontsize=TICKS_FONT_SIZE-2)
                 # Show CV
@@ -457,7 +459,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
                                     color='black')
             else:
                 level = 'C' + str(vert[x])
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\n{n_str}',
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}{n_str}',
                                 horizontalalignment='center', verticalalignment='bottom', color='black',
                                 fontsize=TICKS_FONT_SIZE-2)
                 # Show CV
@@ -1298,9 +1300,8 @@ def _discover_pam50_csvs(path_HC):
     Find per-subject PAM50 CSV files under ``path_HC``.
 
     Supports two filename conventions:
-      - flat layout used by this repo, e.g. ``sub-amuAL_T2w_PAM50.csv``
-      - nested SCT default, e.g.
-        ``<sub>/<contrast>/sub-XXX_..._space-PAM50_desc-sct-morphometrics_stat.csv``
+      - flat layout used by this repo, e.g. ``whole-spine/sub-amuAL_T2w_PAM50.csv``
+      - nested BIDS-like, e.g. ``<sub>/<contrast>/sub-XXX_..._space-PAM50_desc-sct-morphometrics_stat.csv``
 
     Returns a list of (basename, absolute_path) tuples.
     """
@@ -1309,7 +1310,7 @@ def _discover_pam50_csvs(path_HC):
     if flat:
         return [(f, os.path.join(path_HC, f)) for f in flat]
 
-    # Fall back to recursive search for SCT's default morphometrics-stat naming
+    # Fall back to recursive search for BIDS-like layout
     found = []
     for root, _, files in os.walk(path_HC):
         for f in files:
