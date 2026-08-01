@@ -40,8 +40,11 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 
-METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)', 'MEAN(compression_ratio)', 'MEAN(eccentricity)',
-           'MEAN(solidity)', 'aSCOR']
+# Order matters: with ncols=4 in create_lineplot, the row-major iteration places the symmetry
+# metrics in the rightmost column (col 3) and the original 6 metrics in the left 2x3 block.
+METRICS = ['MEAN(area)', 'MEAN(diameter_AP)', 'MEAN(diameter_RL)', 'MEAN(symmetry_dice_AP)',
+           'MEAN(compression_ratio)', 'MEAN(eccentricity)', 'MEAN(solidity)', 'MEAN(symmetry_dice_RL)',
+           'aSCOR']
 
 METRICS_DTYPE = {
     'MEAN(diameter_AP)': 'float64',
@@ -49,6 +52,8 @@ METRICS_DTYPE = {
     'MEAN(diameter_RL)': 'float64',
     'MEAN(eccentricity)': 'float64',
     'MEAN(solidity)': 'float64',
+    'MEAN(symmetry_dice_AP)': 'float64',
+    'MEAN(symmetry_dice_RL)': 'float64',
     'aSCOR':'float64'
 }
 
@@ -59,6 +64,8 @@ METRIC_TO_TITLE = {
     'MEAN(eccentricity)': 'Eccentricity',
     'MEAN(solidity)': 'Solidity',
     'MEAN(compression_ratio)': 'AP/RL Ratio',
+    'MEAN(symmetry_dice_AP)': 'AP Symmetry (Dice)',
+    'MEAN(symmetry_dice_RL)': 'RL Symmetry (Dice)',
     'aSCOR':'aSCOR',
 }
 
@@ -69,6 +76,8 @@ METRIC_TO_AXIS = {
     'MEAN(eccentricity)': 'Eccentricity [a.u.]',
     'MEAN(solidity)': 'Solidity [%]',
     'MEAN(compression_ratio)': 'AP/RL Ratio [a.u.]',
+    'MEAN(symmetry_dice_AP)': 'AP Symmetry Dice [a.u.]',
+    'MEAN(symmetry_dice_RL)': 'RL Symmetry Dice [a.u.]',
     'aSCOR':'aSCOR [%]',
 }
 
@@ -87,6 +96,8 @@ METRICS_TO_YLIM_OFFSET = {
     'MEAN(eccentricity)': 0.03,
     'MEAN(solidity)': 1,
     'MEAN(compression_ratio)': 0.03,
+    'MEAN(symmetry_dice_AP)': 0.01,
+    'MEAN(symmetry_dice_RL)': 0.01,
     'aSCOR': 1,
 }
 
@@ -98,6 +109,8 @@ METRICS_TO_YLIM = {
     'MEAN(eccentricity)': (0.51, 0.89),
     'MEAN(solidity)': (91.2, 99.9),
     'MEAN(compression_ratio)': (0.41, 0.84),
+    'MEAN(symmetry_dice_AP)': (0.78, 0.95),
+    'MEAN(symmetry_dice_RL)': (0.78, 0.95),
     'aSCOR': (20, 50),
 }
 
@@ -160,6 +173,19 @@ def get_parser():
                         help="When multiple datasets are provided via -path-SC or -path-canal, combine them "
                              "into a single line (same color). Default: show each dataset in a separate color "
                              "with the dataset folder name in the legend.")
+    parser.add_argument('--intersect-subjects', action='store_true', default=False,
+                        help="When multiple datasets are provided, restrict each dataset to subjects present "
+                             "in ALL of them. Useful for fair side-by-side comparison on the same cohort analyzed"
+                             "using different SCT versions.")
+    parser.add_argument('--dataset-labels', required=False, type=str, nargs='+', default=None,
+                        help="Custom labels (one per path) to use in legends and filenames instead of the "
+                             "folder basename. Must match the number of -path-SC paths (or -path-canal if "
+                             "-path-SC is not given).")
+    parser.add_argument('--include-symmetry', action='store_true', default=False,
+                        help="Include the AP and RL symmetry Dice metrics. Requires "
+                             "MEAN(symmetry_dice_AP) and MEAN(symmetry_dice_RL) in the CSV files "
+                             "(produced by SCT >= v7.3 with sct_process_segmentation -anat). "
+                             "Default: 6-metric 2x3 layout (original behavior).")
     parser.add_argument('--min-age', required=False, type=float, default=0,
                         help="Exclude participants younger than this age (in years). "
                              "Use 18 to include only adults. Default: 0 (no filtering).")
@@ -192,13 +218,18 @@ def get_vert_indices(df):
         ind_vert (np.array): indices of slices corresponding to the beginning of each level (=intervertebral disc)
         ind_vert_mid (np.array): indices of slices corresponding to mid-levels
     """
-    # Get vert levels for the first available subject (and first session, if session_id column exists)
+    # Get vert levels for the first available subject (and first session, if session_id column exists).
+    # When the same participant_id appears in multiple datasets, also scope by dataset so that
+    # vert.diff() does not see a spurious transition across the dataset boundary.
     first_subject = df['participant_id'].iloc[0]
     mask = df['participant_id'] == first_subject
     if 'session_id' in df.columns:
         first_session = df[mask]['session_id'].iloc[0]
         if pd.notna(first_session):
             mask = mask & (df['session_id'] == first_session)
+    if 'dataset' in df.columns:
+        first_dataset = df[mask]['dataset'].iloc[0]
+        mask = mask & (df['dataset'] == first_dataset)
     vert = df[mask]['VertLevel']
     # Get indexes of where array changes value
     ind_vert = vert.diff()[vert.diff() != 0].index.values
@@ -254,8 +285,8 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
         n = n_subjects_per_level.get(vert[x], 0)
         print(f'  {level}: {n}')
 
-    # Loop across metrics
-    for index, metric in enumerate(METRICS):
+    # Loop across metrics (cap to the number of available axes)
+    for index, metric in enumerate(METRICS[:len(axs)]):
         if metric not in df_21_40.columns:
             axs[index].set_visible(False)
             continue
@@ -366,7 +397,8 @@ def create_lineplot(df, hue, path_out, show_cv=False):
             df['dataset'] = df['dataset'].map(lambda d: f'{d} (n={n_subjects[d]})')
 
     available_metrics = [m for m in METRICS if m in df.columns]
-    ncols = 3
+    # 4 columns when symmetry metrics (rightmost column) are in play; otherwise the original 2x3 layout.
+    ncols = 4 if len(available_metrics) > 6 else 3
     nrows = (len(available_metrics) + ncols - 1) // ncols
     fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6, nrows * 5))
     axs = axes.ravel()
@@ -520,8 +552,8 @@ def create_regplot(df, path_out, show_cv=False):
         n = n_subjects_per_level.get(vert[x], 0)
         print(f'  {level}: {n}')
 
-    # Loop across metrics
-    for index, metric in enumerate(METRICS):
+    # Loop across metrics (cap to the number of available axes)
+    for index, metric in enumerate(METRICS[:len(axs)]):
         if metric not in df.columns:
             axs[index].set_visible(False)
             continue
@@ -619,8 +651,8 @@ def create_regplot_per_sex(df, path_out):
     fig, axes = plt.subplots(2, 4, figsize=(20, 10))
     axs = axes.ravel()
 
-    # Loop across metrics
-    for index, metric in enumerate(METRICS):
+    # Loop across metrics (cap to the number of available axes)
+    for index, metric in enumerate(METRICS[:len(axs)]):
         if metric not in df.columns:
             axs[index].set_visible(False)
             continue
@@ -1367,6 +1399,11 @@ def main():
     if args.path_SC is None and args.path_canal is None:
         parser.error("At least one of -path-SC or -path-canal must be provided.")
 
+    # Opt-out of symmetry metrics by default. Mutating the module-level METRICS list
+    # propagates the change to every function that iterates over it.
+    if not args.include_symmetry:
+        METRICS[:] = [m for m in METRICS if 'symmetry' not in m]
+
     path_out_figures = os.path.join(args.path_out, 'figures')
     path_out_figures_canal = os.path.join(args.path_out, 'figures', 'canal')
     path_out_csv = os.path.join(args.path_out, 'csv')
@@ -1388,11 +1425,21 @@ def main():
     # with its folder name so figures can show them in separate colors.
     def load_paths(path_list):
         use_dataset_labels = not args.combine_datasets
+        if args.dataset_labels is not None and len(args.dataset_labels) != len(path_list):
+            parser.error(
+                f"--dataset-labels expects one label per path "
+                f"(got {len(args.dataset_labels)} labels for {len(path_list)} paths)"
+            )
         dfs = []
         last_participants = None
         all_subjects = []
-        for path in path_list:
-            dataset_name = os.path.basename(path.rstrip('/')) if use_dataset_labels else None
+        for i, path in enumerate(path_list):
+            if not use_dataset_labels:
+                dataset_name = None
+            elif args.dataset_labels is not None:
+                dataset_name = args.dataset_labels[i]
+            else:
+                dataset_name = os.path.basename(path.rstrip('/'))
             # Use explicit participant_file if provided, otherwise auto-discover per dataset folder
             pfile = args.participant_file if args.participant_file else None
             df_single, df_part, subs = read_csv_files(path, pfile, dataset_name=dataset_name)
@@ -1408,6 +1455,18 @@ def main():
 
     if args.path_canal is not None:
         df_canal, df_participants, subjects = load_paths(args.path_canal)
+
+    # Restrict to subjects present in every dataset (fair side-by-side comparison)
+    if args.intersect_subjects and 'dataset' in (df.columns if df is not None else []):
+        per_dataset_subjects = [
+            set(df[df['dataset'] == d]['participant_id'].unique()) for d in df['dataset'].unique()
+        ]
+        common = set.intersection(*per_dataset_subjects) if per_dataset_subjects else set()
+        before = df['participant_id'].nunique()
+        df = df[df['participant_id'].isin(common)]
+        if df_canal is not None and 'participant_id' in df_canal.columns:
+            df_canal = df_canal[df_canal['participant_id'].isin(common)]
+        print(f'--intersect-subjects: {before} → {len(common)} unique participants common to all datasets')
 
     # Compute aSCOR only if both spinal cord and canal data are available
     if df is not None and df_canal is not None:
