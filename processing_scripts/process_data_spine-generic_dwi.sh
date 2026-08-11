@@ -369,12 +369,12 @@ for dti_metric in "${dti_metrics[@]}"; do
 done
 
 # =================================
-# Extra: Extract metrics in the native space as a sanity check (optional; not used for final database)
+# Extra: Extract metrics perslice in the native space as a sanity check (optional; not used for final database)
 # =================================
-mkdir -p ${PATH_RESULTS}/dwi_native
+mkdir -p ${PATH_RESULTS}/dwi_native_perslice
 
 for dti_metric in "${dti_metrics[@]}"; do
-  file_out="${PATH_RESULTS}/dwi_native/${SUBJECT}_dwi_${dti_metric}_native.csv"
+  file_out="${PATH_RESULTS}/dwi_native_perslice/${SUBJECT}_dwi_${dti_metric}_native.csv"
   echo "👉 Extracting ${dti_metric} metrics in native space..."
 
   rm -f "${file_out}"
