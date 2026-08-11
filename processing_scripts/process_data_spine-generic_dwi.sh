@@ -392,6 +392,31 @@ for dti_metric in "${dti_metrics[@]}"; do
   done
 done
 
+# =================================
+# Extra: Extract metrics perlevel in the native space as a sanity check (optional; not used for final database)
+# =================================
+mkdir -p ${PATH_RESULTS}/dwi_native_perlevel
+
+for dti_metric in "${dti_metrics[@]}"; do
+  file_out="${PATH_RESULTS}/dwi_native_perlevel/${SUBJECT}_dwi_${dti_metric}_native.csv"
+  echo "👉 Extracting ${dti_metric} metrics in native space..."
+
+  rm -f "${file_out}"
+  for tract in "${tracts[@]}"; do
+    sct_extract_metric \
+      -i ${file_dwi}_${dti_metric}.nii.gz \
+      -f label_${file_dwi}/atlas \
+      -l ${tract} \
+      -combine 1 \
+      -method map \
+      -vert 2:6 \
+      -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
+      -perlevel 1 \
+      -o "${file_out}" \
+      -append 1
+  done
+done
+
 # Go back to subject folder
 cd ..
 
