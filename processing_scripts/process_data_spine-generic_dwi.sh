@@ -374,7 +374,7 @@ dti_metrics=(FA MD RD AD)
 #mkdir -p ${PATH_RESULTS}/dwi_native_perslice
 #
 #for dti_metric in "${dti_metrics[@]}"; do
-#  file_out="${PATH_RESULTS}/dwi_native_perslice/${SUBJECT}_dwi_${dti_metric}_native.csv"
+#  file_out="${PATH_RESULTS}/dwi_native_perslice/${SUBJECT}_dwi_${dti_metric}_native_perslice.csv"
 #  echo "👉 Extracting ${dti_metric} metrics in native space..."
 #
 #  rm -f "${file_out}"
