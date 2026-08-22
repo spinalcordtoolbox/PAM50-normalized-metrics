@@ -1,6 +1,6 @@
 {
   "path_data"   : "~/data/data.neuro.polymtl.ca/data-multi-subject",
-  "path_output" : "~/results/dwi_normative_database/dwi_normative_database_2026-08-11_perlevel_native",
+  "path_output" : "~/results/dwi_normative_database/dwi_normative_database_2026-08-22_PAM50_interpolated",
   "script"      : "~/code/PAM50-normalized-metrics/processing_scripts/process_data_spine-generic_dwi.sh",
   "jobs"        : 16,
   "include_list" : [
