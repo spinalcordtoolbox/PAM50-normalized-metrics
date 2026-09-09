@@ -150,6 +150,10 @@ def get_parser():
                              "can be combined, e.g. '-vertlevels 1-7 20'. "
                              "Default: 1-8 (C1-T1). "
                              "For the whole-spine dataset (C1-L1), use: -vertlevels 1-20.")
+    parser.add_argument('-show-n', action='store_true', default=False,
+                        help="Show the number of subjects (or sessions for longitudinal datasets) below each "
+                             "vertebral level label in the lineplot, e.g. 'C3 n=203'. "
+                             "Default: the number is not shown.")
     parser.add_argument('--min-age', required=False, type=float, default=0,
                         help="Exclude participants younger than this age (in years). "
                              "Use 18 to include only adults. Default: 0 (no filtering).")
@@ -370,7 +374,7 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
     print('Figure saved: ' + path_filename)
 
 
-def create_lineplot(df, hue, path_out, show_cv=False):
+def create_lineplot(df, hue, path_out, show_cv=False, show_n=False):
     """
     Create lineplot for individual metrics per vertebral levels.
     Note: we are ploting slices not levels to avoid averaging across levels.
@@ -379,6 +383,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         hue (str): column name of the dataframe to use for grouping; if None, no grouping is applied
         path_out (str): path to output directory
         show_cv (bool): if True, include coefficient of variation for each vertebral level to the plot
+        show_n (bool): if True, include the number of subjects (or sessions) for each vertebral level to the plot
     """
 
     mpl.rcParams['font.family'] = 'Arial'
@@ -483,9 +488,9 @@ def create_lineplot(df, hue, path_out, show_cv=False):
             if show_cv:
                 cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
             n = n_per_level.get(vert[x], 0)
-            n_str = f"n={n}"
             level = get_vert_level_name(vert[x])
-            axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\n{n_str}',
+            level_str = f'{level}\nn={n}' if show_n else level
+            axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level_str,
                             horizontalalignment='center', verticalalignment='bottom', color='black',
                             fontsize=TICKS_FONT_SIZE-2)
             # Show CV
@@ -1370,6 +1375,7 @@ def main():
     args = parser.parse_args()
 
     vertlevels = parse_vertlevels(args.vertlevels)
+    show_n = args.show_n
     print(f'Including vertebral levels: {" ".join(get_vert_level_name(level) for level in vertlevels)}')
 
     # Validate that at least one of -path-SC or -path-canal is provided
@@ -1476,7 +1482,7 @@ def main():
 
         # Create main lineplot (always)
         dataset_hue = 'dataset' if 'dataset' in current_df.columns else None
-        create_lineplot(current_df, dataset_hue, path_out)
+        create_lineplot(current_df, dataset_hue, path_out, show_n=show_n)
 
         if args.lineplot_only:
             continue
@@ -1519,10 +1525,10 @@ def main():
             create_lineplot_21_40_persex(current_df, path_out)
 
             # Create plots split by demographics
-            create_lineplot(current_df, 'age', path_out)
-            create_lineplot(current_df, 'sex', path_out)
+            create_lineplot(current_df, 'age', path_out, show_n=show_n)
+            create_lineplot(current_df, 'sex', path_out, show_n=show_n)
             if 'manufacturer' in current_df.columns:
-                create_lineplot(current_df, 'manufacturer', path_out)
+                create_lineplot(current_df, 'manufacturer', path_out, show_n=show_n)
 
             # Plot scatterplot metrics vs COV per sex
             create_regplot_per_sex(current_df, path_out)
