@@ -148,7 +148,8 @@ def get_parser():
                         help="Vertebral levels to include, as numbers used by SCT "
                              "(1-7 = C1-C7, 8-19 = T1-T12, 20-24 = L1-L5). Individual levels and inclusive ranges "
                              "can be combined, e.g. '-vertlevels 1-7 20'. "
-                             "Default: 1-8 (C1-T1). Whole spine dataset (C1-L5): -vertlevels 1-24.")
+                             "Default: 1-8 (C1-T1). "
+                             "For the whole-spine dataset (C1-L1), use: -vertlevels 1-20.")
     parser.add_argument('--min-age', required=False, type=float, default=0,
                         help="Exclude participants younger than this age (in years). "
                              "Use 18 to include only adults. Default: 0 (no filtering).")
