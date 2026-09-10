@@ -159,10 +159,23 @@ sct_check_dependencies -short
 
 cd $PATH_DATA_PROCESSED
 
+# Select the DWI file. Some subjects (e.g., sub-ucdavis01, sub-ucdavis02, sub-ucdavis04) have multiple DWI runs
+# (sub-XX_run-01_dwi, sub-XX_run-02_dwi, ...) instead of a single sub-XX_dwi. In that case, use run-01.
+# Context: https://github.com/spine-generic/spine-generic/issues/290
+if [[ -e ${PATH_DATA}/${SUBJECT}/dwi/${SUBJECT}_dwi.nii.gz ]]; then
+  file_dwi="${SUBJECT}_dwi"
+elif [[ -e ${PATH_DATA}/${SUBJECT}/dwi/${SUBJECT}_run-01_dwi.nii.gz ]]; then
+  file_dwi="${SUBJECT}_run-01_dwi"
+  echo "⚠️ [$(date '+%Y-%m-%d %H:%M:%S')] ${SUBJECT}: multiple DWI runs found --> using ${file_dwi}.nii.gz" >> "${PATH_LOG}/dwi_runs.log"
+else
+  echo "${SUBJECT}: no DWI file found (neither ${SUBJECT}_dwi.nii.gz nor ${SUBJECT}_run-01_dwi.nii.gz)" >> "${PATH_LOG}/_error_check_output_files.log"
+  exit 1
+fi
+
 # Copy T2w and DWI source data into subject-specific subfolders
 mkdir -p ${SUBJECT}/anat ${SUBJECT}/dwi
 rsync -avzh ${PATH_DATA}/${SUBJECT}/anat/${SUBJECT}_*T2w.* ${SUBJECT}/anat/
-rsync -avzh ${PATH_DATA}/${SUBJECT}/dwi/${SUBJECT}_dwi.* ${SUBJECT}/dwi/
+rsync -avzh ${PATH_DATA}/${SUBJECT}/dwi/${file_dwi}.* ${SUBJECT}/dwi/
 
 # ==============================================================================
 # T2w
@@ -205,7 +218,7 @@ mv warp_anat2template.nii.gz warp_T2w2template.nii.gz
 # ==============================================================================
 cd ../dwi
 
-file_dwi="${SUBJECT}_dwi"
+# file_dwi is set above (sub-XX_dwi, or sub-XX_run-01_dwi for subjects with multiple DWI runs)
 file_bval=${file_dwi}.bval
 file_bvec=${file_dwi}.bvec
 
