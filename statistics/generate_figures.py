@@ -23,6 +23,11 @@
 #       -path-SC spinal_cord/MASiVar spinal_cord/spine-generic_multi-subject
 #       --min-age 18
 #
+# Example usage (whole spine, i.e., C1 to L1 instead of the default C1 to T1):
+#       python generate_figures.py
+#       -path-SC spinal_cord/whole-spine
+#       -vertlevels 1-20
+#
 # Example usage (multiple datasets, combined):
 #       python generate_figures.py
 #       -path-SC spinal_cord/MASiVar spinal_cord/spine-generic_multi-subject
@@ -101,27 +106,6 @@ METRICS_TO_YLIM = {
     'aSCOR': (20, 50),
 }
 
-DISCS_DICT = {
-    7: 'C7-T1',
-    6: 'C6-C7',
-    5: 'C5-C6',
-    4: 'C4-C5',
-    3: 'C3-C4',
-    2: 'C2-C3',
-    1: 'C1-C2'
-}
-
-MID_VERT_DICT = {
-    8: 'T1',
-    7: 'C7',
-    6: 'C6',
-    5: 'C5',
-    4: 'C4',
-    3: 'C3',
-    2: 'C2',
-    1: 'C1'
-}
-
 VENDORS = ['Siemens', 'Philips', 'GE']
 AGE_DECADES = ['10-20', '21-30', '31-40', '41-50', '51-60']
 
@@ -160,6 +144,16 @@ def get_parser():
                         help="When multiple datasets are provided via -path-SC or -path-canal, combine them "
                              "into a single line (same color). Default: show each dataset in a separate color "
                              "with the dataset folder name in the legend.")
+    parser.add_argument('-vertlevels', required=False, type=str, nargs='+', default=['1-8'],
+                        help="Vertebral levels to include, as numbers used by SCT "
+                             "(1-7 = C1-C7, 8-19 = T1-T12, 20-24 = L1-L5). Individual levels and inclusive ranges "
+                             "can be combined, e.g. '-vertlevels 1-7 20'. "
+                             "Default: 1-8 (C1-T1). "
+                             "For the whole-spine dataset (C1-L1), use: -vertlevels 1-20.")
+    parser.add_argument('-show-n', action='store_true', default=False,
+                        help="Show the number of subjects (or sessions for longitudinal datasets) below each "
+                             "vertebral level label in the lineplot, e.g. 'C3 n=203'. "
+                             "Default: the number is not shown.")
     parser.add_argument('--min-age', required=False, type=float, default=0,
                         help="Exclude participants younger than this age (in years). "
                              "Use 18 to include only adults. Default: 0 (no filtering).")
@@ -180,6 +174,69 @@ def csv2dataFrame(filename):
     """
     data = pd.read_csv(filename)
     return data
+
+
+def parse_vertlevels(vertlevels):
+    """
+    Expand the -vertlevels argument into a list of numeric vertebral levels. Individual levels ('20') and inclusive
+    ranges ('1-20') can be combined, e.g. ['1-7', '20'] --> [1, 2, 3, 4, 5, 6, 7, 20]
+    Args:
+        vertlevels (list of str): vertebral levels as provided by the user
+    Returns:
+        (list of int): expanded numeric vertebral levels
+    """
+    levels = []
+    for item in vertlevels:
+        if '-' in item:
+            start, end = item.split('-')
+            levels.extend(range(int(start), int(end) + 1))
+        else:
+            levels.append(int(item))
+    return sorted(set(levels))
+
+
+def get_fig_width_scale(df):
+    """
+    Get a figure width scaling factor based on the number of vertebral levels to be plotted. Figures are designed for
+    the default C1-T1 range; when more levels are plotted (e.g., whole spine), the figure has to be widened, otherwise
+    the vertebral level labels overlap.
+    Args:
+        df (pd.dataFrame): dataframe with metric values
+    Returns:
+        (float): figure width scaling factor (1 for C1-T1, up to 2 for the whole spine)
+    """
+    return float(np.clip(df['VertLevel'].nunique() / 8, 1, 2))
+
+
+def get_vert_level_name(level):
+    """
+    Convert a numeric vertebral level used by SCT into its anatomical name (1-7 --> C1-C7, 8-19 --> T1-T12,
+    20-24 --> L1-L5, 25+ --> S1+)
+    Args:
+        level (int): numeric vertebral level
+    Returns:
+        (str): anatomical level name, e.g. 'C3', 'T5', 'L1'
+    """
+    level = int(level)
+    if level <= 7:
+        return f'C{level}'
+    elif level <= 19:
+        return f'T{level - 7}'
+    elif level <= 24:
+        return f'L{level - 19}'
+    else:
+        return f'S{level - 24}'
+
+
+def get_disc_name(level):
+    """
+    Get the name of the intervertebral disc below the given vertebral level, e.g. 7 --> 'C7-T1'
+    Args:
+        level (int): numeric vertebral level
+    Returns:
+        (str): disc name
+    """
+    return f'{get_vert_level_name(level)}-{get_vert_level_name(int(level) + 1)}'
 
 
 def get_vert_indices(df):
@@ -224,7 +281,7 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
 
    # mpl.rcParams['font.family'] = 'Arial'
 
-    fig, axes = plt.subplots(2, 4, figsize=(20, 10))
+    fig, axes = plt.subplots(2, 4, figsize=(20 * get_fig_width_scale(df), 10))
     axs = axes.ravel()
 
     hue = 'sex'
@@ -247,10 +304,7 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
     # Print number of subjects per vertebral level to terminal
     print('\nNumber of subjects per vertebral level (21-40 age group):')
     for idx, x in enumerate(ind_vert_mid, 0):
-        if vert[x] > 7:
-            level = 'T' + str(vert[x] - 7)
-        else:
-            level = 'C' + str(vert[x])
+        level = get_vert_level_name(vert[x])
         n = n_subjects_per_level.get(vert[x], 0)
         print(f'  {level}: {n}')
 
@@ -267,7 +321,10 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
         else:
             axs[index].get_legend().remove()
 
-        axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
+        # Note: METRICS_TO_YLIM is tuned for cervical levels; when thoracic/lumbar levels are included, the
+        # predefined limits would clip the curves --> let matplotlib autoscale in that case
+        if df['VertLevel'].max() <= 8:
+            axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
         ymin, ymax = axs[index].get_ylim()
 
         # Add labels
@@ -291,28 +348,15 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
             if show_cv:
                 cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
             n = n_subjects_per_level.get(vert[x], 0)
-            # Deal with T1 label (C8 -> T1)
-            if vert[x] > 7:
-                level = 'T' + str(vert[x] - 7)
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
-                                horizontalalignment='center', verticalalignment='bottom', color='black',
-                                fontsize=TICKS_FONT_SIZE)
-                # Show CV
-                if show_cv:
-                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
-                                    str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
-                                    color='black')
-            else:
-                level = 'C' + str(vert[x])
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
-                                horizontalalignment='center', verticalalignment='bottom', color='black',
-                                fontsize=TICKS_FONT_SIZE)
-                # Show CV
-                if show_cv:
-                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
-                                    str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
-                                    color='black')
+            level = get_vert_level_name(vert[x])
+            axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
+                            horizontalalignment='center', verticalalignment='bottom', color='black',
+                            fontsize=TICKS_FONT_SIZE)
+            # Show CV
             if show_cv:
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
+                                str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
+                                color='black')
                 print(f'{metric}, {level}, COV: {cv}')
 
         # Invert x-axis
@@ -330,7 +374,7 @@ def create_lineplot_21_40_persex(df, path_out, show_cv=False):
     print('Figure saved: ' + path_filename)
 
 
-def create_lineplot(df, hue, path_out, show_cv=False):
+def create_lineplot(df, hue, path_out, show_cv=False, show_n=False):
     """
     Create lineplot for individual metrics per vertebral levels.
     Note: we are ploting slices not levels to avoid averaging across levels.
@@ -339,6 +383,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
         hue (str): column name of the dataframe to use for grouping; if None, no grouping is applied
         path_out (str): path to output directory
         show_cv (bool): if True, include coefficient of variation for each vertebral level to the plot
+        show_n (bool): if True, include the number of subjects (or sessions) for each vertebral level to the plot
     """
 
     mpl.rcParams['font.family'] = 'Arial'
@@ -368,7 +413,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
     available_metrics = [m for m in METRICS if m in df.columns]
     ncols = 3
     nrows = (len(available_metrics) + ncols - 1) // ncols
-    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6, nrows * 5))
+    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6 * get_fig_width_scale(df), nrows * 5))
     axs = axes.ravel()
 
     # Hide unused subplots
@@ -398,10 +443,7 @@ def create_lineplot(df, hue, path_out, show_cv=False):
     # Print number of subjects/sessions per vertebral level to terminal
     print(f'\nNumber of {n_label} per vertebral level:')
     for idx, x in enumerate(ind_vert_mid, 0):
-        if vert[x] > 7:
-            level = 'T' + str(vert[x] - 7)
-        else:
-            level = 'C' + str(vert[x])
+        level = get_vert_level_name(vert[x])
         n = n_per_level.get(vert[x], 0)
         print(f'  {level}: {n}')
 
@@ -419,7 +461,10 @@ def create_lineplot(df, hue, path_out, show_cv=False):
             else:
                 axs[index].get_legend().remove()
 
-        axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
+        # Note: METRICS_TO_YLIM is tuned for cervical levels; when thoracic/lumbar levels are included, the
+        # predefined limits would clip the curves --> let matplotlib autoscale in that case
+        if df['VertLevel'].max() <= 8:
+            axs[index].set_ylim(METRICS_TO_YLIM[metric][0], METRICS_TO_YLIM[metric][1])
         ymin, ymax = axs[index].get_ylim()
 
         # Add labels
@@ -443,29 +488,16 @@ def create_lineplot(df, hue, path_out, show_cv=False):
             if show_cv:
                 cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
             n = n_per_level.get(vert[x], 0)
-            n_str = f"n={n}"
-            # Deal with T1 label (C8 -> T1)
-            if vert[x] > 7:
-                level = 'T' + str(vert[x] - 7)
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\n{n_str}',
-                                horizontalalignment='center', verticalalignment='bottom', color='black',
-                                fontsize=TICKS_FONT_SIZE-2)
-                # Show CV
-                if show_cv:
-                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
-                                    str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
-                                    color='black')
-            else:
-                level = 'C' + str(vert[x])
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\n{n_str}',
-                                horizontalalignment='center', verticalalignment='bottom', color='black',
-                                fontsize=TICKS_FONT_SIZE-2)
-                # Show CV
-                if show_cv:
-                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
-                                    str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
-                                    color='black')
+            level = get_vert_level_name(vert[x])
+            level_str = f'{level}\nn={n}' if show_n else level
+            axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level_str,
+                            horizontalalignment='center', verticalalignment='bottom', color='black',
+                            fontsize=TICKS_FONT_SIZE-2)
+            # Show CV
             if show_cv:
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymax-METRICS_TO_YLIM_OFFSET[metric],
+                                str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
+                                color='black')
                 print(f'{metric}, {level}, COV: {cv}')
 
         # Invert x-axis
@@ -498,7 +530,7 @@ def create_regplot(df, path_out, show_cv=False):
 
     #mpl.rcParams['font.family'] = 'Arial'
 
-    fig, axes = plt.subplots(2, 4, figsize=(20, 10))
+    fig, axes = plt.subplots(2, 4, figsize=(20 * get_fig_width_scale(df), 10))
     axs = axes.ravel()
 
     # Compute number of unique subjects with valid data per vertebral level (computed once, outside metric loop).
@@ -513,10 +545,7 @@ def create_regplot(df, path_out, show_cv=False):
     # Print number of subjects per vertebral level to terminal
     print('\nNumber of subjects per vertebral level:')
     for idx, x in enumerate(ind_vert_mid, 0):
-        if vert[x] > 7:
-            level = 'T' + str(vert[x] - 7)
-        else:
-            level = 'C' + str(vert[x])
+        level = get_vert_level_name(vert[x])
         n = n_subjects_per_level.get(vert[x], 0)
         print(f'  {level}: {n}')
 
@@ -568,27 +597,15 @@ def create_regplot(df, path_out, show_cv=False):
             if show_cv:
                 cv = compute_cv(df[(df['VertLevel'] == vert[x])], metric)
             n = n_subjects_per_level.get(vert[x], 0)
-            # Deal with T1 label (C8 -> T1)
-            if vert[x] > 7:
-                level = 'T' + str(vert[x] - 7)
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
-                                horizontalalignment='center', verticalalignment='bottom', color='black',
-                                fontsize=TICKS_FONT_SIZE)
-                # Show CV
-                if show_cv:
-                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8,
-                                    str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
-                                    color='black')
-            else:
-                level = 'C' + str(vert[x])
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
-                                horizontalalignment='center', verticalalignment='bottom', color='black',
-                                fontsize=TICKS_FONT_SIZE)
-                # Show CV
-                if show_cv:
-                    axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8, str(round(cv, 1)) + '%',
-                                    horizontalalignment='center', verticalalignment='bottom', color='black')
+            level = get_vert_level_name(vert[x])
+            axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, f'{level}\nn={n}',
+                            horizontalalignment='center', verticalalignment='bottom', color='black',
+                            fontsize=TICKS_FONT_SIZE)
+            # Show CV
             if show_cv:
+                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], 14.8,
+                                str(round(cv, 1)) + '%', horizontalalignment='center', verticalalignment='bottom',
+                                color='black')
                 print(f'{metric}, {level}, COV: {cv}')
 
         # Invert x-axis
@@ -616,7 +633,7 @@ def create_regplot_per_sex(df, path_out):
 
     #mpl.rcParams['font.family'] = 'Arial'
 
-    fig, axes = plt.subplots(2, 4, figsize=(20, 10))
+    fig, axes = plt.subplots(2, 4, figsize=(20 * get_fig_width_scale(df), 10))
     axs = axes.ravel()
 
     # Loop across metrics
@@ -680,15 +697,9 @@ def create_regplot_per_sex(df, path_out):
         ymin, ymax = axs[index].get_ylim()
         # Insert a text label for each vertebral level
         for idx, x in enumerate(ind_vert_mid, 0):
-            # Deal with T1 label (C8 -> T1)
-            if vert[x] > 7:
-                level = 'T' + str(vert[x] - 7)
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
-            else:
-                level = 'C' + str(vert[x])
-                axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
-                                verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
+            level = get_vert_level_name(vert[x])
+            axs[index].text(df.loc[ind_vert_mid[idx], 'Slice (I->S)'], ymin, level, horizontalalignment='center',
+                            verticalalignment='bottom', color='black', fontsize=TICKS_FONT_SIZE)
 
         # Invert x-axis
         axs[index].invert_xaxis()
@@ -1089,7 +1100,7 @@ def compute_normative_values(df, path_out):
         # Loop across intervertebral discs
         for x in reversed(ind_vert[1:-1]):
             slice_number = df.loc[x, 'Slice (I->S)']
-            disc = DISCS_DICT[vert[x]]
+            disc = get_disc_name(vert[x])
             slice_mean = slices_mean.loc[slice_number]
             slice_std = slices_std.loc[slice_number]
             print(f'Disc {disc}, slice {slice_number}: {round(slice_mean, 2)} ± {round(slice_std, 2)}')
@@ -1109,7 +1120,7 @@ def compute_normative_values(df, path_out):
         # Loop across mid-vertebral slices
         for x in reversed(ind_vert_mid):
             slice_number = df.loc[x, 'Slice (I->S)']
-            mid_level = MID_VERT_DICT[vert[x]]
+            mid_level = get_vert_level_name(vert[x])
             slice_mean = slices_mean.loc[slice_number]
             slice_std = slices_std.loc[slice_number]
             print(f'Level {mid_level}, slice {slice_number}: {round(slice_mean, 2)} ± {round(slice_std, 2)}')
@@ -1150,7 +1161,7 @@ def compute_normative_values_persex(df, path_out):
         # Loop across intervertebral discs
         for x in reversed(ind_vert[1:-1]):
             slice_number = df.loc[x, 'Slice (I->S)']
-            disc = DISCS_DICT[vert[x]]
+            disc = get_disc_name(vert[x])
             # males
             slice_mean_M = slices_mean.loc[slice_number]['M']
             slice_std_M = slices_std.loc[slice_number]['M']
@@ -1177,7 +1188,7 @@ def compute_normative_values_persex(df, path_out):
         # Loop across mid-vertebral slices
         for x in reversed(ind_vert_mid):
             slice_number = df.loc[x, 'Slice (I->S)']
-            mid_level = MID_VERT_DICT[vert[x]]
+            mid_level = get_vert_level_name(vert[x])
             # males
             slice_mean_M = slices_mean.loc[slice_number]['M']
             slice_std_M = slices_std.loc[slice_number]['M']
@@ -1363,6 +1374,10 @@ def main():
     parser = get_parser()
     args = parser.parse_args()
 
+    vertlevels = parse_vertlevels(args.vertlevels)
+    show_n = args.show_n
+    print(f'Including vertebral levels: {" ".join(get_vert_level_name(level) for level in vertlevels)}')
+
     # Validate that at least one of -path-SC or -path-canal is provided
     if args.path_SC is None and args.path_canal is None:
         parser.error("At least one of -path-SC or -path-canal must be provided.")
@@ -1459,15 +1474,15 @@ def main():
         if subjects is not None:
             print(f'Dropped subjects: {str(list(set(list(subjects)) - set(list(subjects_after_dropping))))}\n')
 
-        # Keep only VertLevel from C1 to Th1
-        current_df = current_df[current_df['VertLevel'] <= 8]
+        # Keep only the requested vertebral levels
+        current_df = current_df[current_df['VertLevel'].isin(vertlevels)]
 
         # Multiply solidity by 100 to get percentage (sct_process_segmentation computes solidity in the interval 0-1)
         current_df['MEAN(solidity)'] = current_df['MEAN(solidity)'] * 100
 
         # Create main lineplot (always)
         dataset_hue = 'dataset' if 'dataset' in current_df.columns else None
-        create_lineplot(current_df, dataset_hue, path_out)
+        create_lineplot(current_df, dataset_hue, path_out, show_n=show_n)
 
         if args.lineplot_only:
             continue
@@ -1510,10 +1525,10 @@ def main():
             create_lineplot_21_40_persex(current_df, path_out)
 
             # Create plots split by demographics
-            create_lineplot(current_df, 'age', path_out)
-            create_lineplot(current_df, 'sex', path_out)
+            create_lineplot(current_df, 'age', path_out, show_n=show_n)
+            create_lineplot(current_df, 'sex', path_out, show_n=show_n)
             if 'manufacturer' in current_df.columns:
-                create_lineplot(current_df, 'manufacturer', path_out)
+                create_lineplot(current_df, 'manufacturer', path_out, show_n=show_n)
 
             # Plot scatterplot metrics vs COV per sex
             create_regplot_per_sex(current_df, path_out)
