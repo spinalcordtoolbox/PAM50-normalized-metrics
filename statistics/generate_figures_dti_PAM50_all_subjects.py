@@ -30,10 +30,14 @@ DTI_METRICS = ['FA', 'MD', 'RD', 'AD']
 
 METRIC_TO_AXIS = {
     'FA': 'Fractional Anisotropy [a.u.]',
-    'MD': 'Mean Diffusivity [mm²/s]',
-    'RD': 'Radial Diffusivity [mm²/s]',
-    'AD': 'Axial Diffusivity [mm²/s]',
+    'MD': r'Mean Diffusivity [$\times10^{-3}$ mm²/s]',
+    'RD': r'Radial Diffusivity [$\times10^{-3}$ mm²/s]',
+    'AD': r'Axial Diffusivity [$\times10^{-3}$ mm²/s]',
 }
+
+# Diffusivity metrics (MD/RD/AD) are stored in mm²/s but conventionally displayed
+# in ×10⁻³ mm²/s (values ~0.3-1.5 instead of ~0.0003-0.0015). FA is unitless.
+METRIC_SCALE = {'FA': 1, 'MD': 1000, 'RD': 1000, 'AD': 1000}
 
 # Human-readable names for tract labels from sct_extract_metric output
 # Legend: https://spinalcordtoolbox.com/overview/concepts/pam50.html#white-and-gray-matter-atlas
@@ -123,6 +127,8 @@ def load_dti_csvs(path_results, dataset_label):
             df = df.rename(columns={'MAP()': 'value', 'STD()': 'std'})
             if 'std' not in df.columns:
                 df['std'] = np.nan
+            df['value'] *= METRIC_SCALE[metric]
+            df['std'] *= METRIC_SCALE[metric]
             frames.append(df[['participant_id', 'Slice (I->S)', 'VertLevel', 'Label',
                                'metric', 'value', 'std', 'dataset']])
     if not frames:
