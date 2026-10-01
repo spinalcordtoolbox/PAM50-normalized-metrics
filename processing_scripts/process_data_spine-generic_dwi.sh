@@ -323,7 +323,8 @@ dti_metrics=(FA MD RD AD)
 #   3. sct_apply_transfo (Warp DTI maps to PAM50) (spline interpolation)
 # Note that steps 1 and 2 are done only above as even for Method 2 we need the PAM50-to-DWI warp to bring the PAM50 atlas to DWI space.
 
-mkdir -p ${PATH_RESULTS}/dwi_PAM50
+mkdir -p ${PATH_RESULTS}/dwi_PAM50_map
+mkdir -p ${PATH_RESULTS}/dwi_PAM50_wa
 
 # Process DTI metrics sequentially to avoid memory issues from parallel sct_extract_metric
 # (sct_run_batch already parallelizes across subjects)
@@ -335,10 +336,10 @@ for dti_metric in "${dti_metrics[@]}"; do
     -w warp_dwi2template.nii.gz \
     -o ${file_dwi}_${dti_metric}_PAM50.nii.gz
 
-  file_out="${PATH_RESULTS}/dwi_PAM50/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
-  echo "👉 Extracting ${dti_metric} metrics in PAM50 space..."
-
-  rm -f "${file_out}"
+  # -method map
+  file_out_map="${PATH_RESULTS}/dwi_PAM50_map/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
+  echo "👉 Extracting ${dti_metric} metrics in PAM50 space -method map..."
+  rm -f "${file_out_map}"
   for tract in "${tracts[@]}"; do
     sct_extract_metric \
       -i ${file_dwi}_${dti_metric}_PAM50.nii.gz \
@@ -348,9 +349,27 @@ for dti_metric in "${dti_metrics[@]}"; do
       -method map \
       -vertfile $SCT_DIR/data/PAM50/template/PAM50_levels.nii.gz \
       -perslice 1 \
-      -o "${file_out}" \
+      -o "${file_out_map}" \
       -append 1
   done
+
+  # -method wa
+  file_out_wa="${PATH_RESULTS}/dwi_PAM50_wa/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
+  echo "👉 Extracting ${dti_metric} metrics in PAM50 space -method wa..."
+  rm -f "${file_out_wa}"
+  for tract in "${tracts[@]}"; do
+    sct_extract_metric \
+      -i ${file_dwi}_${dti_metric}_PAM50.nii.gz \
+      -f $SCT_DIR/data/PAM50/atlas \
+      -l ${tract} \
+      -combine 1 \
+      -method wa \
+      -vertfile $SCT_DIR/data/PAM50/template/PAM50_levels.nii.gz \
+      -perslice 1 \
+      -o "${file_out_wa}" \
+      -append 1
+  done
+
 done
 
 # =================================
@@ -359,13 +378,14 @@ done
 # DTI metrics are extracted in native space (using atlas warped from PAM50 to DWI) and each slice is mapped
 # (using linear interpolation) to PAM50, without warping the DTI maps first.
 # Uses the new sct_extract_metric -normalize-PAM50 flag (SCT's branch jv/sct_extract_metric_normalize_pam50).
-mkdir -p ${PATH_RESULTS}/dwi_interpolation_to_PAM50
+mkdir -p ${PATH_RESULTS}/dwi_interpolation_to_PAM50_map
+mkdir -p ${PATH_RESULTS}/dwi_interpolation_to_PAM50_wa
 
 for dti_metric in "${dti_metrics[@]}"; do
-  file_out="${PATH_RESULTS}/dwi_interpolation_to_PAM50/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
-  echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50..."
-
-  rm -f "${file_out}"
+  # -method map
+  file_out_map="${PATH_RESULTS}/dwi_interpolation_to_PAM50_map/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
+  echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50 -method map..."
+  rm -f "${file_out_map}"
   for tract in "${tracts[@]}"; do
     sct_extract_metric \
       -i ${file_dwi}_${dti_metric}.nii.gz \
@@ -376,7 +396,25 @@ for dti_metric in "${dti_metrics[@]}"; do
       -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
       -perslice 1 \
       -normalize-PAM50 1 \
-      -o "${file_out}" \
+      -o "${file_out_map}" \
+      -append 1
+  done
+
+  # -method wa
+  file_out_wa="${PATH_RESULTS}/dwi_interpolation_to_PAM50_wa/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
+  echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50 -method wa..."
+  rm -f "${file_out_wa}"
+  for tract in "${tracts[@]}"; do
+    sct_extract_metric \
+      -i ${file_dwi}_${dti_metric}.nii.gz \
+      -f label_${file_dwi}/atlas \
+      -l ${tract} \
+      -combine 1 \
+      -method wa \
+      -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
+      -perslice 1 \
+      -normalize-PAM50 1 \
+      -o "${file_out_wa}" \
       -append 1
   done
 done
@@ -384,13 +422,14 @@ done
 # =================================
 # Extra: Extract metrics perslice in the native space as a sanity check (optional; not used for final database)
 # =================================
-mkdir -p ${PATH_RESULTS}/dwi_native_perslice
+mkdir -p ${PATH_RESULTS}/dwi_native_perslice_map
+mkdir -p ${PATH_RESULTS}/dwi_native_perslice_wa
 
 for dti_metric in "${dti_metrics[@]}"; do
-  file_out="${PATH_RESULTS}/dwi_native_perslice/${SUBJECT}_dwi_${dti_metric}_native_perslice.csv"
-  echo "👉 Extracting ${dti_metric} metrics in native space..."
-
-  rm -f "${file_out}"
+  # -method map
+  file_out_map="${PATH_RESULTS}/dwi_native_perslice_map/${SUBJECT}_dwi_${dti_metric}_native_perslice.csv"
+  echo "👉 Extracting ${dti_metric} metrics in native space -method map..."
+  rm -f "${file_out_map}"
   for tract in "${tracts[@]}"; do
     sct_extract_metric \
       -i ${file_dwi}_${dti_metric}.nii.gz \
@@ -400,7 +439,24 @@ for dti_metric in "${dti_metrics[@]}"; do
       -combine 1 \
       -method map \
       -perslice 1 \
-      -o "${file_out}" \
+      -o "${file_out_map}" \
+      -append 1
+  done
+
+  # -method wa
+  file_out_wa="${PATH_RESULTS}/dwi_native_perslice_wa/${SUBJECT}_dwi_${dti_metric}_native_perslice.csv"
+  echo "👉 Extracting ${dti_metric} metrics in native space -method wa..."
+  rm -f "${file_out_wa}"
+  for tract in "${tracts[@]}"; do
+    sct_extract_metric \
+      -i ${file_dwi}_${dti_metric}.nii.gz \
+      -f label_${file_dwi}/atlas \
+      -vertfile label_${file_dwi}/template/PAM50_levels.nii.gz \
+      -l ${tract} \
+      -combine 1 \
+      -method wa \
+      -perslice 1 \
+      -o "${file_out_wa}" \
       -append 1
   done
 done

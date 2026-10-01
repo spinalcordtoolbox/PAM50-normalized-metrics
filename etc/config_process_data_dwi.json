@@ -1,6 +1,6 @@
 {
   "path_data"   : "~/data/data-multi-subject",
-  "path_output" : "~/results/dwi_normative_database/dwi_normative_database_2026-09-25_PAM50_interpolated_smooth_fix_wm_tracts",
+  "path_output" : "~/results/dwi_normative_database/dwi_normative_database_2026-10-01_PAM50_interpolated_smooth_fix_wm_tracts_map_vs_wa",
   "script"      : "~/code/PAM50-normalized-metrics/processing_scripts/process_data_spine-generic_dwi.sh",
   "jobs"        : 16,
   "include_list" : [
