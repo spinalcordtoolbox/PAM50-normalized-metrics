@@ -1,0 +1,23 @@
+{
+  "path_data"   : "~/data/oklahoma_standford",
+  "path_output" : "~/results/dwi_normative_database/dwi_normative_database_2026-10-07_oklahoma_standford",
+  "script"      : "~/code/PAM50-normalized-metrics/processing_scripts/process_data_spine-generic_dwi.sh",
+  "jobs"        : 15,
+  "include_list" : [
+    "sub-CSM177",
+    "sub-CSM199f",
+    "sub-CSM215",
+    "sub-CSM221",
+    "sub-CSM222",
+    "sub-NSDCM032",
+    "sub-NSDCM033",
+    "sub-NSDCM034",
+    "sub-NSDCM036",
+    "sub-NSDCM038",
+    "sub-UTCSM010",
+    "sub-UTCSM011",
+    "sub-UTCSM012",
+    "sub-UTCSM013",
+    "sub-UTCSM014"
+  ]
+}
