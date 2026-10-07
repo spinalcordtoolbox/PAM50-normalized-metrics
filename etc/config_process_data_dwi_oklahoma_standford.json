@@ -19,5 +19,10 @@
     "sub-UTCSM012",
     "sub-UTCSM013",
     "sub-UTCSM014"
+  ],
+  "exclude_list" : [
+    "sub-NSDCM034",
+    "sub-UTCSM012",
+    "sub-UTCSM013"
   ]
 }
