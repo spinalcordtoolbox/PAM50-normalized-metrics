@@ -36,6 +36,7 @@ import numpy as np
 import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 import seaborn as sns
 from tqdm import tqdm
 
@@ -90,6 +91,9 @@ TICKS_FONT_SIZE = LABELS_FONT_SIZE-2
 # X-axis is restricted to this inclusive range of vertebral levels (C1=1 … C7=7, T1=8 …).
 XLIM_VERT_RANGE = (2, 5)
 
+# Dash patterns for -dataset-linestyles (seaborn format: '' is solid, otherwise (dash, gap))
+LINESTYLE_DASHES = {'solid': '', 'dashed': (4, 1.5), 'dotted': (1, 1), 'dashdot': (3, 1.25, 1.5, 1.25)}
+
 SEX_PALETTE = {'Males': 'blue', 'Females': 'red'}
 SEX_LABEL_MAP = {'M': 'Males', 'F': 'Females'}
 
@@ -108,10 +112,25 @@ def get_parser():
         help='Legend labels for each -path-results entry. Must match the number of paths. '
              'Defaults to the folder name of each path.')
     parser.add_argument(
+        '-dataset-colors', required=False, nargs='+', default=None,
+        help='Line color (any matplotlib color, e.g. "tab:blue") for each -path-results entry. '
+             'Must match the number of paths. Default: tab10 palette, one color per dataset.')
+    parser.add_argument(
+        '-dataset-linestyles', required=False, nargs='+', default=None,
+        choices=list(LINESTYLE_DASHES.keys()),
+        help='Line style for each -path-results entry. Must match the number of paths. '
+             'Default: a different line style per dataset. Together with -dataset-colors, this '
+             'allows encoding two factors, e.g. color = registration, line style = -method. '
+             'If both are provided and each -dataset-labels entry has the form "<A>, <B>", two '
+             'separate legends are drawn: one for colors (<A>) and one for line styles (<B>).')
+    parser.add_argument(
         '-labels-to-plot', required=False, nargs='+',
         default=['white matter'],
         help='Tract/region label(s) to plot. Default: "white matter". '
              f'Available: {list(LABEL_DISPLAY_NAMES.keys())}')
+    parser.add_argument(
+        '-metrics', required=False, nargs='+', choices=DTI_METRICS, default=DTI_METRICS,
+        help='DTI metric(s) to plot with -figure-type per-metric and all-labels. Default: all.')
     parser.add_argument(
         '-figure-type', required=False, nargs='+', choices=FIGURE_TYPES, default=['per-metric'],
         help='Figure layout(s) to generate. '
@@ -163,7 +182,9 @@ def load_dti_csvs(path_results, dataset_label):
             df['participant_id'] = subject
             df['metric'] = metric
             df['dataset'] = dataset_label
-            df = df.rename(columns={'MAP()': 'value', 'STD()': 'std'})
+            # Value column is named after the sct_extract_metric -method, e.g. MAP() or WA()
+            value_col = [c for c in df.columns if re.fullmatch(r'[A-Z]+\(\)', c) and c != 'STD()'][0]
+            df = df.rename(columns={value_col: 'value', 'STD()': 'std'})
             if 'std' not in df.columns:
                 df['std'] = np.nan
             # DTI maps warped to PAM50 are zero-filled outside the acquired FOV, so slices without
@@ -176,6 +197,72 @@ def load_dti_csvs(path_results, dataset_label):
     if not frames:
         raise FileNotFoundError(f'No DTI CSVs found in {path_results}')
     return pd.concat(frames, ignore_index=True)
+
+
+def get_dataset_style(dataset_labels, colors, linestyles):
+    """
+    Build the seaborn palette and dashes mappings for -dataset-colors and -dataset-linestyles.
+
+    Args:
+        dataset_labels (list[str]): dataset labels, one per -path-results entry.
+        colors     (list[str] or None): color per dataset; None → tab10 palette.
+        linestyles (list[str] or None): LINESTYLE_DASHES key per dataset; None → seaborn defaults.
+
+    Returns:
+        dict or None: {'palette': {dataset: color}, 'dashes': {dataset: dashes} or True};
+                      None if neither colors nor linestyles are provided.
+    """
+    if colors is None and linestyles is None:
+        return None
+    if colors is None:
+        colors = sns.color_palette('tab10', n_colors=len(dataset_labels))
+    dashes = True if linestyles is None else \
+        {ds: LINESTYLE_DASHES[ls] for ds, ls in zip(dataset_labels, linestyles)}
+    dataset_style = {'palette': dict(zip(dataset_labels, colors)), 'dashes': dashes}
+
+    # Two factors encoded by color and line style: "<A>, <B>" labels → one legend per factor
+    parts = [ds.split(', ') for ds in dataset_labels]
+    if colors is not None and linestyles is not None and all(len(p) == 2 for p in parts):
+        color_legend = dict((p[0], c) for p, c in zip(parts, colors))
+        linestyle_legend = dict((p[1], LINESTYLE_DASHES[ls]) for p, ls in zip(parts, linestyles))
+        # Each factor level has to map to a single color / line style
+        if len(color_legend) == len({(p[0], c) for p, c in zip(parts, colors)}) and \
+                len(linestyle_legend) == len({(p[1], ls) for p, ls in zip(parts, linestyles)}):
+            dataset_style['color_legend'] = color_legend
+            dataset_style['linestyle_legend'] = linestyle_legend
+        else:
+            print('  Warning: -dataset-labels parts do not map consistently to colors/line styles; '
+                  'drawing a single legend')
+    return dataset_style
+
+
+def add_factor_legends(target, dataset_style, fontsize):
+    """
+    Draw two legends, one for colors and one for line styles (see get_dataset_style()), side by
+    side below the figure (target=Figure) or stacked in the upper right corner (target=Axes).
+
+    Args:
+        target        : matplotlib Figure or Axes.
+        dataset_style (dict): output of get_dataset_style() with color_legend and linestyle_legend.
+        fontsize      (int): legend font size.
+    """
+    color_handles = [Line2D([], [], color=c, linewidth=2) for c in dataset_style['color_legend'].values()]
+    # Line styles are shown in neutral gray, so they do not suggest one of the colors
+    linestyle_handles = [Line2D([], [], color='dimgray', linewidth=2, dashes=d if d else (None, None))
+                         for d in dataset_style['linestyle_legend'].values()]
+    legend_kwargs = dict(fontsize=fontsize, handlelength=3)
+    if isinstance(target, plt.Figure):
+        legend_kwargs.update(frameon=False, ncol=2)
+        target.legend(color_handles, dataset_style['color_legend'].keys(),
+                      loc='upper right', bbox_to_anchor=(0.48, 0), **legend_kwargs)
+        target.legend(linestyle_handles, dataset_style['linestyle_legend'].keys(),
+                      loc='upper left', bbox_to_anchor=(0.52, 0), **legend_kwargs)
+    else:
+        legend_color = target.legend(color_handles, dataset_style['color_legend'].keys(),
+                                     loc='upper right', **legend_kwargs)
+        target.add_artist(legend_color)
+        target.legend(linestyle_handles, dataset_style['linestyle_legend'].keys(),
+                      loc='upper right', bbox_to_anchor=(1, 0.8), **legend_kwargs)
 
 
 def keep_common_subjects(df, labels):
@@ -322,7 +409,7 @@ def style_ax(ax):
     ax.tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
 
 
-def create_lineplot_dti(df, metric, labels, path_out, hue=None):
+def create_lineplot_dti(df, metric, labels, path_out, hue=None, dataset_style=None):
     """
     Create a grid figure (nrows=2, ncols=ceil(n_labels/2)) for a single DTI metric,
     with one subplot per ROI label.
@@ -338,6 +425,8 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None):
         path_out (str): output directory.
         hue      (str or None): column to colour lines by — 'dataset', 'sex', or None
                                 (single steelblue line).
+        dataset_style (dict or None): {'palette': {dataset: color}, 'dashes': {dataset: dashes}}
+                                      used when hue='dataset'; see get_dataset_style().
     """
     mpl.rcParams['font.family'] = 'Arial'
 
@@ -357,6 +446,9 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None):
         palette = sns.color_palette('tab10', n_colors=n_datasets)
     else:
         palette = None
+    dashes = True
+    if hue == 'dataset' and dataset_style is not None:
+        palette, dashes = dataset_style['palette'], dataset_style['dashes']
 
     # Pre-compute vertebral indices once (slice positions are the same across all labels)
     disc_slices, mid_slices, vert_at_mid, xlim_min, xlim_max, n_per_level = \
@@ -384,9 +476,13 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None):
             # and alpha lets overlapping traces be seen through one another.
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
                          hue=hue, style=hue, errorbar='sd', linewidth=2,
-                         palette=palette, alpha=0.7)
+                         palette=palette, dashes=dashes, alpha=0.7)
             if i == 0:
-                ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE-5)
+                if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
+                    ax.get_legend().remove()
+                    add_factor_legends(ax, dataset_style, TICKS_FONT_SIZE-5)
+                else:
+                    ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE-5)
             else:
                 ax.get_legend().remove()
         else:
@@ -433,7 +529,7 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None):
     plt.close()
 
 
-def create_lineplot_dti_per_label(df, label, path_out, hue=None):
+def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=None):
     """
     Create a 2x2 figure for a single ROI label, with one subplot per DTI metric (FA, MD, RD, AD).
 
@@ -445,6 +541,8 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None):
         path_out (str): output directory.
         hue      (str or None): column to colour lines by — 'dataset', 'sex', or None
                                 (single steelblue line).
+        dataset_style (dict or None): {'palette': {dataset: color}, 'dashes': {dataset: dashes}}
+                                      used when hue='dataset'; see get_dataset_style().
     """
     mpl.rcParams['font.family'] = 'Arial'
 
@@ -459,6 +557,9 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None):
         palette = sns.color_palette('tab10', n_colors=df['dataset'].nunique())
     else:
         palette = None
+    dashes = True
+    if hue == 'dataset' and dataset_style is not None:
+        palette, dashes = dataset_style['palette'], dataset_style['dashes']
 
     nrows, ncols = 2, 2
     fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6, nrows * 5))
@@ -472,9 +573,12 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None):
         if hue is not None:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_metric,
                          hue=hue, style=hue, errorbar='sd', linewidth=2,
-                         palette=palette, alpha=0.7)
+                         palette=palette, dashes=dashes, alpha=0.7)
             if i == 0:
-                ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE-5)
+                if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
+                    ax.get_legend().remove()
+                else:
+                    ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE-5)
             else:
                 ax.get_legend().remove()
         else:
@@ -494,6 +598,8 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None):
 
     fig.suptitle(LABEL_DISPLAY_NAMES.get(label, label), fontsize=LABELS_FONT_SIZE + 2, y=1.01)
     plt.tight_layout()
+    if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
+        add_factor_legends(fig, dataset_style, TICKS_FONT_SIZE-2)
 
     suffix = f'_per{hue}' if hue is not None else ''
     label_fname = re.sub(r'[^A-Za-z0-9]+', '_', LABEL_DISPLAY_NAMES.get(label, label)).strip('_')
@@ -608,6 +714,12 @@ def main():
     else:
         dataset_labels = [os.path.basename(os.path.normpath(p)) for p in args.path_results]
 
+    for arg_name in ['dataset_colors', 'dataset_linestyles']:
+        values = getattr(args, arg_name)
+        if values is not None and len(values) != len(args.path_results):
+            parser.error(f'-{arg_name.replace("_", "-")} must have the same number of entries as -path-results')
+    dataset_style = get_dataset_style(dataset_labels, args.dataset_colors, args.dataset_linestyles)
+
     os.makedirs(args.path_out, exist_ok=True)
 
     # Load data from all paths
@@ -644,9 +756,10 @@ def main():
 
     # One figure per DTI metric, one subplot per ROI
     if 'per-metric' in args.figure_type:
-        for metric in DTI_METRICS:
+        for metric in args.metrics:
             print(f'\nPlotting: {metric}')
-            create_lineplot_dti(df_all, metric, args.labels_to_plot, args.path_out, hue=default_hue)
+            create_lineplot_dti(df_all, metric, args.labels_to_plot, args.path_out, hue=default_hue,
+                                dataset_style=dataset_style)
             if has_sex:
                 print(f'  Plotting per-sex: {metric}')
                 create_lineplot_dti(df_all, metric, args.labels_to_plot, args.path_out, hue='sex')
@@ -655,7 +768,8 @@ def main():
     if 'per-label' in args.figure_type:
         for label in args.labels_to_plot:
             print(f'\nPlotting: {label}')
-            create_lineplot_dti_per_label(df_all, label, args.path_out, hue=default_hue)
+            create_lineplot_dti_per_label(df_all, label, args.path_out, hue=default_hue,
+                                          dataset_style=dataset_style)
             if has_sex:
                 print(f'  Plotting per-sex: {label}')
                 create_lineplot_dti_per_label(df_all, label, args.path_out, hue='sex')
@@ -665,7 +779,7 @@ def main():
         if df_all['dataset'].nunique() > 1:
             parser.error('-figure-type all-labels/all-labels-grid supports a single -path-results only')
     if 'all-labels' in args.figure_type:
-        for metric in DTI_METRICS:
+        for metric in args.metrics:
             print(f'\nPlotting all labels: {metric}')
             create_lineplot_dti_all_labels(df_all, metric, args.labels_to_plot, args.path_out)
     if 'all-labels-grid' in args.figure_type:
