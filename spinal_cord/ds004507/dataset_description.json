@@ -1,0 +1,10 @@
+{
+    "name": "Spinal Cord Head Positions",
+    "order": 11,
+    "coverage": "cervical spine",
+    "contrast": "T2w",
+    "resolution": "0.6mm iso",
+    "population": "healthy adults",
+    "link": "https://openneuro.org/datasets/ds004507/versions/1.1.2",
+    "link_text": "OpenNeuro ds004507"
+}
