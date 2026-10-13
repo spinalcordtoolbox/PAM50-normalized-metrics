@@ -337,7 +337,7 @@ for dti_metric in "${dti_metrics[@]}"; do
     -w warp_dwi2template.nii.gz \
     -o ${file_dwi}_${dti_metric}_PAM50.nii.gz
 
-  # -method map
+  # -method map (maximum a posteriori)
   file_out_map="${PATH_RESULTS}/dwi_PAM50_map/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
   echo "👉 Extracting ${dti_metric} metrics in PAM50 space -method map..."
   rm -f "${file_out_map}"
@@ -354,7 +354,6 @@ for dti_metric in "${dti_metrics[@]}"; do
       -append 1
   done
 
-  # -method wa
   # -method ml (maximum likelihood)
   file_out_ml="${PATH_RESULTS}/dwi_PAM50_ml/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
   echo "👉 Extracting ${dti_metric} metrics in PAM50 space -method ml..."
@@ -371,6 +370,8 @@ for dti_metric in "${dti_metrics[@]}"; do
       -o "${file_out_ml}" \
       -append 1
   done
+
+  # -method wa (weighted average)
   file_out_wa="${PATH_RESULTS}/dwi_PAM50_wa/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
   echo "👉 Extracting ${dti_metric} metrics in PAM50 space -method wa..."
   rm -f "${file_out_wa}"
@@ -400,7 +401,7 @@ mkdir -p ${PATH_RESULTS}/dwi_interpolation_to_PAM50_ml
 mkdir -p ${PATH_RESULTS}/dwi_interpolation_to_PAM50_wa
 
 for dti_metric in "${dti_metrics[@]}"; do
-  # -method map
+  # -method map (maximum a posteriori)
   file_out_map="${PATH_RESULTS}/dwi_interpolation_to_PAM50_map/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
   echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50 -method map..."
   rm -f "${file_out_map}"
@@ -463,7 +464,7 @@ mkdir -p ${PATH_RESULTS}/dwi_native_perslice_ml
 mkdir -p ${PATH_RESULTS}/dwi_native_perslice_wa
 
 for dti_metric in "${dti_metrics[@]}"; do
-  # -method map
+  # -method map (maximum a posteriori)
   file_out_map="${PATH_RESULTS}/dwi_native_perslice_map/${SUBJECT}_dwi_${dti_metric}_native_perslice.csv"
   echo "👉 Extracting ${dti_metric} metrics in native space -method map..."
   rm -f "${file_out_map}"
