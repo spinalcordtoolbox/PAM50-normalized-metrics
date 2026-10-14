@@ -63,6 +63,7 @@ The table below summarizes all datasets included in this repository. It is also 
 | spinal_cord | TempleSocial | 90 | 90 | n/a | healthy adults | 28/60/2 | 42.2±16.7 [21–80] | cervical spine | T1w | 1.0mm iso | [openneuro/ds005123](https://openneuro.org/datasets/ds005123) |
 | spinal_cord | UCLA LA5c | 254 | 254 | n/a | healthy controls and neuropsychiatric patients | 146/108/0 | 33.0±9.3 [21–50] | cervical spine | T1w | 1.0mm iso | [openneuro/ds000030](https://openneuro.org/datasets/ds000030) |
 | spinal_cord | BLSA | 1095 | 3170 | n/a | Healthy Control, MCI, and dementia | 484/577/34 | 66.1±14.8 [22–94] | cervical spine | T1w | 1.0mm iso | [blsa.nih.gov](https://www.blsa.nih.gov) |
+| spinal_cord | Spinal Cord Head Positions | 10 | 30 | n/a | healthy adults | 7/3/0 | 22.9±1.2 [22–26] | cervical spine | T2w | 0.6mm iso | [OpenNeuro ds004507](https://openneuro.org/datasets/ds004507/versions/1.1.2) |
 <!-- datasets-table-end -->
 
 ## Datasets Structure
