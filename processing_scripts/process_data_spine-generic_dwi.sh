@@ -116,6 +116,10 @@ segment_if_does_not_exist() {
   fi
   FILESEG="${file}_label-SC_seg"
   FILESEGMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/${folder_contrast}/${FILESEG}.nii.gz"
+  # Fallback to the dcm-olomouc_derivatives naming convention (${file}_seg.nii.gz)
+  if [[ ! -e $FILESEGMANUAL && -e ${PATH_DERIVATIVES}/labels/${SUBJECT}/${folder_contrast}/${file}_seg.nii.gz ]]; then
+    FILESEGMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/${folder_contrast}/${file}_seg.nii.gz"
+  fi
   # Define log prefix to have consistent log files for T2w and DWI files
   local log_prefix
   if [[ $contrast == "t2" ]]; then log_prefix="T2w"; else log_prefix="${contrast}"; fi
@@ -141,6 +145,10 @@ label_if_does_not_exist() {
   local file="$1"
   FILELABEL="${file}_label-discs_dlabel"
   FILELABELMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/anat/${FILELABEL}.nii.gz"
+  # Fallback to the dcm-olomouc_derivatives naming convention (${file}_label-disc.nii.gz)
+  if [[ ! -e $FILELABELMANUAL && -e ${PATH_DERIVATIVES}/labels/${SUBJECT}/anat/${file}_label-disc.nii.gz ]]; then
+    FILELABELMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/anat/${file}_label-disc.nii.gz"
+  fi
   echo "Looking for manual disc labels: $FILELABELMANUAL"
   if [[ -e $FILELABELMANUAL ]]; then
     echo "✏️ [$(date '+%Y-%m-%d %H:%M:%S')] Found! Using manual disc labels."
