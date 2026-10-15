@@ -92,6 +92,10 @@ shift
 
 echo "SUBJECT: ${SUBJECT}"
 
+# Define variables
+# We do a substitution '/' --> '_' in case there is a subfolder 'ses-0X/'
+file="${SUBJECT//[\/]/_}"
+
 # get starting time
 start=`date +%s`
 
@@ -162,19 +166,19 @@ cd $PATH_DATA_PROCESSED
 # Select the DWI file. Some subjects (e.g., sub-ucdavis01, sub-ucdavis02, sub-ucdavis04) have multiple DWI runs
 # (sub-XX_run-01_dwi, sub-XX_run-02_dwi, ...) instead of a single sub-XX_dwi. In that case, use run-01.
 # Context: https://github.com/spine-generic/spine-generic/issues/290
-if [[ -e ${PATH_DATA}/${SUBJECT}/dwi/${SUBJECT}_dwi.nii.gz ]]; then
-  file_dwi="${SUBJECT}_dwi"
-elif [[ -e ${PATH_DATA}/${SUBJECT}/dwi/${SUBJECT}_run-01_dwi.nii.gz ]]; then
-  file_dwi="${SUBJECT}_run-01_dwi"
+if [[ -e ${PATH_DATA}/${SUBJECT}/dwi/${file}_dwi.nii.gz ]]; then
+  file_dwi="${file}_dwi"
+elif [[ -e ${PATH_DATA}/${SUBJECT}/dwi/${file}_run-01_dwi.nii.gz ]]; then
+  file_dwi="${file}_run-01_dwi"
   echo "⚠️ [$(date '+%Y-%m-%d %H:%M:%S')] ${SUBJECT}: multiple DWI runs found --> using ${file_dwi}.nii.gz" >> "${PATH_LOG}/dwi_runs.log"
 else
-  echo "${SUBJECT}: no DWI file found (neither ${SUBJECT}_dwi.nii.gz nor ${SUBJECT}_run-01_dwi.nii.gz)" >> "${PATH_LOG}/_error_check_output_files.log"
+  echo "${SUBJECT}: no DWI file found (neither ${file}_dwi.nii.gz nor ${file}_run-01_dwi.nii.gz)" >> "${PATH_LOG}/_error_check_output_files.log"
   exit 1
 fi
 
 # Copy T2w and DWI source data into subject-specific subfolders
 mkdir -p ${SUBJECT}/anat ${SUBJECT}/dwi
-rsync -avzh ${PATH_DATA}/${SUBJECT}/anat/${SUBJECT}_*T2w.* ${SUBJECT}/anat/
+rsync -avzh ${PATH_DATA}/${SUBJECT}/anat/${file}_*T2w.* ${SUBJECT}/anat/
 rsync -avzh ${PATH_DATA}/${SUBJECT}/dwi/${file_dwi}.* ${SUBJECT}/dwi/
 
 # ==============================================================================
@@ -182,7 +186,7 @@ rsync -avzh ${PATH_DATA}/${SUBJECT}/dwi/${file_dwi}.* ${SUBJECT}/dwi/
 # ==============================================================================
 cd ${SUBJECT}/anat
 
-file_t2="${SUBJECT}_T2w"
+file_t2="${file}_T2w"
 echo "👉 Processing T2w: ${file_t2}"
 
 # Segment spinal cord
@@ -249,8 +253,8 @@ file_dwi=${file_dwi}_moco
 
 # Rename mean DWI to the BIDS rec-average convention used by spine-generic derivatives
 # (derivatives/labels uses sub-XX_rec-average_dwi_label-SC_seg.nii.gz)
-mv ${file_dwi}_dwi_mean.nii.gz ${SUBJECT}_rec-average_dwi.nii.gz
-file_dwi_mean="${SUBJECT}_rec-average_dwi"
+mv ${file_dwi}_dwi_mean.nii.gz ${file}_rec-average_dwi.nii.gz
+file_dwi_mean="${file}_rec-average_dwi"
 
 # ----------
 # Spinal cord segmentation in DWI space
@@ -302,11 +306,11 @@ sct_qc \
 # QC: bring DWI vertebral levels into T2w space to check DWI FOV coverage
 sct_register_multimodal \
   -i label_${file_dwi}/template/PAM50_levels.nii.gz \
-  -d ../anat/${SUBJECT}_T2w.nii.gz \
+  -d ../anat/${file}_T2w.nii.gz \
   -identity 1 -x nn
-rm -f warp_PAM50_levels2${SUBJECT}_T2w.nii.gz warp_${SUBJECT}_T2w2PAM50_levels.nii.gz ${SUBJECT}_T2w_reg.nii.gz
+rm -f warp_PAM50_levels2${file}_T2w.nii.gz warp_${file}_T2w2PAM50_levels.nii.gz ${file}_T2w_reg.nii.gz
 sct_qc \
-  -i ../anat/${SUBJECT}_T2w.nii.gz \
+  -i ../anat/${file}_T2w.nii.gz \
   -s PAM50_levels_reg.nii.gz \
   -p sct_label_vertebrae \
   -qc ${PATH_QC} -qc-subject "PAM50_levels_DWI_to_T2w"
@@ -338,7 +342,7 @@ for dti_metric in "${dti_metrics[@]}"; do
     -o ${file_dwi}_${dti_metric}_PAM50.nii.gz
 
   # -method map (maximum a posteriori)
-  file_out_map="${PATH_RESULTS}/dwi_PAM50_map/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
+  file_out_map="${PATH_RESULTS}/dwi_PAM50_map/${file}_dwi_${dti_metric}_PAM50.csv"
   echo "👉 Extracting ${dti_metric} metrics in PAM50 space -method map..."
   rm -f "${file_out_map}"
   for tract in "${tracts[@]}"; do
@@ -355,7 +359,7 @@ for dti_metric in "${dti_metrics[@]}"; do
   done
 
   # -method ml (maximum likelihood)
-  file_out_ml="${PATH_RESULTS}/dwi_PAM50_ml/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
+  file_out_ml="${PATH_RESULTS}/dwi_PAM50_ml/${file}_dwi_${dti_metric}_PAM50.csv"
   echo "👉 Extracting ${dti_metric} metrics in PAM50 space -method ml..."
   rm -f "${file_out_ml}"
   for tract in "${tracts[@]}"; do
@@ -372,7 +376,7 @@ for dti_metric in "${dti_metrics[@]}"; do
   done
 
   # -method wa (weighted average)
-  file_out_wa="${PATH_RESULTS}/dwi_PAM50_wa/${SUBJECT}_dwi_${dti_metric}_PAM50.csv"
+  file_out_wa="${PATH_RESULTS}/dwi_PAM50_wa/${file}_dwi_${dti_metric}_PAM50.csv"
   echo "👉 Extracting ${dti_metric} metrics in PAM50 space -method wa..."
   rm -f "${file_out_wa}"
   for tract in "${tracts[@]}"; do
@@ -402,7 +406,7 @@ mkdir -p ${PATH_RESULTS}/dwi_interpolation_to_PAM50_wa
 
 for dti_metric in "${dti_metrics[@]}"; do
   # -method map (maximum a posteriori)
-  file_out_map="${PATH_RESULTS}/dwi_interpolation_to_PAM50_map/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
+  file_out_map="${PATH_RESULTS}/dwi_interpolation_to_PAM50_map/${file}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
   echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50 -method map..."
   rm -f "${file_out_map}"
   for tract in "${tracts[@]}"; do
@@ -420,7 +424,7 @@ for dti_metric in "${dti_metrics[@]}"; do
   done
 
   # -method ml (maximum likelihood)
-  file_out_ml="${PATH_RESULTS}/dwi_interpolation_to_PAM50_ml/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
+  file_out_ml="${PATH_RESULTS}/dwi_interpolation_to_PAM50_ml/${file}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
   echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50 -method ml..."
   rm -f "${file_out_ml}"
   for tract in "${tracts[@]}"; do
@@ -438,7 +442,7 @@ for dti_metric in "${dti_metrics[@]}"; do
   done
 
   # -method wa (weighted average)
-  file_out_wa="${PATH_RESULTS}/dwi_interpolation_to_PAM50_wa/${SUBJECT}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
+  file_out_wa="${PATH_RESULTS}/dwi_interpolation_to_PAM50_wa/${file}_dwi_${dti_metric}_interpolated_to_PAM50.csv"
   echo "👉 Extracting ${dti_metric} metrics with -normalize-PAM50 -method wa..."
   rm -f "${file_out_wa}"
   for tract in "${tracts[@]}"; do
@@ -465,7 +469,7 @@ mkdir -p ${PATH_RESULTS}/dwi_native_perslice_wa
 
 for dti_metric in "${dti_metrics[@]}"; do
   # -method map (maximum a posteriori)
-  file_out_map="${PATH_RESULTS}/dwi_native_perslice_map/${SUBJECT}_dwi_${dti_metric}_native_perslice.csv"
+  file_out_map="${PATH_RESULTS}/dwi_native_perslice_map/${file}_dwi_${dti_metric}_native_perslice.csv"
   echo "👉 Extracting ${dti_metric} metrics in native space -method map..."
   rm -f "${file_out_map}"
   for tract in "${tracts[@]}"; do
@@ -482,7 +486,7 @@ for dti_metric in "${dti_metrics[@]}"; do
   done
 
   # -method ml (maximum likelihood)
-  file_out_ml="${PATH_RESULTS}/dwi_native_perslice_ml/${SUBJECT}_dwi_${dti_metric}_native_perslice.csv"
+  file_out_ml="${PATH_RESULTS}/dwi_native_perslice_ml/${file}_dwi_${dti_metric}_native_perslice.csv"
   echo "👉 Extracting ${dti_metric} metrics in native space -method ml..."
   rm -f "${file_out_ml}"
   for tract in "${tracts[@]}"; do
@@ -499,7 +503,7 @@ for dti_metric in "${dti_metrics[@]}"; do
   done
 
   # -method wa (weighted average)
-  file_out_wa="${PATH_RESULTS}/dwi_native_perslice_wa/${SUBJECT}_dwi_${dti_metric}_native_perslice.csv"
+  file_out_wa="${PATH_RESULTS}/dwi_native_perslice_wa/${file}_dwi_${dti_metric}_native_perslice.csv"
   echo "👉 Extracting ${dti_metric} metrics in native space -method wa..."
   rm -f "${file_out_wa}"
   for tract in "${tracts[@]}"; do
@@ -522,7 +526,7 @@ done
 #mkdir -p ${PATH_RESULTS}/dwi_native_perlevel
 #
 #for dti_metric in "${dti_metrics[@]}"; do
-#  file_out="${PATH_RESULTS}/dwi_native_perlevel/${SUBJECT}_dwi_${dti_metric}_native_perlevel.csv"
+#  file_out="${PATH_RESULTS}/dwi_native_perlevel/${file}_dwi_${dti_metric}_native_perlevel.csv"
 #  echo "👉 Extracting ${dti_metric} metrics in native space..."
 #
 #  rm -f "${file_out}"
@@ -550,8 +554,8 @@ echo "✅ Done: ${SUBJECT}"
 # Check output files
 # ==============================================================================
 FILES_TO_CHECK=(
-  "anat/${SUBJECT}_T2w_label-SC_seg.nii.gz"
-  "dwi/${SUBJECT}_rec-average_dwi_label-SC_seg.nii.gz"
+  "anat/${file}_T2w_label-SC_seg.nii.gz"
+  "dwi/${file}_rec-average_dwi_label-SC_seg.nii.gz"
   "dwi/${file_dwi}_FA.nii.gz"
   "dwi/${file_dwi}_MD.nii.gz"
   "dwi/warp_template2dwi.nii.gz"
