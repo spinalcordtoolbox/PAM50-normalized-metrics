@@ -1,0 +1,18 @@
+{
+  "path_data"   : "~/data/dwi_normative/dcm-olomouc",
+  "path_output" : "~/results/dwi_normative_database/dwi_normative_database_2026-10-15_dcm-olomouc",
+  "script"      : "~/code/PAM50-normalized-metrics/processing_scripts/process_data_spine-generic_dwi.sh",
+  "jobs"        : 10,
+  "include_list" : [
+    "sub-018/ses-M0",
+    "sub-018/ses-M6",
+    "sub-020/ses-M0",
+    "sub-020/ses-M6",
+    "sub-022/ses-M0",
+    "sub-022/ses-M6",
+    "sub-024/ses-M0",
+    "sub-024/ses-M6",
+    "sub-026/ses-M0",
+    "sub-026/ses-M6"
+  ]
+}
