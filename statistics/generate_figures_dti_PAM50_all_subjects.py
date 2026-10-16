@@ -87,6 +87,8 @@ FIGURE_TYPES = ['per-metric', 'per-label', 'all-labels', 'all-labels-grid']
 
 LABELS_FONT_SIZE = 20
 TICKS_FONT_SIZE = LABELS_FONT_SIZE-2
+# Font size of the per-level subject counts (n=...) below the vertebral level labels
+N_FONT_SIZE = TICKS_FONT_SIZE-6
 
 # X-axis is restricted to this inclusive range of vertebral levels (C1=1 … C7=7, T1=8 …).
 # Default; can be changed with -vert-range.
@@ -308,6 +310,19 @@ def keep_common_subjects(df, labels):
     return df[df['participant_id'].isin(subjects)]
 
 
+def format_counts(counts):
+    """
+    Format the number of subjects per dataset for a vertebral level label: a single number when all
+    datasets have the same count (e.g. paired comparison of methods), one number per dataset for two
+    datasets (e.g. "202/12"), and the min–max range for more datasets (to keep the label short).
+    """
+    if counts.nunique() == 1:
+        return str(counts.iloc[0])
+    if len(counts) <= 2:
+        return '/'.join(str(n) for n in counts)
+    return f'{counts.min()}–{counts.max()}'
+
+
 def get_vert_reference(df, metric, label):
     """
     Get everything needed to restrict the x-axis to XLIM_VERT_RANGE and to annotate vertebral
@@ -322,7 +337,8 @@ def get_vert_reference(df, metric, label):
     Returns:
         disc_slices, mid_slices, vert_at_mid: see get_vert_indices(); restricted to the x-axis range.
         xlim_min, xlim_max (int): slice range covering XLIM_VERT_RANGE.
-        n_per_level (dict): VertLevel → number of subjects with data.
+        n_per_level (dict): VertLevel → number of subjects with data (str; one number per dataset,
+                            separated by '/').
     """
     df_ref = df[(df['metric'] == metric) & (df['Label'] == label)]
     ref = df_ref.dropna(subset=['VertLevel']).drop_duplicates(subset='Slice (I->S)')
@@ -340,12 +356,15 @@ def get_vert_reference(df, metric, label):
         if xlim_min <= s <= xlim_max
     ]) if mid_slices else ([], [])
 
+    # Number of subjects with data per level; per dataset (e.g. "202/12") when several are plotted
     n_per_level = (
         df_ref.dropna(subset=['value'])
-        .groupby('VertLevel')['participant_id']
+        .groupby(['VertLevel', 'dataset'])['participant_id']
         .nunique()
-        .to_dict()
+        .unstack(fill_value=0)
+        .reindex(columns=pd.unique(df_ref['dataset']), fill_value=0)
     )
+    n_per_level = {v: format_counts(row) for v, row in n_per_level.iterrows()}
 
     return disc_slices, mid_slices, vert_at_mid, xlim_min, xlim_max, n_per_level
 
@@ -411,8 +430,12 @@ def annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ym
         ax.axvline(s, color='black', linestyle='--', alpha=0.5, zorder=0)
     for s, v in zip(mid_slices, vert_at_mid):
         n = n_per_level.get(v, 0)
-        ax.text(s, ymin, f'{vert_num_to_label(v)}\nn={n}',
-                ha='center', va='bottom', fontsize=TICKS_FONT_SIZE, color='black')
+        # Subject count in a smaller font at the bottom, vertebral level label right above it
+        ax.text(s, ymin, f'n={n}',
+                ha='center', va='bottom', fontsize=N_FONT_SIZE, color='black')
+        ax.annotate(vert_num_to_label(v), xy=(s, ymin), xytext=(0, N_FONT_SIZE * 1.3),
+                    textcoords='offset points', ha='center', va='bottom',
+                    fontsize=TICKS_FONT_SIZE, color='black')
 
 
 def style_ax(ax):
@@ -476,7 +499,7 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None, dataset_style=No
     # Print n per vertebral level to terminal
     print('  Subjects per vertebral level:')
     for v in sorted(n_per_level):
-        print(f'    {vert_num_to_label(v)}: {n_per_level[v]}')
+        print(f'    {vert_num_to_label(int(v))}: {n_per_level[v]}')
 
     # --- First pass: draw lineplots ---
     active_axes = []
