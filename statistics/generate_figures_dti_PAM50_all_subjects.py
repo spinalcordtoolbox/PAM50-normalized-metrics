@@ -69,11 +69,11 @@ LABEL_DISPLAY_NAMES = {
     'dorsal columns': 'Dorsal Columns',
     'lateral funiculi':  'Lateral Funiculi',
     'ventral funiculi':  'Ventral Funiculi',
-    '0,1':   'Fasciculus Gracilis (L+R)',
-    '2,3':   'Fasciculus Cuneatus (L+R)',
-    '4,5':   'Lateral Corticospinal Tract (L+R)',
-    '12,13': 'Spinal Lemniscus (L+R)',
-    '30,31': 'Ventral Horn (L+R)',
+    '0,1':   'Fasciculus Gracilis',
+    '2,3':   'Fasciculus Cuneatus',
+    '4,5':   'Lateral Corticospinal Tract',
+    '12,13': 'Spinal Lemniscus',
+    '30,31': 'Ventral Horn',
 }
 
 # Fixed color per tract label (-figure-type all-labels, and the single line of -figure-type per-label).
