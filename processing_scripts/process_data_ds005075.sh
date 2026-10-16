@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Process OpenNeuro ds005075 and generate PAM50-normalized per-slice morphometric CSVs.
+# Process OpenNeuro ds005075 and generate PAM50-normalized per-slice morphometric CSVs
+# and QC reports for spinal cord segmentations and intervertebral disc labels.
 #
 # Usage from Git Bash:
 #   bash processing_scripts/process_data_ds005075.sh /path/to/ds005075
@@ -18,12 +19,16 @@ if [[ -z "$DATASET_ROOT" ]]; then
 fi
 
 OUTPUT_DIR="${DATASET_ROOT}/outputs"
+QC_DIR="${DATASET_ROOT}/qc"
+
 mkdir -p "$OUTPUT_DIR"
+mkdir -p "$QC_DIR"
 
 echo "============================================================"
-echo "ds005075 - PAM50 CSV generation"
+echo "ds005075 - PAM50 CSV generation and QC"
 echo "Dataset root: $DATASET_ROOT"
 echo "Output folder: $OUTPUT_DIR"
+echo "QC folder: $QC_DIR"
 echo "============================================================"
 
 for subject_path in "${DATASET_ROOT}"/sub-*; do
@@ -73,6 +78,9 @@ for subject_path in "${DATASET_ROOT}"/sub-*; do
     echo "Intervertebral disc labels:"
     echo "$disc_file"
 
+    echo
+    echo "Generating PAM50-normalized morphometric CSV..."
+
     sct_process_segmentation \
         -i "$seg_file" \
         -discfile "$disc_file" \
@@ -80,6 +88,29 @@ for subject_path in "${DATASET_ROOT}"/sub-*; do
         -normalize-PAM50 1 \
         -o "$output_csv"
 
+    echo
+    echo "Generating QC for spinal cord segmentation..."
+
+    sct_qc \
+        -i "$image" \
+        -s "$seg_file" \
+        -p sct_deepseg_sc \
+        -qc "$QC_DIR" \
+        -qc-dataset ds005075 \
+        -qc-subject "$subject"
+
+    echo
+    echo "Generating QC for intervertebral disc labels..."
+
+    sct_qc \
+        -i "$image" \
+        -s "$disc_file" \
+        -p sct_label_utils \
+        -qc "$QC_DIR" \
+        -qc-dataset ds005075 \
+        -qc-subject "$subject"
+
+    echo
     echo "Created:"
     echo "$output_csv"
 
@@ -89,4 +120,5 @@ echo
 echo "============================================================"
 echo "Done."
 echo "Outputs: $OUTPUT_DIR"
+echo "QC reports: $QC_DIR"
 echo "============================================================"
