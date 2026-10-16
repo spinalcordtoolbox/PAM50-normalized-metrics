@@ -112,7 +112,8 @@ def get_parser():
         '-path-results', required=True, nargs='+',
         help='Path(s) to results/dwi folder(s) containing *_dwi_{FA,MD,RD,AD}_PAM50.csv '
              'files. Provide multiple paths to overlay runs (e.g. to compare preprocessing '
-             'pipelines).')
+             'pipelines). A path can end with a filename prefix pattern to load only matching '
+             'files, e.g. "<dir>/*_ses-M0" for one session of a longitudinal dataset.')
     parser.add_argument(
         '-dataset-labels', required=False, nargs='+', default=None,
         help='Legend labels for each -path-results entry. Must match the number of paths. '
@@ -175,7 +176,8 @@ def load_dti_csvs(path_results, dataset_label):
     Load all DTI CSVs (FA, MD, RD, AD) from a results directory.
 
     Args:
-        path_results (str): directory containing *_dwi_{metric}_PAM50.csv files.
+        path_results (str): directory containing *_dwi_{metric}_PAM50.csv files, or such a directory
+            followed by a filename prefix pattern (e.g. "<dir>/*_ses-M0") to load only matching files.
         dataset_label (str): label to assign to all rows (used for multi-run comparison).
 
     Returns:
@@ -186,14 +188,17 @@ def load_dti_csvs(path_results, dataset_label):
     for metric in DTI_METRICS:
         # Matches both warped (`*_dwi_FA_PAM50.csv`) and interpolated
         # (`*_dwi_FA_interpolated_to_PAM50.csv`) naming.
-        pattern = os.path.join(path_results, f'*_dwi_{metric}_*PAM50.csv')
+        if os.path.isdir(path_results):
+            pattern = os.path.join(path_results, f'*_dwi_{metric}_*PAM50.csv')
+        else:
+            pattern = f'{path_results}_dwi_{metric}_*PAM50.csv'
         csv_files = sorted(glob.glob(pattern))
         if not csv_files:
             print(f'  Warning: no {metric} CSVs found in {path_results}')
             continue
         for csv_file in tqdm(csv_files, desc=f'    {metric}', unit='subj', leave=False):
             basename = os.path.basename(csv_file)
-            m = re.match(r'(sub-\w+)_dwi_', basename)
+            m = re.match(r'(sub-[^_]+(?:_ses-[^_]+)?)_dwi_', basename)
             if not m:
                 print(f'  Warning: could not parse subject from {basename}, skipping')
                 continue
