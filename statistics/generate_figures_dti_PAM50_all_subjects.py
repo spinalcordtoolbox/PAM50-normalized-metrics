@@ -131,6 +131,11 @@ def get_parser():
              'If both are provided and each -dataset-labels entry has the form "<A>, <B>", two '
              'separate legends are drawn: one for colors (<A>) and one for line styles (<B>).')
     parser.add_argument(
+        '-dataset-first-level', required=False, nargs='+', type=int, default=None,
+        help='First vertebral level (C1=1 … C7=7) to plot for each -path-results entry; more rostral '
+             'levels are dropped for that dataset (e.g. to hide levels covered by only a few '
+             'subjects). Must match the number of paths. Default: no restriction.')
+    parser.add_argument(
         '-labels-to-plot', required=False, nargs='+',
         default=['white matter'],
         help='Tract/region label(s) to plot. Default: "white matter". '
@@ -769,7 +774,7 @@ def main():
     else:
         dataset_labels = [os.path.basename(os.path.normpath(p)) for p in args.path_results]
 
-    for arg_name in ['dataset_colors', 'dataset_linestyles']:
+    for arg_name in ['dataset_colors', 'dataset_linestyles', 'dataset_first_level']:
         values = getattr(args, arg_name)
         if values is not None and len(values) != len(args.path_results):
             parser.error(f'-{arg_name.replace("_", "-")} must have the same number of entries as -path-results')
@@ -783,6 +788,9 @@ def main():
     for path, ds_label in zip(args.path_results, dataset_labels):
         print(f'  {path}  →  dataset="{ds_label}"')
         df = load_dti_csvs(path, ds_label)
+        if args.dataset_first_level is not None:
+            first_level = args.dataset_first_level[len(all_frames)]
+            df = df[df['VertLevel'] >= first_level]
         n_subjects = df['participant_id'].nunique()
         print(f'    {n_subjects} subject(s), {len(df)} rows loaded')
         all_frames.append(df)
