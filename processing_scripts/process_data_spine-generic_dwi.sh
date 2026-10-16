@@ -116,10 +116,13 @@ segment_if_does_not_exist() {
   fi
   FILESEG="${file}_label-SC_seg"
   FILESEGMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/${folder_contrast}/${FILESEG}.nii.gz"
-  # Fallback to the dcm-olomouc_derivatives naming convention (${file}_seg.nii.gz)
-  if [[ ! -e $FILESEGMANUAL && -e ${PATH_DERIVATIVES}/labels/${SUBJECT}/${folder_contrast}/${file}_seg.nii.gz ]]; then
-    FILESEGMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/${folder_contrast}/${file}_seg.nii.gz"
-  fi
+  # Fallback to other naming conventions: ${file}_seg.nii.gz (dcm-olomouc, sci-olomouc) and
+  # ${file}_sc_seg.nii.gz (sci-chicago)
+  for suffix in seg sc_seg; do
+    if [[ ! -e $FILESEGMANUAL && -e ${PATH_DERIVATIVES}/labels/${SUBJECT}/${folder_contrast}/${file}_${suffix}.nii.gz ]]; then
+      FILESEGMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/${folder_contrast}/${file}_${suffix}.nii.gz"
+    fi
+  done
   # Define log prefix to have consistent log files for T2w and DWI files
   local log_prefix
   if [[ $contrast == "t2" ]]; then log_prefix="T2w"; else log_prefix="${contrast}"; fi
@@ -145,10 +148,13 @@ label_if_does_not_exist() {
   local file="$1"
   FILELABEL="${file}_label-discs_dlabel"
   FILELABELMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/anat/${FILELABEL}.nii.gz"
-  # Fallback to the dcm-olomouc_derivatives naming convention (${file}_label-disc.nii.gz)
-  if [[ ! -e $FILELABELMANUAL && -e ${PATH_DERIVATIVES}/labels/${SUBJECT}/anat/${file}_label-disc.nii.gz ]]; then
-    FILELABELMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/anat/${file}_label-disc.nii.gz"
-  fi
+  # Fallback to other naming conventions: ${file}_label-disc.nii.gz (dcm-olomouc, sci-olomouc) and
+  # ${file}_discs.nii.gz (sci-chicago)
+  for suffix in label-disc discs; do
+    if [[ ! -e $FILELABELMANUAL && -e ${PATH_DERIVATIVES}/labels/${SUBJECT}/anat/${file}_${suffix}.nii.gz ]]; then
+      FILELABELMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/anat/${file}_${suffix}.nii.gz"
+    fi
+  done
   echo "Looking for manual disc labels: $FILELABELMANUAL"
   if [[ -e $FILELABELMANUAL ]]; then
     echo "✏️ [$(date '+%Y-%m-%d %H:%M:%S')] Found! Using manual disc labels."
@@ -194,7 +200,15 @@ rsync -avzh ${PATH_DATA}/${SUBJECT}/dwi/${file_dwi}.* ${SUBJECT}/dwi/
 # ==============================================================================
 cd ${SUBJECT}/anat
 
-file_t2="${file}_T2w"
+# Select the T2w file: sub-XX_T2w, or sub-XX_acq-sag_T2w (e.g., sci-olomouc)
+if [[ -e ${file}_T2w.nii.gz ]]; then
+  file_t2="${file}_T2w"
+elif [[ -e ${file}_acq-sag_T2w.nii.gz ]]; then
+  file_t2="${file}_acq-sag_T2w"
+else
+  echo "${SUBJECT}: no T2w file found (neither ${file}_T2w.nii.gz nor ${file}_acq-sag_T2w.nii.gz)" >> "${PATH_LOG}/_error_check_output_files.log"
+  exit 1
+fi
 echo "👉 Processing T2w: ${file_t2}"
 
 # Segment spinal cord
@@ -314,11 +328,11 @@ sct_qc \
 # QC: bring DWI vertebral levels into T2w space to check DWI FOV coverage
 sct_register_multimodal \
   -i label_${file_dwi}/template/PAM50_levels.nii.gz \
-  -d ../anat/${file}_T2w.nii.gz \
+  -d ../anat/${file_t2}.nii.gz \
   -identity 1 -x nn
-rm -f warp_PAM50_levels2${file}_T2w.nii.gz warp_${file}_T2w2PAM50_levels.nii.gz ${file}_T2w_reg.nii.gz
+rm -f warp_PAM50_levels2${file_t2}.nii.gz warp_${file_t2}2PAM50_levels.nii.gz ${file_t2}_reg.nii.gz
 sct_qc \
-  -i ../anat/${file}_T2w.nii.gz \
+  -i ../anat/${file_t2}.nii.gz \
   -s PAM50_levels_reg.nii.gz \
   -p sct_label_vertebrae \
   -qc ${PATH_QC} -qc-subject "PAM50_levels_DWI_to_T2w"
@@ -562,7 +576,7 @@ echo "✅ Done: ${SUBJECT}"
 # Check output files
 # ==============================================================================
 FILES_TO_CHECK=(
-  "anat/${file}_T2w_label-SC_seg.nii.gz"
+  "anat/${file_t2}_label-SC_seg.nii.gz"
   "dwi/${file}_rec-average_dwi_label-SC_seg.nii.gz"
   "dwi/${file_dwi}_FA.nii.gz"
   "dwi/${file_dwi}_MD.nii.gz"

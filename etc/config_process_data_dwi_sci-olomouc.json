@@ -1,5 +1,5 @@
 {
-  "path_data"   : "~/data/dwi_normative/sci-olomouc",
+  "path_data"   : "~/data/dwi_normative_database/sci-olomouc",
   "path_output" : "~/results/dwi_normative_database/dwi_normative_database_2026-10-16_sci-olomouc",
   "script"      : "~/code/PAM50-normalized-metrics/processing_scripts/process_data_spine-generic_dwi.sh",
   "jobs"        : 2,
