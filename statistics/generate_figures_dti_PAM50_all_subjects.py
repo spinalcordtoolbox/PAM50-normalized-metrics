@@ -53,6 +53,14 @@ METRIC_TO_AXIS = {
 # in ×10⁻³ mm²/s (values ~0.3-1.5 instead of ~0.0003-0.0015). FA is unitless.
 METRIC_SCALE = {'FA': 1, 'MD': 1000, 'RD': 1000, 'AD': 1000}
 
+# Abbreviated axis labels (-metric-abbrev 1), e.g. for compact multi-panel figures
+METRIC_TO_AXIS_ABBREV = {
+    'FA': 'FA [a.u.]',
+    'MD': r'MD [$\times10^{-3}$ mm²/s]',
+    'RD': r'RD [$\times10^{-3}$ mm²/s]',
+    'AD': r'AD [$\times10^{-3}$ mm²/s]',
+}
+
 # Human-readable names for tract labels from sct_extract_metric output
 # Legend: https://spinalcordtoolbox.com/overview/concepts/pam50.html#white-and-gray-matter-atlas
 LABEL_DISPLAY_NAMES = {
@@ -85,7 +93,8 @@ LABEL_PALETTE = {
 
 FIGURE_TYPES = ['per-metric', 'per-label', 'all-labels', 'all-labels-grid']
 
-LABELS_FONT_SIZE = 20
+DEFAULT_FONT_SIZE = 20
+LABELS_FONT_SIZE = DEFAULT_FONT_SIZE
 TICKS_FONT_SIZE = LABELS_FONT_SIZE-2
 # Font size of the per-level subject counts (n=...) below the vertebral level labels
 N_FONT_SIZE = TICKS_FONT_SIZE-6
@@ -100,6 +109,14 @@ ERRORBAR = 'sd'
 # Where the number of subjects is shown: False → per vertebral level below the level labels on the x-axis;
 # True → per dataset (or sex) in the legend. Can be changed with -n-in-legend.
 N_IN_LEGEND = False
+# Show the number of subjects per vertebral level on the x-axis. Can be changed with -show-n.
+SHOW_N = True
+# Vertebral level labels (C2, C3, ...) only in the bottom row of 2x2 figures. See -level-labels-bottom-only.
+LEVEL_LABELS_BOTTOM_ONLY = False
+# Fixed number of decimals of the y-axis tick labels (None: matplotlib default). See -ytick-decimals.
+YTICK_DECIMALS = None
+# Width of the mean lines. Can be changed with -linewidth.
+LINEWIDTH = 2
 # Legend placement: subplot (DTI metric, -figure-type per-label) and location. See -legend-metric, -legend-loc.
 LEGEND_METRIC = 'FA'
 LEGEND_LOC = 'upper right'
@@ -155,6 +172,27 @@ def get_parser():
         '-n-in-legend', required=False, type=int, choices=[0, 1], default=0,
         help='0: number of subjects per vertebral level below the level labels (default). 1: number of '
              'subjects per dataset (or sex) in the legend instead, no counts on the x-axis.')
+    parser.add_argument(
+        '-show-n', required=False, type=int, choices=[0, 1], default=1,
+        help='1: number of subjects per vertebral level below the level labels (default). 0: no counts.')
+    parser.add_argument(
+        '-level-labels-bottom-only', required=False, type=int, choices=[0, 1], default=0,
+        help='1: vertebral level labels (C2, C3, ...) only in the bottom row of 2x2 figures '
+             '(-figure-type per-label, all-labels-grid). Default: 0 (all subplots).')
+    parser.add_argument(
+        '-metric-abbrev', required=False, type=int, choices=[0, 1], default=0,
+        help='1: abbreviated y-axis labels (e.g. "FA [a.u.]" instead of "Fractional Anisotropy [a.u.]"). '
+             'Default: 0.')
+    parser.add_argument(
+        '-ytick-decimals', required=False, type=int, default=None,
+        help='Fixed number of decimals of the y-axis tick labels (e.g. 1). Default: matplotlib default.')
+    parser.add_argument(
+        '-linewidth', required=False, type=float, default=LINEWIDTH,
+        help=f'Width of the mean lines. Default: {LINEWIDTH}.')
+    parser.add_argument(
+        '-font-size', required=False, type=int, default=LABELS_FONT_SIZE,
+        help=f'Font size of axis labels; tick labels and legends are scaled accordingly. '
+             f'Default: {LABELS_FONT_SIZE}.')
     parser.add_argument(
         '-legend-metric', required=False, choices=DTI_METRICS, default=DTI_METRICS[0],
         help='-figure-type per-label: subplot (DTI metric) holding the legend. Default: FA.')
@@ -442,7 +480,7 @@ def vert_num_to_label(v):
     return f'T{v - 7}' if v > 7 else f'C{v}'
 
 
-def annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ymin):
+def annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ymin, show_levels=True):
     """
     Overlay vertebral disc boundary lines and level text labels on an axis.
 
@@ -453,11 +491,14 @@ def annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ym
         vert_at_mid   : vertebral level numbers at mid_slices positions.
         n_per_level   : dict mapping VertLevel → subject count.
         ymin (float)  : bottom of the y-axis (anchor for text labels).
+        show_levels (bool): draw the level labels (and subject counts); False draws only the disc lines.
     """
     for s in disc_slices:
         ax.axvline(s, color='black', linestyle='--', alpha=0.5, zorder=0)
+    if not show_levels:
+        return
     for s, v in zip(mid_slices, vert_at_mid):
-        if N_IN_LEGEND:
+        if N_IN_LEGEND or not SHOW_N:
             # Subject counts are in the legend; vertebral level label at the bottom
             ax.text(s, ymin, vert_num_to_label(v),
                     ha='center', va='bottom', fontsize=TICKS_FONT_SIZE, color='black')
@@ -490,6 +531,14 @@ def add_legend(ax, df, hue, loc, fontsize):
     ax.legend(handles, labels, loc=loc, fontsize=fontsize)
 
 
+def fig_scale():
+    """
+    Figure size factor for fonts larger than the default (-font-size): grows with the square root of the
+    font size ratio, so that the text gets relatively larger while the axis labels still have room.
+    """
+    return max(1.0, (LABELS_FONT_SIZE / DEFAULT_FONT_SIZE) ** 0.5)
+
+
 def style_ax(ax):
     """Apply shared axis styling (spines, grid, tick size, x-axis inversion)."""
     ax.spines['right'].set_visible(False)
@@ -500,6 +549,16 @@ def style_ax(ax):
     ax.set_axisbelow(True)
     ax.invert_xaxis()
     ax.tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
+    if YTICK_DECIMALS is not None:
+        # Tick spacing of 1, 2 or 5 × 10^k (not e.g. 0.25), and at least 10^-decimals, so that every tick
+        # value is shown exactly with the fixed number of decimals
+        step = 10 ** -YTICK_DECIMALS
+        locator = mpl.ticker.MaxNLocator(steps=[1, 2, 5, 10])
+        ticks = locator.tick_values(*ax.get_ylim())
+        if len(ticks) > 1 and np.diff(ticks).min() < step - 1e-12:
+            locator = mpl.ticker.MultipleLocator(step)
+        ax.yaxis.set_major_locator(locator)
+        ax.yaxis.set_major_formatter(mpl.ticker.FormatStrFormatter(f'%.{YTICK_DECIMALS}f'))
 
 
 def create_lineplot_dti(df, metric, labels, path_out, hue=None, dataset_style=None):
@@ -525,7 +584,7 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None, dataset_style=No
 
     nrows = 2
     ncols = int(np.ceil(len(labels) / nrows))
-    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6, nrows * 5))
+    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6 * fig_scale(), nrows * 5 * fig_scale()))
     axs = np.array(axes).ravel()
 
     # Hide unused subplots (when n_labels is odd)
@@ -568,7 +627,7 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None, dataset_style=No
             # style=hue varies linestyle per dataset (1st solid, 2nd dashed, ...)
             # and alpha lets overlapping traces be seen through one another.
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
-                         hue=hue, style=hue, errorbar=ERRORBAR, linewidth=2,
+                         hue=hue, style=hue, errorbar=ERRORBAR, linewidth=LINEWIDTH,
                          palette=palette, dashes=dashes, alpha=0.7)
             if i == 0:
                 if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
@@ -580,7 +639,7 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None, dataset_style=No
                 ax.get_legend().remove()
         else:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
-                         errorbar=ERRORBAR, linewidth=2, color='steelblue')
+                         errorbar=ERRORBAR, linewidth=LINEWIDTH, color='steelblue')
 
         ax.set_title(LABEL_DISPLAY_NAMES.get(label, label), fontsize=LABELS_FONT_SIZE)
         # X-axis label and ticks only on bottom row
@@ -655,7 +714,7 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=N
         palette, dashes = dataset_style['palette'], dataset_style['dashes']
 
     nrows, ncols = 2, 2
-    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6, nrows * 5))
+    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6 * fig_scale(), nrows * 5 * fig_scale()))
     axs = np.array(axes).ravel()
 
     for i, (ax, metric) in enumerate(zip(axs, DTI_METRICS)):
@@ -665,7 +724,7 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=N
 
         if hue is not None:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_metric,
-                         hue=hue, style=hue, errorbar=ERRORBAR, linewidth=2,
+                         hue=hue, style=hue, errorbar=ERRORBAR, linewidth=LINEWIDTH,
                          palette=palette, dashes=dashes, alpha=0.7)
             if metric == LEGEND_METRIC:
                 if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
@@ -676,7 +735,7 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=N
                 ax.get_legend().remove()
         else:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_metric,
-                         errorbar=ERRORBAR, linewidth=2, color=LABEL_PALETTE.get(label, 'steelblue'))
+                         errorbar=ERRORBAR, linewidth=LINEWIDTH, color=LABEL_PALETTE.get(label, 'steelblue'))
 
         # X-axis label and ticks only on bottom row
         if i >= ncols:
@@ -687,7 +746,8 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=N
         ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
         style_ax(ax)
         ax.set_xlim(xlim_max, xlim_min)  # inverted x-axis (rostral on the left)
-        annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ax.get_ylim()[0])
+        annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ax.get_ylim()[0],
+                           show_levels=not LEVEL_LABELS_BOTTOM_ONLY or i >= ncols)
 
     fig.suptitle(LABEL_DISPLAY_NAMES.get(label, label), fontsize=LABELS_FONT_SIZE + 2, y=1.01)
     plt.tight_layout()
@@ -702,7 +762,7 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=N
     plt.close()
 
 
-def plot_all_labels(ax, df, metric, labels):
+def plot_all_labels(ax, df, metric, labels, show_levels=True):
     """
     Draw a single DTI metric with all ROI labels overlaid into an axis, one color (and linestyle)
     per label. The seaborn legend is left on the axis for the caller to place or remove.
@@ -712,6 +772,7 @@ def plot_all_labels(ax, df, metric, labels):
         df       (pd.DataFrame): long-format dataframe for all metrics / subjects (single dataset).
         metric   (str): DTI metric to plot (e.g. 'FA').
         labels   (list[str]): tract/region labels, one line each.
+        show_levels (bool): draw the vertebral level labels (see annotate_vertebrae()).
     """
     disc_slices, mid_slices, vert_at_mid, xlim_min, xlim_max, n_per_level = \
         get_vert_reference(df, metric, labels[0])
@@ -725,13 +786,14 @@ def plot_all_labels(ax, df, metric, labels):
     # style varies linestyle per label, so that labels are not distinguished by color alone
     sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df,
                  hue='Label', hue_order=display_names, style='Label', style_order=display_names,
-                 errorbar=ERRORBAR, err_kws={'alpha': 0.1}, linewidth=2, palette=palette)
+                 errorbar=ERRORBAR, err_kws={'alpha': 0.1}, linewidth=LINEWIDTH, palette=palette)
 
     ax.set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
     ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
     style_ax(ax)
     ax.set_xlim(xlim_max, xlim_min)  # inverted x-axis (rostral on the left)
-    annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ax.get_ylim()[0])
+    annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ax.get_ylim()[0],
+                       show_levels=show_levels)
 
 
 def create_lineplot_dti_all_labels(df, metric, labels, path_out):
@@ -772,11 +834,11 @@ def create_lineplot_dti_all_labels_grid(df, labels, path_out):
     mpl.rcParams['font.family'] = 'Arial'
 
     nrows, ncols = 2, 2
-    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6, nrows * 5))
+    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6 * fig_scale(), nrows * 5 * fig_scale()))
     axs = np.array(axes).ravel()
 
     for i, (ax, metric) in enumerate(zip(axs, DTI_METRICS)):
-        plot_all_labels(ax, df, metric, labels)
+        plot_all_labels(ax, df, metric, labels, show_levels=not LEVEL_LABELS_BOTTOM_ONLY or i >= ncols)
         handles, legend_labels = ax.get_legend_handles_labels()
         ax.get_legend().remove()
         # X-axis label and ticks only on bottom row
@@ -785,6 +847,9 @@ def create_lineplot_dti_all_labels_grid(df, labels, path_out):
             ax.tick_params(axis='x', labelbottom=False)
 
     plt.tight_layout()
+    # Extra space between columns: tight_layout leaves too little room for the right column's y-axis
+    # label with large fonts (-font-size)
+    plt.subplots_adjust(wspace=0.3 * fig_scale())
     # Shared legend below the subplots
     fig.legend(handles, legend_labels, loc='upper center', bbox_to_anchor=(0.5, 0),
                ncol=3, frameon=False, fontsize=TICKS_FONT_SIZE-2, handlelength=3)
@@ -805,9 +870,17 @@ def main():
         args.participant_file = os.path.expanduser(args.participant_file)
 
     global XLIM_VERT_RANGE, ERRORBAR, N_IN_LEGEND, LEGEND_METRIC, LEGEND_LOC
+    global SHOW_N, LEVEL_LABELS_BOTTOM_ONLY, YTICK_DECIMALS, LINEWIDTH, LABELS_FONT_SIZE, TICKS_FONT_SIZE, N_FONT_SIZE
     XLIM_VERT_RANGE = tuple(args.vert_range)
     ERRORBAR = None if args.errorbar == 'none' else args.errorbar
     N_IN_LEGEND, LEGEND_METRIC, LEGEND_LOC = bool(args.n_in_legend), args.legend_metric, args.legend_loc
+    SHOW_N, LEVEL_LABELS_BOTTOM_ONLY = bool(args.show_n), bool(args.level_labels_bottom_only)
+    YTICK_DECIMALS, LINEWIDTH = args.ytick_decimals, args.linewidth
+    LABELS_FONT_SIZE = args.font_size
+    TICKS_FONT_SIZE = LABELS_FONT_SIZE - 2
+    N_FONT_SIZE = TICKS_FONT_SIZE - 6
+    if args.metric_abbrev:
+        METRIC_TO_AXIS.update(METRIC_TO_AXIS_ABBREV)
 
     # Validate -dataset-labels count
     if args.dataset_labels is not None:
