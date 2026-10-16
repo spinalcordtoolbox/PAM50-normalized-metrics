@@ -1,0 +1,16 @@
+{
+  "path_data"   : "~/data/dwi_normative/sci-chicago_double_dose_4AP",
+  "path_output" : "~/results/dwi_normative_database/dwi_normative_database_2026-10-16_sci-chicago",
+  "script"      : "~/code/PAM50-normalized-metrics/processing_scripts/process_data_spine-generic_dwi.sh",
+  "jobs"        : 8,
+  "include_list" : [
+    "sub-chicago001/ses-pre",
+    "sub-chicago001/ses-post",
+    "sub-chicago017/ses-pre",
+    "sub-chicago017/ses-post",
+    "sub-chicago018/ses-pre",
+    "sub-chicago018/ses-post",
+    "sub-chicago019/ses-pre",
+    "sub-chicago019/ses-post"
+  ]
+}

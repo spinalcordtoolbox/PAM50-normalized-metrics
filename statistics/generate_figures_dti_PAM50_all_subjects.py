@@ -160,6 +160,11 @@ def get_parser():
              'levels are dropped for that dataset (e.g. to hide levels covered by only a few '
              'subjects). Must match the number of paths. Default: no restriction.')
     parser.add_argument(
+        '-dataset-last-level', required=False, nargs='+', type=int, default=None,
+        help='Last vertebral level (C1=1 … C7=7) to plot for each -path-results entry; more caudal '
+             'levels are dropped for that dataset (e.g. to hide the edge of the acquired field of view). '
+             'Must match the number of paths. Default: no restriction.')
+    parser.add_argument(
         '-labels-to-plot', required=False, nargs='+',
         default=['white matter'],
         help='Tract/region label(s) to plot. Default: "white matter". '
@@ -890,7 +895,7 @@ def main():
     else:
         dataset_labels = [os.path.basename(os.path.normpath(p)) for p in args.path_results]
 
-    for arg_name in ['dataset_colors', 'dataset_linestyles', 'dataset_first_level']:
+    for arg_name in ['dataset_colors', 'dataset_linestyles', 'dataset_first_level', 'dataset_last_level']:
         values = getattr(args, arg_name)
         if values is not None and len(values) != len(args.path_results):
             parser.error(f'-{arg_name.replace("_", "-")} must have the same number of entries as -path-results')
@@ -907,6 +912,8 @@ def main():
         if args.dataset_first_level is not None:
             first_level = args.dataset_first_level[len(all_frames)]
             df = df[df['VertLevel'] >= first_level]
+        if args.dataset_last_level is not None:
+            df = df[df['VertLevel'] <= args.dataset_last_level[len(all_frames)]]
         n_subjects = df['participant_id'].nunique()
         print(f'    {n_subjects} subject(s), {len(df)} rows loaded')
         all_frames.append(df)
