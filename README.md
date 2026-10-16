@@ -64,6 +64,7 @@ The table below summarizes all datasets included in this repository. It is also 
 | spinal_cord | UCLA LA5c | 254 | 254 | n/a | healthy controls and neuropsychiatric patients | 146/108/0 | 33.0±9.3 [21–50] | cervical spine | T1w | 1.0mm iso | [openneuro/ds000030](https://openneuro.org/datasets/ds000030) |
 | spinal_cord | BLSA | 1095 | 3170 | n/a | Healthy Control, MCI, and dementia | 484/577/34 | 66.1±14.8 [22–94] | cervical spine | T1w | 1.0mm iso | [blsa.nih.gov](https://www.blsa.nih.gov) |
 | spinal_cord | Spinal Cord Head Positions | 10 | 30 | n/a | healthy adults | 7/3/0 | 22.9±1.2 [22–26] | cervical spine | T2w | 0.6mm iso | [OpenNeuro ds004507](https://openneuro.org/datasets/ds004507/versions/1.1.2) |
+| spinal_cord | Simultaneous Brain and Spinal Cord at rest | 31 | 31 | n/a | healthy adults | 15/16/0 | 32.8±6.9 [22–45] | cervical spine | T1w | 1.3mm iso | [OpenNeuro ds005075](https://openneuro.org/datasets/ds005075/versions/1.0.1) |
 <!-- datasets-table-end -->
 
 ## Datasets Structure
