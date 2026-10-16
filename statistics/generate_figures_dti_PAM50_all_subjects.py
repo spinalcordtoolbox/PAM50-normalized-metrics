@@ -89,7 +89,11 @@ LABELS_FONT_SIZE = 20
 TICKS_FONT_SIZE = LABELS_FONT_SIZE-2
 
 # X-axis is restricted to this inclusive range of vertebral levels (C1=1 … C7=7, T1=8 …).
+# Default; can be changed with -vert-range.
 XLIM_VERT_RANGE = (2, 5)
+
+# Band around the mean across subjects: 'sd' (± 1 SD) or None (lines only). Can be changed with -errorbar.
+ERRORBAR = 'sd'
 
 # Dash patterns for -dataset-linestyles (seaborn format: '' is solid, otherwise (dash, gap))
 LINESTYLE_DASHES = {'solid': '', 'dashed': (4, 1.5), 'dotted': (1, 1), 'dashdot': (3, 1.25, 1.5, 1.25)}
@@ -128,6 +132,20 @@ def get_parser():
         default=['white matter'],
         help='Tract/region label(s) to plot. Default: "white matter". '
              f'Available: {list(LABEL_DISPLAY_NAMES.keys())}')
+    parser.add_argument(
+        '-errorbar', required=False, choices=['sd', 'none'], default='sd',
+        help='Band around the mean across subjects: "sd" (± 1 SD, default) or "none" (lines only, '
+             'e.g. when many datasets are overlaid).')
+    parser.add_argument(
+        '-vert-range', required=False, nargs=2, type=int, default=list(XLIM_VERT_RANGE),
+        metavar=('FIRST', 'LAST'),
+        help='Inclusive range of vertebral levels shown on the x-axis (C1=1 … C7=7). '
+             f'Default: {XLIM_VERT_RANGE[0]} {XLIM_VERT_RANGE[1]} (C2-C5).')
+    parser.add_argument(
+        '-common-subjects', required=False, type=int, choices=[0, 1], default=1,
+        help='1: with several -path-results, keep only subjects with complete data in all of them '
+             '(paired comparison of methods on the same subjects). 0: keep all subjects (comparison '
+             'of independent cohorts, e.g. two datasets). Default: 1.')
     parser.add_argument(
         '-metrics', required=False, nargs='+', choices=DTI_METRICS, default=DTI_METRICS,
         help='DTI metric(s) to plot with -figure-type per-metric and all-labels. Default: all.')
@@ -475,7 +493,7 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None, dataset_style=No
             # style=hue varies linestyle per dataset (1st solid, 2nd dashed, ...)
             # and alpha lets overlapping traces be seen through one another.
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
-                         hue=hue, style=hue, errorbar='sd', linewidth=2,
+                         hue=hue, style=hue, errorbar=ERRORBAR, linewidth=2,
                          palette=palette, dashes=dashes, alpha=0.7)
             if i == 0:
                 if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
@@ -487,7 +505,7 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None, dataset_style=No
                 ax.get_legend().remove()
         else:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
-                         errorbar='sd', linewidth=2, color='steelblue')
+                         errorbar=ERRORBAR, linewidth=2, color='steelblue')
 
         ax.set_title(LABEL_DISPLAY_NAMES.get(label, label), fontsize=LABELS_FONT_SIZE)
         # X-axis label and ticks only on bottom row
@@ -572,7 +590,7 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=N
 
         if hue is not None:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_metric,
-                         hue=hue, style=hue, errorbar='sd', linewidth=2,
+                         hue=hue, style=hue, errorbar=ERRORBAR, linewidth=2,
                          palette=palette, dashes=dashes, alpha=0.7)
             if i == 0:
                 if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
@@ -583,7 +601,7 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=N
                 ax.get_legend().remove()
         else:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_metric,
-                         errorbar='sd', linewidth=2, color='steelblue')
+                         errorbar=ERRORBAR, linewidth=2, color='steelblue')
 
         # X-axis label and ticks only on bottom row
         if i >= ncols:
@@ -632,7 +650,7 @@ def plot_all_labels(ax, df, metric, labels):
     # style varies linestyle per label, so that labels are not distinguished by color alone
     sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df,
                  hue='Label', hue_order=display_names, style='Label', style_order=display_names,
-                 errorbar='sd', err_kws={'alpha': 0.1}, linewidth=2, palette=palette)
+                 errorbar=ERRORBAR, err_kws={'alpha': 0.1}, linewidth=2, palette=palette)
 
     ax.set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
     ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
@@ -705,6 +723,15 @@ def create_lineplot_dti_all_labels_grid(df, labels, path_out):
 def main():
     parser = get_parser()
     args = parser.parse_args()
+    # Expand "~" also when the script is not started from a shell (e.g. from an IDE run configuration)
+    args.path_results = [os.path.expanduser(p) for p in args.path_results]
+    args.path_out = os.path.expanduser(args.path_out)
+    if args.participant_file is not None:
+        args.participant_file = os.path.expanduser(args.participant_file)
+
+    global XLIM_VERT_RANGE, ERRORBAR
+    XLIM_VERT_RANGE = tuple(args.vert_range)
+    ERRORBAR = None if args.errorbar == 'none' else args.errorbar
 
     # Validate -dataset-labels count
     if args.dataset_labels is not None:
@@ -734,7 +761,7 @@ def main():
     df_all = pd.concat(all_frames, ignore_index=True)
 
     # Compare datasets on the same subjects
-    if len(args.path_results) > 1:
+    if len(args.path_results) > 1 and args.common_subjects:
         df_all = keep_common_subjects(df_all, args.labels_to_plot)
 
     # Merge sex from participants.tsv when provided
