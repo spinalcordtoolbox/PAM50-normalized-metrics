@@ -37,6 +37,21 @@
 # sites only healthy controls, site and diagnosis are confounded and ComBat would remove the
 # disease effect together with the site effect.
 #
+# ComBat does the following with the data:
+#       1. Remove what you want to keep. It first models the biological effects listed as covariates (i.e., age and sex).
+#          These are set aside so they aren't mistaken for scanner effects.
+#       2. Measure each scanner's "fingerprint". For each batch (i.e., scanner model) it estimates two numbers:
+#               - shift: how much this scanner reads higher or lower than average (e.g., MD is 0.05 higher on Philips);
+#               - scale: how much more or less spread its values have.
+#          It does this separately for every feature (i.e., every slice × tract × metric).
+#       3. Borrow strength (the "empirical Bayes" part). With only 4 subjects on one scanner, its fingerprint estimate
+#           is noisy. ComBat assumes the shifts across all features of one scanner look roughly alike, and pulls extreme
+#           estimates toward that common pattern. This is why it works with small batches.
+#       4. Each value is adjusted: remove the scanner's shift, undo its extra spread, then put the age and sex effects back.
+#
+# The result is what each subject would roughly look like on an "average scanner". This average is the pooled reference,
+# not any one specific scanner.
+#
 # Outputs (in -path-out):
 #   combat_perslice.csv                  : long table with raw and harmonized per-slice values
 #   combat_between_scanner_cov.csv       : between-scanner CoV per slice (training dataset), raw vs harmonized
