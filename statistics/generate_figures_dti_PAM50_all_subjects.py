@@ -97,6 +97,13 @@ XLIM_VERT_RANGE = (2, 5)
 # Band around the mean across subjects: 'sd' (± 1 SD) or None (lines only). Can be changed with -errorbar.
 ERRORBAR = 'sd'
 
+# Where the number of subjects is shown: False → per vertebral level below the level labels on the x-axis;
+# True → per dataset (or sex) in the legend. Can be changed with -n-in-legend.
+N_IN_LEGEND = False
+# Legend placement: subplot (DTI metric, -figure-type per-label) and location. See -legend-metric, -legend-loc.
+LEGEND_METRIC = 'FA'
+LEGEND_LOC = 'upper right'
+
 # Dash patterns for -dataset-linestyles (seaborn format: '' is solid, otherwise (dash, gap))
 LINESTYLE_DASHES = {'solid': '', 'dashed': (4, 1.5), 'dotted': (1, 1), 'dashdot': (3, 1.25, 1.5, 1.25)}
 
@@ -144,6 +151,17 @@ def get_parser():
         '-errorbar', required=False, choices=['sd', 'none'], default='sd',
         help='Band around the mean across subjects: "sd" (± 1 SD, default) or "none" (lines only, '
              'e.g. when many datasets are overlaid).')
+    parser.add_argument(
+        '-n-in-legend', required=False, type=int, choices=[0, 1], default=0,
+        help='0: number of subjects per vertebral level below the level labels (default). 1: number of '
+             'subjects per dataset (or sex) in the legend instead, no counts on the x-axis.')
+    parser.add_argument(
+        '-legend-metric', required=False, choices=DTI_METRICS, default=DTI_METRICS[0],
+        help='-figure-type per-label: subplot (DTI metric) holding the legend. Default: FA.')
+    parser.add_argument(
+        '-legend-loc', required=False, default='upper right',
+        help='-figure-type per-label/per-metric: legend location within its subplot (matplotlib loc, '
+             'e.g. "upper left"). Default: "upper right".')
     parser.add_argument(
         '-vert-range', required=False, nargs=2, type=int, default=list(XLIM_VERT_RANGE),
         metavar=('FIRST', 'LAST'),
@@ -439,6 +457,11 @@ def annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ym
     for s in disc_slices:
         ax.axvline(s, color='black', linestyle='--', alpha=0.5, zorder=0)
     for s, v in zip(mid_slices, vert_at_mid):
+        if N_IN_LEGEND:
+            # Subject counts are in the legend; vertebral level label at the bottom
+            ax.text(s, ymin, vert_num_to_label(v),
+                    ha='center', va='bottom', fontsize=TICKS_FONT_SIZE, color='black')
+            continue
         n = n_per_level.get(v, 0)
         # Subject count in a smaller font at the bottom, vertebral level label right above it
         ax.text(s, ymin, f'n={n}',
@@ -446,6 +469,25 @@ def annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ym
         ax.annotate(vert_num_to_label(v), xy=(s, ymin), xytext=(0, N_FONT_SIZE * 1.3),
                     textcoords='offset points', ha='center', va='bottom',
                     fontsize=TICKS_FONT_SIZE, color='black')
+
+
+def add_legend(ax, df, hue, loc, fontsize):
+    """
+    Draw the seaborn hue legend on an axis; with N_IN_LEGEND, append the number of subjects with data
+    in the plotted range to each entry (e.g. "spine-generic, n=202").
+
+    Args:
+        ax       : matplotlib Axes with a seaborn lineplot (hue=hue).
+        df       (pd.DataFrame): plotted data (one metric, one label, plotted slice range).
+        hue      (str): hue column ('dataset' or 'sex').
+        loc      (str): matplotlib legend location.
+        fontsize (int): legend font size.
+    """
+    handles, labels = ax.get_legend_handles_labels()
+    if N_IN_LEGEND:
+        n = df.dropna(subset=['value']).groupby(hue)['participant_id'].nunique()
+        labels = [f'{lab}, n={n.get(lab, 0)}' for lab in labels]
+    ax.legend(handles, labels, loc=loc, fontsize=fontsize)
 
 
 def style_ax(ax):
@@ -533,7 +575,7 @@ def create_lineplot_dti(df, metric, labels, path_out, hue=None, dataset_style=No
                     ax.get_legend().remove()
                     add_factor_legends(ax, dataset_style, TICKS_FONT_SIZE-5)
                 else:
-                    ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE-5)
+                    add_legend(ax, df_label, hue, LEGEND_LOC, TICKS_FONT_SIZE-5)
             else:
                 ax.get_legend().remove()
         else:
@@ -625,11 +667,11 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=N
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_metric,
                          hue=hue, style=hue, errorbar=ERRORBAR, linewidth=2,
                          palette=palette, dashes=dashes, alpha=0.7)
-            if i == 0:
+            if metric == LEGEND_METRIC:
                 if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
                     ax.get_legend().remove()
                 else:
-                    ax.legend(loc='upper right', fontsize=TICKS_FONT_SIZE-5)
+                    add_legend(ax, df_metric, hue, LEGEND_LOC, TICKS_FONT_SIZE-5)
             else:
                 ax.get_legend().remove()
         else:
@@ -762,9 +804,10 @@ def main():
     if args.participant_file is not None:
         args.participant_file = os.path.expanduser(args.participant_file)
 
-    global XLIM_VERT_RANGE, ERRORBAR
+    global XLIM_VERT_RANGE, ERRORBAR, N_IN_LEGEND, LEGEND_METRIC, LEGEND_LOC
     XLIM_VERT_RANGE = tuple(args.vert_range)
     ERRORBAR = None if args.errorbar == 'none' else args.errorbar
+    N_IN_LEGEND, LEGEND_METRIC, LEGEND_LOC = bool(args.n_in_legend), args.legend_metric, args.legend_loc
 
     # Validate -dataset-labels count
     if args.dataset_labels is not None:
