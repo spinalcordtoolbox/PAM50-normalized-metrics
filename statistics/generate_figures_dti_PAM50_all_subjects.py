@@ -68,11 +68,11 @@ LABEL_DISPLAY_NAMES = {
     '30,31': 'Ventral Horn (L+R)',
 }
 
-# Fixed color per tract label for figures overlaying several ROIs in one axis (-figure-type all-labels).
+# Fixed color per tract label (-figure-type all-labels, and the single line of -figure-type per-label).
 # The color follows the tract, not its position in -labels-to-plot, so a tract keeps its color across figures.
 LABEL_PALETTE = {
-    'white matter':      '#0b0b0b',
-    'gray matter':       '#898781',
+    'white matter':      '#4cc9f0',
+    'gray matter':       '#c71585',
     'dorsal columns':    '#2a78d6',
     'lateral funiculi':  '#eb6834',
     'ventral funiculi':  '#1baf7a',
@@ -676,7 +676,7 @@ def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=N
                 ax.get_legend().remove()
         else:
             sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_metric,
-                         errorbar=ERRORBAR, linewidth=2, color='steelblue')
+                         errorbar=ERRORBAR, linewidth=2, color=LABEL_PALETTE.get(label, 'steelblue'))
 
         # X-axis label and ticks only on bottom row
         if i >= ncols:
