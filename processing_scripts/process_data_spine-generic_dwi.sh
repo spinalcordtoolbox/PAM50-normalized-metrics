@@ -123,6 +123,11 @@ segment_if_does_not_exist() {
       FILESEGMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/${folder_contrast}/${file}_${suffix}.nii.gz"
     fi
   done
+  # dcm-brno: DWI segmentation named after the motion-corrected DWI (${file_dwi}_seg.nii.gz, e.g.
+  # sub-XX_ses-XX_acq-ZOOMit_dir-AP_dwi_moco_seg.nii.gz), made on its mean with the same preprocessing as below
+  if [[ $contrast == "dwi" && ! -e $FILESEGMANUAL && -e ${PATH_DERIVATIVES}/labels/${SUBJECT}/dwi/${file_dwi}_seg.nii.gz ]]; then
+    FILESEGMANUAL="${PATH_DERIVATIVES}/labels/${SUBJECT}/dwi/${file_dwi}_seg.nii.gz"
+  fi
   # Define log prefix to have consistent log files for T2w and DWI files
   local log_prefix
   if [[ $contrast == "t2" ]]; then log_prefix="T2w"; else log_prefix="${contrast}"; fi
@@ -185,8 +190,11 @@ if [[ -e ${PATH_DATA}/${SUBJECT}/dwi/${file}_dwi.nii.gz ]]; then
 elif [[ -e ${PATH_DATA}/${SUBJECT}/dwi/${file}_run-01_dwi.nii.gz ]]; then
   file_dwi="${file}_run-01_dwi"
   echo "⚠️ [$(date '+%Y-%m-%d %H:%M:%S')] ${SUBJECT}: multiple DWI runs found --> using ${file_dwi}.nii.gz" >> "${PATH_LOG}/dwi_runs.log"
+elif [[ -e ${PATH_DATA}/${SUBJECT}/dwi/${file}_acq-ZOOMit_dir-AP_dwi.nii.gz ]]; then
+  # dcm-brno
+  file_dwi="${file}_acq-ZOOMit_dir-AP_dwi"
 else
-  echo "${SUBJECT}: no DWI file found (neither ${file}_dwi.nii.gz nor ${file}_run-01_dwi.nii.gz)" >> "${PATH_LOG}/_error_check_output_files.log"
+  echo "${SUBJECT}: no DWI file found (neither ${file}_dwi.nii.gz, ${file}_run-01_dwi.nii.gz nor ${file}_acq-ZOOMit_dir-AP_dwi.nii.gz)" >> "${PATH_LOG}/_error_check_output_files.log"
   exit 1
 fi
 
