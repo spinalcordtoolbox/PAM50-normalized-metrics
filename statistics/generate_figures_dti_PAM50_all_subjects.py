@@ -1,0 +1,979 @@
+#!/usr/bin/env python3
+#
+# Plot DTI metrics (FA, MD, RD, AD) computed per-slice in the PAM50 space
+# from sct_extract_metric output CSVs produced by process_data_spine-generic_dwi.sh.
+#
+# Usage (single run):
+#     python statistics/generate_figures_dti_PAM50_all_subjects.py \
+#         -path-results /path/to/results/dwi
+#
+# Usage (compare two preprocessing pipelines):
+#     python statistics/generate_figures_dti_PAM50_all_subjects.py \
+#         -path-results /path/to/run_A/results/dwi /path/to/run_B/results/dwi \
+#         -dataset-labels "Centerline 30mm" "Deepseg 35mm"
+#
+# Usage (one figure per ROI with all four DTI metrics; here warped vs interpolated for WM):
+#     python statistics/generate_figures_dti_PAM50_all_subjects.py \
+#         -path-results /path/to/results/dwi_PAM50 /path/to/results/dwi_interpolation_to_PAM50 \
+#         -dataset-labels "Warped" "Interpolated" \
+#         -labels-to-plot "white matter" -figure-type per-label
+#
+# Usage (one figure per DTI metric with all ROIs overlaid in different colors):
+#     python statistics/generate_figures_dti_PAM50_all_subjects.py \
+#         -path-results /path/to/results/dwi_interpolation_to_PAM50 \
+#         -labels-to-plot "dorsal columns" "lateral funiculi" "ventral funiculi" "4,5" "12,13" \
+#         -figure-type all-labels
+# (use -figure-type all-labels-grid for a single 2x2 figure with all four DTI metrics)
+#
+# Author: Jan Valosek
+#
+
+import os
+import glob
+import re
+import argparse
+import numpy as np
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+import seaborn as sns
+from tqdm import tqdm
+
+DTI_METRICS = ['FA', 'MD', 'RD', 'AD']
+
+METRIC_TO_AXIS = {
+    'FA': 'Fractional Anisotropy [a.u.]',
+    'MD': r'Mean Diffusivity [$\times10^{-3}$ mm²/s]',
+    'RD': r'Radial Diffusivity [$\times10^{-3}$ mm²/s]',
+    'AD': r'Axial Diffusivity [$\times10^{-3}$ mm²/s]',
+}
+
+# Diffusivity metrics (MD/RD/AD) are stored in mm²/s but conventionally displayed
+# in ×10⁻³ mm²/s (values ~0.3-1.5 instead of ~0.0003-0.0015). FA is unitless.
+METRIC_SCALE = {'FA': 1, 'MD': 1000, 'RD': 1000, 'AD': 1000}
+
+# Abbreviated axis labels (-metric-abbrev 1), e.g. for compact multi-panel figures
+METRIC_TO_AXIS_ABBREV = {
+    'FA': 'FA [a.u.]',
+    'MD': r'MD [$\times10^{-3}$ mm²/s]',
+    'RD': r'RD [$\times10^{-3}$ mm²/s]',
+    'AD': r'AD [$\times10^{-3}$ mm²/s]',
+}
+
+# Human-readable names for tract labels from sct_extract_metric output
+# Legend: https://spinalcordtoolbox.com/overview/concepts/pam50.html#white-and-gray-matter-atlas
+LABEL_DISPLAY_NAMES = {
+    'white matter':   'White Matter',
+    'gray matter':    'Gray Matter',
+    'dorsal columns': 'Dorsal Columns',
+    'lateral funiculi':  'Lateral Funiculi',
+    'ventral funiculi':  'Ventral Funiculi',
+    '0,1':   'Fasciculus Gracilis',
+    '2,3':   'Fasciculus Cuneatus',
+    '4,5':   'Lateral Corticospinal Tract',
+    '12,13': 'Spinal Lemniscus',
+    '30,31': 'Ventral Horn',
+}
+
+# Fixed color per tract label (-figure-type all-labels, and the single line of -figure-type per-label).
+# The color follows the tract, not its position in -labels-to-plot, so a tract keeps its color across figures.
+LABEL_PALETTE = {
+    'white matter':      '#4cc9f0',
+    'gray matter':       '#c71585',
+    'dorsal columns':    '#2a78d6',
+    'lateral funiculi':  '#eb6834',
+    'ventral funiculi':  '#1baf7a',
+    '4,5':               '#eda100',
+    '12,13':             '#e87ba4',
+    '0,1':               '#008300',
+    '2,3':               '#4a3aa7',
+    '30,31':             '#e34948',
+}
+
+FIGURE_TYPES = ['per-metric', 'per-label', 'all-labels', 'all-labels-grid']
+
+DEFAULT_FONT_SIZE = 20
+LABELS_FONT_SIZE = DEFAULT_FONT_SIZE
+TICKS_FONT_SIZE = LABELS_FONT_SIZE-2
+# Font size of the per-level subject counts (n=...) below the vertebral level labels
+N_FONT_SIZE = TICKS_FONT_SIZE-6
+
+# X-axis is restricted to this inclusive range of vertebral levels (C1=1 … C7=7, T1=8 …).
+# Default; can be changed with -vert-range.
+XLIM_VERT_RANGE = (2, 5)
+
+# Band around the mean across subjects: 'sd' (± 1 SD) or None (lines only). Can be changed with -errorbar.
+ERRORBAR = 'sd'
+
+# Where the number of subjects is shown: False → per vertebral level below the level labels on the x-axis;
+# True → per dataset (or sex) in the legend. Can be changed with -n-in-legend.
+N_IN_LEGEND = False
+# Show the number of subjects per vertebral level on the x-axis. Can be changed with -show-n.
+SHOW_N = True
+# Vertebral level labels (C2, C3, ...) only in the bottom row of 2x2 figures. See -level-labels-bottom-only.
+LEVEL_LABELS_BOTTOM_ONLY = False
+# Fixed number of decimals of the y-axis tick labels (None: matplotlib default). See -ytick-decimals.
+YTICK_DECIMALS = None
+# Width of the mean lines. Can be changed with -linewidth.
+LINEWIDTH = 2
+# Legend placement: subplot (DTI metric, -figure-type per-label) and location. See -legend-metric, -legend-loc.
+LEGEND_METRIC = 'FA'
+LEGEND_LOC = 'upper right'
+
+# Dash patterns for -dataset-linestyles (seaborn format: '' is solid, otherwise (dash, gap))
+LINESTYLE_DASHES = {'solid': '', 'dashed': (4, 1.5), 'dotted': (1, 1), 'dashdot': (3, 1.25, 1.5, 1.25)}
+
+SEX_PALETTE = {'Males': 'blue', 'Females': 'red'}
+SEX_LABEL_MAP = {'M': 'Males', 'F': 'Females'}
+
+
+def get_parser():
+    parser = argparse.ArgumentParser(
+        description='Plot DTI metrics (FA, MD, RD, AD) per slice in PAM50 space from '
+                    'sct_extract_metric CSV outputs.')
+    parser.add_argument(
+        '-path-results', required=True, nargs='+',
+        help='Path(s) to results/dwi folder(s) containing *_dwi_{FA,MD,RD,AD}_PAM50.csv '
+             'files. Provide multiple paths to overlay runs (e.g. to compare preprocessing '
+             'pipelines). A path can end with a filename prefix pattern to load only matching '
+             'files, e.g. "<dir>/*_ses-M0" for one session of a longitudinal dataset.')
+    parser.add_argument(
+        '-dataset-labels', required=False, nargs='+', default=None,
+        help='Legend labels for each -path-results entry. Must match the number of paths. '
+             'Defaults to the folder name of each path.')
+    parser.add_argument(
+        '-dataset-colors', required=False, nargs='+', default=None,
+        help='Line color (any matplotlib color, e.g. "tab:blue") for each -path-results entry. '
+             'Must match the number of paths. Default: tab10 palette, one color per dataset.')
+    parser.add_argument(
+        '-dataset-linestyles', required=False, nargs='+', default=None,
+        choices=list(LINESTYLE_DASHES.keys()),
+        help='Line style for each -path-results entry. Must match the number of paths. '
+             'Default: a different line style per dataset. Together with -dataset-colors, this '
+             'allows encoding two factors, e.g. color = registration, line style = -method. '
+             'If both are provided and each -dataset-labels entry has the form "<A>, <B>", two '
+             'separate legends are drawn: one for colors (<A>) and one for line styles (<B>).')
+    parser.add_argument(
+        '-dataset-first-level', required=False, nargs='+', type=int, default=None,
+        help='First vertebral level (C1=1 … C7=7) to plot for each -path-results entry; more rostral '
+             'levels are dropped for that dataset (e.g. to hide levels covered by only a few '
+             'subjects). Must match the number of paths. Default: no restriction.')
+    parser.add_argument(
+        '-dataset-last-level', required=False, nargs='+', type=int, default=None,
+        help='Last vertebral level (C1=1 … C7=7) to plot for each -path-results entry; more caudal '
+             'levels are dropped for that dataset (e.g. to hide the edge of the acquired field of view). '
+             'Must match the number of paths. Default: no restriction.')
+    parser.add_argument(
+        '-labels-to-plot', required=False, nargs='+',
+        default=['white matter'],
+        help='Tract/region label(s) to plot. Default: "white matter". '
+             f'Available: {list(LABEL_DISPLAY_NAMES.keys())}')
+    parser.add_argument(
+        '-errorbar', required=False, choices=['sd', 'none'], default='sd',
+        help='Band around the mean across subjects: "sd" (± 1 SD, default) or "none" (lines only, '
+             'e.g. when many datasets are overlaid).')
+    parser.add_argument(
+        '-n-in-legend', required=False, type=int, choices=[0, 1], default=0,
+        help='0: number of subjects per vertebral level below the level labels (default). 1: number of '
+             'subjects per dataset (or sex) in the legend instead, no counts on the x-axis.')
+    parser.add_argument(
+        '-show-n', required=False, type=int, choices=[0, 1], default=1,
+        help='1: number of subjects per vertebral level below the level labels (default). 0: no counts.')
+    parser.add_argument(
+        '-level-labels-bottom-only', required=False, type=int, choices=[0, 1], default=0,
+        help='1: vertebral level labels (C2, C3, ...) only in the bottom row of 2x2 figures '
+             '(-figure-type per-label, all-labels-grid). Default: 0 (all subplots).')
+    parser.add_argument(
+        '-metric-abbrev', required=False, type=int, choices=[0, 1], default=0,
+        help='1: abbreviated y-axis labels (e.g. "FA [a.u.]" instead of "Fractional Anisotropy [a.u.]"). '
+             'Default: 0.')
+    parser.add_argument(
+        '-ytick-decimals', required=False, type=int, default=None,
+        help='Fixed number of decimals of the y-axis tick labels (e.g. 1). Default: matplotlib default.')
+    parser.add_argument(
+        '-linewidth', required=False, type=float, default=LINEWIDTH,
+        help=f'Width of the mean lines. Default: {LINEWIDTH}.')
+    parser.add_argument(
+        '-font-size', required=False, type=int, default=LABELS_FONT_SIZE,
+        help=f'Font size of axis labels; tick labels and legends are scaled accordingly. '
+             f'Default: {LABELS_FONT_SIZE}.')
+    parser.add_argument(
+        '-legend-metric', required=False, choices=DTI_METRICS, default=DTI_METRICS[0],
+        help='-figure-type per-label: subplot (DTI metric) holding the legend. Default: FA.')
+    parser.add_argument(
+        '-legend-loc', required=False, default='upper right',
+        help='-figure-type per-label/per-metric: legend location within its subplot (matplotlib loc, '
+             'e.g. "upper left"). Default: "upper right".')
+    parser.add_argument(
+        '-vert-range', required=False, nargs=2, type=int, default=list(XLIM_VERT_RANGE),
+        metavar=('FIRST', 'LAST'),
+        help='Inclusive range of vertebral levels shown on the x-axis (C1=1 … C7=7). '
+             f'Default: {XLIM_VERT_RANGE[0]} {XLIM_VERT_RANGE[1]} (C2-C5).')
+    parser.add_argument(
+        '-common-subjects', required=False, type=int, choices=[0, 1], default=1,
+        help='1: with several -path-results, keep only subjects with complete data in all of them '
+             '(paired comparison of methods on the same subjects). 0: keep all subjects (comparison '
+             'of independent cohorts, e.g. two datasets). Default: 1.')
+    parser.add_argument(
+        '-metrics', required=False, nargs='+', choices=DTI_METRICS, default=DTI_METRICS,
+        help='DTI metric(s) to plot with -figure-type per-metric and all-labels. Default: all.')
+    parser.add_argument(
+        '-figure-type', required=False, nargs='+', choices=FIGURE_TYPES, default=['per-metric'],
+        help='Figure layout(s) to generate. '
+             '"per-metric": one figure per DTI metric, one subplot per label (default). '
+             '"per-label": one figure per label, one subplot per DTI metric (FA, MD, RD, AD). '
+             '"all-labels": one figure per DTI metric, all labels overlaid in a single axis in '
+             'different colors (single -path-results only). '
+             '"all-labels-grid": same as "all-labels", but a single 2x2 figure with one subplot '
+             'per DTI metric.')
+    parser.add_argument(
+        '-participant-file', required=False, default=None,
+        help='Path to participants.tsv with at least participant_id and sex columns. '
+             'Required to generate per-sex figures.')
+    parser.add_argument(
+        '-path-out', required=False, default='stats',
+        help='Output directory for saved figures. Default: stats/')
+    return parser
+
+
+def load_dti_csvs(path_results, dataset_label):
+    """
+    Load all DTI CSVs (FA, MD, RD, AD) from a results directory.
+
+    Args:
+        path_results (str): directory containing *_dwi_{metric}_PAM50.csv files, or such a directory
+            followed by a filename prefix pattern (e.g. "<dir>/*_ses-M0") to load only matching files.
+        dataset_label (str): label to assign to all rows (used for multi-run comparison).
+
+    Returns:
+        pd.DataFrame: long-format dataframe with columns:
+            participant_id, Slice (I->S), VertLevel, Label, metric, value, std, dataset
+    """
+    frames = []
+    for metric in DTI_METRICS:
+        # Matches both warped (`*_dwi_FA_PAM50.csv`) and interpolated
+        # (`*_dwi_FA_interpolated_to_PAM50.csv`) naming.
+        if os.path.isdir(path_results):
+            pattern = os.path.join(path_results, f'*_dwi_{metric}_*PAM50.csv')
+        else:
+            pattern = f'{path_results}_dwi_{metric}_*PAM50.csv'
+        csv_files = sorted(glob.glob(pattern))
+        if not csv_files:
+            print(f'  Warning: no {metric} CSVs found in {path_results}')
+            continue
+        for csv_file in tqdm(csv_files, desc=f'    {metric}', unit='subj', leave=False):
+            basename = os.path.basename(csv_file)
+            m = re.match(r'(sub-[^_]+(?:_ses-[^_]+)?)_dwi_', basename)
+            if not m:
+                print(f'  Warning: could not parse subject from {basename}, skipping')
+                continue
+            subject = m.group(1)
+            df = pd.read_csv(csv_file)
+            df['participant_id'] = subject
+            df['metric'] = metric
+            df['dataset'] = dataset_label
+            # Value column is named after the sct_extract_metric -method, e.g. MAP() or WA()
+            value_col = [c for c in df.columns if re.fullmatch(r'[A-Z]+\(\)', c) and c != 'STD()'][0]
+            df = df.rename(columns={value_col: 'value', 'STD()': 'std'})
+            if 'std' not in df.columns:
+                df['std'] = np.nan
+            # DTI maps warped to PAM50 are zero-filled outside the acquired FOV, so slices without
+            # any data get an exact 0 instead of NaN. Mask them to not bias the across-subject mean.
+            df.loc[df['value'] == 0, ['value', 'std']] = np.nan
+            df['value'] *= METRIC_SCALE[metric]
+            df['std'] *= METRIC_SCALE[metric]
+            frames.append(df[['participant_id', 'Slice (I->S)', 'VertLevel', 'Label',
+                               'metric', 'value', 'std', 'dataset']])
+    if not frames:
+        raise FileNotFoundError(f'No DTI CSVs found in {path_results}')
+    return pd.concat(frames, ignore_index=True)
+
+
+def get_dataset_style(dataset_labels, colors, linestyles):
+    """
+    Build the seaborn palette and dashes mappings for -dataset-colors and -dataset-linestyles.
+
+    Args:
+        dataset_labels (list[str]): dataset labels, one per -path-results entry.
+        colors     (list[str] or None): color per dataset; None → tab10 palette.
+        linestyles (list[str] or None): LINESTYLE_DASHES key per dataset; None → seaborn defaults.
+
+    Returns:
+        dict or None: {'palette': {dataset: color}, 'dashes': {dataset: dashes} or True};
+                      None if neither colors nor linestyles are provided.
+    """
+    if colors is None and linestyles is None:
+        return None
+    if colors is None:
+        colors = sns.color_palette('tab10', n_colors=len(dataset_labels))
+    dashes = True if linestyles is None else \
+        {ds: LINESTYLE_DASHES[ls] for ds, ls in zip(dataset_labels, linestyles)}
+    dataset_style = {'palette': dict(zip(dataset_labels, colors)), 'dashes': dashes}
+
+    # Two factors encoded by color and line style: "<A>, <B>" labels → one legend per factor
+    parts = [ds.split(', ') for ds in dataset_labels]
+    if colors is not None and linestyles is not None and all(len(p) == 2 for p in parts):
+        color_legend = dict((p[0], c) for p, c in zip(parts, colors))
+        linestyle_legend = dict((p[1], LINESTYLE_DASHES[ls]) for p, ls in zip(parts, linestyles))
+        # Each factor level has to map to a single color / line style
+        if len(color_legend) == len({(p[0], c) for p, c in zip(parts, colors)}) and \
+                len(linestyle_legend) == len({(p[1], ls) for p, ls in zip(parts, linestyles)}):
+            dataset_style['color_legend'] = color_legend
+            dataset_style['linestyle_legend'] = linestyle_legend
+        else:
+            print('  Warning: -dataset-labels parts do not map consistently to colors/line styles; '
+                  'drawing a single legend')
+    return dataset_style
+
+
+def add_factor_legends(target, dataset_style, fontsize):
+    """
+    Draw two legends, one for colors and one for line styles (see get_dataset_style()), side by
+    side below the figure (target=Figure) or stacked in the upper right corner (target=Axes).
+
+    Args:
+        target        : matplotlib Figure or Axes.
+        dataset_style (dict): output of get_dataset_style() with color_legend and linestyle_legend.
+        fontsize      (int): legend font size.
+    """
+    color_handles = [Line2D([], [], color=c, linewidth=2) for c in dataset_style['color_legend'].values()]
+    # Line styles are shown in neutral gray, so they do not suggest one of the colors
+    linestyle_handles = [Line2D([], [], color='dimgray', linewidth=2, dashes=d if d else (None, None))
+                         for d in dataset_style['linestyle_legend'].values()]
+    legend_kwargs = dict(fontsize=fontsize, handlelength=3)
+    if isinstance(target, plt.Figure):
+        legend_kwargs.update(frameon=False, ncol=2)
+        target.legend(color_handles, dataset_style['color_legend'].keys(),
+                      loc='upper right', bbox_to_anchor=(0.48, 0), **legend_kwargs)
+        target.legend(linestyle_handles, dataset_style['linestyle_legend'].keys(),
+                      loc='upper left', bbox_to_anchor=(0.52, 0), **legend_kwargs)
+    else:
+        legend_color = target.legend(color_handles, dataset_style['color_legend'].keys(),
+                                     loc='upper right', **legend_kwargs)
+        target.add_artist(legend_color)
+        target.legend(linestyle_handles, dataset_style['linestyle_legend'].keys(),
+                      loc='upper right', bbox_to_anchor=(1, 0.8), **legend_kwargs)
+
+
+def keep_common_subjects(df, labels):
+    """
+    Keep only subjects with all DTI metrics and all requested labels in every dataset, so that
+    datasets are compared on the same subjects (e.g. when a run is incomplete for some of them).
+
+    Args:
+        df     (pd.DataFrame): long-format dataframe for all metrics / subjects / datasets.
+        labels (list[str]): tract/region labels that have to be available.
+
+    Returns:
+        pd.DataFrame: df restricted to the common subjects.
+    """
+    df_labels = df[df['Label'].isin(labels)].dropna(subset=['value'])
+    n_combinations = (df_labels.groupby('participant_id')[['dataset', 'metric', 'Label']]
+                      .apply(lambda x: len(x.drop_duplicates())))
+    n_expected = df['dataset'].nunique() * len(DTI_METRICS) * len(labels)
+    subjects = n_combinations[n_combinations == n_expected].index
+    excluded = sorted(set(df['participant_id']) - set(subjects))
+    if excluded:
+        print(f'  Excluding {len(excluded)} subject(s) without complete data in all datasets: '
+              f'{", ".join(excluded)}')
+    print(f'  {len(subjects)} subject(s) common to all datasets')
+    return df[df['participant_id'].isin(subjects)]
+
+
+def format_counts(counts):
+    """
+    Format the number of subjects per dataset for a vertebral level label: a single number when all
+    datasets have the same count (e.g. paired comparison of methods), one number per dataset for two
+    datasets (e.g. "202/12"), and the min–max range for more datasets (to keep the label short).
+    """
+    if counts.nunique() == 1:
+        return str(counts.iloc[0])
+    if len(counts) <= 2:
+        return '/'.join(str(n) for n in counts)
+    return f'{counts.min()}–{counts.max()}'
+
+
+def get_vert_reference(df, metric, label):
+    """
+    Get everything needed to restrict the x-axis to XLIM_VERT_RANGE and to annotate vertebral
+    levels. Slices are in the PAM50 space, so the slice-to-level mapping is the same for all
+    subjects and is pooled across them (a single subject does not have to cover all levels).
+
+    Args:
+        df     (pd.DataFrame): long-format dataframe for all metrics / subjects / datasets.
+        metric (str): DTI metric used as reference (e.g. 'FA').
+        label  (str): tract/region label used as reference.
+
+    Returns:
+        disc_slices, mid_slices, vert_at_mid: see get_vert_indices(); restricted to the x-axis range.
+        xlim_min, xlim_max (int): slice range covering XLIM_VERT_RANGE.
+        n_per_level (dict): VertLevel → number of subjects with data (str; one number per dataset,
+                            separated by '/').
+    """
+    df_ref = df[(df['metric'] == metric) & (df['Label'] == label)]
+    ref = df_ref.dropna(subset=['VertLevel']).drop_duplicates(subset='Slice (I->S)')
+    disc_slices, mid_slices, vert_at_mid = get_vert_indices(ref)
+
+    # Slice range covering the requested vertebral levels (used to clip data and xlim).
+    ref_in_range = ref[ref['VertLevel'].between(*XLIM_VERT_RANGE)]
+    xlim_min = ref_in_range['Slice (I->S)'].min()
+    xlim_max = ref_in_range['Slice (I->S)'].max()
+
+    # Keep only annotations within the visible range
+    disc_slices = [s for s in disc_slices if xlim_min <= s <= xlim_max]
+    mid_slices, vert_at_mid = zip(*[
+        (s, v) for s, v in zip(mid_slices, vert_at_mid)
+        if xlim_min <= s <= xlim_max
+    ]) if mid_slices else ([], [])
+
+    # Number of subjects with data per level; per dataset (e.g. "202/12") when several are plotted
+    n_per_level = (
+        df_ref.dropna(subset=['value'])
+        .groupby(['VertLevel', 'dataset'])['participant_id']
+        .nunique()
+        .unstack(fill_value=0)
+        .reindex(columns=pd.unique(df_ref['dataset']), fill_value=0)
+    )
+    n_per_level = {v: format_counts(row) for v, row in n_per_level.iterrows()}
+
+    return disc_slices, mid_slices, vert_at_mid, xlim_min, xlim_max, n_per_level
+
+
+def get_vert_indices(df_single_trace):
+    """
+    Compute slice positions of intervertebral disc boundaries and mid-vertebrae
+    from a single reference trace (one subject, one metric, one label).
+
+    Args:
+        df_single_trace (pd.DataFrame): subset with columns Slice (I->S) and VertLevel.
+
+    Returns:
+        disc_slices  (list[int]): slice numbers at VertLevel transitions (for dashed lines).
+        mid_slices   (list[int]): slice numbers at the middle of each vertebral level.
+        vert_at_mid  (list[int]): vertebral level number at each mid-slice.
+    """
+    df = (df_single_trace.dropna(subset=['VertLevel'])
+                         .sort_values('Slice (I->S)')
+                         .reset_index(drop=True))
+    vert = df['VertLevel'].tolist()
+    slices = df['Slice (I->S)'].tolist()
+
+    # Find indices where VertLevel changes
+    changes = [0]
+    for i in range(1, len(vert)):
+        if vert[i] != vert[i - 1]:
+            changes.append(i)
+    changes.append(len(df))
+
+    # Slice positions at disc boundaries (skip the very first boundary at index 0).
+    # Place vertical lines between the last slice of one level and the first slice of the next
+    disc_slices = [(slices[i - 1] + slices[i]) / 2 for i in changes[1:-1]]
+
+    # Mid-slice position and vertebral level for each level segment
+    mid_slices, vert_at_mid = [], []
+    for i in range(len(changes) - 1):
+        mid_idx = (changes[i] + changes[i + 1]) // 2
+        mid_slices.append(slices[mid_idx])
+        vert_at_mid.append(int(vert[mid_idx]))
+
+    return disc_slices, mid_slices, vert_at_mid
+
+
+def vert_num_to_label(v):
+    """Convert integer vertebral level to string (e.g. 5 → 'C5', 8 → 'T1')."""
+    return f'T{v - 7}' if v > 7 else f'C{v}'
+
+
+def annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ymin, show_levels=True):
+    """
+    Overlay vertebral disc boundary lines and level text labels on an axis.
+
+    Args:
+        ax            : matplotlib Axes.
+        disc_slices   : slice numbers for dashed disc boundary lines.
+        mid_slices    : slice numbers for vertebral level text labels.
+        vert_at_mid   : vertebral level numbers at mid_slices positions.
+        n_per_level   : dict mapping VertLevel → subject count.
+        ymin (float)  : bottom of the y-axis (anchor for text labels).
+        show_levels (bool): draw the level labels (and subject counts); False draws only the disc lines.
+    """
+    for s in disc_slices:
+        ax.axvline(s, color='black', linestyle='--', alpha=0.5, zorder=0)
+    if not show_levels:
+        return
+    for s, v in zip(mid_slices, vert_at_mid):
+        if N_IN_LEGEND or not SHOW_N:
+            # Subject counts are in the legend; vertebral level label at the bottom
+            ax.text(s, ymin, vert_num_to_label(v),
+                    ha='center', va='bottom', fontsize=TICKS_FONT_SIZE, color='black')
+            continue
+        n = n_per_level.get(v, 0)
+        # Subject count in a smaller font at the bottom, vertebral level label right above it
+        ax.text(s, ymin, f'n={n}',
+                ha='center', va='bottom', fontsize=N_FONT_SIZE, color='black')
+        ax.annotate(vert_num_to_label(v), xy=(s, ymin), xytext=(0, N_FONT_SIZE * 1.3),
+                    textcoords='offset points', ha='center', va='bottom',
+                    fontsize=TICKS_FONT_SIZE, color='black')
+
+
+def add_legend(ax, df, hue, loc, fontsize):
+    """
+    Draw the seaborn hue legend on an axis; with N_IN_LEGEND, append the number of subjects with data
+    in the plotted range to each entry (e.g. "spine-generic, n=202").
+
+    Args:
+        ax       : matplotlib Axes with a seaborn lineplot (hue=hue).
+        df       (pd.DataFrame): plotted data (one metric, one label, plotted slice range).
+        hue      (str): hue column ('dataset' or 'sex').
+        loc      (str): matplotlib legend location.
+        fontsize (int): legend font size.
+    """
+    handles, labels = ax.get_legend_handles_labels()
+    if N_IN_LEGEND:
+        n = df.dropna(subset=['value']).groupby(hue)['participant_id'].nunique()
+        labels = [f'{lab}, n={n.get(lab, 0)}' for lab in labels]
+    ax.legend(handles, labels, loc=loc, fontsize=fontsize)
+
+
+def fig_scale():
+    """
+    Figure size factor for fonts larger than the default (-font-size): grows with the square root of the
+    font size ratio, so that the text gets relatively larger while the axis labels still have room.
+    """
+    return max(1.0, (LABELS_FONT_SIZE / DEFAULT_FONT_SIZE) ** 0.5)
+
+
+def style_ax(ax):
+    """Apply shared axis styling (spines, grid, tick size, x-axis inversion)."""
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['bottom'].set_visible(True)
+    ax.yaxis.grid(True)
+    ax.set_axisbelow(True)
+    ax.invert_xaxis()
+    ax.tick_params(axis='both', which='major', labelsize=TICKS_FONT_SIZE)
+    if YTICK_DECIMALS is not None:
+        # Tick spacing of 1, 2 or 5 × 10^k (not e.g. 0.25), and at least 10^-decimals, so that every tick
+        # value is shown exactly with the fixed number of decimals
+        step = 10 ** -YTICK_DECIMALS
+        locator = mpl.ticker.MaxNLocator(steps=[1, 2, 5, 10])
+        ticks = locator.tick_values(*ax.get_ylim())
+        if len(ticks) > 1 and np.diff(ticks).min() < step - 1e-12:
+            locator = mpl.ticker.MultipleLocator(step)
+        ax.yaxis.set_major_locator(locator)
+        ax.yaxis.set_major_formatter(mpl.ticker.FormatStrFormatter(f'%.{YTICK_DECIMALS}f'))
+
+
+def create_lineplot_dti(df, metric, labels, path_out, hue=None, dataset_style=None):
+    """
+    Create a grid figure (nrows=2, ncols=ceil(n_labels/2)) for a single DTI metric,
+    with one subplot per ROI label.
+
+    Y-axis limits are shared across all subplots to allow cross-ROI comparison.
+    Y-axis label is shown only on the first column to avoid repetition.
+    X-axis label and tick numbers shown only on the bottom row.
+
+    Args:
+        df       (pd.DataFrame): long-format dataframe for all metrics / subjects / datasets.
+        metric   (str): DTI metric to plot (e.g. 'FA').
+        labels   (list[str]): tract/region labels, one subplot each.
+        path_out (str): output directory.
+        hue      (str or None): column to colour lines by — 'dataset', 'sex', or None
+                                (single steelblue line).
+        dataset_style (dict or None): {'palette': {dataset: color}, 'dashes': {dataset: dashes}}
+                                      used when hue='dataset'; see get_dataset_style().
+    """
+    mpl.rcParams['font.family'] = 'Arial'
+
+    nrows = 2
+    ncols = int(np.ceil(len(labels) / nrows))
+    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6 * fig_scale(), nrows * 5 * fig_scale()))
+    axs = np.array(axes).ravel()
+
+    # Hide unused subplots (when n_labels is odd)
+    for i in range(len(labels), len(axs)):
+        axs[i].set_visible(False)
+
+    if hue == 'sex':
+        palette = SEX_PALETTE
+    elif hue == 'dataset':
+        n_datasets = df['dataset'].nunique()
+        palette = sns.color_palette('tab10', n_colors=n_datasets)
+    else:
+        palette = None
+    dashes = True
+    if hue == 'dataset' and dataset_style is not None:
+        palette, dashes = dataset_style['palette'], dataset_style['dashes']
+
+    # Pre-compute vertebral indices once (slice positions are the same across all labels)
+    disc_slices, mid_slices, vert_at_mid, xlim_min, xlim_max, n_per_level = \
+        get_vert_reference(df, metric, labels[0])
+    df = df[df['Slice (I->S)'].between(xlim_min, xlim_max)]
+
+    # Print n per vertebral level to terminal
+    print('  Subjects per vertebral level:')
+    for v in sorted(n_per_level):
+        print(f'    {vert_num_to_label(int(v))}: {n_per_level[v]}')
+
+    # --- First pass: draw lineplots ---
+    active_axes = []
+    for i, (ax, label) in enumerate(zip(axs, labels)):
+        df_label = df[(df['metric'] == metric) & (df['Label'] == label)].copy()
+        if hue == 'sex' and 'sex' in df_label.columns:
+            df_label['sex'] = df_label['sex'].map(SEX_LABEL_MAP).fillna(df_label['sex'])
+        if df_label.empty:
+            print(f'  Warning: no data for label "{label}", skipping subplot')
+            ax.set_visible(False)
+            continue
+
+        if hue is not None:
+            # style=hue varies linestyle per dataset (1st solid, 2nd dashed, ...)
+            # and alpha lets overlapping traces be seen through one another.
+            sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
+                         hue=hue, style=hue, errorbar=ERRORBAR, linewidth=LINEWIDTH,
+                         palette=palette, dashes=dashes, alpha=0.7)
+            if i == 0:
+                if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
+                    ax.get_legend().remove()
+                    add_factor_legends(ax, dataset_style, TICKS_FONT_SIZE-5)
+                else:
+                    add_legend(ax, df_label, hue, LEGEND_LOC, TICKS_FONT_SIZE-5)
+            else:
+                ax.get_legend().remove()
+        else:
+            sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_label,
+                         errorbar=ERRORBAR, linewidth=LINEWIDTH, color='steelblue')
+
+        ax.set_title(LABEL_DISPLAY_NAMES.get(label, label), fontsize=LABELS_FONT_SIZE)
+        # X-axis label and ticks only on bottom row
+        if i >= ncols:
+            ax.set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
+        else:
+            ax.set_xlabel('')
+            ax.tick_params(axis='x', labelbottom=False)
+        # Y-axis label only on first column
+        if i % ncols == 0:
+            ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
+        else:
+            ax.set_ylabel('')
+        style_ax(ax)
+        active_axes.append(ax)
+
+    # --- Shared y-axis limits across all subplots ---
+    all_ymins = [ax.get_ylim()[0] for ax in active_axes]
+    all_ymaxs = [ax.get_ylim()[1] for ax in active_axes]
+    shared_ymin, shared_ymax = min(all_ymins), max(all_ymaxs)
+    for ax in active_axes:
+        ax.set_ylim(shared_ymin, shared_ymax)
+
+    for ax in active_axes:
+        ax.set_xlim(xlim_max, xlim_min)  # inverted x-axis (rostral on the left)
+
+    # --- Second pass: vertebral annotations (need final ymin) ---
+    for ax in active_axes:
+        annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, shared_ymin)
+
+    fig.suptitle(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE + 2, y=1.01)
+    plt.tight_layout()
+
+    suffix = f'_per{hue}' if hue is not None else ''
+    filename = f'lineplot_dti_{metric}{suffix}.png'
+    path_filename = os.path.join(path_out, filename)
+    plt.savefig(path_filename, dpi=300, bbox_inches='tight')
+    print(f'  Figure saved: {path_filename}')
+    plt.close()
+
+
+def create_lineplot_dti_per_label(df, label, path_out, hue=None, dataset_style=None):
+    """
+    Create a 2x2 figure for a single ROI label, with one subplot per DTI metric (FA, MD, RD, AD).
+
+    Y-axis limits are independent across subplots (metrics have different units and ranges).
+
+    Args:
+        df       (pd.DataFrame): long-format dataframe for all metrics / subjects / datasets.
+        label    (str): tract/region label to plot.
+        path_out (str): output directory.
+        hue      (str or None): column to colour lines by — 'dataset', 'sex', or None
+                                (single steelblue line).
+        dataset_style (dict or None): {'palette': {dataset: color}, 'dashes': {dataset: dashes}}
+                                      used when hue='dataset'; see get_dataset_style().
+    """
+    mpl.rcParams['font.family'] = 'Arial'
+
+    df = df[df['Label'] == label].copy()
+    if df.empty:
+        print(f'  Warning: no data for label "{label}", skipping figure')
+        return
+    if hue == 'sex':
+        df['sex'] = df['sex'].map(SEX_LABEL_MAP).fillna(df['sex'])
+        palette = SEX_PALETTE
+    elif hue == 'dataset':
+        palette = sns.color_palette('tab10', n_colors=df['dataset'].nunique())
+    else:
+        palette = None
+    dashes = True
+    if hue == 'dataset' and dataset_style is not None:
+        palette, dashes = dataset_style['palette'], dataset_style['dashes']
+
+    nrows, ncols = 2, 2
+    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6 * fig_scale(), nrows * 5 * fig_scale()))
+    axs = np.array(axes).ravel()
+
+    for i, (ax, metric) in enumerate(zip(axs, DTI_METRICS)):
+        disc_slices, mid_slices, vert_at_mid, xlim_min, xlim_max, n_per_level = \
+            get_vert_reference(df, metric, label)
+        df_metric = df[(df['metric'] == metric) & df['Slice (I->S)'].between(xlim_min, xlim_max)]
+
+        if hue is not None:
+            sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_metric,
+                         hue=hue, style=hue, errorbar=ERRORBAR, linewidth=LINEWIDTH,
+                         palette=palette, dashes=dashes, alpha=0.7)
+            if metric == LEGEND_METRIC:
+                if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
+                    ax.get_legend().remove()
+                else:
+                    add_legend(ax, df_metric, hue, LEGEND_LOC, TICKS_FONT_SIZE-5)
+            else:
+                ax.get_legend().remove()
+        else:
+            sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df_metric,
+                         errorbar=ERRORBAR, linewidth=LINEWIDTH, color=LABEL_PALETTE.get(label, 'steelblue'))
+
+        # X-axis label and ticks only on bottom row
+        if i >= ncols:
+            ax.set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
+        else:
+            ax.set_xlabel('')
+            ax.tick_params(axis='x', labelbottom=False)
+        ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
+        style_ax(ax)
+        ax.set_xlim(xlim_max, xlim_min)  # inverted x-axis (rostral on the left)
+        annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ax.get_ylim()[0],
+                           show_levels=not LEVEL_LABELS_BOTTOM_ONLY or i >= ncols)
+
+    fig.suptitle(LABEL_DISPLAY_NAMES.get(label, label), fontsize=LABELS_FONT_SIZE + 2, y=1.01)
+    plt.tight_layout()
+    if hue == 'dataset' and dataset_style is not None and 'color_legend' in dataset_style:
+        add_factor_legends(fig, dataset_style, TICKS_FONT_SIZE-2)
+
+    suffix = f'_per{hue}' if hue is not None else ''
+    label_fname = re.sub(r'[^A-Za-z0-9]+', '_', LABEL_DISPLAY_NAMES.get(label, label)).strip('_')
+    path_filename = os.path.join(path_out, f'lineplot_dti_{label_fname}{suffix}.png')
+    plt.savefig(path_filename, dpi=300, bbox_inches='tight')
+    print(f'  Figure saved: {path_filename}')
+    plt.close()
+
+
+def plot_all_labels(ax, df, metric, labels, show_levels=True):
+    """
+    Draw a single DTI metric with all ROI labels overlaid into an axis, one color (and linestyle)
+    per label. The seaborn legend is left on the axis for the caller to place or remove.
+
+    Args:
+        ax       : matplotlib Axes.
+        df       (pd.DataFrame): long-format dataframe for all metrics / subjects (single dataset).
+        metric   (str): DTI metric to plot (e.g. 'FA').
+        labels   (list[str]): tract/region labels, one line each.
+        show_levels (bool): draw the vertebral level labels (see annotate_vertebrae()).
+    """
+    disc_slices, mid_slices, vert_at_mid, xlim_min, xlim_max, n_per_level = \
+        get_vert_reference(df, metric, labels[0])
+    df = df[(df['metric'] == metric) & df['Label'].isin(labels) &
+            df['Slice (I->S)'].between(xlim_min, xlim_max)].copy()
+    df['Label'] = df['Label'].map(lambda x: LABEL_DISPLAY_NAMES.get(x, x))
+    display_names = [LABEL_DISPLAY_NAMES.get(label, label) for label in labels]
+    palette = {LABEL_DISPLAY_NAMES.get(label, label): LABEL_PALETTE.get(label, 'gray')
+               for label in labels}
+
+    # style varies linestyle per label, so that labels are not distinguished by color alone
+    sns.lineplot(ax=ax, x='Slice (I->S)', y='value', data=df,
+                 hue='Label', hue_order=display_names, style='Label', style_order=display_names,
+                 errorbar=ERRORBAR, err_kws={'alpha': 0.1}, linewidth=LINEWIDTH, palette=palette)
+
+    ax.set_xlabel('Axial Slice #', fontsize=LABELS_FONT_SIZE)
+    ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=LABELS_FONT_SIZE)
+    style_ax(ax)
+    ax.set_xlim(xlim_max, xlim_min)  # inverted x-axis (rostral on the left)
+    annotate_vertebrae(ax, disc_slices, mid_slices, vert_at_mid, n_per_level, ax.get_ylim()[0],
+                       show_levels=show_levels)
+
+
+def create_lineplot_dti_all_labels(df, metric, labels, path_out):
+    """
+    Create a single-axis figure for a single DTI metric with all ROI labels overlaid, one color
+    (and linestyle) per label.
+
+    Args:
+        df       (pd.DataFrame): long-format dataframe for all metrics / subjects (single dataset).
+        metric   (str): DTI metric to plot (e.g. 'FA').
+        labels   (list[str]): tract/region labels, one line each.
+        path_out (str): output directory.
+    """
+    mpl.rcParams['font.family'] = 'Arial'
+
+    fig, ax = plt.subplots(figsize=(14, 7))
+    plot_all_labels(ax, df, metric, labels)
+    ax.legend(loc='upper left', bbox_to_anchor=(1.01, 1), frameon=False,
+              fontsize=TICKS_FONT_SIZE-3, handlelength=3)
+
+    plt.tight_layout()
+    path_filename = os.path.join(path_out, f'lineplot_dti_{metric}_all_labels.png')
+    plt.savefig(path_filename, dpi=300, bbox_inches='tight')
+    print(f'  Figure saved: {path_filename}')
+    plt.close()
+
+
+def create_lineplot_dti_all_labels_grid(df, labels, path_out):
+    """
+    Create a 2x2 figure with one subplot per DTI metric (FA, MD, RD, AD), each with all ROI labels
+    overlaid, one color (and linestyle) per label. A single legend is shared by all subplots.
+
+    Args:
+        df       (pd.DataFrame): long-format dataframe for all metrics / subjects (single dataset).
+        labels   (list[str]): tract/region labels, one line each.
+        path_out (str): output directory.
+    """
+    mpl.rcParams['font.family'] = 'Arial'
+
+    nrows, ncols = 2, 2
+    fig, axes = plt.subplots(nrows, ncols, figsize=(ncols * 6 * fig_scale(), nrows * 5 * fig_scale()))
+    axs = np.array(axes).ravel()
+
+    for i, (ax, metric) in enumerate(zip(axs, DTI_METRICS)):
+        plot_all_labels(ax, df, metric, labels, show_levels=not LEVEL_LABELS_BOTTOM_ONLY or i >= ncols)
+        handles, legend_labels = ax.get_legend_handles_labels()
+        ax.get_legend().remove()
+        # X-axis label and ticks only on bottom row
+        if i < ncols:
+            ax.set_xlabel('')
+            ax.tick_params(axis='x', labelbottom=False)
+
+    plt.tight_layout()
+    # Extra space between columns: tight_layout leaves too little room for the right column's y-axis
+    # label with large fonts (-font-size)
+    plt.subplots_adjust(wspace=0.3 * fig_scale())
+    # Shared legend below the subplots
+    fig.legend(handles, legend_labels, loc='upper center', bbox_to_anchor=(0.5, 0),
+               ncol=3, frameon=False, fontsize=TICKS_FONT_SIZE-2, handlelength=3)
+
+    path_filename = os.path.join(path_out, 'lineplot_dti_all_metrics_all_labels.png')
+    plt.savefig(path_filename, dpi=300, bbox_inches='tight')
+    print(f'  Figure saved: {path_filename}')
+    plt.close()
+
+
+def main():
+    parser = get_parser()
+    args = parser.parse_args()
+    # Expand "~" also when the script is not started from a shell (e.g. from an IDE run configuration)
+    args.path_results = [os.path.expanduser(p) for p in args.path_results]
+    args.path_out = os.path.expanduser(args.path_out)
+    if args.participant_file is not None:
+        args.participant_file = os.path.expanduser(args.participant_file)
+
+    global XLIM_VERT_RANGE, ERRORBAR, N_IN_LEGEND, LEGEND_METRIC, LEGEND_LOC
+    global SHOW_N, LEVEL_LABELS_BOTTOM_ONLY, YTICK_DECIMALS, LINEWIDTH, LABELS_FONT_SIZE, TICKS_FONT_SIZE, N_FONT_SIZE
+    XLIM_VERT_RANGE = tuple(args.vert_range)
+    ERRORBAR = None if args.errorbar == 'none' else args.errorbar
+    N_IN_LEGEND, LEGEND_METRIC, LEGEND_LOC = bool(args.n_in_legend), args.legend_metric, args.legend_loc
+    SHOW_N, LEVEL_LABELS_BOTTOM_ONLY = bool(args.show_n), bool(args.level_labels_bottom_only)
+    YTICK_DECIMALS, LINEWIDTH = args.ytick_decimals, args.linewidth
+    LABELS_FONT_SIZE = args.font_size
+    TICKS_FONT_SIZE = LABELS_FONT_SIZE - 2
+    N_FONT_SIZE = TICKS_FONT_SIZE - 6
+    if args.metric_abbrev:
+        METRIC_TO_AXIS.update(METRIC_TO_AXIS_ABBREV)
+
+    # Validate -dataset-labels count
+    if args.dataset_labels is not None:
+        if len(args.dataset_labels) != len(args.path_results):
+            parser.error('-dataset-labels must have the same number of entries as -path-results')
+        dataset_labels = args.dataset_labels
+    else:
+        dataset_labels = [os.path.basename(os.path.normpath(p)) for p in args.path_results]
+
+    for arg_name in ['dataset_colors', 'dataset_linestyles', 'dataset_first_level', 'dataset_last_level']:
+        values = getattr(args, arg_name)
+        if values is not None and len(values) != len(args.path_results):
+            parser.error(f'-{arg_name.replace("_", "-")} must have the same number of entries as -path-results')
+    dataset_style = get_dataset_style(dataset_labels, args.dataset_colors, args.dataset_linestyles)
+
+    os.makedirs(args.path_out, exist_ok=True)
+
+    # Load data from all paths
+    print('Loading DTI CSVs...')
+    all_frames = []
+    for path, ds_label in zip(args.path_results, dataset_labels):
+        print(f'  {path}  →  dataset="{ds_label}"')
+        df = load_dti_csvs(path, ds_label)
+        if args.dataset_first_level is not None:
+            first_level = args.dataset_first_level[len(all_frames)]
+            df = df[df['VertLevel'] >= first_level]
+        if args.dataset_last_level is not None:
+            df = df[df['VertLevel'] <= args.dataset_last_level[len(all_frames)]]
+        n_subjects = df['participant_id'].nunique()
+        print(f'    {n_subjects} subject(s), {len(df)} rows loaded')
+        all_frames.append(df)
+    df_all = pd.concat(all_frames, ignore_index=True)
+
+    # Compare datasets on the same subjects
+    if len(args.path_results) > 1 and args.common_subjects:
+        df_all = keep_common_subjects(df_all, args.labels_to_plot)
+
+    # Merge sex from participants.tsv when provided
+    if args.participant_file is not None:
+        df_participants = pd.read_csv(args.participant_file, sep='\t')
+        if 'sex' in df_participants.columns:
+            df_all = df_all.merge(
+                df_participants[['participant_id', 'sex']],
+                on='participant_id', how='left'
+            )
+            n_with_sex = df_all['participant_id'][df_all['sex'].notna()].nunique()
+            print(f'  Sex merged for {n_with_sex} subject(s)')
+        else:
+            print('  Warning: participants.tsv has no "sex" column — per-sex figures skipped')
+
+    default_hue = 'dataset' if df_all['dataset'].nunique() > 1 else None
+
+    has_sex = 'sex' in df_all.columns and df_all['sex'].notna().any()
+
+    # One figure per DTI metric, one subplot per ROI
+    if 'per-metric' in args.figure_type:
+        for metric in args.metrics:
+            print(f'\nPlotting: {metric}')
+            create_lineplot_dti(df_all, metric, args.labels_to_plot, args.path_out, hue=default_hue,
+                                dataset_style=dataset_style)
+            if has_sex:
+                print(f'  Plotting per-sex: {metric}')
+                create_lineplot_dti(df_all, metric, args.labels_to_plot, args.path_out, hue='sex')
+
+    # One figure per ROI, one subplot per DTI metric
+    if 'per-label' in args.figure_type:
+        for label in args.labels_to_plot:
+            print(f'\nPlotting: {label}')
+            create_lineplot_dti_per_label(df_all, label, args.path_out, hue=default_hue,
+                                          dataset_style=dataset_style)
+            if has_sex:
+                print(f'  Plotting per-sex: {label}')
+                create_lineplot_dti_per_label(df_all, label, args.path_out, hue='sex')
+
+    # All ROIs overlaid in a single axis: one figure per DTI metric and/or a single 2x2 figure
+    if 'all-labels' in args.figure_type or 'all-labels-grid' in args.figure_type:
+        if df_all['dataset'].nunique() > 1:
+            parser.error('-figure-type all-labels/all-labels-grid supports a single -path-results only')
+    if 'all-labels' in args.figure_type:
+        for metric in args.metrics:
+            print(f'\nPlotting all labels: {metric}')
+            create_lineplot_dti_all_labels(df_all, metric, args.labels_to_plot, args.path_out)
+    if 'all-labels-grid' in args.figure_type:
+        print('\nPlotting all labels: all metrics')
+        create_lineplot_dti_all_labels_grid(df_all, args.labels_to_plot, args.path_out)
+
+    print('\nDone.')
+
+
+if __name__ == '__main__':
+    main()
