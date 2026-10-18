@@ -198,9 +198,13 @@ else
   exit 1
 fi
 
-# Copy T2w and DWI source data into subject-specific subfolders
+# Copy T2w (or T2*w, see below) and DWI source data into subject-specific subfolders
 mkdir -p ${SUBJECT}/anat ${SUBJECT}/dwi
-rsync -avzh ${PATH_DATA}/${SUBJECT}/anat/${file}_*T2w.* ${SUBJECT}/anat/
+if compgen -G "${PATH_DATA}/${SUBJECT}/anat/${file}_*T2w.*" > /dev/null; then
+  rsync -avzh ${PATH_DATA}/${SUBJECT}/anat/${file}_*T2w.* ${SUBJECT}/anat/
+else
+  rsync -avzh ${PATH_DATA}/${SUBJECT}/anat/${file}_T2starw.* ${SUBJECT}/anat/
+fi
 rsync -avzh ${PATH_DATA}/${SUBJECT}/dwi/${file_dwi}.* ${SUBJECT}/dwi/
 
 # ==============================================================================
@@ -208,13 +212,19 @@ rsync -avzh ${PATH_DATA}/${SUBJECT}/dwi/${file_dwi}.* ${SUBJECT}/dwi/
 # ==============================================================================
 cd ${SUBJECT}/anat
 
-# Select the T2w file: sub-XX_T2w, or sub-XX_acq-sag_T2w (e.g., sci-olomouc)
+# Select the T2w file: sub-XX_T2w, or sub-XX_acq-sag_T2w (e.g., sci-olomouc).
+# Without T2w (balgrist_sci_tasci), the axial T2*w image reconstructed from the MEGRE (sub-XX_T2starw, made beforehand
+# with reconstruct_megre_t2starw.sh) is used instead.
+# For simplicity, the anatomical image is called T2w (file_t2, warp_template2T2w, ...) also in this case.
+contrast_anat="t2"
 if [[ -e ${file}_T2w.nii.gz ]]; then
   file_t2="${file}_T2w"
 elif [[ -e ${file}_acq-sag_T2w.nii.gz ]]; then
   file_t2="${file}_acq-sag_T2w"
+elif [[ -e ${file}_T2starw.nii.gz ]]; then
+  file_t2="${file}_T2starw"
 else
-  echo "${SUBJECT}: no T2w file found (neither ${file}_T2w.nii.gz nor ${file}_acq-sag_T2w.nii.gz)" >> "${PATH_LOG}/_error_check_output_files.log"
+  echo "${SUBJECT}: no T2w file found (neither ${file}_T2w.nii.gz, ${file}_acq-sag_T2w.nii.gz nor ${file}_T2starw.nii.gz)" >> "${PATH_LOG}/_error_check_output_files.log"
   exit 1
 fi
 echo "👉 Processing T2w: ${file_t2}"
