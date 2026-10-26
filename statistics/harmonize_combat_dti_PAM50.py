@@ -31,7 +31,11 @@
 #         preserved. No covariates (sex, age) are needed for them (the average covariate effect of the
 #         training dataset is used, as in neuroCombatFromTraining).
 #     Subjects on a scanner model absent from the training dataset (or from a batch with <2 subjects
-#     for fitting) are kept unharmonized and flagged in the output.
+#     for fitting) are kept unharmonized and flagged in the output, unless the new dataset provides healthy
+#     controls on that scanner model (-new-controls): these are then harmonized against the training dataset
+#     with a reference-batch ComBat (the harmonized training dataset is the reference and stays unchanged;
+#     no covariates), and the resulting correction is applied to all new subjects on that scanner model.
+#     Note that the controls of that batch then match the training dataset by construction.
 #
 # Why not ComBat across datasets directly: when a site contains only patients and the other
 # sites only healthy controls, site and diagnosis are confounded and ComBat would remove the
@@ -56,9 +60,11 @@
 #   combat_perslice.csv                  : long table with raw and harmonized per-slice values
 #   combat_between_scanner_cov.csv       : between-scanner CoV per slice (training dataset), raw vs harmonized
 #   combat_scanners_<label>.png          : per-scanner means of the training dataset, raw vs harmonized
-#   combat_datasets_<label>.png          : training dataset vs new-dataset sites, raw vs harmonized
 #   combat_datasets_grid_<label>.png     : raw (top) vs harmonized (bottom), training dataset as mean ± SD,
-#                                          new-dataset sites as lines (site means), levels and n in the legend
+#                                          new-dataset sites as lines (site means), levels and n in the legend;
+#                                          panel titles give the between-scanner-model CoV of the training
+#                                          dataset (mean over slices; across scanner models whatever -batch-col)
+#   combat_datasets_grid_subjects_<label>.png : same, with one line per new-dataset subject instead of site means
 #
 # Usage:
 #     python statistics/harmonize_combat_dti_PAM50.py \
@@ -71,6 +77,15 @@
 #                     "*_ses-M0=Olomouc pre-op" "*_ses-M6=Olomouc post-op" \
 #         -site-first-level OU=4 Stanford=4 UTSW=4 \
 #         -path-out           <path>/figures/combat/interpolated_map
+#
+# Example with new healthy controls (CSVs only, no BIDS) on a scanner model absent from spine-generic:
+#     python statistics/harmonize_combat_dti_PAM50.py \
+#         -path-results-train <spine-generic>/results/dwi_PAM50_map \
+#         -participants-train <data-multi-subject>/participants.tsv \
+#         -path-results-new   <NSHC CSVs> -path-data-new none \
+#         -new-models "sub-NSHC*=SIGNA_Premier" -new-controls "sub-NSHC*" \
+#         -labels "white matter" -vert-range 3 5 -site-names "sub-NSHC*=Stanford HC" \
+#         -path-out           <path>/combat_reference
 #
 # Requires: neuroCombat (pip install neuroCombat)
 #
@@ -101,6 +116,8 @@ SLICE = 'Slice (I->S)'
 TRAIN_COLOR = 'tab:gray'
 SITE_COLORS = ['tab:orange', 'tab:red', 'tab:purple', 'tab:blue', 'tab:green', 'tab:brown', 'tab:pink']
 LINESTYLES = {'solid': '-', 'dashed': '--', 'dotted': ':', 'dashdot': '-.'}
+# -batch-col (participants.tsv) → corresponding key of the BIDS JSON sidecars of the new subjects
+BATCH_COL_TO_JSON_KEY = {'manufacturers_model_name': 'ManufacturersModelName', 'manufacturer': 'Manufacturer'}
 
 
 def get_parser():
@@ -114,14 +131,28 @@ def get_parser():
                         help='participants.tsv of the training dataset with participant_id, age, sex '
                              'and the -batch-col column.')
     parser.add_argument('-batch-col', default='manufacturers_model_name',
-                        help='Column of -participants-train defining the ComBat batch. '
-                             'Default: manufacturers_model_name (scanner model).')
+                        help='Column of -participants-train defining the ComBat batch, e.g. manufacturer '
+                             '(vendor). For the new subjects, the corresponding BIDS JSON key is read '
+                             f'({BATCH_COL_TO_JSON_KEY}). Default: manufacturers_model_name (scanner model).')
     parser.add_argument('-path-results-new', nargs='+', default=None,
                         help='Folder(s) with the new dataset(s) sct_extract_metric CSVs (optional).')
     parser.add_argument('-path-data-new', nargs='+', default=None,
                         help='BIDS folder of each new dataset (same order as -path-results-new); the scanner '
                              'model of each subject (or session) is read from ManufacturersModelName in its '
-                             'DWI JSON sidecar. Required with -path-results-new.')
+                             'DWI JSON sidecar. Required with -path-results-new; "none" for a dataset '
+                             'without BIDS folder (then use -new-models).')
+    parser.add_argument('-new-models', nargs='+', default=[],
+                        help='Scanner model of new subjects, as <pattern>=<model> (pattern matched against the '
+                             'participant ID), e.g. "sub-NSHC*=SIGNA_Premier". Overrides the BIDS JSON '
+                             'sidecars; needed for datasets without BIDS folder.')
+    parser.add_argument('-new-controls', nargs='+', default=[],
+                        help='Participant ID pattern(s) of healthy controls in the new dataset(s), e.g. '
+                             '"sub-NSHC*". For their scanner model(s) absent from the training dataset, they '
+                             'are harmonized against the training dataset (reference-batch ComBat), and the '
+                             'correction is applied to all new subjects on that scanner model.')
+    parser.add_argument('-labels', nargs='+', default=None,
+                        help='Tract/region label(s) to harmonize, e.g. "white matter" (when a new dataset '
+                             'provides only these). Default: all labels of the training dataset.')
     parser.add_argument('-site-names', nargs='+', default=[],
                         help='Display names of the new-dataset sites (plotted as separate lines), as '
                              '<pattern>=<name>, where <pattern> is matched against the participant ID '
@@ -136,6 +167,9 @@ def get_parser():
     parser.add_argument('-site-linestyles', nargs='+', default=[],
                         help='Line style per site, as <name>=<style> (solid, dashed, dotted, dashdot), e.g. '
                              '"Olomouc post-op=dashed". Default: solid.')
+    parser.add_argument('-footnote', default=None,
+                        help='Footnote below the legend of the grid figures, e.g. abbreviations: '
+                             '"tSCI = Traumatic spinal cord injury; DCM = Degenerative cervical myelopathy".')
     parser.add_argument('-dataset-labels', nargs=2, default=['Spine-generic', 'OU/Stanford/UTSW'],
                         metavar=('TRAIN', 'NEW'), help='Display names of the training and new datasets.')
     parser.add_argument('-vert-range', nargs=2, type=int, default=[2, 5], metavar=('FIRST', 'LAST'),
@@ -180,9 +214,9 @@ def get_site(participant_id, site_patterns):
     return get_site_prefix(participant_id)
 
 
-def get_models_from_bids(path_data, participant_ids):
-    """Read ManufacturersModelName from the DWI JSON sidecar of each subject (or session, for
-    participant IDs of the form sub-XX_ses-YY)."""
+def get_models_from_bids(path_data, participant_ids, json_key='ManufacturersModelName'):
+    """Read json_key (ManufacturersModelName by default) from the DWI JSON sidecar of each subject (or
+    session, for participant IDs of the form sub-XX_ses-YY)."""
     models = {}
     for sub in participant_ids:
         # sub-018_ses-M0 → <path_data>/sub-018/ses-M0/dwi/
@@ -191,7 +225,7 @@ def get_models_from_bids(path_data, participant_ids):
             print(f'  Warning: no DWI JSON sidecar for {sub}; it will not be harmonized')
             continue
         with open(files[0]) as f:
-            models[sub] = normalize_model_name(json.load(f).get('ManufacturersModelName', 'n/a'))
+            models[sub] = normalize_model_name(json.load(f).get(json_key, 'n/a'))
     return models
 
 
@@ -221,14 +255,38 @@ def apply_combat_estimates(dat, batch_idx, estimates):
     return ((s_data - gamma) / np.sqrt(delta)) * np.sqrt(var_pooled) + stand_mean
 
 
-def harmonize(wide_train, covars_train, wide_new, batch_new):
+def fit_to_reference(wide_ref, wide_ctrl):
+    """
+    ComBat with the (harmonized) training dataset as reference batch, kept unchanged, and the healthy
+    controls of a scanner model absent from it as the only other batch. No covariates (the controls'
+    age/sex may be unknown).
+
+    Returns:
+        estimates (dict): neuroCombat(...)['estimates'].
+        idx       (int): index of the controls' batch in the estimates.
+    """
+    covars = pd.DataFrame({'batch': ['reference'] * len(wide_ref) + ['controls'] * len(wide_ctrl)})
+    # neuroCombat 0.2.12 uses np.int (removed in numpy 1.24) when a reference batch is given
+    if not hasattr(np, 'int'):
+        np.int = int
+    idx = int(np.searchsorted(np.unique(covars['batch']), 'controls'))
+    # neuroCombat modifies covars in place, hence the copy
+    out = neuroCombat(dat=pd.concat([wide_ref, wide_ctrl]).T.values, covars=covars.copy(), batch_col='batch',
+                      ref_batch='reference')
+    return out['estimates'], idx
+
+
+def harmonize(wide_train, covars_train, wide_new, batch_new, controls_new=()):
     """
     Fit ComBat on the training subjects covering all features, then apply the estimates to all other
-    subjects whose batch (scanner model, by default) was fitted.
+    subjects whose batch (scanner model, by default) was fitted. New batches absent from the training
+    dataset that contain healthy controls (controls_new) are harmonized against the harmonized training
+    dataset (fit_to_reference).
 
     Returns:
         wide_harm (pd.DataFrame): harmonized values, same layout as the concatenated inputs.
-        status    (pd.Series): per subject — 'fit', 'applied' or 'not harmonized'.
+        status    (pd.Series): per subject — 'fit', 'applied', 'fit (reference)', 'applied (reference)' or
+                               'not harmonized'.
     """
     complete = wide_train.notna().all(axis=1)
     covars_fit = covars_train.loc[wide_train.index[complete]]
@@ -264,6 +322,24 @@ def harmonize(wide_train, covars_train, wide_new, batch_new):
         wide_harm.loc[to_apply] = apply_combat_estimates(wide_raw.loc[to_apply].T.values, idx,
                                                          out['estimates']).T
         status[to_apply] = 'applied'
+
+    # New batches absent from the training dataset, with healthy controls
+    if wide_new is not None:
+        wide_ref = wide_harm.loc[wide_train.index[fit]]
+        for batch in sorted(set(batch_all[list(controls_new)]) - set(batch_levels)):
+            subs = batch_all.index[(batch_all == batch).values].intersection(wide_new.index)
+            ctrl = [s for s in controls_new if s in subs and wide_raw.loc[s].notna().all()]
+            if len(ctrl) < 2:
+                print(f'  {batch}: <2 healthy controls covering all slices; not harmonized')
+                continue
+            print(f'  {batch}: harmonizing {len(ctrl)} healthy control(s) covering all slices against '
+                  f'{len(wide_ref)} training subject(s) (reference-batch ComBat); correction applied to '
+                  f'{len(subs) - len(ctrl)} other subject(s) on {batch}')
+            estimates, idx = fit_to_reference(wide_ref, wide_raw.loc[ctrl])
+            wide_harm.loc[subs] = apply_combat_estimates(wide_raw.loc[subs].T.values,
+                                                         np.full(len(subs), idx), estimates).T
+            status[subs] = 'applied (reference)'
+            status[ctrl] = 'fit (reference)'
     return wide_raw, wide_harm, batch_all, status
 
 
@@ -337,61 +413,21 @@ def plot_scanners(df_train, label, slice_to_level, path_out):
     print(f'Figure saved: {fname}')
 
 
-def plot_datasets(df, label, slice_to_level, dataset_labels, sites, path_out):
-    """
-    Rows: raw / harmonized; columns: DTI metrics. Training dataset as mean ± SD band, new-dataset sites
-    as site means (dashed if not harmonized).
-    """
-    df = df[df['Label'] == label]
-    train = df[df['dataset'] == 'train']
-    new = df[df['dataset'] == 'new']
-    site_colors = dict(zip(sites, SITE_COLORS))
-    fig, axes = plt.subplots(2, len(DTI_METRICS), figsize=(5 * len(DTI_METRICS), 9), sharex=True)
-    for j, metric in enumerate(DTI_METRICS):
-        for i, (col, title) in enumerate([('value_raw', 'Raw'), ('value_harmonized', 'Harmonized')]):
-            ax = axes[i, j]
-            t = train[train['metric'] == metric].groupby(SLICE)[col].agg(['mean', 'std'])
-            ax.plot(t.index, t['mean'], color='#2a78d6', linewidth=2,
-                    label=f'{dataset_labels[0]} (n={train["participant_id"].nunique()})')
-            ax.fill_between(t.index, t['mean'] - t['std'], t['mean'] + t['std'], color='#2a78d6', alpha=0.15)
-            for site in sites:
-                s = new[(new['metric'] == metric) & (new['site'] == site)]
-                harmonized = (s['status'] != 'not harmonized').all()
-                m = s.groupby(SLICE)[col].mean()
-                suffix = '' if harmonized else ', not harmonized'
-                ax.plot(m.index, m.values, color=site_colors[site], linewidth=2,
-                        linestyle='-' if harmonized else '--',
-                        label=f'{site} (n={s["participant_id"].nunique()}{suffix})')
-            ax.set_title(title, fontsize=LABELS_FONT_SIZE)
-            ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=TICKS_FONT_SIZE)
-            if i == 1:
-                ax.set_xlabel('Axial Slice #', fontsize=TICKS_FONT_SIZE)
-        share_ylim(axes[:, j])
-        for ax in axes[:, j]:
-            style_ax(ax, slice_to_level)
-    handles, labels = axes[0, 0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 0), ncol=len(labels),
-               frameon=False, fontsize=TICKS_FONT_SIZE)
-    fig.suptitle(f'{LABEL_DISPLAY_NAMES.get(label, label)}: {dataset_labels[0]} (mean ± SD) vs. '
-                 f'{dataset_labels[1]} (site means)', fontsize=LABELS_FONT_SIZE + 2)
-    plt.tight_layout()
-    fname = os.path.join(path_out, f'combat_datasets_{_slug(label)}.png')
-    plt.savefig(fname, dpi=200, bbox_inches='tight')
-    plt.close()
-    print(f'Figure saved: {fname}')
-
-
 def plot_datasets_grid(df, label, slice_to_level, dataset_labels, sites, site_style, site_first_level,
-                       path_out):
+                       path_out, per_subject=False, cov=None, footnote=None):
     """
     Rows: raw / harmonized; columns: DTI metrics. Training dataset as mean ± SD band, new-dataset sites
-    as site means (lines only). The legend gives the vertebral levels plotted and the number of subjects
-    of each line.
+    as site means (lines only), or as one line per subject (per_subject). The legend gives the vertebral
+    levels plotted and the number of subjects of each site.
 
     Args:
         sites            (list[str]): site display names, in legend order.
         site_style       (dict): site → (color, linestyle).
         site_first_level (dict): site → first vertebral level to plot.
+        per_subject      (bool): plot individual subjects of the new-dataset sites instead of site means.
+        cov              (pd.DataFrame): between-scanner-model CoV of the training dataset (metric × cov_raw,
+                                         cov_harmonized), shown in the panel titles (optional).
+        footnote         (str): text below the legend, e.g. abbreviations (optional).
     """
     df = df[df['Label'] == label]
     train = df[df['dataset'] == 'train']
@@ -416,12 +452,19 @@ def plot_datasets_grid(df, label, slice_to_level, dataset_labels, sites, site_st
                 if s.empty:
                     continue
                 harmonized = (s['status'] != 'not harmonized').all()
-                m = s.groupby(SLICE)[col].mean()
                 color, linestyle = site_style[site]
-                ax.plot(m.index, m.values, color=color, linestyle=linestyle, linewidth=2,
-                        label=f'{site}, {levels_str(s)}, n={s["participant_id"].nunique()}'
+                site_label = (f'{site}, {levels_str(s)}, n={s["participant_id"].nunique()}'
                               f'{"" if harmonized else ", not harmonized"}')
-            ax.set_title(f'{title}: {metric}', fontsize=LABELS_FONT_SIZE)
+                if per_subject:
+                    for k, (_, sub) in enumerate(s.groupby('participant_id')):
+                        m = sub.set_index(SLICE)[col].sort_index()
+                        ax.plot(m.index, m.values, color=color, linestyle=linestyle, linewidth=1, alpha=0.7,
+                                label=site_label if k == 0 else None)
+                else:
+                    m = s.groupby(SLICE)[col].mean()
+                    ax.plot(m.index, m.values, color=color, linestyle=linestyle, linewidth=2, label=site_label)
+            cov_str = f' (CoV {cov.loc[metric, col.replace("value", "cov")] * 100:.1f}%)' if cov is not None else ''
+            ax.set_title(f'{title}: {metric}{cov_str}', fontsize=LABELS_FONT_SIZE)
             ax.set_ylabel(METRIC_TO_AXIS[metric], fontsize=TICKS_FONT_SIZE)
             if i == 1:
                 ax.set_xlabel('Axial Slice #', fontsize=TICKS_FONT_SIZE)
@@ -429,11 +472,23 @@ def plot_datasets_grid(df, label, slice_to_level, dataset_labels, sites, site_st
         for ax in axes[:, j]:
             style_ax(ax, slice_to_level)
     handles, labels = axes[1, 0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 0), ncol=3, frameon=False,
-               fontsize=TICKS_FONT_SIZE)
-    fig.suptitle(LABEL_DISPLAY_NAMES.get(label, label), fontsize=LABELS_FONT_SIZE + 2)
+    legend = fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 0), ncol=3, frameon=False,
+                        fontsize=TICKS_FONT_SIZE)
+    for line in legend.get_lines():
+        line.set_linewidth(2)
+        line.set_alpha(1)
+    suptitle = LABEL_DISPLAY_NAMES.get(label, label)
+    if cov is not None:
+        suptitle += (f'\nCoV: between-scanner-model coefficient of variation of {dataset_labels[0]} '
+                     f'(mean over slices)')
+    fig.suptitle(suptitle, fontsize=LABELS_FONT_SIZE + 2)
     plt.tight_layout()
-    fname = os.path.join(path_out, f'combat_datasets_grid_{_slug(label)}.png')
+    if footnote:
+        # Below the legend, left-aligned with the figure
+        fig.canvas.draw()
+        legend_bbox = legend.get_window_extent().transformed(fig.transFigure.inverted())
+        fig.text(0.01, legend_bbox.y0 - 0.01, footnote, ha='left', va='top', fontsize=TICKS_FONT_SIZE - 2)
+    fname = os.path.join(path_out, f'combat_datasets_grid{"_subjects" if per_subject else ""}_{_slug(label)}.png')
     plt.savefig(fname, dpi=300, bbox_inches='tight')
     plt.close()
     print(f'Figure saved: {fname}')
@@ -464,6 +519,8 @@ def main():
     # --- Training dataset ---
     print('Loading training dataset...')
     df_train = load_dti_csvs(args.path_results_train, 'train')
+    if args.labels:
+        df_train = df_train[df_train['Label'].isin(args.labels)]
     # In PAM50 space, the slice-to-level mapping is the same for all subjects
     slice_to_level = (df_train.dropna(subset=['VertLevel']).drop_duplicates(SLICE)[[SLICE, 'VertLevel']]
                       .astype({'VertLevel': int}))
@@ -490,7 +547,7 @@ def main():
     wide_train = wide_train.loc[:, wide_train.notna().any()]
 
     # --- New dataset ---
-    wide_new, batch_new = None, pd.Series(dtype=str)
+    wide_new, batch_new, controls_new = None, pd.Series(dtype=str), []
     if args.path_results_new:
         print('Loading new dataset(s)...')
         frames, models = [], {}
@@ -498,20 +555,36 @@ def main():
             d = load_dti_csvs(path_results, 'new')
             frames.append(d)
             # ComBat batch of the new subjects: scanner model from their DWI JSON sidecars
-            models.update(get_models_from_bids(path_data, sorted(d['participant_id'].unique())))
+            subs = sorted(d['participant_id'].unique())
+            # Scanner model from -new-models, else from the BIDS JSON sidecars
+            new_models = {sub: normalize_model_name(model) for sub in subs
+                          for pattern, model in reversed(parse_site_patterns(args.new_models))
+                          if fnmatch.fnmatch(sub, pattern)}
+            models.update(new_models)
+            if path_data.lower() != 'none':
+                models.update(get_models_from_bids(path_data, [s for s in subs if s not in new_models],
+                                                   BATCH_COL_TO_JSON_KEY.get(args.batch_col, 'ManufacturersModelName')))
         df_new = pd.concat(frames, ignore_index=True)
         df_new = df_new[df_new[SLICE].isin(slices)].dropna(subset=['value'])
         wide_new = to_wide(df_new).reindex(columns=wide_train.columns)
         batch_new = pd.Series(models)
+        controls_new = [s for s in wide_new.index if any(fnmatch.fnmatch(s, p) for p in args.new_controls)]
         train_batches = set(covars_train.loc[wide_train.index, 'batch'])
         for model, subs in batch_new.groupby(batch_new):
-            status = 'in training dataset' if model in train_batches else 'NOT in training dataset → not harmonized'
+            n_ctrl = len(set(subs.index) & set(controls_new))
+            if model in train_batches:
+                status = 'in training dataset'
+            elif n_ctrl:
+                status = f'NOT in training dataset; {n_ctrl} healthy control(s) → reference-batch ComBat'
+            else:
+                status = 'NOT in training dataset → not harmonized'
             print(f'  {model}: {len(subs)} subject(s) ({status})')
 
     # --- ComBat on all slices × metrics × labels ---
     print(f'\nHarmonizing {vert_num_to_label(vert_range[0])}–{vert_num_to_label(vert_range[1])} '
           f'({len(slices)} slices)...')
-    wide_raw, wide_harm, batch_all, status = harmonize(wide_train, covars_train, wide_new, batch_new)
+    wide_raw, wide_harm, batch_all, status = harmonize(wide_train, covars_train, wide_new, batch_new,
+                                                       controls_new)
 
     df = to_long(wide_raw, wide_harm)
     df['VertLevel'] = df[SLICE].map(slice_to_level.set_index(SLICE)['VertLevel'])
@@ -538,6 +611,15 @@ def main():
         c = cov[cov['Label'] == label].groupby('metric')[['cov_raw', 'cov_harmonized']].mean().reindex(DTI_METRICS)
         print(f'\nBetween-scanner CoV of {label} (training dataset, mean over slices):')
         print((c * 100).round(1).astype(str).add(' %').to_string())
+    # Between-scanner-model CoV (whatever -batch-col), to compare harmonization strategies (shown in the figures)
+    scanner_model = participants['manufacturers_model_name'].map(normalize_model_name)
+    cov_model = between_scanner_cov(train.assign(batch=train['participant_id'].map(scanner_model)))
+    cov_model = {label: cov_model[cov_model['Label'] == label].groupby('metric')[['cov_raw', 'cov_harmonized']].mean()
+                 for label in args.labels_to_plot}
+    if args.batch_col != 'manufacturers_model_name':
+        for label, c in cov_model.items():
+            print(f'\nBetween-scanner-model CoV of {label} (training dataset, mean over slices):')
+            print((c.reindex(DTI_METRICS) * 100).round(1).astype(str).add(' %').to_string())
 
     # --- Figures ---
     # New-dataset sites in -site-names order, then any other (unnamed) sites
@@ -549,9 +631,10 @@ def main():
     for label in args.labels_to_plot:
         plot_scanners(train, label, slice_to_level, args.path_out)
         if wide_new is not None:
-            plot_datasets(df, label, slice_to_level, args.dataset_labels, sites, args.path_out)
-            plot_datasets_grid(df, label, slice_to_level, args.dataset_labels, sites, site_style,
-                               site_first_level, args.path_out)
+            for per_subject in [False, True]:
+                plot_datasets_grid(df, label, slice_to_level, args.dataset_labels, sites, site_style,
+                                   site_first_level, args.path_out, per_subject, cov_model[label],
+                                   args.footnote)
 
 
 if __name__ == '__main__':
