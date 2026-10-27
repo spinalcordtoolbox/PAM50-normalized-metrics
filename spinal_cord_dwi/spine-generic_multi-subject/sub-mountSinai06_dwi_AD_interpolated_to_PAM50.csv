@@ -1,0 +1,939 @@
+Timestamp,SCT Version,Filename,Slice (I->S),VertLevel,DistancePMJ,Label,WA()
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","801","5","","white matter",0.002152285093408015
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","802","5","","white matter",0.002159033000709253
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","803","5","","white matter",0.0021657809080104905
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","804","5","","white matter",0.0021725288153117282
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","805","5","","white matter",0.002179276722612966
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","806","5","","white matter",0.0021860246299142037
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","807","5","","white matter",0.0021927725372154414
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","808","5","","white matter",0.0021883425982920646
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","809","5","","white matter",0.0021755292747002272
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","810","5","","white matter",0.0021627159511083903
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","811","5","","white matter",0.002149902627516553
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","812","5","","white matter",0.0021370893039247157
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","813","5","","white matter",0.0021242759803328784
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","814","5","","white matter",0.002111462656741041
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","815","5","","white matter",0.002098649333149204
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","816","5","","white matter",0.002085836009557367
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","817","5","","white matter",0.0020730226859655295
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","818","5","","white matter",0.002061799084602543
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","819","5","","white matter",0.002060113816612659
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","820","5","","white matter",0.0020584285486227754
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","821","5","","white matter",0.0020567432806328917
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","822","5","","white matter",0.002055058012643008
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","823","5","","white matter",0.0020533727446531247
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","824","5","","white matter",0.002051687476663241
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","825","5","","white matter",0.0020500022086733572
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","826","5","","white matter",0.0020483169406834735
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","827","5","","white matter",0.00204663167269359
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","828","5","","white matter",0.0020449464047037065
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","829","5","","white matter",0.0020387443673228517
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","830","5","","white matter",0.002030735622185609
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","831","5","","white matter",0.002022726877048366
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","832","5","","white matter",0.002014718131911123
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","833","5","","white matter",0.00200670938677388
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","834","4","","white matter",0.001998190432004342
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","835","4","","white matter",0.001989161267602508
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","836","4","","white matter",0.0019801321032006745
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","837","4","","white matter",0.001971102938798841
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","838","4","","white matter",0.001962073774397007
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","839","4","","white matter",0.001958039087495562
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","840","4","","white matter",0.0019547178973798865
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","841","4","","white matter",0.0019513967072642112
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","842","4","","white matter",0.0019480755171485359
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","843","4","","white matter",0.0019447543270328604
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","844","4","","white matter",0.001941433136917185
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","845","4","","white matter",0.0019381119468015095
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","846","4","","white matter",0.0019347907566858343
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","847","4","","white matter",0.001931469566570159
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","848","4","","white matter",0.0019342160177544972
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","849","4","","white matter",0.0019406030537188438
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","850","4","","white matter",0.0019469900896831901
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","851","4","","white matter",0.0019533771256475367
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","852","4","","white matter",0.001959764161611883
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","853","4","","white matter",0.0019661511975762294
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","854","4","","white matter",0.001972538233540576
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","855","4","","white matter",0.0019789252695049226
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","856","4","","white matter",0.001985312305469269
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","857","4","","white matter",0.0019895368388734786
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","858","4","","white matter",0.0019901572013441273
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","859","4","","white matter",0.001990777563814776
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","860","4","","white matter",0.001991397926285425
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","861","4","","white matter",0.0019920182887560737
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","862","4","","white matter",0.0019926386512267224
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","863","4","","white matter",0.001993259013697371
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","864","4","","white matter",0.00199387937616802
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","865","4","","white matter",0.0019944997386386687
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","866","4","","white matter",0.0019950039767358584
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","867","4","","white matter",0.001994695344218835
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","868","4","","white matter",0.001994386711701812
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","869","4","","white matter",0.0019940780791847888
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","870","4","","white matter",0.0019937694466677655
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","871","3","","white matter",0.0019934608141507423
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","872","3","","white matter",0.001993152181633719
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","873","3","","white matter",0.001992843549116696
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","874","3","","white matter",0.0019925349165996727
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","875","3","","white matter",0.0019922262840826495
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","876","3","","white matter",0.0019921955926016865
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","877","3","","white matter",0.0019922046069830177
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","878","3","","white matter",0.001992213621364349
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","879","3","","white matter",0.00199222263574568
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","880","3","","white matter",0.0019922316501270114
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","881","3","","white matter",0.0019922406645083426
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","882","3","","white matter",0.001992249678889674
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","883","3","","white matter",0.0019922586932710046
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","884","3","","white matter",0.001992267707652336
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","885","3","","white matter",0.001997949207010729
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","886","3","","white matter",0.002007034197355359
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","887","3","","white matter",0.0020161191876999895
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","888","3","","white matter",0.0020252041780446195
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","889","3","","white matter",0.0020342891683892495
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","890","3","","white matter",0.00204337415873388
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","891","3","","white matter",0.00205245914907851
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","892","3","","white matter",0.00206154413942314
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","893","3","","white matter",0.0020706291297677704
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","894","3","","white matter",0.002075070801017938
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","895","3","","white matter",0.0020717736071106693
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","896","3","","white matter",0.0020684764132034
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","897","3","","white matter",0.002065179219296131
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","898","3","","white matter",0.002061882025388862
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","899","3","","white matter",0.002058584831481593
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","900","3","","white matter",0.002055287637574324
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","901","3","","white matter",0.0020519904436670545
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","902","3","","white matter",0.0020486932497597856
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","903","3","","white matter",0.002044712399842888
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","904","3","","white matter",0.002035945957858593
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","905","3","","white matter",0.0020271795158742978
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","906","3","","white matter",0.0020184130738900028
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","907","3","","white matter",0.0020096466319057074
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","908","2","","white matter",0.0020014384303307896
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","909","2","","white matter",0.001993788469165249
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","910","2","","white matter",0.0019861385079997084
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","911","2","","white matter",0.001978488546834168
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","912","2","","white matter",0.001970838585668627
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","913","2","","white matter",0.0019634149316866225
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","914","2","","white matter",0.001956896506438762
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","915","2","","white matter",0.0019503780811909014
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","916","2","","white matter",0.001943859655943041
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","917","2","","white matter",0.0019373412306951806
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","918","2","","white matter",0.0019308228054473202
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","919","2","","white matter",0.0019243043801994598
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","920","2","","white matter",0.0019177859549515993
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","921","2","","white matter",0.001911267529703739
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","922","2","","white matter",0.0019047491044558785
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","923","2","","white matter",0.001898230679208018
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","924","2","","white matter",0.001897625376429041
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","925","2","","white matter",0.001900962155295986
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","926","2","","white matter",0.001904298934162931
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","927","2","","white matter",0.0019076357130298762
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","928","2","","white matter",0.0019109724918968214
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","929","2","","white matter",0.0019143092707637665
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","930","2","","white matter",0.0019176460496307117
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","931","2","","white matter",0.0019209828284976569
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","932","2","","white matter",0.0019243196073646018
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","933","2","","white matter",0.001927656386231547
+"2026-10-14 04:36:45","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","934","2","","white matter",0.0019309931650984922
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","801","5","","gray matter",0.0016242609152463316
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","802","5","","gray matter",0.0016197191743395896
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","803","5","","gray matter",0.0016151774334328475
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","804","5","","gray matter",0.0016106356925261057
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","805","5","","gray matter",0.0016060939516193637
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","806","5","","gray matter",0.0016015522107126216
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","807","5","","gray matter",0.0015970104698058798
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","808","5","","gray matter",0.0015966783111439147
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","809","5","","gray matter",0.0015995033391655324
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","810","5","","gray matter",0.0016023283671871503
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","811","5","","gray matter",0.001605153395208768
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","812","5","","gray matter",0.001607978423230386
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","813","5","","gray matter",0.0016108034512520037
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","814","5","","gray matter",0.0016136284792736214
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","815","5","","gray matter",0.0016164535072952394
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","816","5","","gray matter",0.001619278535316857
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","817","5","","gray matter",0.0016221035633384748
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","818","5","","gray matter",0.0016231918200832862
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","819","5","","gray matter",0.0016138594491672575
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","820","5","","gray matter",0.0016045270782512288
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","821","5","","gray matter",0.0015951947073352003
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","822","5","","gray matter",0.0015858623364191715
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","823","5","","gray matter",0.0015765299655031428
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","824","5","","gray matter",0.0015671975945871143
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","825","5","","gray matter",0.0015578652236710856
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","826","5","","gray matter",0.0015485328527550571
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","827","5","","gray matter",0.0015392004818390284
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","828","5","","gray matter",0.0015298681109229997
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","829","5","","gray matter",0.0015212085417625016
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","830","5","","gray matter",0.0015128180933042159
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","831","5","","gray matter",0.00150442764484593
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","832","5","","gray matter",0.001496037196387644
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","833","5","","gray matter",0.001487646747929358
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","834","4","","gray matter",0.0014787217728318377
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","835","4","","gray matter",0.001469262271095083
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","836","4","","gray matter",0.0014598027693583282
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","837","4","","gray matter",0.0014503432676215735
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","838","4","","gray matter",0.0014408837658848187
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","839","4","","gray matter",0.001453746309047594
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","840","4","","gray matter",0.001469797715767445
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","841","4","","gray matter",0.0014858491224872962
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","842","4","","gray matter",0.001501900529207147
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","843","4","","gray matter",0.0015179519359269983
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","844","4","","gray matter",0.0015340033426468492
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","845","4","","gray matter",0.0015500547493667003
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","846","4","","gray matter",0.0015661061560865513
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","847","4","","gray matter",0.0015821575628064024
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","848","4","","gray matter",0.00159253981318154
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","849","4","","gray matter",0.0015995205697498496
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","850","4","","gray matter",0.0016065013263181593
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","851","4","","gray matter",0.001613482082886469
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","852","4","","gray matter",0.0016204628394547787
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","853","4","","gray matter",0.0016274435960230884
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","854","4","","gray matter",0.0016344243525913981
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","855","4","","gray matter",0.0016414051091597078
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","856","4","","gray matter",0.0016483858657280175
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","857","4","","gray matter",0.001654389826571048
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","858","4","","gray matter",0.0016587657945386135
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","859","4","","gray matter",0.0016631417625061788
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","860","4","","gray matter",0.0016675177304737443
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","861","4","","gray matter",0.0016718936984413098
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","862","4","","gray matter",0.0016762696664088751
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","863","4","","gray matter",0.0016806456343764406
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","864","4","","gray matter",0.001685021602344006
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","865","4","","gray matter",0.0016893975703115714
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","866","4","","gray matter",0.001692832950813683
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","867","4","","gray matter",0.0016896842190576172
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","868","4","","gray matter",0.0016865354873015514
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","869","4","","gray matter",0.0016833867555454858
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","870","4","","gray matter",0.00168023802378942
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","871","3","","gray matter",0.0016770892920333544
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","872","3","","gray matter",0.0016739405602772886
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","873","3","","gray matter",0.001670791828521223
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","874","3","","gray matter",0.0016676430967651572
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","875","3","","gray matter",0.0016644943650090914
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","876","3","","gray matter",0.0016697219734447626
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","877","3","","gray matter",0.001676146201907825
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","878","3","","gray matter",0.0016825704303708871
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","879","3","","gray matter",0.0016889946588339493
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","880","3","","gray matter",0.0016954188872970117
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","881","3","","gray matter",0.0017018431157600738
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","882","3","","gray matter",0.0017082673442231362
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","883","3","","gray matter",0.0017146915726861983
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","884","3","","gray matter",0.0017211158011492605
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","885","3","","gray matter",0.001718936654553599
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","886","3","","gray matter",0.001711595482922703
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","887","3","","gray matter",0.001704254311291807
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","888","3","","gray matter",0.001696913139660911
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","889","3","","gray matter",0.0016895719680300153
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","890","3","","gray matter",0.0016822307963991192
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","891","3","","gray matter",0.0016748896247682234
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","892","3","","gray matter",0.0016675484531373276
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","893","3","","gray matter",0.0016602072815064316
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","894","3","","gray matter",0.001655771923848113
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","895","3","","gray matter",0.001656179589477423
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","896","3","","gray matter",0.0016565872551067332
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","897","3","","gray matter",0.0016569949207360431
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","898","3","","gray matter",0.0016574025863653533
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","899","3","","gray matter",0.0016578102519946634
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","900","3","","gray matter",0.0016582179176239736
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","901","3","","gray matter",0.0016586255832532837
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","902","3","","gray matter",0.0016590332488825939
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","903","3","","gray matter",0.0016595087911903215
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","904","3","","gray matter",0.0016604594702469729
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","905","3","","gray matter",0.0016614101493036243
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","906","3","","gray matter",0.0016623608283602754
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","907","3","","gray matter",0.0016633115074169268
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","908","2","","gray matter",0.0016642016479487443
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","909","2","","gray matter",0.0016650312499557278
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","910","2","","gray matter",0.0016658608519627112
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","911","2","","gray matter",0.0016666904539696947
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","912","2","","gray matter",0.0016675200559766782
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","913","2","","gray matter",0.0016687382563743969
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","914","2","","gray matter",0.0016715108503350562
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","915","2","","gray matter",0.0016742834442957154
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","916","2","","gray matter",0.0016770560382563748
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","917","2","","gray matter",0.0016798286322170341
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","918","2","","gray matter",0.0016826012261776935
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","919","2","","gray matter",0.0016853738201383526
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","920","2","","gray matter",0.001688146414099012
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","921","2","","gray matter",0.0016909190080596713
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","922","2","","gray matter",0.0016936916020203307
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","923","2","","gray matter",0.0016964641959809899
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","924","2","","gray matter",0.0017033634505831
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","925","2","","gray matter",0.0017130138122795108
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","926","2","","gray matter",0.0017226641739759214
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","927","2","","gray matter",0.001732314535672332
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","928","2","","gray matter",0.0017419648973687426
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","929","2","","gray matter",0.0017516152590651534
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","930","2","","gray matter",0.001761265620761564
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","931","2","","gray matter",0.0017709159824579746
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","932","2","","gray matter",0.0017805663441543855
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","933","2","","gray matter",0.001790216705850796
+"2026-10-14 04:36:52","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","934","2","","gray matter",0.0017998670675472067
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","801","5","","dorsal columns",0.002131855687344262
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","802","5","","dorsal columns",0.002142289890237119
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","803","5","","dorsal columns",0.0021527240931299768
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","804","5","","dorsal columns",0.002163158296022834
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","805","5","","dorsal columns",0.002173592498915691
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","806","5","","dorsal columns",0.0021840267018085487
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","807","5","","dorsal columns",0.002194460904701406
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","808","5","","dorsal columns",0.0021907615831551434
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","809","5","","dorsal columns",0.002176462118279541
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","810","5","","dorsal columns",0.002162162653403939
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","811","5","","dorsal columns",0.002147863188528337
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","812","5","","dorsal columns",0.0021335637236527343
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","813","5","","dorsal columns",0.002119264258777132
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","814","5","","dorsal columns",0.00210496479390153
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","815","5","","dorsal columns",0.0020906653290259274
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","816","5","","dorsal columns",0.0020763658641503252
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","817","5","","dorsal columns",0.002062066399274723
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","818","5","","dorsal columns",0.0020485124443116475
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","819","5","","dorsal columns",0.002039431548823733
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","820","5","","dorsal columns",0.0020303506533358184
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","821","5","","dorsal columns",0.002021269757847904
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","822","5","","dorsal columns",0.0020121888623599892
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","823","5","","dorsal columns",0.0020031079668720747
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","824","5","","dorsal columns",0.00199402707138416
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","825","5","","dorsal columns",0.0019849461758962455
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","826","5","","dorsal columns",0.001975865280408331
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","827","5","","dorsal columns",0.0019667843849204164
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","828","5","","dorsal columns",0.0019577034894325018
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","829","5","","dorsal columns",0.00195365494846873
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","830","5","","dorsal columns",0.0019516193493146162
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","831","5","","dorsal columns",0.001949583750160502
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","832","5","","dorsal columns",0.0019475481510063879
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","833","5","","dorsal columns",0.0019455125518522737
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","834","4","","dorsal columns",0.001943347271670967
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","835","4","","dorsal columns",0.0019410523104624676
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","836","4","","dorsal columns",0.0019387573492539681
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","837","4","","dorsal columns",0.0019364623880454687
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","838","4","","dorsal columns",0.0019341674268369695
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","839","4","","dorsal columns",0.0019421116431261709
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","840","4","","dorsal columns",0.0019515185990579011
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","841","4","","dorsal columns",0.001960925554989631
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","842","4","","dorsal columns",0.0019703325109213616
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","843","4","","dorsal columns",0.0019797394668530917
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","844","4","","dorsal columns",0.0019891464227848217
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","845","4","","dorsal columns",0.001998553378716552
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","846","4","","dorsal columns",0.002007960334648282
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","847","4","","dorsal columns",0.0020173672905800127
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","848","4","","dorsal columns",0.0020247950585822252
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","849","4","","dorsal columns",0.002031035313826728
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","850","4","","dorsal columns",0.0020372755690712305
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","851","4","","dorsal columns",0.0020435158243157334
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","852","4","","dorsal columns",0.002049756079560236
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","853","4","","dorsal columns",0.0020559963348047387
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","854","4","","dorsal columns",0.0020622365900492415
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","855","4","","dorsal columns",0.002068476845293744
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","856","4","","dorsal columns",0.002074717100538247
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","857","4","","dorsal columns",0.002082288177050925
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","858","4","","dorsal columns",0.0020920772890105637
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","859","4","","dorsal columns",0.002101866400970202
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","860","4","","dorsal columns",0.0021116555129298406
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","861","4","","dorsal columns",0.002121444624889479
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","862","4","","dorsal columns",0.002131233736849117
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","863","4","","dorsal columns",0.0021410228488087557
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","864","4","","dorsal columns",0.002150811960768394
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","865","4","","dorsal columns",0.002160601072728032
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","866","4","","dorsal columns",0.0021687110385207077
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","867","4","","dorsal columns",0.0021650669811446406
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","868","4","","dorsal columns",0.002161422923768573
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","869","4","","dorsal columns",0.002157778866392506
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","870","4","","dorsal columns",0.0021541348090164387
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","871","3","","dorsal columns",0.0021504907516403716
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","872","3","","dorsal columns",0.0021468466942643045
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","873","3","","dorsal columns",0.0021432026368882373
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","874","3","","dorsal columns",0.0021395585795121698
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","875","3","","dorsal columns",0.0021359145221361026
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","876","3","","dorsal columns",0.002122099317239511
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","877","3","","dorsal columns",0.0021068310912685587
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","878","3","","dorsal columns",0.002091562865297606
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","879","3","","dorsal columns",0.0020762946393266535
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","880","3","","dorsal columns",0.0020610264133557013
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","881","3","","dorsal columns",0.0020457581873847487
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","882","3","","dorsal columns",0.002030489961413796
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","883","3","","dorsal columns",0.002015221735442844
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","884","3","","dorsal columns",0.0019999535094718914
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","885","3","","dorsal columns",0.001999442693824629
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","886","3","","dorsal columns",0.00200778632437158
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","887","3","","dorsal columns",0.0020161299549185316
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","888","3","","dorsal columns",0.0020244735854654827
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","889","3","","dorsal columns",0.002032817216012434
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","890","3","","dorsal columns",0.0020411608465593857
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","891","3","","dorsal columns",0.002049504477106337
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","892","3","","dorsal columns",0.0020578481076532883
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","893","3","","dorsal columns",0.00206619173820024
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","894","3","","dorsal columns",0.002074009542859752
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","895","3","","dorsal columns",0.002080950971040199
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","896","3","","dorsal columns",0.002087892399220646
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","897","3","","dorsal columns",0.0020948338274010938
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","898","3","","dorsal columns",0.002101775255581541
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","899","3","","dorsal columns",0.002108716683761988
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","900","3","","dorsal columns",0.0021156581119424352
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","901","3","","dorsal columns",0.0021225995401228824
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","902","3","","dorsal columns",0.0021295409683033295
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","903","3","","dorsal columns",0.00213443082057391
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","904","3","","dorsal columns",0.0021249596414754245
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","905","3","","dorsal columns",0.002115488462376939
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","906","3","","dorsal columns",0.002106017283278453
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","907","3","","dorsal columns",0.0020965461041799675
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","908","2","","dorsal columns",0.002087678042618414
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","909","2","","dorsal columns",0.002079413098593792
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","910","2","","dorsal columns",0.00207114815456917
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","911","2","","dorsal columns",0.002062883210544548
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","912","2","","dorsal columns",0.002054618266519926
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","913","2","","dorsal columns",0.0020464621915619366
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","914","2","","dorsal columns",0.002038741592870478
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","915","2","","dorsal columns",0.002031020994179019
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","916","2","","dorsal columns",0.0020233003954875607
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","917","2","","dorsal columns",0.0020155797967961017
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","918","2","","dorsal columns",0.0020078591981046432
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","919","2","","dorsal columns",0.0020001385994131847
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","920","2","","dorsal columns",0.0019924180007217258
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","921","2","","dorsal columns",0.0019846974020302673
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","922","2","","dorsal columns",0.0019769768033388083
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","923","2","","dorsal columns",0.00196925620464735
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","924","2","","dorsal columns",0.0019661821396242027
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","925","2","","dorsal columns",0.0019662057637132636
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","926","2","","dorsal columns",0.001966229387802324
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","927","2","","dorsal columns",0.001966253011891385
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","928","2","","dorsal columns",0.0019662766359804457
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","929","2","","dorsal columns",0.001966300260069506
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","930","2","","dorsal columns",0.001966323884158567
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","931","2","","dorsal columns",0.001966347508247628
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","932","2","","dorsal columns",0.0019663711323366887
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","933","2","","dorsal columns",0.001966394756425749
+"2026-10-14 04:37:00","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","934","2","","dorsal columns",0.00196641838051481
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","801","5","","lateral funiculi",0.002097838930406814
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","802","5","","lateral funiculi",0.0021014017848562435
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","803","5","","lateral funiculi",0.0021049646393056726
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","804","5","","lateral funiculi",0.0021085274937551017
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","805","5","","lateral funiculi",0.0021120903482045312
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","806","5","","lateral funiculi",0.0021156532026539603
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","807","5","","lateral funiculi",0.00211921605710339
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","808","5","","lateral funiculi",0.0021148233296403897
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","809","5","","lateral funiculi",0.0021044639157430677
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","810","5","","lateral funiculi",0.002094104501845746
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","811","5","","lateral funiculi",0.002083745087948424
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","812","5","","lateral funiculi",0.0020733856740511023
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","813","5","","lateral funiculi",0.0020630262601537804
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","814","5","","lateral funiculi",0.0020526668462564584
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","815","5","","lateral funiculi",0.0020423074323591365
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","816","5","","lateral funiculi",0.0020319480184618145
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","817","5","","lateral funiculi",0.0020215886045644926
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","818","5","","lateral funiculi",0.0020128955914254613
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","819","5","","lateral funiculi",0.0020142009828361747
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","820","5","","lateral funiculi",0.0020155063742468885
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","821","5","","lateral funiculi",0.002016811765657602
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","822","5","","lateral funiculi",0.002018117157068315
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","823","5","","lateral funiculi",0.0020194225484790286
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","824","5","","lateral funiculi",0.0020207279398897424
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","825","5","","lateral funiculi",0.0020220333313004557
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","826","5","","lateral funiculi",0.002023338722711169
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","827","5","","lateral funiculi",0.0020246441141218824
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","828","5","","lateral funiculi",0.0020259495055325962
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","829","5","","lateral funiculi",0.0020190311496474304
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","830","5","","lateral funiculi",0.0020088232948439135
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","831","5","","lateral funiculi",0.0019986154400403965
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","832","5","","lateral funiculi",0.001988407585236879
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","833","5","","lateral funiculi",0.001978199730433362
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","834","4","","lateral funiculi",0.001967341568277497
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","835","4","","lateral funiculi",0.001955833098769285
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","836","4","","lateral funiculi",0.0019443246292610726
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","837","4","","lateral funiculi",0.0019328161597528602
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","838","4","","lateral funiculi",0.0019213076902446478
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","839","4","","lateral funiculi",0.001914294332853702
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","840","4","","lateral funiculi",0.0019079231343366513
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","841","4","","lateral funiculi",0.0019015519358196009
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","842","4","","lateral funiculi",0.0018951807373025504
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","843","4","","lateral funiculi",0.0018888095387854997
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","844","4","","lateral funiculi",0.0018824383402684492
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","845","4","","lateral funiculi",0.0018760671417513985
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","846","4","","lateral funiculi",0.001869695943234348
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","847","4","","lateral funiculi",0.0018633247447172973
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","848","4","","lateral funiculi",0.0018679890305556706
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","849","4","","lateral funiculi",0.001879274607007298
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","850","4","","lateral funiculi",0.0018905601834589252
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","851","4","","lateral funiculi",0.0019018457599105528
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","852","4","","lateral funiculi",0.00191313133636218
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","853","4","","lateral funiculi",0.0019244169128138074
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","854","4","","lateral funiculi",0.0019357024892654349
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","855","4","","lateral funiculi",0.0019469880657170622
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","856","4","","lateral funiculi",0.0019582736421686897
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","857","4","","lateral funiculi",0.0019635951639213702
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","858","4","","lateral funiculi",0.0019589765945091397
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","859","4","","lateral funiculi",0.001954358025096909
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","860","4","","lateral funiculi",0.0019497394556846784
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","861","4","","lateral funiculi",0.0019451208862724476
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","862","4","","lateral funiculi",0.001940502316860217
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","863","4","","lateral funiculi",0.0019358837474479863
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","864","4","","lateral funiculi",0.0019312651780357558
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","865","4","","lateral funiculi",0.001926646608623525
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","866","4","","lateral funiculi",0.001923509529140033
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","867","4","","lateral funiculi",0.0019307428791577102
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","868","4","","lateral funiculi",0.0019379762291753875
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","869","4","","lateral funiculi",0.0019452095791930649
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","870","4","","lateral funiculi",0.001952442929210742
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","871","3","","lateral funiculi",0.001959676279228419
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","872","3","","lateral funiculi",0.0019669096292460964
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","873","3","","lateral funiculi",0.0019741429792637737
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","874","3","","lateral funiculi",0.001981376329281451
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","875","3","","lateral funiculi",0.0019886096792991284
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","876","3","","lateral funiculi",0.0019964877170354552
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","877","3","","lateral funiculi",0.0020044578530173038
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","878","3","","lateral funiculi",0.002012427988999152
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","879","3","","lateral funiculi",0.0020203981249810004
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","880","3","","lateral funiculi",0.0020283682609628486
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","881","3","","lateral funiculi",0.002036338396944697
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","882","3","","lateral funiculi",0.0020443085329265457
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","883","3","","lateral funiculi",0.0020522786689083938
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","884","3","","lateral funiculi",0.0020602488048902423
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","885","3","","lateral funiculi",0.0020689607490971497
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","886","3","","lateral funiculi",0.0020781177782390925
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","887","3","","lateral funiculi",0.002087274807381035
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","888","3","","lateral funiculi",0.002096431836522978
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","889","3","","lateral funiculi",0.0021055888656649206
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","890","3","","lateral funiculi",0.0021147458948068635
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","891","3","","lateral funiculi",0.0021239029239488063
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","892","3","","lateral funiculi",0.0021330599530907488
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","893","3","","lateral funiculi",0.0021422169822326916
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","894","3","","lateral funiculi",0.0021444544644539107
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","895","3","","lateral funiculi",0.0021351593684739234
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","896","3","","lateral funiculi",0.002125864272493936
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","897","3","","lateral funiculi",0.002116569176513949
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","898","3","","lateral funiculi",0.0021072740805339616
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","899","3","","lateral funiculi",0.0020979789845539747
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","900","3","","lateral funiculi",0.0020886838885739874
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","901","3","","lateral funiculi",0.002079388792594
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","902","3","","lateral funiculi",0.002070093696614013
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","903","3","","lateral funiculi",0.002060696467371968
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","904","3","","lateral funiculi",0.0020505843052955205
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","905","3","","lateral funiculi",0.0020404721432190727
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","906","3","","lateral funiculi",0.002030359981142625
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","907","3","","lateral funiculi",0.002020247819066177
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","908","2","","lateral funiculi",0.002010779591838937
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","909","2","","lateral funiculi",0.002001955299460905
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","910","2","","lateral funiculi",0.0019931310070828725
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","911","2","","lateral funiculi",0.0019843067147048404
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","912","2","","lateral funiculi",0.0019754824223268083
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","913","2","","lateral funiculi",0.0019667907788786052
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","914","2","","lateral funiculi",0.001958629731149719
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","915","2","","lateral funiculi",0.0019504686834208329
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","916","2","","lateral funiculi",0.0019423076356919467
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","917","2","","lateral funiculi",0.0019341465879630605
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","918","2","","lateral funiculi",0.0019259855402341743
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","919","2","","lateral funiculi",0.0019178244925052883
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","920","2","","lateral funiculi",0.0019096634447764022
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","921","2","","lateral funiculi",0.001901502397047516
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","922","2","","lateral funiculi",0.0018933413493186298
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","923","2","","lateral funiculi",0.0018851803015897436
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","924","2","","lateral funiculi",0.0018870065384461148
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","925","2","","lateral funiculi",0.0018954909650259909
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","926","2","","lateral funiculi",0.001903975391605867
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","927","2","","lateral funiculi",0.0019124598181857431
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","928","2","","lateral funiculi",0.0019209442447656192
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","929","2","","lateral funiculi",0.0019294286713454952
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","930","2","","lateral funiculi",0.0019379130979253715
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","931","2","","lateral funiculi",0.0019463975245052475
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","932","2","","lateral funiculi",0.0019548819510851237
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","933","2","","lateral funiculi",0.0019633663776649998
+"2026-10-14 04:37:09","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","934","2","","lateral funiculi",0.001971850804244876
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","801","5","","ventral funiculi",0.0022551411989093963
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","802","5","","ventral funiculi",0.0022635010149379387
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","803","5","","ventral funiculi",0.002271860830966481
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","804","5","","ventral funiculi",0.002280220646995023
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","805","5","","ventral funiculi",0.0022885804630235654
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","806","5","","ventral funiculi",0.0022969402790521077
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","807","5","","ventral funiculi",0.0023053000950806497
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","808","5","","ventral funiculi",0.002300517182594166
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","809","5","","ventral funiculi",0.0022858772237214138
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","810","5","","ventral funiculi",0.002271237264848661
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","811","5","","ventral funiculi",0.002256597305975908
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","812","5","","ventral funiculi",0.0022419573471031554
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","813","5","","ventral funiculi",0.002227317388230403
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","814","5","","ventral funiculi",0.0022126774293576503
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","815","5","","ventral funiculi",0.0021980374704848975
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","816","5","","ventral funiculi",0.0021833975116121447
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","817","5","","ventral funiculi",0.0021687575527393923
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","818","5","","ventral funiculi",0.0021565280410079865
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","819","5","","ventral funiculi",0.0021587612121246645
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","820","5","","ventral funiculi",0.002160994383241342
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","821","5","","ventral funiculi",0.0021632275543580198
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","822","5","","ventral funiculi",0.002165460725474698
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","823","5","","ventral funiculi",0.0021676938965913754
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","824","5","","ventral funiculi",0.002169927067708053
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","825","5","","ventral funiculi",0.002172160238824731
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","826","5","","ventral funiculi",0.0021743934099414087
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","827","5","","ventral funiculi",0.0021766265810580863
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","828","5","","ventral funiculi",0.0021788597521747643
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","829","5","","ventral funiculi",0.0021718239396412145
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","830","5","","ventral funiculi",0.0021610805336475737
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","831","5","","ventral funiculi",0.0021503371276539334
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","832","5","","ventral funiculi",0.0021395937216602927
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","833","5","","ventral funiculi",0.002128850315666652
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","834","4","","ventral funiculi",0.0021174224841946517
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","835","4","","ventral funiculi",0.0021053102272442924
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","836","4","","ventral funiculi",0.002093197970293933
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","837","4","","ventral funiculi",0.0020810857133435738
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","838","4","","ventral funiculi",0.0020689734563932144
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","839","4","","ventral funiculi",0.0020541266073362046
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","840","4","","ventral funiculi",0.0020388891022639593
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","841","4","","ventral funiculi",0.0020236515971917136
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","842","4","","ventral funiculi",0.002008414092119468
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","843","4","","ventral funiculi",0.0019931765870472226
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","844","4","","ventral funiculi",0.001977939081974977
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","845","4","","ventral funiculi",0.001962701576902731
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","846","4","","ventral funiculi",0.0019474640718304857
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","847","4","","ventral funiculi",0.0019322265667582402
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","848","4","","ventral funiculi",0.0019255423470762917
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","849","4","","ventral funiculi",0.0019239900986285214
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","850","4","","ventral funiculi",0.001922437850180751
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","851","4","","ventral funiculi",0.001920885601732981
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","852","4","","ventral funiculi",0.0019193333532852106
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","853","4","","ventral funiculi",0.0019177811048374403
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","854","4","","ventral funiculi",0.0019162288563896702
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","855","4","","ventral funiculi",0.0019146766079418999
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","856","4","","ventral funiculi",0.0019131243594941295
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","857","4","","ventral funiculi",0.0019108773329990572
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","858","4","","ventral funiculi",0.0019074723430918144
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","859","4","","ventral funiculi",0.0019040673531845716
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","860","4","","ventral funiculi",0.0019006623632773288
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","861","4","","ventral funiculi",0.0018972573733700858
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","862","4","","ventral funiculi",0.001893852383462843
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","863","4","","ventral funiculi",0.0018904473935556002
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","864","4","","ventral funiculi",0.0018870424036483574
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","865","4","","ventral funiculi",0.0018836374137411146
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","866","4","","ventral funiculi",0.0018798974757488977
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","867","4","","ventral funiculi",0.0018738129011618622
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","868","4","","ventral funiculi",0.0018677283265748266
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","869","4","","ventral funiculi",0.001861643751987791
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","870","4","","ventral funiculi",0.0018555591774007554
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","871","3","","ventral funiculi",0.0018494746028137198
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","872","3","","ventral funiculi",0.0018433900282266843
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","873","3","","ventral funiculi",0.0018373054536396486
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","874","3","","ventral funiculi",0.001831220879052613
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","875","3","","ventral funiculi",0.0018251363044655775
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","876","3","","ventral funiculi",0.0018279812232584126
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","877","3","","ventral funiculi",0.0018321017839626579
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","878","3","","ventral funiculi",0.001836222344666903
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","879","3","","ventral funiculi",0.0018403429053711485
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","880","3","","ventral funiculi",0.0018444634660753937
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","881","3","","ventral funiculi",0.001848584026779639
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","882","3","","ventral funiculi",0.0018527045874838842
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","883","3","","ventral funiculi",0.0018568251481881294
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","884","3","","ventral funiculi",0.0018609457088923748
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","885","3","","ventral funiculi",0.0018685111992337968
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","886","3","","ventral funiculi",0.0018781436473575247
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","887","3","","ventral funiculi",0.0018877760954812528
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","888","3","","ventral funiculi",0.0018974085436049809
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","889","3","","ventral funiculi",0.0019070409917287087
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","890","3","","ventral funiculi",0.0019166734398524368
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","891","3","","ventral funiculi",0.0019263058879761647
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","892","3","","ventral funiculi",0.0019359383360998928
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","893","3","","ventral funiculi",0.0019455707842236207
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","894","3","","ventral funiculi",0.0019479354562138955
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","895","3","","ventral funiculi",0.0019381871679817477
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","896","3","","ventral funiculi",0.0019284388797496002
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","897","3","","ventral funiculi",0.0019186905915174524
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","898","3","","ventral funiculi",0.0019089423032853047
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","899","3","","ventral funiculi",0.0018991940150531572
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","900","3","","ventral funiculi",0.0018894457268210094
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","901","3","","ventral funiculi",0.001879697438588862
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","902","3","","ventral funiculi",0.0018699491503567141
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","903","3","","ventral funiculi",0.001860616610090041
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","904","3","","ventral funiculi",0.0018541943055816895
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","905","3","","ventral funiculi",0.001847772001073338
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","906","3","","ventral funiculi",0.0018413496965649864
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","907","3","","ventral funiculi",0.0018349273920566349
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","908","2","","ventral funiculi",0.001828914055052353
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","909","2","","ventral funiculi",0.0018233096855521404
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","910","2","","ventral funiculi",0.001817705316051928
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","911","2","","ventral funiculi",0.0018121009465517156
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","912","2","","ventral funiculi",0.001806496577051503
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","913","2","","ventral funiculi",0.0018022792647688097
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","914","2","","ventral funiculi",0.0018036101813561928
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","915","2","","ventral funiculi",0.0018049410979435758
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","916","2","","ventral funiculi",0.001806272014530959
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","917","2","","ventral funiculi",0.0018076029311183419
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","918","2","","ventral funiculi",0.001808933847705725
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","919","2","","ventral funiculi",0.001810264764293108
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","920","2","","ventral funiculi",0.0018115956808804911
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","921","2","","ventral funiculi",0.001812926597467874
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","922","2","","ventral funiculi",0.0018142575140552572
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","923","2","","ventral funiculi",0.0018155884306426402
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","924","2","","ventral funiculi",0.0018151943276174334
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","925","2","","ventral funiculi",0.0018136502115171666
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","926","2","","ventral funiculi",0.0018121060954168998
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","927","2","","ventral funiculi",0.0018105619793166332
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","928","2","","ventral funiculi",0.0018090178632163664
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","929","2","","ventral funiculi",0.0018074737471160997
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","930","2","","ventral funiculi",0.001805929631015833
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","931","2","","ventral funiculi",0.0018043855149155663
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","932","2","","ventral funiculi",0.0018028413988152995
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","933","2","","ventral funiculi",0.001801297282715033
+"2026-10-14 04:37:16","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","934","2","","ventral funiculi",0.0017997531666147661
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","801","5","","4,5",0.002029312423694179
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","802","5","","4,5",0.0020407348218315666
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","803","5","","4,5",0.0020521572199689547
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","804","5","","4,5",0.0020635796181063424
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","805","5","","4,5",0.00207500201624373
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","806","5","","4,5",0.0020864244143811183
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","807","5","","4,5",0.002097846812518506
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","808","5","","4,5",0.0020999244567292356
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","809","5","","4,5",0.0020949935354949716
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","810","5","","4,5",0.002090062614260707
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","811","5","","4,5",0.002085131693026443
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","812","5","","4,5",0.0020802007717921787
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","813","5","","4,5",0.0020752698505579143
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","814","5","","4,5",0.0020703389293236503
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","815","5","","4,5",0.002065408008089386
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","816","5","","4,5",0.002060477086855122
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","817","5","","4,5",0.0020555461656208574
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","818","5","","4,5",0.00205044591944395
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","819","5","","4,5",0.002044329723611184
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","820","5","","4,5",0.002038213527778418
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","821","5","","4,5",0.002032097331945652
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","822","5","","4,5",0.0020259811361128858
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","823","5","","4,5",0.0020198649402801195
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","824","5","","4,5",0.0020137487444473537
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","825","5","","4,5",0.0020076325486145874
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","826","5","","4,5",0.0020015163527818216
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","827","5","","4,5",0.0019954001569490554
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","828","5","","4,5",0.0019892839611162895
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","829","5","","4,5",0.001986876466134378
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","830","5","","4,5",0.0019859524514928084
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","831","5","","4,5",0.001985028436851239
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","832","5","","4,5",0.0019841044222096696
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","833","5","","4,5",0.0019831804075681
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","834","4","","4,5",0.001982197527128902
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","835","4","","4,5",0.0019811557808920746
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","836","4","","4,5",0.0019801140346552473
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","837","4","","4,5",0.00197907228841842
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","838","4","","4,5",0.0019780305421815926
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","839","4","","4,5",0.001964522034231856
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","840","4","","4,5",0.0019492325603231318
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","841","4","","4,5",0.0019339430864144078
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","842","4","","4,5",0.0019186536125056837
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","843","4","","4,5",0.0019033641385969597
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","844","4","","4,5",0.0018880746646882357
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","845","4","","4,5",0.0018727851907795116
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","846","4","","4,5",0.0018574957168707876
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","847","4","","4,5",0.0018422062429620635
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","848","4","","4,5",0.0018484071232050708
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","849","4","","4,5",0.001867502215939117
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","850","4","","4,5",0.001886597308673163
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","851","4","","4,5",0.0019056924014072092
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","852","4","","4,5",0.0019247874941412553
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","853","4","","4,5",0.0019438825868753015
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","854","4","","4,5",0.0019629776796093474
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","855","4","","4,5",0.0019820727723433938
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","856","4","","4,5",0.0020011678650774397
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","857","4","","4,5",0.0020127158396979652
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","858","4","","4,5",0.002011685284129289
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","859","4","","4,5",0.0020106547285606126
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","860","4","","4,5",0.0020096241729919365
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","861","4","","4,5",0.0020085936174232604
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","862","4","","4,5",0.0020075630618545844
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","863","4","","4,5",0.0020065325062859083
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","864","4","","4,5",0.002005501950717232
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","865","4","","4,5",0.0020044713951485557
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","866","4","","4,5",0.0020049693078025873
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","867","4","","4,5",0.002016166498015571
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","868","4","","4,5",0.002027363688228555
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","869","4","","4,5",0.0020385608784415387
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","870","4","","4,5",0.0020497580686545227
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","871","3","","4,5",0.002060955258867506
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","872","3","","4,5",0.00207215244908049
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","873","3","","4,5",0.002083349639293474
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","874","3","","4,5",0.002094546829506458
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","875","3","","4,5",0.0021057440197194415
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","876","3","","4,5",0.0021082926992394718
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","877","3","","4,5",0.0021096058772319373
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","878","3","","4,5",0.0021109190552244025
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","879","3","","4,5",0.002112232233216868
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","880","3","","4,5",0.002113545411209333
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","881","3","","4,5",0.0021148585892017987
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","882","3","","4,5",0.0021161717671942643
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","883","3","","4,5",0.0021174849451867294
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","884","3","","4,5",0.002118798123179195
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","885","3","","4,5",0.002118137501217802
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","886","3","","4,5",0.0021162925992840947
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","887","3","","4,5",0.0021144476973503873
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","888","3","","4,5",0.00211260279541668
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","889","3","","4,5",0.0021107578934829725
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","890","3","","4,5",0.002108912991549265
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","891","3","","4,5",0.0021070680896155577
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","892","3","","4,5",0.0021052231876818503
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","893","3","","4,5",0.002103378285748143
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","894","3","","4,5",0.0021030717114388707
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","895","3","","4,5",0.0021053290165036573
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","896","3","","4,5",0.002107586321568444
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","897","3","","4,5",0.002109843626633231
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","898","3","","4,5",0.002112100931698018
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","899","3","","4,5",0.0021143582367628045
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","900","3","","4,5",0.002116615541827591
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","901","3","","4,5",0.002118872846892378
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","902","3","","4,5",0.0021211301519571645
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","903","3","","4,5",0.00212246365372155
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","904","3","","4,5",0.0021173305323831286
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","905","3","","4,5",0.0021121974110447066
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","906","3","","4,5",0.0021070642897062846
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","907","3","","4,5",0.0021019311683678626
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","908","2","","4,5",0.002097124920322218
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","909","2","","4,5",0.0020926455455693494
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","910","2","","4,5",0.0020881661708164814
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","911","2","","4,5",0.0020836867960636134
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","912","2","","4,5",0.002079207421310745
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","913","2","","4,5",0.002071434237144336
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","914","2","","4,5",0.0020504858153237615
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","915","2","","4,5",0.0020295373935031876
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","916","2","","4,5",0.0020085889716826132
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","917","2","","4,5",0.0019876405498620393
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","918","2","","4,5",0.001966692128041465
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","919","2","","4,5",0.0019457437062208908
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","920","2","","4,5",0.0019247952844003164
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","921","2","","4,5",0.0019038468625797423
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","922","2","","4,5",0.0018828984407591681
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","923","2","","4,5",0.001861950018938594
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","924","2","","4,5",0.001861320863862755
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","925","2","","4,5",0.00187423788661674
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","926","2","","4,5",0.001887154909370725
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","927","2","","4,5",0.00190007193212471
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","928","2","","4,5",0.001912988954878695
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","929","2","","4,5",0.00192590597763268
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","930","2","","4,5",0.0019388230003866648
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","931","2","","4,5",0.0019517400231406498
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","932","2","","4,5",0.0019646570458946347
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","933","2","","4,5",0.00197757406864862
+"2026-10-14 04:37:21","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","934","2","","4,5",0.0019904910914026047
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","801","5","","12,13",0.0019422138890859701
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","802","5","","12,13",0.0019416790964388584
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","803","5","","12,13",0.0019411443037917466
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","804","5","","12,13",0.001940609511144635
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","805","5","","12,13",0.0019400747184975232
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","806","5","","12,13",0.0019395399258504112
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","807","5","","12,13",0.0019390051332032995
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","808","5","","12,13",0.0019315249063154352
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","809","5","","12,13",0.0019188356037470064
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","810","5","","12,13",0.0019061463011785778
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","811","5","","12,13",0.001893456998610149
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","812","5","","12,13",0.0018807676960417203
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","813","5","","12,13",0.0018680783934732915
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","814","5","","12,13",0.0018553890909048627
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","815","5","","12,13",0.001842699788336434
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","816","5","","12,13",0.0018300104857680052
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","817","5","","12,13",0.0018173211831995766
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","818","5","","12,13",0.0018050710254191322
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","819","5","","12,13",0.0017954557363665938
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","820","5","","12,13",0.0017858404473140555
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","821","5","","12,13",0.0017762251582615172
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","822","5","","12,13",0.0017666098692089788
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","823","5","","12,13",0.0017569945801564405
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","824","5","","12,13",0.0017473792911039023
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","825","5","","12,13",0.001737764002051364
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","826","5","","12,13",0.0017281487129988257
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","827","5","","12,13",0.0017185334239462873
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","828","5","","12,13",0.001708918134893749
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","829","5","","12,13",0.0017022519851113626
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","830","5","","12,13",0.001696765491037037
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","831","5","","12,13",0.0016912789969627112
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","832","5","","12,13",0.0016857925028883856
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","833","5","","12,13",0.00168030600881406
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","834","4","","12,13",0.0016744699890554628
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","835","4","","12,13",0.0016682844436125936
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","836","4","","12,13",0.0016620988981697247
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","837","4","","12,13",0.0016559133527268557
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","838","4","","12,13",0.0016497278072839865
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","839","4","","12,13",0.001663758944976671
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","840","4","","12,13",0.0016806781802601483
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","841","4","","12,13",0.001697597415543626
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","842","4","","12,13",0.0017145166508271035
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","843","4","","12,13",0.001731435886110581
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","844","4","","12,13",0.0017483551213940585
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","845","4","","12,13",0.001765274356677536
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","846","4","","12,13",0.0017821935919610137
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","847","4","","12,13",0.0017991128272444913
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","848","4","","12,13",0.0018046081197454526
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","849","4","","12,13",0.0018032490465769045
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","850","4","","12,13",0.0018018899734083562
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","851","4","","12,13",0.0018005309002398079
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","852","4","","12,13",0.0017991718270712596
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","853","4","","12,13",0.0017978127539027115
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","854","4","","12,13",0.0017964536807341632
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","855","4","","12,13",0.001795094607565615
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","856","4","","12,13",0.0017937355343970668
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","857","4","","12,13",0.0017897888964988034
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","858","4","","12,13",0.0017815296507176818
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","859","4","","12,13",0.0017732704049365604
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","860","4","","12,13",0.0017650111591554388
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","861","4","","12,13",0.0017567519133743171
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","862","4","","12,13",0.0017484926675931955
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","863","4","","12,13",0.0017402334218120739
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","864","4","","12,13",0.0017319741760309522
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","865","4","","12,13",0.0017237149302498306
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","866","4","","12,13",0.0017177765942015916
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","867","4","","12,13",0.0017280846262835291
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","868","4","","12,13",0.0017383926583654668
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","869","4","","12,13",0.0017487006904474043
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","870","4","","12,13",0.001759008722529342
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","871","3","","12,13",0.0017693167546112794
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","872","3","","12,13",0.0017796247866932171
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","873","3","","12,13",0.0017899328187751546
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","874","3","","12,13",0.0018002408508570923
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","875","3","","12,13",0.0018105488829390298
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","876","3","","12,13",0.001828072906625843
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","877","3","","12,13",0.00184662778625621
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","878","3","","12,13",0.001865182665886577
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","879","3","","12,13",0.0018837375455169438
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","880","3","","12,13",0.0019022924251473107
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","881","3","","12,13",0.0019208473047776775
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","882","3","","12,13",0.0019394021844080446
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","883","3","","12,13",0.0019579570640384115
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","884","3","","12,13",0.0019765119436687783
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","885","3","","12,13",0.001984755711232884
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","886","3","","12,13",0.001986812811557234
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","887","3","","12,13",0.0019888699118815836
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","888","3","","12,13",0.0019909270122059333
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","889","3","","12,13",0.0019929841125302826
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","890","3","","12,13",0.0019950412128546323
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","891","3","","12,13",0.001997098313178982
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","892","3","","12,13",0.0019991554135033317
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","893","3","","12,13",0.0020012125138276814
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","894","3","","12,13",0.0019957564033788178
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","895","3","","12,13",0.001977778274974599
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","896","3","","12,13",0.00195980014657038
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","897","3","","12,13",0.001941822018166161
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","898","3","","12,13",0.0019238438897619422
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","899","3","","12,13",0.0019058657613577235
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","900","3","","12,13",0.0018878876329535047
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","901","3","","12,13",0.0018699095045492857
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","902","3","","12,13",0.0018519313761450667
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","903","3","","12,13",0.001835684296741589
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","904","3","","12,13",0.0018315545603432971
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","905","3","","12,13",0.0018274248239450051
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","906","3","","12,13",0.0018232950875467133
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","907","3","","12,13",0.0018191653511484215
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","908","2","","12,13",0.0018152985932471907
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","909","2","","12,13",0.0018116948138430207
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","910","2","","12,13",0.001808091034438851
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","911","2","","12,13",0.0018044872550346813
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","912","2","","12,13",0.0018008834756305114
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","913","2","","12,13",0.0017978799884258967
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","914","2","","12,13",0.0017972776700195027
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","915","2","","12,13",0.0017966753516131086
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","916","2","","12,13",0.0017960730332067145
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","917","2","","12,13",0.0017954707148003205
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","918","2","","12,13",0.0017948683963939264
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","919","2","","12,13",0.0017942660779875323
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","920","2","","12,13",0.0017936637595811383
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","921","2","","12,13",0.0017930614411747444
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","922","2","","12,13",0.0017924591227683503
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","923","2","","12,13",0.0017918568043619563
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","924","2","","12,13",0.0017957231485431267
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","925","2","","12,13",0.0018025686011160073
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","926","2","","12,13",0.0018094140536888878
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","927","2","","12,13",0.0018162595062617684
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","928","2","","12,13",0.001823104958834649
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","929","2","","12,13",0.0018299504114075295
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","930","2","","12,13",0.00183679586398041
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","931","2","","12,13",0.0018436413165532906
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","932","2","","12,13",0.001850486769126171
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","933","2","","12,13",0.0018573322216990516
+"2026-10-14 04:37:28","git-jv-test-josh-fix-8cc3512a7de43c9b03e8460c25a615629b2a62de","sub-mountSinai06_dwi_moco_AD.nii.gz","934","2","","12,13",0.0018641776742719322
