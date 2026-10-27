@@ -1,0 +1,10 @@
+{
+    "name": "spine-generic multi-subject",
+    "order": 1,
+    "coverage": "cervical spine",
+    "contrast": "DWI",
+    "resolution": "0.9x0.9x5mm",
+    "link": "https://github.com/spine-generic/data-multi-subject",
+    "link_text": "spine-generic/data-multi-subject",
+    "population": "healthy adults"
+}
