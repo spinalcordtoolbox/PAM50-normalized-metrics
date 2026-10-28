@@ -1,0 +1,10 @@
+{
+    "name": "Simultaneous Brain and Spinal Cord at rest",
+    "order": 12,
+    "coverage": "cervical spine",
+    "contrast": "T1w",
+    "resolution": "1.3mm iso",
+    "population": "healthy adults",
+    "link": "https://openneuro.org/datasets/ds005075/versions/1.0.1",
+    "link_text": "OpenNeuro ds005075"
+}
