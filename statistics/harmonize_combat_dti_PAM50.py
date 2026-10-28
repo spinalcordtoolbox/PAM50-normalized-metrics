@@ -18,10 +18,9 @@
 #   - Features: every PAM50 slice × DTI metric × region within -vert-range (e.g., C2-C5).
 #     A single ComBat model is fitted on all features, so the empirical Bayes priors pool information
 #     across slices.
-#   - Batch: scanner model (participants.tsv column, -batch-col), e.g. Siemens Prisma, Prisma-fit, Skyra,
-#     Philips Achieva-dStream, Ingenia, GE MR750 for spine-generic; subjects with the same model from
-#     different sites share a batch. ComBat is fitted on the training dataset only (healthy subjects),
-#     with age and sex as biological covariates to preserve.
+#   - Batch: scanner model (participants.tsv column, -batch-col), e.g. Siemens Prisma, Prisma-fit, etc.
+#     for spine-generic; subjects with the same model from different sites share a batch.
+#     ComBat is fitted on the training dataset only (healthy subjects), with age and sex as covariates.
 #   - ComBat cannot be fitted with missing values, so only training subjects covering all slices of
 #     -vert-range are used for fitting. Once fitted, the correction is independent for each feature
 #     (slice), so the estimates are then applied to all other subjects on the slices they cover:
