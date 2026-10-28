@@ -94,6 +94,7 @@
 
 import os
 import re
+import textwrap
 import fnmatch
 import glob
 import json
@@ -124,12 +125,18 @@ def get_parser():
     parser = argparse.ArgumentParser(
         description='Harmonize per-slice DTI metrics in PAM50 space across scanner models with ComBat, '
                     'fitted on a healthy training dataset and optionally applied to a new dataset.')
-    parser.add_argument('-path-results-train', required=True,
-                        help='Folder with the training dataset sct_extract_metric CSVs '
-                             '(*_dwi_{FA,MD,RD,AD}_*PAM50.csv), e.g. spine-generic.')
-    parser.add_argument('-participants-train', required=True,
-                        help='participants.tsv of the training dataset with participant_id, age, sex '
-                             'and the -batch-col column.')
+    parser.add_argument('-path-results-train', required=True, nargs='+',
+                        help='Folder(s) with the training dataset sct_extract_metric CSVs '
+                             '(*_dwi_{FA,MD,RD,AD}_*PAM50.csv), e.g. spine-generic. Several folders are pooled '
+                             'into one training dataset (e.g. spine-generic + other healthy controls).')
+    parser.add_argument('-participants-train', required=True, nargs='+',
+                        help='participants.tsv of the training dataset(s) with participant_id, the -batch-col '
+                             'column and the -covariates columns. Several files are concatenated.')
+    parser.add_argument('-covariates', nargs='*', default=['age', 'sex'],
+                        help='Biological covariates to preserve (columns of -participants-train); sex is '
+                             'categorical, the others continuous. Pass "-covariates" without value for no '
+                             'covariates (e.g. when they are unknown for part of the training dataset). '
+                             'Default: age sex.')
     parser.add_argument('-batch-col', default='manufacturers_model_name',
                         help='Column of -participants-train defining the ComBat batch, e.g. manufacturer '
                              '(vendor). For the new subjects, the corresponding BIDS JSON key is read '
@@ -276,7 +283,7 @@ def fit_to_reference(wide_ref, wide_ctrl):
     return out['estimates'], idx
 
 
-def harmonize(wide_train, covars_train, wide_new, batch_new, controls_new=()):
+def harmonize(wide_train, covars_train, wide_new, batch_new, controls_new=(), covariates=('age', 'sex')):
     """
     Fit ComBat on the training subjects covering all features, then apply the estimates to all other
     subjects whose batch (scanner model, by default) was fitted. New batches absent from the training
@@ -302,10 +309,12 @@ def harmonize(wide_train, covars_train, wide_new, batch_new, controls_new=()):
           f'({covars_fit["batch"].nunique()} batches); {(~fit).sum()} training subject(s) with partial '
           f'coverage get the fitted correction applied')
 
-    # Batch = scanner model (see -batch-col); sex and age are biological effects to preserve
+    # Batch = scanner model (see -batch-col); covariates (sex, age by default) are biological effects to preserve
+    covariates = list(covariates)
     out = neuroCombat(dat=wide_train[fit].T.values,
-                      covars=covars_fit[['batch', 'sex', 'age']].reset_index(drop=True),
-                      batch_col='batch', categorical_cols=['sex'], continuous_cols=['age'])
+                      covars=covars_fit[['batch'] + covariates].reset_index(drop=True),
+                      batch_col='batch', categorical_cols=[c for c in covariates if c == 'sex'],
+                      continuous_cols=[c for c in covariates if c != 'sex'])
     batch_levels = np.unique(covars_fit['batch'])   # neuroCombat encodes batches in this (sorted) order
 
     wide_raw = pd.concat([wide_train, wide_new]) if wide_new is not None else wide_train
@@ -436,10 +445,13 @@ def plot_datasets_grid(df, label, slice_to_level, dataset_labels, sites, site_st
     def levels_str(d):
         return f'{vert_num_to_label(int(d["VertLevel"].min()))}–{vert_num_to_label(int(d["VertLevel"].max()))}'
 
-    fig, axes = plt.subplots(2, len(DTI_METRICS), figsize=(5.5 * len(DTI_METRICS), 9), sharex=True)
+    # Panel width growing with the number of vertebral levels: 5.5 in for 4 levels (e.g. C2-C5), 4.1 in for 2
+    width_scale = (slice_to_level['VertLevel'].nunique() + 4) / 8
+    narrow = width_scale < 1
+    fig, axes = plt.subplots(2, len(DTI_METRICS), figsize=(5.5 * width_scale * len(DTI_METRICS), 9), sharex=True)
     for j, metric in enumerate(DTI_METRICS):
         tm = train[train['metric'] == metric]
-        for i, (col, title) in enumerate([('value_raw', 'Raw'), ('value_harmonized', 'Harmonized (ComBat)')]):
+        for i, (col, title) in enumerate([('value_raw', 'Raw'), ('value_harmonized', 'Harmonized')]):
             ax = axes[i, j]
             t = tm.groupby(SLICE)[col].agg(['mean', 'std'])
             ax.plot(t.index, t['mean'], color=TRAIN_COLOR, linewidth=2,
@@ -452,9 +464,12 @@ def plot_datasets_grid(df, label, slice_to_level, dataset_labels, sites, site_st
                 if s.empty:
                     continue
                 harmonized = (s['status'] != 'not harmonized').all()
+                # Sites that could not be harmonized (scanner model absent from the training dataset): raw row only
+                if not harmonized and col == 'value_harmonized':
+                    continue
                 color, linestyle = site_style[site]
                 site_label = (f'{site}, {levels_str(s)}, n={s["participant_id"].nunique()}'
-                              f'{"" if harmonized else ", not harmonized"}')
+                              f'{"" if harmonized else ", raw only (not harmonized)"}')
                 if per_subject:
                     for k, (_, sub) in enumerate(s.groupby('participant_id')):
                         m = sub.set_index(SLICE)[col].sort_index()
@@ -471,23 +486,27 @@ def plot_datasets_grid(df, label, slice_to_level, dataset_labels, sites, site_st
         share_ylim(axes[:, j])
         for ax in axes[:, j]:
             style_ax(ax, slice_to_level)
-    handles, labels = axes[1, 0].get_legend_handles_labels()
-    legend = fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 0), ncol=3, frameon=False,
+    # Raw row: includes the sites that could not be harmonized
+    handles, labels = axes[0, 0].get_legend_handles_labels()
+    legend = fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, 0), ncol=2 if narrow else 3,
+                        frameon=False,
                         fontsize=TICKS_FONT_SIZE)
     for line in legend.get_lines():
         line.set_linewidth(2)
         line.set_alpha(1)
     suptitle = LABEL_DISPLAY_NAMES.get(label, label)
     if cov is not None:
-        suptitle += (f'\nCoV: between-scanner-model coefficient of variation of {dataset_labels[0]} '
+        cov_title = (f'CoV: between-scanner-model coefficient of variation of {dataset_labels[0]} '
                      f'(mean over slices)')
+        suptitle += '\n' + textwrap.fill(cov_title, int(140 * width_scale))
     fig.suptitle(suptitle, fontsize=LABELS_FONT_SIZE + 2)
     plt.tight_layout()
     if footnote:
         # Below the legend, left-aligned with the figure
         fig.canvas.draw()
         legend_bbox = legend.get_window_extent().transformed(fig.transFigure.inverted())
-        fig.text(0.01, legend_bbox.y0 - 0.01, footnote, ha='left', va='top', fontsize=TICKS_FONT_SIZE - 2)
+        fig.text(0.01, legend_bbox.y0 - 0.01, textwrap.fill(footnote, int(180 * width_scale)),
+                 ha='left', va='top', fontsize=TICKS_FONT_SIZE - 2)
     fname = os.path.join(path_out, f'combat_datasets_grid{"_subjects" if per_subject else ""}_{_slug(label)}.png')
     plt.savefig(fname, dpi=300, bbox_inches='tight')
     plt.close()
@@ -501,9 +520,8 @@ def _slug(label):
 def main():
     parser = get_parser()
     args = parser.parse_args()
-    for arg in ['path_results_train', 'participants_train', 'path_out']:
-        setattr(args, arg, os.path.expanduser(getattr(args, arg)))
-    for arg in ['path_results_new', 'path_data_new']:
+    args.path_out = os.path.expanduser(args.path_out)
+    for arg in ['path_results_train', 'participants_train', 'path_results_new', 'path_data_new']:
         if getattr(args, arg) is not None:
             setattr(args, arg, [os.path.expanduser(p) for p in getattr(args, arg)])
     if args.path_results_new and (not args.path_data_new or len(args.path_data_new) != len(args.path_results_new)):
@@ -518,7 +536,7 @@ def main():
 
     # --- Training dataset ---
     print('Loading training dataset...')
-    df_train = load_dti_csvs(args.path_results_train, 'train')
+    df_train = pd.concat([load_dti_csvs(p, 'train') for p in args.path_results_train], ignore_index=True)
     if args.labels:
         df_train = df_train[df_train['Label'].isin(args.labels)]
     # In PAM50 space, the slice-to-level mapping is the same for all subjects
@@ -529,14 +547,16 @@ def main():
     slices = set(slice_to_level[SLICE])
     df_train = df_train[df_train[SLICE].isin(slices)].dropna(subset=['value'])
 
-    participants = pd.read_csv(args.participants_train, sep='\t').set_index('participant_id')
+    participants = pd.concat([pd.read_csv(p, sep='\t') for p in args.participants_train],
+                             ignore_index=True).set_index('participant_id')
     # ComBat batch: scanner model by default (-batch-col manufacturers_model_name)
-    # batch (scanner model), sex, age
-    covars_train = participants[[args.batch_col, 'sex', 'age']].rename(columns={args.batch_col: 'batch'})
+    # batch (scanner model) and covariates (sex, age by default)
+    covars_train = participants[[args.batch_col] + args.covariates].rename(columns={args.batch_col: 'batch'})
     covars_train['batch'] = covars_train['batch'].map(normalize_model_name)
     missing = sorted(set(df_train['participant_id']) - set(covars_train.dropna().index))
     if missing:
-        print(f'  Excluding {len(missing)} subject(s) without {args.batch_col}/age/sex: {", ".join(missing)}')
+        print(f'  Excluding {len(missing)} subject(s) without {"/".join([args.batch_col] + args.covariates)}: '
+              f'{", ".join(missing)}')
         df_train = df_train[~df_train['participant_id'].isin(missing)]
     wide_train = to_wide(df_train)
     # Same features (columns) for all subjects, in the same order
@@ -584,7 +604,7 @@ def main():
     print(f'\nHarmonizing {vert_num_to_label(vert_range[0])}–{vert_num_to_label(vert_range[1])} '
           f'({len(slices)} slices)...')
     wide_raw, wide_harm, batch_all, status = harmonize(wide_train, covars_train, wide_new, batch_new,
-                                                       controls_new)
+                                                       controls_new, args.covariates)
 
     df = to_long(wide_raw, wide_harm)
     df['VertLevel'] = df[SLICE].map(slice_to_level.set_index(SLICE)['VertLevel'])
