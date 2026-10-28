@@ -1,0 +1,13 @@
+{
+  "path_data"   : "~/data/dwi_normative_database/balgrist_sci_tasci",
+  "path_output" : "~/results/dwi_normative_database/dwi_normative_database_2026-10-18_balgrist_sci_tasci",
+  "script"      : "~/code/PAM50-normalized-metrics/processing_scripts/process_data_spine-generic_dwi.sh",
+  "jobs"        : 5,
+  "include_list" : [
+    "sub-1028/ses-TM06mrSP",
+    "sub-1034/ses-TM06mrSP",
+    "sub-1035/ses-TM06mrSP",
+    "sub-1037/ses-TM06mrSP",
+    "sub-1043/ses-TM06mrSP"
+  ]
+}
