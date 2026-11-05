@@ -1,0 +1,10 @@
+{
+    "name": "Reliability of resting-state functional connectivity in the human spinal cord",
+    "order": 13,
+    "coverage": "cervical spine",
+    "contrast": "T2w",
+    "resolution": "0.8mm iso",
+    "population": "healthy adults",
+    "link": "https://openneuro.org/datasets/ds004386",
+    "link_text": "OpenNeuro ds004386"
+}
