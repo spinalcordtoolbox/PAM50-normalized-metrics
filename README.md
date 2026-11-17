@@ -66,6 +66,7 @@ The table below summarizes all datasets included in this repository. It is also 
 | spinal_cord | Spinal Cord Head Positions | 10 | 30 | n/a | healthy adults | 7/3/0 | 22.9±1.2 [22–26] | cervical spine | T2w | 0.6mm iso | [OpenNeuro ds004507](https://openneuro.org/datasets/ds004507/versions/1.1.2) |
 | spinal_cord | Simultaneous Brain and Spinal Cord at rest | 31 | 31 | n/a | healthy adults | 15/16/0 | 32.8±6.9 [22–45] | cervical spine | T1w | 1.3mm iso | [OpenNeuro ds005075](https://openneuro.org/datasets/ds005075/versions/1.0.1) |
 | spinal_cord | Reliability of resting-state functional connectivity in the human spinal cord | 48 | 48 | n/a | healthy adults | 26/22/0 | 27.2±3.8 [20–37] | cervical spine | T2w | 0.8mm iso | [OpenNeuro ds004386](https://openneuro.org/datasets/ds004386) |
+| spinal_cord | Spatial distribution of hand-grasp motor task activity in spinal cord functional magnetic resonance imaging | 26 | 50 | n/a | healthy adults | 9/17/0 | 25.8±4.5 [20–38] | cervical spine | T2w | 0.8 x 0.39 x 0.39 mm | [OpenNeuro ds004616](https://openneuro.org/datasets/ds004616) |
 <!-- datasets-table-end -->
 
 ## Datasets Structure

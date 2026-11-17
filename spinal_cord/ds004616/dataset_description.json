@@ -1,0 +1,10 @@
+{
+    "name": "Spatial distribution of hand-grasp motor task activity in spinal cord functional magnetic resonance imaging",
+    "order": 14,
+    "coverage": "cervical spine",
+    "contrast": "T2w",
+    "resolution": "0.8 x 0.39 x 0.39 mm",
+    "population": "healthy adults",
+    "link": "https://openneuro.org/datasets/ds004616",
+    "link_text": "OpenNeuro ds004616"
+}
