@@ -1459,7 +1459,8 @@ def main():
 
     # Plot correlation between weight and height per sex (only when SC data and participants are available
     # and weight/height columns are present)
-    if (df is not None and df_participants is not None
+    if (not args.lineplot_only
+            and df is not None and df_participants is not None
             and 'weight' in df_participants.columns and 'height' in df_participants.columns):
         gen_chart_weight_height(df, df_participants, path_out_figures)
 
@@ -1483,6 +1484,10 @@ def main():
         # Create main lineplot (always)
         dataset_hue = 'dataset' if 'dataset' in current_df.columns else None
         create_lineplot(current_df, dataset_hue, path_out, show_n=show_n)
+
+        # For multi-session datasets, also create a lineplot comparing sessions
+        if 'session_id' in current_df.columns and current_df['session_id'].notna().any():
+            create_lineplot(current_df, 'session_id', path_out, show_n=show_n)
 
         if args.lineplot_only:
             continue
