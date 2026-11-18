@@ -730,6 +730,234 @@ def compute_cv(df, metric):
     return cv
 
 
+def compute_within_subject_cv(df, repeat_col='session_id', min_repeats=2):
+    """
+    Compute within-subject coefficient of variation across repeated measurements.
+
+    For each participant and axial slice, the CoV is computed across repeated
+    sessions/visits as:
+
+        CoV = standard deviation / mean * 100
+
+    The slice-wise CoVs are then summarized for each vertebral level.
+
+    Args:
+        df (pd.DataFrame): dataframe containing morphometric measurements.
+        repeat_col (str): column identifying repeated measurements
+            (e.g., 'session_id' or 'visit_index').
+        min_repeats (int): minimum number of repeated measurements required
+            for a participant/slice combination.
+
+    Returns:
+        summary_df (pd.DataFrame): per-metric and per-level summary containing
+            mean, median, std, number of observations, and number of subjects.
+        detailed_df (pd.DataFrame): individual participant/slice CoV values.
+    """
+
+    if repeat_col not in df.columns:
+        raise ValueError(f"Column '{repeat_col}' not found in dataframe.")
+
+    available_metrics = [metric for metric in METRICS if metric in df.columns]
+
+    summaries = []
+    detailed_results = []
+
+    for metric in available_metrics:
+
+        current = df[
+            [
+                'participant_id',
+                repeat_col,
+                'Slice (I->S)',
+                'VertLevel',
+                metric
+            ]
+        ].dropna(
+            subset=[repeat_col, metric]
+        ).copy()
+
+        # Ensure one value per participant/slice/repeated measurement.
+        # This also protects against accidental duplicate rows.
+        repeated_values = (
+            current.groupby(
+                [
+                    'participant_id',
+                    'Slice (I->S)',
+                    'VertLevel',
+                    repeat_col
+                ],
+                as_index=False
+            )[metric]
+            .mean()
+        )
+
+        # Compute CoV across repeated measurements for each participant/slice.
+        cov = (
+            repeated_values.groupby(
+                [
+                    'participant_id',
+                    'Slice (I->S)',
+                    'VertLevel'
+                ]
+            )[metric]
+            .agg(
+                mean='mean',
+                std='std',
+                n_repeats='count'
+            )
+            .reset_index()
+        )
+
+        cov = cov[
+            cov['n_repeats'] >= min_repeats
+        ].copy()
+
+        # Avoid division by zero.
+        cov = cov[
+            cov['mean'] != 0
+        ].copy()
+
+        cov['CoV'] = (
+            cov['std'] /
+            cov['mean'] *
+            100
+        )
+
+        cov['metric'] = metric
+        detailed_results.append(cov)
+
+        if cov.empty:
+            continue
+
+        level_summary = (
+            cov.groupby('VertLevel')['CoV']
+            .agg(
+                mean='mean',
+                median='median',
+                std='std',
+                n_observations='count'
+            )
+            .reset_index()
+        )
+
+        n_subjects = (
+            cov.groupby('VertLevel')['participant_id']
+            .nunique()
+            .rename('n_subjects')
+            .reset_index()
+        )
+
+        level_summary = level_summary.merge(
+            n_subjects,
+            on='VertLevel'
+        )
+
+        level_summary['metric'] = metric
+        summaries.append(level_summary)
+
+    summary_df = (
+        pd.concat(summaries, ignore_index=True)
+        if summaries
+        else pd.DataFrame()
+    )
+
+    detailed_df = (
+        pd.concat(detailed_results, ignore_index=True)
+        if detailed_results
+        else pd.DataFrame()
+    )
+
+    return summary_df, detailed_df
+
+
+def create_within_subject_cv_plot(summary_df, path_out, repeat_label='session'):
+    """
+    Create a per-level plot of median within-subject CoV for each available metric.
+
+    Args:
+        summary_df (pd.DataFrame): output from compute_within_subject_cv().
+        path_out (str): output directory.
+        repeat_label (str): label used in the y-axis and filename,
+            e.g. 'session' or 'visit'.
+    """
+
+    if summary_df.empty:
+        print('No within-subject CoV data available for plotting.')
+        return
+
+    os.makedirs(path_out, exist_ok=True)
+
+    available_metrics = [
+        metric for metric in METRICS
+        if metric in summary_df['metric'].unique()
+    ]
+
+    ncols = 3
+    nrows = (len(available_metrics) + ncols - 1) // ncols
+
+    fig, axes = plt.subplots(
+        nrows,
+        ncols,
+        figsize=(ncols * 5, nrows * 4)
+    )
+
+    axes = np.atleast_1d(axes).ravel()
+
+    for i in range(len(available_metrics), len(axes)):
+        axes[i].set_visible(False)
+
+    for ax, metric in zip(axes, available_metrics):
+
+        metric_df = (
+            summary_df[
+                summary_df['metric'] == metric
+            ]
+            .sort_values('VertLevel')
+        )
+
+        ax.plot(
+            metric_df['VertLevel'],
+            metric_df['median'],
+            marker='o'
+        )
+
+        levels = metric_df['VertLevel'].astype(int).tolist()
+
+        ax.set_xticks(levels)
+        ax.set_xticklabels(
+            [get_vert_level_name(level) for level in levels]
+        )
+
+        ax.set_title(
+            METRIC_TO_TITLE.get(metric, metric)
+        )
+
+        ax.set_xlabel('Vertebral level')
+        ax.set_ylabel(
+            f'Median inter-{repeat_label} CoV [%]'
+        )
+
+        ax.grid(
+            axis='y',
+            alpha=0.3
+        )
+
+    plt.tight_layout()
+
+    filename = f'within_subject_cov_per_{repeat_label}.png'
+    path_filename = os.path.join(path_out, filename)
+
+    plt.savefig(
+        path_filename,
+        dpi=300,
+        bbox_inches='tight'
+    )
+
+    plt.close(fig)
+
+    print('Figure saved: ' + path_filename)
+
+
 def format_pvalue(p_value, alpha=0.001, decimal_places=3, include_space=True, include_equal=True):
     """
     Format p-value.
@@ -1459,7 +1687,8 @@ def main():
 
     # Plot correlation between weight and height per sex (only when SC data and participants are available
     # and weight/height columns are present)
-    if (df is not None and df_participants is not None
+    if (not args.lineplot_only
+            and df is not None and df_participants is not None
             and 'weight' in df_participants.columns and 'height' in df_participants.columns):
         gen_chart_weight_height(df, df_participants, path_out_figures)
 
@@ -1483,6 +1712,10 @@ def main():
         # Create main lineplot (always)
         dataset_hue = 'dataset' if 'dataset' in current_df.columns else None
         create_lineplot(current_df, dataset_hue, path_out, show_n=show_n)
+
+        # For multi-session datasets, also create a lineplot comparing sessions
+        if 'session_id' in current_df.columns and current_df['session_id'].notna().any():
+            create_lineplot(current_df, 'session_id', path_out, show_n=show_n)
 
         if args.lineplot_only:
             continue
