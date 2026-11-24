@@ -6,5 +6,7 @@
     "resolution": "0.6mm iso",
     "population": "healthy adults",
     "link": "https://openneuro.org/datasets/ds004507/versions/1.1.2",
-    "link_text": "OpenNeuro ds004507"
+    "link_text": "OpenNeuro ds004507",
+    "multiple_sessions": "yes",
+    "multiple_sessions_note": "3 different head/neck positions."
 }
