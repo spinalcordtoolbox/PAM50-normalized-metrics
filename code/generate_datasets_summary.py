@@ -15,8 +15,10 @@ Manually maintained columns (from dataset_description.json in each dataset folde
     population -- subject population (e.g., "healthy adults", "healthy adults and children")
     link       -- URL to the original raw dataset
     link_text  -- display text for the link in README (e.g., "spine-generic/data-multi-subject")
-    multiple_sessions -- whether subjects have multiple sessions, with a brief note on what the sessions
-                         correspond to (e.g., "yes — longitudinal, up to 3 waves, 3–11 years apart", "no")
+    multiple_sessions      -- whether subjects have multiple sessions ("yes" or "no")
+    multiple_sessions_note -- optional brief note on what the sessions correspond to
+                              (e.g., "Longitudinal, up to 3 waves, 3–11 years apart."); rendered as a
+                              footnote in the README table
 
 Usage:
     python code/generate_datasets_summary.py
@@ -32,7 +34,7 @@ import numpy as np
 from pathlib import Path
 
 
-MANUAL_COLUMNS = ['name', 'order', 'coverage', 'contrast', 'resolution', 'population', 'multiple_sessions', 'link', 'link_text']
+MANUAL_COLUMNS = ['name', 'order', 'coverage', 'contrast', 'resolution', 'population', 'multiple_sessions', 'multiple_sessions_note', 'link', 'link_text']
 PLACEHOLDER = 'n/a'
 
 README_TABLE_START = '<!-- datasets-table-start -->'
@@ -118,7 +120,16 @@ def build_readme_table(rows):
     separator = '|--------|------|-------------:|-------------:|-------------------|----------:|------------|:-----------------:|:-----------------------:|----------|----------|------------|------|'
 
     lines = [header, separator]
+    footnotes = []
     for r in rows:
+        # Render the multiple-sessions note as a footnote to keep the table column narrow
+        multiple_sessions = r['multiple_sessions']
+        if r['multiple_sessions_note'] != PLACEHOLDER:
+            footnote_id = re.sub(r'[^A-Za-z0-9]', '', r['dataset']).lower()
+            multiple_sessions += f'[^{footnote_id}]'
+            footnote = f"[^{footnote_id}]: {r['name']}: {r['multiple_sessions_note']}"
+            if footnote not in footnotes:
+                footnotes.append(footnote)
         sex = f"{r['sex_M']}/{r['sex_F']}/{r['sex_unknown']}"
         if r['age_mean'] == PLACEHOLDER:
             age = PLACEHOLDER
@@ -132,10 +143,12 @@ def build_readme_table(rows):
         else:
             link = PLACEHOLDER
         lines.append(
-            f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sessions']} | {r['multiple_sessions']} | {r['num_sites']} "
+            f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sessions']} | {multiple_sessions} | {r['num_sites']} "
             f"| {r['population']} | {sex} | {age} | {r['coverage']} | {r['contrast']} "
             f"| {r['resolution']} | {link} |"
         )
+    if footnotes:
+        lines += [''] + footnotes
     return '\n'.join(lines)
 
 
@@ -167,13 +180,13 @@ def main():
         stats = compute_stats(df)
         manual = load_description(dataset_dir)
 
-        rows.append({'metric': metric, **stats, **manual})
+        rows.append({'metric': metric, 'dataset': dataset, **stats, **manual})
 
     rows.sort(key=lambda r: r.get('order', 999))
 
     # Write datasets.tsv (drop link_text — it's only for README rendering)
     # Column order: metric, name, then computed stats, then remaining manual fields
-    tsv_columns = ['metric', 'name', 'num_subjects', 'num_sessions', 'multiple_sessions', 'num_sites', 'population', 'sex_M', 'sex_F',
+    tsv_columns = ['metric', 'name', 'num_subjects', 'num_sessions', 'multiple_sessions', 'multiple_sessions_note', 'num_sites', 'population', 'sex_M', 'sex_F',
                    'sex_unknown', 'age_mean', 'age_std', 'age_min', 'age_max', 'coverage', 'contrast',
                    'resolution', 'link']
     out_df = pd.DataFrame(rows)[tsv_columns]

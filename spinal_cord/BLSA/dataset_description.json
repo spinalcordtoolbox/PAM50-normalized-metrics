@@ -7,5 +7,6 @@
     "link": "https://www.blsa.nih.gov",
     "link_text": "blsa.nih.gov",
     "population": "Healthy Control, MCI, and dementia",
-    "multiple_sessions": "yes — longitudinal visits (up to 12 per subject, over up to 17 years)"
+    "multiple_sessions": "yes",
+    "multiple_sessions_note": "Longitudinal visits (up to 12 per subject, over up to 17 years)."
 }

@@ -7,5 +7,6 @@
     "population": "healthy adults",
     "link": "https://openneuro.org/datasets/ds004616",
     "link_text": "OpenNeuro ds004616",
-    "multiple_sessions": "yes — 2 same-day sessions, before/after an intervention (AIH)"
+    "multiple_sessions": "yes",
+    "multiple_sessions_note": "2 same-day sessions, before/after an intervention (AIH)."
 }
