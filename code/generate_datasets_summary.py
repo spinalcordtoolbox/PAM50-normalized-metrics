@@ -120,13 +120,21 @@ def build_readme_table(rows):
     separator = '|--------|------|-------------:|-------------:|-------------------|----------:|------------|:-----------------:|:-----------------------:|----------|----------|------------|------|'
 
     lines = [header, separator]
-    # Multiple-sessions notes are listed below the table to keep the table column narrow
+    # Multiple-sessions notes are listed right below the table (keeps the table column narrow), linked from
+    # numbered markers in the table. HTML anchors are used instead of Markdown footnotes because GitHub
+    # moves footnotes to the very end of the page.
     notes = []
     for r in rows:
+        multiple_sessions = r['multiple_sessions']
         if r['multiple_sessions_note'] != PLACEHOLDER:
-            note = f"- **{r['name']}**: {r['multiple_sessions_note']}"
-            if note not in notes:
-                notes.append(note)
+            note_text = f"**{r['name']}**: {r['multiple_sessions_note']}"
+            existing = [i for i, n in enumerate(notes, start=1) if n == note_text]
+            if existing:
+                note_num = existing[0]
+            else:
+                notes.append(note_text)
+                note_num = len(notes)
+            multiple_sessions += f'<sup>[{note_num}](#multiple-sessions-note-{note_num})</sup>'
         sex = f"{r['sex_M']}/{r['sex_F']}/{r['sex_unknown']}"
         if r['age_mean'] == PLACEHOLDER:
             age = PLACEHOLDER
@@ -140,12 +148,13 @@ def build_readme_table(rows):
         else:
             link = PLACEHOLDER
         lines.append(
-            f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sessions']} | {r['multiple_sessions']} | {r['num_sites']} "
+            f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sessions']} | {multiple_sessions} | {r['num_sites']} "
             f"| {r['population']} | {sex} | {age} | {r['coverage']} | {r['contrast']} "
             f"| {r['resolution']} | {link} |"
         )
     if notes:
-        lines += ['', '**Datasets with multiple sessions:**', ''] + notes
+        lines += ['', '**Datasets with multiple sessions:**', '']
+        lines += [f'{i}. <a name="multiple-sessions-note-{i}"></a>{n}' for i, n in enumerate(notes, start=1)]
     return '\n'.join(lines)
 
 
