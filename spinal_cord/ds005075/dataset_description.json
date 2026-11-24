@@ -6,5 +6,6 @@
     "resolution": "1.3mm iso",
     "population": "healthy adults",
     "link": "https://openneuro.org/datasets/ds005075/versions/1.0.1",
-    "link_text": "OpenNeuro ds005075"
+    "link_text": "OpenNeuro ds005075",
+    "multiple_sessions": "no"
 }

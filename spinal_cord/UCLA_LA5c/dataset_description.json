@@ -6,5 +6,6 @@
     "resolution": "1.0mm iso",
     "link": "https://openneuro.org/datasets/ds000030",
     "link_text": "openneuro/ds000030",
-    "population": "healthy controls and neuropsychiatric patients"
+    "population": "healthy controls and neuropsychiatric patients",
+    "multiple_sessions": "no"
 }

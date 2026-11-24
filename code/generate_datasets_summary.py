@@ -15,6 +15,8 @@ Manually maintained columns (from dataset_description.json in each dataset folde
     population -- subject population (e.g., "healthy adults", "healthy adults and children")
     link       -- URL to the original raw dataset
     link_text  -- display text for the link in README (e.g., "spine-generic/data-multi-subject")
+    multiple_sessions -- whether subjects have multiple sessions, with a brief note on what the sessions
+                         correspond to (e.g., "yes — longitudinal, up to 3 waves, 3–11 years apart", "no")
 
 Usage:
     python code/generate_datasets_summary.py
@@ -30,7 +32,7 @@ import numpy as np
 from pathlib import Path
 
 
-MANUAL_COLUMNS = ['name', 'order', 'coverage', 'contrast', 'resolution', 'population', 'link', 'link_text']
+MANUAL_COLUMNS = ['name', 'order', 'coverage', 'contrast', 'resolution', 'population', 'multiple_sessions', 'link', 'link_text']
 PLACEHOLDER = 'n/a'
 
 README_TABLE_START = '<!-- datasets-table-start -->'
@@ -112,8 +114,8 @@ def load_description(dataset_dir):
 
 def build_readme_table(rows):
     """Render rows as a GitHub-flavoured Markdown table."""
-    header = '| metric | name | num_subjects | num_sessions | num_sites | population | sex (M/F/unknown) | age (mean\u00b1SD [min\u2013max]) | coverage | contrast | resolution | link |'
-    separator = '|--------|------|-------------:|-------------:|----------:|------------|:-----------------:|:-----------------------:|----------|----------|------------|------|'
+    header = '| metric | name | num_subjects | num_sessions | multiple sessions | num_sites | population | sex (M/F/unknown) | age (mean\u00b1SD [min\u2013max]) | coverage | contrast | resolution | link |'
+    separator = '|--------|------|-------------:|-------------:|-------------------|----------:|------------|:-----------------:|:-----------------------:|----------|----------|------------|------|'
 
     lines = [header, separator]
     for r in rows:
@@ -130,7 +132,7 @@ def build_readme_table(rows):
         else:
             link = PLACEHOLDER
         lines.append(
-            f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sessions']} | {r['num_sites']} "
+            f"| {r['metric']} | {r['name']} | {r['num_subjects']} | {r['num_sessions']} | {r['multiple_sessions']} | {r['num_sites']} "
             f"| {r['population']} | {sex} | {age} | {r['coverage']} | {r['contrast']} "
             f"| {r['resolution']} | {link} |"
         )
@@ -171,7 +173,7 @@ def main():
 
     # Write datasets.tsv (drop link_text — it's only for README rendering)
     # Column order: metric, name, then computed stats, then remaining manual fields
-    tsv_columns = ['metric', 'name', 'num_subjects', 'num_sessions', 'num_sites', 'population', 'sex_M', 'sex_F',
+    tsv_columns = ['metric', 'name', 'num_subjects', 'num_sessions', 'multiple_sessions', 'num_sites', 'population', 'sex_M', 'sex_F',
                    'sex_unknown', 'age_mean', 'age_std', 'age_min', 'age_max', 'coverage', 'contrast',
                    'resolution', 'link']
     out_df = pd.DataFrame(rows)[tsv_columns]

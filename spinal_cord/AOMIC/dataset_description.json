@@ -18,5 +18,6 @@
             "link_text": "openneuro/ds002790"
         }
     ],
-    "population": "healthy adults"
+    "population": "healthy adults",
+    "multiple_sessions": "no"
 }
