@@ -1,14 +1,13 @@
-"""
-Analyze datasets containing repeated sessions/visits for issue #35.
-
-For each multi-session dataset, this script:
+"""Analyze datasets containing repeated sessions/visits for issue #35. For each multi-session dataset, this script:
 1. compares repeated measurements using per-slice lineplots;
 2. computes within-subject CoV across repeated measurements;
 3. saves per-level CoV summaries and detailed participant/slice values.
 
 Dataset-specific handling is used when the meaning of "session" differs
 between datasets.
-"""
+
+Lineplots include only participants with at least two available sessions/visits.
+The within-subject CoV calculations retain their original input data and logic."""
 
 import os
 from pathlib import Path
@@ -33,6 +32,32 @@ def prepare_plot_df(df):
         plot_df["MEAN(solidity)"] = plot_df["MEAN(solidity)"] * 100
 
     return plot_df
+
+
+def select_repeated_participants(df, repeat_col):
+    """
+    Keep only participants with >=2 distinct sessions/visits in the supplied
+    data. This is intended for descriptive session-comparison lineplots.
+
+    Note that this is *not* a per-slice paired-data filter: session-specific
+    curves can still include different participant counts at some slices.
+    """
+    repeated_counts = (
+        df[["participant_id", repeat_col]]
+        .dropna(subset=["participant_id", repeat_col])
+        .drop_duplicates()
+        .groupby("participant_id")[repeat_col]
+        .nunique()
+    )
+
+    repeated_ids = repeated_counts[repeated_counts >= 2].index
+    filtered = df[df["participant_id"].isin(repeated_ids)].copy()
+
+    print(
+        f"Subjects with >=2 {repeat_col} values in plot data: "
+        f"{len(repeated_ids)}"
+    )
+    return filtered
 
 
 def save_cov_results(df, repeat_col, output_dir, repeat_label):
@@ -101,19 +126,22 @@ def analyze_standard_dataset(dataset_name):
     )
 
     n_repeated = (repeated_subjects >= 2).sum()
-
     print(f"Subjects with >=2 sessions: {n_repeated}")
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    plot_df = prepare_plot_df(df)
-
-    gf.create_lineplot(
-        plot_df,
-        "session_id",
-        str(output_dir),
-        show_n=False
-    )
+    # Only the lineplot is filtered; the CoV input is unchanged.
+    plot_subjects_df = select_repeated_participants(df, "session_id")
+    if not plot_subjects_df.empty:
+        plot_df = prepare_plot_df(plot_subjects_df)
+        gf.create_lineplot(
+            plot_df,
+            "session_id",
+            str(output_dir),
+            show_n=False
+        )
+    else:
+        print("No subjects with repeated sessions for lineplot. Skipping plot.")
 
     save_cov_results(
         df,
@@ -302,22 +330,23 @@ def analyze_blsa():
         "Visit " + df["visit_index"].astype(str)
     )
 
-    # Lineplot: C1-T1.
-    plot_df = df[
-        df["VertLevel"].isin(range(1, 9))
-    ].copy()
-
-    plot_df = prepare_plot_df(plot_df)
-
-    gf.create_lineplot(
-        plot_df,
-        "visit_label",
-        str(output_dir),
-        show_n=False
-    )
+    # Lineplot: C1-T1; include only participants with >=2 available visits.
+    # Filter after CSV loading, so only visits with actual morphometric data count.
+    plot_subjects_df = select_repeated_participants(df, "visit_index")
+    if not plot_subjects_df.empty:
+        plot_df = prepare_plot_df(plot_subjects_df)
+        gf.create_lineplot(
+            plot_df,
+            "visit_label",
+            str(output_dir),
+            show_n=False
+        )
+    else:
+        print("No subjects with repeated visits for BLSA lineplot. Skipping plot.")
 
     # CoV: C1-C7.
     # T1 had too few paired subjects in exploratory analysis.
+    # Original CoV input intentionally unchanged.
     cov_df = df[
         df["VertLevel"].isin(range(1, 8))
     ].copy()
@@ -336,6 +365,9 @@ def analyze_masivar():
 
     MASiVar contains cohorts with different repeated-measurement designs,
     therefore cohorts are analyzed separately rather than pooling all sessions.
+
+    Cohort I is not included because there are no corresponding PAM50 CSVs
+    among the currently available repository data.
 
     Cohort II:
         inter-scanner comparison, but only one multi-session participant.
@@ -394,7 +426,6 @@ def analyze_masivar():
         )
 
         n_repeated = (session_counts >= 2).sum()
-
         print(f"Subjects with >=2 sessions: {n_repeated}")
 
         output_dir = (
@@ -408,14 +439,21 @@ def analyze_masivar():
             exist_ok=True
         )
 
-        plot_df = prepare_plot_df(cohort_df)
-
-        gf.create_lineplot(
-            plot_df,
-            "session_id",
-            str(output_dir),
-            show_n=False
+        # Only repeated-session participants contribute to the lineplot.
+        # This also makes Cohort II an individual-level descriptive plot.
+        plot_subjects_df = select_repeated_participants(
+            cohort_df, "session_id"
         )
+        if not plot_subjects_df.empty:
+            plot_df = prepare_plot_df(plot_subjects_df)
+            gf.create_lineplot(
+                plot_df,
+                "session_id",
+                str(output_dir),
+                show_n=False
+            )
+        else:
+            print("No subjects with repeated sessions for lineplot. Skipping plot.")
 
         # Cohort II has only one repeated participant,
         # therefore no group-level quantitative CoV is reported.
@@ -427,6 +465,7 @@ def analyze_masivar():
             continue
 
         # Cohort IV has useful paired coverage mainly through C5.
+        # Original CoV input intentionally unchanged.
         if cohort_name == "IV":
             cov_df = cohort_df[
                 cohort_df["VertLevel"].isin(range(1, 6))
